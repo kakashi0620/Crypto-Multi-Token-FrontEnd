@@ -1,7 +1,7 @@
 import React from "react";
 import { useClickAway } from "react-use";
 import { useRef, useState } from "react";
-import { Link as ScrollLink } from "react-scroll";
+// import { Link as ScrollLink } from "react-scroll";
 import { AnimatePresence, motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
 import LogoIcon from "../Icons/Logo";
@@ -125,32 +125,32 @@ export default function HamburgerMenu() {
                             {item.title}
                           </span>
                         </Link>
-                      ) : (
-                        <ScrollLink
-                          onClick={() => setOpen((prev) => !prev)}
-                          className={
-                            "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
-                          }
-                          to={item.href}
-                        >
-                          <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
-                            {item.title}
-                          </span>
-                        </ScrollLink>
+                      ) : (<></>
+                        // <ScrollLink
+                        //   onClick={() => setOpen((prev) => !prev)}
+                        //   className={
+                        //     "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
+                        //   }
+                        //   to={item.href}
+                        // >
+                        //   <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
+                        //     {item.title}
+                        //   </span>
+                        // </ScrollLink>
                       )}
                     </motion.li>
                   );
                 })}
               </ul>
 
-              <ScrollLink to="presale" onClick={() => setOpen((prev) => !prev)}>
+              {/* <ScrollLink to="presale" onClick={() => setOpen((prev) => !prev)}>
                 <button className="third h-[48px] w-[321px] relative mb-12">
                   <span className="text-[21px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
                     {t("join_presale")}
                   </span>
                   <RightIcon className="absolute right-8 scale-50" />
                 </button>
-              </ScrollLink>
+              </ScrollLink> */}
             </div>
           </motion.div>
         )}

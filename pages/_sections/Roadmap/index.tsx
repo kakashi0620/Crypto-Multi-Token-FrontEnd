@@ -11,7 +11,7 @@ export default function Roadmap() {
   return (
     <main className="flex flex-col items-center justify-center py-20 z-10 relative bg-roadmap">
       <div className="w-full flex flex-col px-4 lg:px-12 2xl:px-20 gap-12 relative z-10">
-        <div className="text-[40px] lg:text-[80px] font-bold leading-[46px] w-full flex justify-center">
+        {/* <div className="text-[40px] lg:text-[80px] font-bold leading-[46px] w-full flex justify-center">
           <span className="text-center">
             {t("tenth_section_explore_our")}{" "}
             <span className="text-yellow">{t("roadmap")}</span>
@@ -30,11 +30,11 @@ export default function Roadmap() {
               <RightIcon className="absolute right-8 scale-50" />
             </button>
           </ScrollLink>
-        </div>
+        </div> */}
 
-        <Element name="faqs">
+        <div >
           <FAQs />
-        </Element>
+        </div>
       </div>
     </main>
   );

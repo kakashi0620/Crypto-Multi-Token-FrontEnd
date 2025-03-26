@@ -12,83 +12,83 @@ export default function FAQs() {
   const [subIndex, setSubIndex] = useState(0);
 
   const FAQ_TYPES = [
-    t("tenth_section_frequently_questions_general"),
-    t("tenth_section_frequently_questions_presale"),
-    t("tenth_section_frequently_questions_dashboard"),
-    t("tenth_section_frequently_questions_other"),
+    // t("tenth_section_frequently_questions_general"),
+    // t("tenth_section_frequently_questions_presale"),
+    // t("tenth_section_frequently_questions_dashboard"),
+    // t("tenth_section_frequently_questions_other"),
   ];
   const FAQ_CONTENTS = [
     [
       {
-        title: t("tenth_section_frequently_questions_general_1"),
-        content: t("tenth_section_frequently_questions_general_1_1"),
+        title: 'question 1', //t("tenth_section_frequently_questions_general_1"),
+        content: 'answer 1'//t("tenth_section_frequently_questions_general_1_1"),
       },
       {
-        title: t("tenth_section_frequently_questions_general_2"),
-        content: t("tenth_section_frequently_questions_general_2_1"),
+        title: 'question 2', //t("tenth_section_frequently_questions_general_2"),
+        content: 'answer 2'//t("tenth_section_frequently_questions_general_2_1"),
       },
       {
-        title: t("tenth_section_frequently_questions_general_3"),
-        content: t("tenth_section_frequently_questions_general_3_1"),
+        title: 'question 3', //t("tenth_section_frequently_questions_general_3"),
+        content: 'answer 3'//t("tenth_section_frequently_questions_general_3_1"),
       },
-      {
-        title: t("tenth_section_frequently_questions_general_4"),
-        contractAddress: "0xC7f59c4bD6927996186696A0A9cF95dD1727b54E",
-      },
-      {
-        title: t("tenth_section_frequently_questions_general_5"),
-        content: t("tenth_section_frequently_questions_general_5_1"),
-        url: "https://remittix-organization.gitbook.io/remittix/tokenomics/vip-program",
-      },
+      // {
+      //   title: 'question 4', //t("tenth_section_frequently_questions_general_4"),
+      //   contractAddress: "0xC7f59c4bD6927996186696A0A9cF95dD1727b54E",
+      // },
+      // {
+      //   title: 'question 5', //t("tenth_section_frequently_questions_general_5"),
+      //   content: t("tenth_section_frequently_questions_general_5_1"),
+      //   url: "https://remittix-organization.gitbook.io/remittix/tokenomics/vip-program",
+      // },
     ],
-    [
-      {
-        title: t("tenth_section_frequently_questions_presale_1"),
-        content: t("tenth_section_frequently_questions_presale_1_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_presale_2"),
-        content: t("tenth_section_frequently_questions_presale_2_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_presale_3"),
-        content: t("tenth_section_frequently_questions_presale_3_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_presale_4"),
-        content: t("tenth_section_frequently_questions_presale_4_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_presale_5"),
-        content: t("tenth_section_frequently_questions_presale_5_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_presale_6"),
-        content: t("tenth_section_frequently_questions_presale_6_1"),
-      },
-    ],
-    [
-      {
-        title: t("tenth_section_frequently_questions_dashboard_1"),
-        content: t("tenth_section_frequently_questions_dashboard_1_1"),
-      },
-      {
-        title: t("tenth_section_frequently_questions_dashboard_2"),
-        content: t("tenth_section_frequently_questions_dashboard_2_1"),
-      },
-    ],
-    [
-      {
-        title: t("tenth_section_frequently_questions_other_1"),
-        content: t("tenth_section_frequently_questions_other_1_1"),
-        email: "support@remittix.io",
-      },
-      {
-        title: t("tenth_section_frequently_questions_other_2"),
-        content: t("tenth_section_frequently_questions_other_2_1"),
-        url: "https://gleam.io/FHtn5/250000-remittix-giveaway",
-      },
-    ],
+    // [
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_1"),
+    //     content: t("tenth_section_frequently_questions_presale_1_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_2"),
+    //     content: t("tenth_section_frequently_questions_presale_2_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_3"),
+    //     content: t("tenth_section_frequently_questions_presale_3_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_4"),
+    //     content: t("tenth_section_frequently_questions_presale_4_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_5"),
+    //     content: t("tenth_section_frequently_questions_presale_5_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_presale_6"),
+    //     content: t("tenth_section_frequently_questions_presale_6_1"),
+    //   },
+    // ],
+    // [
+    //   {
+    //     title: t("tenth_section_frequently_questions_dashboard_1"),
+    //     content: t("tenth_section_frequently_questions_dashboard_1_1"),
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_dashboard_2"),
+    //     content: t("tenth_section_frequently_questions_dashboard_2_1"),
+    //   },
+    // ],
+    // [
+    //   {
+    //     title: t("tenth_section_frequently_questions_other_1"),
+    //     content: t("tenth_section_frequently_questions_other_1_1"),
+    //     email: "support@remittix.io",
+    //   },
+    //   {
+    //     title: t("tenth_section_frequently_questions_other_2"),
+    //     content: t("tenth_section_frequently_questions_other_2_1"),
+    //     url: "https://gleam.io/FHtn5/250000-remittix-giveaway",
+    //   },
+    // ],
   ];
 
   return (
@@ -139,7 +139,7 @@ export default function FAQs() {
                       {faq.title}
                     </span>
                     <div className="flex flex-col pb-12 pr-4">
-                      {faq.url && (
+                      {/* {faq.url && (
                         <div className="text-[15px] md:text-[18px] text-[#FFFFFF94] font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px]">
                           {faq.content}{" "}
                           <Link
@@ -170,7 +170,7 @@ export default function FAQs() {
                         >
                           {faq.email}
                         </Link>
-                      )}
+                      )} */}
                     </div>
                     <UpIcon className="absolute right-4 bottom-4 border rounded-full border-[#EDEDED1F] bg-[#FFFFFF0F]" />
                   </>

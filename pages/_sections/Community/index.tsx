@@ -41,7 +41,7 @@ export default function Community() {
         </div>
 
         <div className="flex justify-center w-full">
-          <ScrollLink
+          {/* <ScrollLink
             to="presale"
             className="flex items-center justify-center relative bg-black rounded-lg text-white w-full md:w-[321px] h-[71px] cursor-pointer"
           >
@@ -51,7 +51,7 @@ export default function Community() {
             <div className="absolute right-4">
               <RightIcon className="scale-50" />
             </div>
-          </ScrollLink>
+          </ScrollLink> */}
         </div>
       </div>
     </main>

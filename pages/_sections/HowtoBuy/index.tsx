@@ -12,25 +12,27 @@ export default function HowtoBuy() {
   return (
     <main className="flex flex-col items-center justify-center z-10 text-black">
       <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-[#F2F5F6] py-12">
-        <Element name="howtobuy">
+        {/* <Element name="howtobuy"> */}
           <div className="flex flex-col items-center">
             <div className="relative w-fit">
               <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10">
-                {t("seventh_section_how_to_buy")}
+                {/* {t("seventh_section_how_to_buy")} */}
+                How to work
               </span>
-              <div className="absolute h-4 w-24 bg-yellow top-6 -right-4 lg:right-0 lg:top-16 z-0" />
+              {/* <div className="absolute h-4 w-24 bg-yellow top-6 -right-4 lg:right-0 lg:top-16 z-0" /> */}
             </div>
             <span className="text-[15px] lg:text-xl font-normal text-center">
-              {t("seventh_section_how_to_buy_content")}
+              {/* {t("seventh_section_how_to_buy_content")} */}
+              Follow these n simple steps to x x x x x
             </span>
           </div>
-        </Element>
+        {/* </Element> */}
         <div className="flex-grow mt-12">
           <BuySteps />
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-white">
+      {/* <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-white">
         <div className="flex relative mt-12">
           <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10">
             {t("eighth_section_powered_by")}
@@ -38,9 +40,9 @@ export default function HowtoBuy() {
           <div className="absolute h-5 w-28 bg-yellow left-0 bottom-0 lg:bottom-6 z-0" />
         </div>
         <Silder />
-      </div>
+      </div> */}
 
-      <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-[#F2F5F6] py-12">
+      {/* <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-[#F2F5F6] py-12">
         <div className="flex flex-col items-center relative">
           <div className="relative">
             <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10 text-center">
@@ -88,9 +90,16 @@ export default function HowtoBuy() {
             </div>
           </Link>
         </div>
-      </div>
+      </div> */}
       <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-white py-12">
-        <div className="flex flex-col bg-[#041019] rounded-[10px] relative text-white bg-competition">
+        <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10">
+          {/* {t("seventh_section_how_to_buy")} */}
+          Profit Calculator
+        </span>
+        <span>
+          profit content
+        </span>
+        {/* <div className="flex flex-col bg-[#041019] rounded-[10px] relative text-white bg-competition">
           <img
             className="w-full rounded-[10px]"
             src="/images/competition.png"
@@ -120,7 +129,7 @@ export default function HowtoBuy() {
               </button>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

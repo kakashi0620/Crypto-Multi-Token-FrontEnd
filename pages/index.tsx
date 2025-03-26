@@ -18,16 +18,16 @@ const Home: NextPage = () => {
   return (
     <div className={poppins.className}>
       <Overview />
-      <Pay />
+      {/* <Pay />
       <Accept />
       <Community />
       <Element name="tokenomics">
         <Tokenomics />
-      </Element>
+      </Element> */}
       <HowtoBuy />
-      <Element name="roadmap">
+      {/* <Element name="roadmap"> */}
         <Roadmap />
-      </Element>
+      {/* </Element> */}
     </div>
   );
 };

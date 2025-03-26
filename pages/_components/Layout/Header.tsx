@@ -8,6 +8,24 @@ import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import { LanugageConfig } from "../../../config/languageConfig";
 
+// vadym add for wallet
+import { useAccount, useBalance } from "wagmi";
+import {
+  disconnect,
+  waitForTransactionReceipt,
+  writeContract,
+} from "@wagmi/core";
+import { wagmiConfig, web3Modal } from "../../_app";
+import {
+  calculateTokenPrice,
+  formatLocalString,
+  shortenAddress,
+} from "../../utils";
+import DisconnectIcon from "../../_components/Icons/Disconnect";
+
+import { useRouter } from 'next/navigation' // move to profile
+// vadym wallet end
+
 export default function Header() {
   const { t } = useTranslation();
 
@@ -39,6 +57,16 @@ export default function Header() {
 
   useClickAway(ref, () => setShowLang(false));
 
+  // vadym add for wallet
+  const { address, isConnected } = useAccount();
+  const router = useRouter()
+  useEffect(() => {
+    if (isConnected) {
+      router.push('/profile')
+    }
+  }, [, isConnected]);
+  // vadym wallet end
+
   return (
     <main
       className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#041019]`}
@@ -47,14 +75,15 @@ export default function Header() {
         <Link href="/" className="flex items-center">
           <img
             className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]"
-            src={"./images/logo.svg"}
+            src={"./images/logo____.svg"}
             draggable={false}
             alt="logo"
           />
           <div
             className={`text-[20.9px] md:text-[37.55px] font-bold ml-1 md:ml-2 text-white`}
           >
-            Remittix
+            {/* Remittix */}
+            Pro Name or abbr
           </div>
         </Link>
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
@@ -62,56 +91,71 @@ export default function Header() {
             href="/howitworks"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
-            {t("how_it_works")}
+            {/* {t("how_it_works")} */}
           </Link>
-          <ScrollLink
+          {/* <ScrollLink
             to="tokenomics"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
             {t("tokenomics")}
-          </ScrollLink>
+          </ScrollLink> */}
           <Link
             href="/usecase"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
-            {t("usecase")}
+            {/* {t("usecase")} */}
           </Link>
           <Link
             href="https://gleam.io/FHtn5/250000-remittix-giveaway"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
             target="_blank"
           >
-            $250k {t("giveaway")}
+            {/* $250k {t("giveaway")} */}
           </Link>
           <Link
             href="https://remittix-organization.gitbook.io/remittix"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
             target="_blank"
           >
-            {t("whitepaper")}
+            {/* {t("whitepaper")} */}
           </Link>
           <Link
             href="/blog"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
-            {t("blog")}
+            {/* {t("blog")} */}
           </Link>
         </div>
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
-          <ScrollLink to="presale" className="hidden xl:flex">
+          {/* <Link to="presale" className="hidden xl:flex"> */}
             <div
-              className={`flex items-center justify-center relative bg-yellow text-black rounded-lg  w-[250px] h-[48px] cursor-pointer`}
+              className={`flex items-center justify-center relative bg-yellow text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
             >
-              <span className="text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
-                {t("join_presale")}
-              </span>
-              <div className="absolute right-4">
-                <RightIcon className="scale-50" />
+              <div className="flex w-full justify-between gap-2">
+                {!isConnected ? (
+                  // primary 
+                  <button
+                    className="h-[30.78px] md:h-[45px] w-full"
+                    onClick={() => web3Modal.open()}
+                  >
+                    Connect wallet
+                  </button>
+                ) :
+                  (
+                    // secondary
+                    <button
+                      className="h-[30.78px] md:h-[45px] w-full relative"
+                      onClick={() => disconnect(wagmiConfig)}
+                    >
+                      <span>{shortenAddress(address)}</span>
+                      <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
+                    </button>
+                  )}
               </div>
             </div>
-          </ScrollLink>
+          {/* </Link> */}
 
-          <div className="relative">
+          {/* <div className="relative">
             <div
               className="flex gap-1 cursor-pointer"
               onClick={() => setShowLang((prev) => !prev)}
@@ -147,7 +191,7 @@ export default function Header() {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 

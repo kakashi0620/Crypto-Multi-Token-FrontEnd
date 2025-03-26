@@ -20,16 +20,18 @@ export default function Overview() {
           <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
             <div className="flex flex-col gap-2 overflow-hidden">
               <h1 className="text-[50px] lg:text-[90px] leading-[54px] lg:leading-[96px] traking-[-2px] text-light-white max-w-[700px] text-center lg:text-left">
-                {t("first_section_title")}{" "}
+                {/* {t("first_section_title")}{" "}
                 <span className="text-yellow">
                   {t("first_section_title_reinvented")}
-                </span>
+                </span> */}
+                Crypto Private Deal
               </h1>
-              <h2 className="text-xl traking-[-2px] mt-6 font-normal text-light-white max-w-[700px] text-center lg:text-left">
+              {/* <h2 className="text-xl traking-[-2px] mt-6 font-normal text-light-white max-w-[700px] text-center lg:text-left">
                 {t("first_section_content")}
-              </h2>
+              </h2> */}
               <div className="text-xl text-yellow text-center lg:text-left">
-                {t("first_section_welcome")}
+                {/* {t("first_section_welcome")} */}
+                Welcome to our site!
               </div>
               <div className="flex gap-12 items-center justify-center lg:justify-start">
                 <Link
@@ -64,9 +66,10 @@ export default function Overview() {
             </div>
           </div>
           <div className="flex w-full justify-center mb-10 relative z-10">
-            <Element name="presale">
-              <BuyNow />
-            </Element>
+            <div >
+              {/* <BuyNow /> */}
+              maybe Welcome image.
+            </div>
           </div>
         </div>
 
@@ -74,11 +77,12 @@ export default function Overview() {
           <Divider />
         </div>
 
-        <Element name="about">
+        <div >
           <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-20 mt-10">
             <div className="flex w-full justify-center mb-10 relative z-0">
-              <div className="onStep flex justify-end z-10 w-full">
-                <video
+              {/* <div className="onStep flex justify-end z-10 w-full"> */}
+              <div className="onStep flex z-10 w-full">
+                {/* <video
                   className="max-w-[576px] w-full pointer-events-none ounded-[11.27px]"
                   autoPlay
                   loop
@@ -87,21 +91,31 @@ export default function Overview() {
                 >
                   <source src="/video/tutorial.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
+                maybe why choose image.
               </div>
             </div>
             <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
-              <div className="text-yellow text-xl">{t("why_remittix")}</div>
+              <div className="text-yellow text-xl">
+                {/* {t("why_remittix")} */}
+                Why choose us?
+              </div>
               <div className="text-[36px] lg:text-[50px] leading-[46px] traking-[-0.8px] text-light-white max-w-[700px]">
-                {t("second_section_title")}
+                {/* {t("second_section_title")} */}
+                Title (why choose us)
               </div>
               <div className="text-xl traking-[-2px] mt-6 font-normal text-light-white max-w-[700px]">
-                {t("remittix_defintion_1")}
+                {/* {t("remittix_defintion_1")} */}
+                Content1 (why choose us)
               </div>
               <div className="text-xl font-normal max-w-[700px]">
-                {t("remittix_definition_2")}
+                {/* {t("remittix_definition_2")} */}
+                Content2 (why choose us)
               </div>
-              <Link
+              <div className="text-yellow text-xl font-normal max-w-[700px]">
+                maybe whitepaper link button
+              </div>
+              {/* <Link
                 href={"https://remittix-organization.gitbook.io/remittix"}
                 className="flex items-center justify-center relative bg-yellow rounded-lg text-black w-[250px] h-[48px] cursor-pointer"
                 target="_blank"
@@ -112,10 +126,10 @@ export default function Overview() {
                 <div className="absolute right-4">
                   <RightIcon className="scale-50" />
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
-        </Element>
+        </div>
       </div>
 
       <div className="bg-overview">

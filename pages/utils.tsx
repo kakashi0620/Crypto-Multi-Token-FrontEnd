@@ -58,8 +58,8 @@ export const copyToClipboard = (text: string, cb: () => void) => {
 
 export function shortenAddress(address: string | undefined) {
   if (!address || address.length < 10) return address;
-  return `${address.substring(0, 4)}...${address.substring(
-    address.length - 4,
+  return `${address.substring(0, 8)}...${address.substring(
+    address.length - 6,
     address.length
   )}`;
 }

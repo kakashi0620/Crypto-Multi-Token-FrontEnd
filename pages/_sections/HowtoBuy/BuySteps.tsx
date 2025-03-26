@@ -11,11 +11,13 @@ export default function BuySteps() {
         <div className="flex flex-col gap-2">
           <SignUpIcon />
           <span className="text-[21px] font-semibold">
-            {t("seventh_section_how_to_buy_sign_up")}
+            {/* {t("seventh_section_how_to_buy_sign_up")} */}
+            Step 1 Title
           </span>
         </div>
         <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
-          {t("seventh_section_how_to_buy_sign_up_content")}
+          {/* {t("seventh_section_how_to_buy_sign_up_content")} */}
+          Step 1 Content
         </span>
       </div>
 
@@ -23,11 +25,13 @@ export default function BuySteps() {
         <div className="flex flex-col gap-2">
           <SelectCurrencyIcon />
           <span className="text-[21px] font-semibold">
-            {t("seventh_section_how_to_buy_select_currency")}
+            {/* {t("seventh_section_how_to_buy_select_currency")} */}
+            Step 2 Title
           </span>
         </div>
         <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
-          {t("seventh_section_how_to_buy_select_currency_content")}
+          {/* {t("seventh_section_how_to_buy_select_currency_content")} */}
+          Step 2 Content
         </span>
       </div>
 
@@ -35,11 +39,13 @@ export default function BuySteps() {
         <div className="flex flex-col gap-2">
           <BuyClaimIcon />
           <span className="text-[21px] font-semibold">
-            {t("seventh_section_how_to_buy_buy_claim")}
+            {/* {t("seventh_section_how_to_buy_buy_claim")} */}
+            Step 3 Title
           </span>
         </div>
         <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
-          {t("seventh_section_how_to_buy_buy_claim_content")}
+          {/* {t("seventh_section_how_to_buy_buy_claim_content")} */}
+          Step 3 content
         </span>
       </div>
     </div>

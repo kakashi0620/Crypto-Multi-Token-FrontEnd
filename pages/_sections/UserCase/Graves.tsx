@@ -1,6 +1,6 @@
 import React from "react";
 import RightIcon from "../../_components/Icons/Right";
-import { Link as ScrollLink } from "react-scroll";
+// import { Link as ScrollLink } from "react-scroll";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Features from "../Pay/Features";
