@@ -1,0 +1,38 @@
+.usecase {
+  .card {
+    border: 1.33px solid transparent;
+    border-image-source: linear-gradient(
+      264.87deg,
+      rgba(255, 255, 255, 0) 18.92%,
+      rgba(153, 153, 153, 0.6) 52.18%,
+      rgba(153, 153, 153, 0) 81.08%
+    );
+    border-image-slice: 1;
+    background-color: #11181e52;
+  }
+
+  .infoCard {
+    width: 400px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 16px 35px 0px rgba(0, 0, 0, 0.1),
+      0px 64px 64px 0px rgba(0, 0, 0, 0.09),
+      0px 144px 87px 0px rgba(0, 0, 0, 0.05),
+      0px 257px 103px 0px rgba(0, 0, 0, 0.01),
+      0px 401px 112px 0px rgba(0, 0, 0, 0);
+  }
+
+  @media (max-width: 768px) {
+    .infoCard {
+      width: 100%;
+    }
+  }
+}
+
+.getpaid {
+  background-image: url("/images/getpaid.png");
+  background-size: cover;
+  background-position: start;
+  background-repeat: no-repeat;
+}

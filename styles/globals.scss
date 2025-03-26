@@ -1,0 +1,218 @@
+@use "styles/animates";
+@use "styles/overview";
+@use "styles/components";
+@use "styles/tokenomics";
+@use "styles/background";
+@use "styles/roadmap";
+@use "styles/blog";
+@use "styles/usecase";
+@use "styles/howitworks";
+
+@import "tailwindcss/base";
+@import "tailwindcss/utilities";
+
+* {
+  font-family: "Onest", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #fff;
+  background: #041019;
+  font-size: 15.03px;
+  font-weight: 500;
+}
+
+.slick-slide {
+  transition: opacity 0.5s ease;
+  opacity: 0.5;
+  /* Default opacity for non-centered slides */
+}
+
+.slick-center {
+  opacity: 1;
+  /* Optional scaling effect */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slick-center .slide-item {
+  background: linear-gradient(0deg, #1b1a1ceb, #00000000),
+    radial-gradient(
+      30% 165% at 48.5% 60.25%,
+      rgba(0, 0, 0, 0) 0%,
+      #00000000 100%
+    ),
+    radial-gradient(99% 99% at 50% 0.21%, #112c4b 0%, rgb(17 40 75) 100%) !important;
+  box-shadow: 0px 3px 6px 0px #34a6f970 inset;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-slide .slide-item {
+  background: #050913;
+  border: 1px solid #31414d;
+  /* Add horizontal margin to each slide's inner div */
+}
+
+.slick-list {
+  margin: 0 -10px;
+  /* Compensate for the added margins */
+}
+
+.collapse-title,
+:where(.collapse > input[type="checkbox"]),
+:where(.collapse > input[type="radio"]) {
+  min-height: 2rem;
+}
+
+/* Scroll Top
+-------------------------------------------------------------- */
+#scroll-top {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 4px;
+  text-align: center;
+  z-index: 999;
+  right: 14px;
+  bottom: 23px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#scroll-top.show {
+  right: 15px;
+  opacity: 1;
+  visibility: visible;
+}
+
+#scroll-top:before,
+#scroll-top:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#scroll-top:before {
+  z-index: -1;
+  background: #3898ff;
+}
+
+#scroll-top:hover {
+  transform: translateY(-7%);
+}
+
+ul {
+  list-style-image: url("/images/list.svg");
+  padding: 0 0 0 16px;
+
+  li {
+    margin-top: 16px;
+  }
+}
+
+.linear-border-top-left:before,
+.linear-border-top-right:before,
+.linear-border-bottom-left:after,
+.linear-border-bottom-right:after {
+  content: "";
+  height: 1px;
+  position: absolute;
+  background: linear-gradient(90deg, #f9ff3800, #f9ff38ad 17.83%, #f9ff3800);
+  border-radius: 12.582px 12.582px 0 0;
+}
+
+.linear-border-top-left:before {
+  top: 0;
+  left: 10%;
+  width: 50%;
+}
+
+.linear-border-top-right:before {
+  top: 0;
+  right: 10%;
+  width: 50%;
+}
+
+.linear-border-bottom-left:after {
+  bottom: 0;
+  left: 10%;
+  width: 50%;
+}
+
+.linear-border-bottom-right:after {
+  bottom: 0;
+  right: 10%;
+  width: 50%;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+
+  .swiper-wrapper {
+    align-items: center;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-button-prev {
+    background-image: url("/images/prev.svg") !important;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    scale: 250%;
+  }
+
+  .swiper-button-next {
+    background-image: url("/images/next.svg") !important;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    scale: 250%;
+  }
+
+  .swiper-button-next::after {
+    display: none;
+  }
+
+  .swiper-button-prev::after {
+    display: none;
+  }
+
+  .swiper-pagination {
+    bottom: 8px !important;
+  }
+}

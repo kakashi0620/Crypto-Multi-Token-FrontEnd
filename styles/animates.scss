@@ -1,0 +1,15 @@
+.marquee-container {
+  cursor: pointer;
+
+  .marquee-bar {
+    display: inline-block;
+    white-space: nowrap;
+    animation-play-state: running;
+  }
+
+  &:hover {
+    .marquee-bar {
+      animation-play-state: paused;
+    }
+  }
+}
