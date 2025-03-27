@@ -407,7 +407,7 @@ export default function BuyNow() {
               <input className="w-full" value={toAmount} readOnly />
               <img
                 className="size-[21.89px] md:size-[32px]"
-                src="/images/logo.svg"
+                src="/images/logo.png"
                 alt="logo"
               />
             </div>

@@ -67,7 +67,7 @@ export default function DigDeep() {
             <div className="blog-card p-3" key={index}>
               <div className="relative">
                 <div className="absolute flex items-center top-2 left-2 text-2xl gap-2 z-10">
-                  <img src="images/logo.svg" className="h-5"></img>
+                  <img src="images/logo.png" className="h-5"></img>
                   <span className="text-[22px] leading-[28.3px] md:leadnig-[30.7px] md:text-[24px] font-bold">
                     {t("remittix")}
                   </span>

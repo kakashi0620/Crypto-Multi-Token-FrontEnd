@@ -12,34 +12,25 @@ import { useTranslation } from "react-i18next";
 
 const NavList = [
   {
-    title: "How It Works",
-    href: "/howitworks",
+    title: "Home",
+    href: "/",
     page: true,
   },
   {
-    title: "Tokenomics",
-    href: "tokenomics",
-  },
-  {
-    title: "Use Cases",
-    href: "/usecase",
+    title: "Profile",
+    href: "/profile",
     page: true,
   },
   {
-    title: "$250k Giveaway",
-    href: "https://gleam.io/FHtn5/250000-remittix-giveaway",
-    target: "_blank",
-  },
-  {
-    title: "Whitepaper",
-    href: "https://remittix-organization.gitbook.io/remittix",
-    target: "_blank",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
+    title: "Dashboard",
+    href: "/",
     page: true,
   },
+  {
+    title: "Referral",
+    href: "/",
+    page: true,
+  }
 ];
 
 export default function HamburgerMenu() {
@@ -112,19 +103,19 @@ export default function HamburgerMenu() {
                             {item.title}
                           </span>
                         </Link>
-                      ) : item.target ? (
-                        <Link
-                          onClick={() => setOpen((prev) => !prev)}
-                          href={item.href}
-                          target="_blank"
-                          className={
-                            "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
-                          }
-                        >
-                          <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
-                            {item.title}
-                          </span>
-                        </Link>
+                      // ) : item.target ? (
+                      //   <Link
+                      //     onClick={() => setOpen((prev) => !prev)}
+                      //     href={item.href}
+                      //     target="_blank"
+                      //     className={
+                      //       "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
+                      //     }
+                      //   >
+                      //     <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
+                      //       {item.title}
+                      //     </span>
+                      //   </Link>
                       ) : (<></>
                         // <ScrollLink
                         //   onClick={() => setOpen((prev) => !prev)}

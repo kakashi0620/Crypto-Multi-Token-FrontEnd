@@ -72,58 +72,44 @@ export default function Header() {
       className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#041019]`}
     >
       <div className="flex items-center justify-between relative z-10">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center ">
           <img
             className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]"
-            src={"./images/logo____.svg"}
+            src={"./images/logo.png"}
             draggable={false}
             alt="logo"
           />
-          <div
+          {/* <div
             className={`text-[20.9px] md:text-[37.55px] font-bold ml-1 md:ml-2 text-white`}
           >
-            {/* Remittix */}
+            Remittix
             Pro Name or abbr
-          </div>
+          </div> */}
         </Link>
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
-            href="/howitworks"
+            href="/"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
-            {/* {t("how_it_works")} */}
-          </Link>
-          {/* <ScrollLink
-            to="tokenomics"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
-          >
-            {t("tokenomics")}
-          </ScrollLink> */}
-          <Link
-            href="/usecase"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
-          >
-            {/* {t("usecase")} */}
+            Home
           </Link>
           <Link
-            href="https://gleam.io/FHtn5/250000-remittix-giveaway"
+            href="/profile"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
-            target="_blank"
           >
-            {/* $250k {t("giveaway")} */}
+            Profile
           </Link>
           <Link
-            href="https://remittix-organization.gitbook.io/remittix"
+            href="/"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
-            target="_blank"
           >
-            {/* {t("whitepaper")} */}
+            Dashboard
           </Link>
           <Link
-            href="/blog"
+            href="/"
             className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
-            {/* {t("blog")} */}
+            Referral
           </Link>
         </div>
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
