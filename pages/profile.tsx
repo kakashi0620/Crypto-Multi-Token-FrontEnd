@@ -1,7 +1,9 @@
+import axios from "axios";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
+import React, { useEffect, useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -10,6 +12,29 @@ const poppins = Poppins({
 
 const ProfilePage: NextPage = () => {
   const { address } = useAccount();
+
+  const [name, setName] = useState("");
+
+  const onRigister = () => {
+    const newUser = {
+      name,
+    };
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+        newUser
+      )
+      .then((res) => {
+        // toast.success("Profile successfully registered!", { position: "top-right" });
+      })
+      .catch((error) => {
+        console.log(
+          "Profile Register error:",
+          error.response ? error.response.data : error.message
+        );
+      });
+  }
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -42,6 +67,10 @@ const ProfilePage: NextPage = () => {
                     autoComplete="name"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -371,6 +400,7 @@ sm:text-md sm:leading-6"
 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm 
 hover:bg-black focus-visible:outline focus-visible:outline-2 
 focus-visible:outline-offset-2 focus-visible:outline-green"
+                onClick={() => onRigister()}
               >
                 Register
               </button>
