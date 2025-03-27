@@ -97,7 +97,7 @@ export default function FAQs() {
         <div className="flex flex-col w-full gap-4">
           <span className="text-center text-[40px] leading-[46px] md:text-[80px] md:leading-[86px] tracking-[-2px]">
             {t("tenth_section_frequently")}{" "}
-            <span className="text-yellow">
+            <span className="text-green">
               {t("tenth_section_frequently_questions")}
             </span>
           </span>
@@ -110,7 +110,7 @@ export default function FAQs() {
           {FAQ_TYPES.map((type, index) => (
             <span
               className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-white rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis ${
-                index === tabIndex ? "bg-yellow text-black" : ""
+                index === tabIndex ? "bg-green text-black" : ""
               }`}
               onClick={() => {
                 setTabIndex(index);
@@ -135,7 +135,7 @@ export default function FAQs() {
               >
                 {index === subIndex ? (
                   <>
-                    <span className=" text-[24px] font-bold text-yellow tracking-[-0.8px] linear-border-top-left">
+                    <span className=" text-[24px] font-bold text-green tracking-[-0.8px] linear-border-top-left">
                       {faq.title}
                     </span>
                     <div className="flex flex-col pb-12 pr-4">

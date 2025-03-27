@@ -40,7 +40,7 @@ export default function Percentage() {
   return (
     <div className="percent-table flex flex-col max-w-[544px] w-full gap-2">
       <div className="header row items-center h-[33.76px] md:h-[49.28px]">
-        <div className="flex text-yellow items-center gap-2">
+        <div className="flex text-green items-center gap-2">
           <LogoIcon className="w-[31.19px] h-[16.12px] md:w-[45.53px] md:h-[23.52px]" />
           <span className="text-[11.2px] md:text-[16.34px]">
             {t("sixth_section_tokenomics_coins")}

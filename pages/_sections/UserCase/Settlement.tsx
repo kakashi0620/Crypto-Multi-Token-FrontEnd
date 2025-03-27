@@ -12,7 +12,7 @@ export default function Settlement() {
         <div className="text-[40px] leading-[40px] lg:leading-[66px] tracking-[0.5px] lg:tracking-[-0.8px] lg:text-[80px] font-bold">
           <span>{t("usecase_second_section_title")}</span>{" "}
           <span className="text-[#F9FF38]">
-            {t("usecase_second_section_title_yellow")}
+            {t("usecase_second_section_title_green")}
           </span>
         </div>
         <div className="flex flex-col items-center">

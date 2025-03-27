@@ -21,7 +21,7 @@ export default function Overview() {
             <div className="flex flex-col gap-2 overflow-hidden">
               <h1 className="text-[50px] lg:text-[90px] leading-[54px] lg:leading-[96px] traking-[-2px] text-light-white max-w-[700px] text-center lg:text-left">
                 {/* {t("first_section_title")}{" "}
-                <span className="text-yellow">
+                <span className="text-green">
                   {t("first_section_title_reinvented")}
                 </span> */}
                 Crypto Private Deal
@@ -29,7 +29,7 @@ export default function Overview() {
               {/* <h2 className="text-xl traking-[-2px] mt-6 font-normal text-light-white max-w-[700px] text-center lg:text-left">
                 {t("first_section_content")}
               </h2> */}
-              <div className="text-xl text-yellow text-center lg:text-left">
+              <div className="text-xl text-green text-center lg:text-left">
                 {/* {t("first_section_welcome")} */}
                 Welcome to our site!
               </div>
@@ -104,7 +104,7 @@ export default function Overview() {
               </div>
             </div>
             <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
-              <div className="text-yellow text-xl">
+              <div className="text-green text-xl">
                 {/* {t("why_remittix")} */}
                 Why choose us?
               </div>
@@ -120,12 +120,12 @@ export default function Overview() {
                 {/* {t("remittix_definition_2")} */}
                 Content2 (why choose us)
               </div>
-              <div className="text-yellow text-xl font-normal max-w-[700px]">
+              <div className="text-green text-xl font-normal max-w-[700px]">
                 maybe whitepaper link button
               </div>
               {/* <Link
                 href={"https://remittix-organization.gitbook.io/remittix"}
-                className="flex items-center justify-center relative bg-yellow rounded-lg text-black w-[250px] h-[48px] cursor-pointer"
+                className="flex items-center justify-center relative bg-green rounded-lg text-black w-[250px] h-[48px] cursor-pointer"
                 target="_blank"
               >
                 <span className="text-[16px] font-semibold">

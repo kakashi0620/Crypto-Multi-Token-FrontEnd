@@ -32,7 +32,7 @@ export default function Features() {
           <div className="bg-[#1A2228] rounded-md p-2 w-fit h-fit">
             <FeatureIcon2 />
           </div>
-          <span className="text-yellow text-[18.42px] font-bold mt-12 md:mt-20">
+          <span className="text-green text-[18.42px] font-bold mt-12 md:mt-20">
             {t("third_section_zero_fx_fees")}
           </span>
           <Divider />
@@ -50,7 +50,7 @@ export default function Features() {
           <div className="bg-[#1A2228] rounded-md p-2 w-fit h-fit">
             <FeatureIcon3 />
           </div>
-          <span className="text-yellow text-[18.42px] font-bold mt-12 md:mt-20">
+          <span className="text-green text-[18.42px] font-bold mt-12 md:mt-20">
             {t("third_section_seamlessly_simple_1")}
           </span>
           <Divider />

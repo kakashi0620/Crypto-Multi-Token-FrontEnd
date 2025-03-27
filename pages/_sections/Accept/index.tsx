@@ -15,7 +15,7 @@ export default function Accept() {
           <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
             <div className="text-[40px] lg:text-[50px] leading-[45px] lg:leading-[62px] traking-[-0.8px] text-white max-w-[529px]">
               {t("fourth_section_easily_accept")}{" "}
-              <span className="text-yellow">
+              <span className="text-green">
                 {t("fourth_section_crypto_payments")}
               </span>
             </div>

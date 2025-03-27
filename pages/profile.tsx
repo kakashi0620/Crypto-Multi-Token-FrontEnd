@@ -14,7 +14,7 @@ const ProfilePage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[943px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-yellow text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
           {/* {t("eleventh_section_profile_policy")} */}
           Profile
         </h1>

@@ -101,8 +101,8 @@ export default function FAQs() {
                 {t("tenth_section_frequently")}{" "}
                 {t("tenth_section_frequently_questions")}
               </span>
-              <div className="absolute bg-yellow w-20 h-4 top-5 left-40 lg:w-32 lg:h-4 lg:top-10 lg:left-80"></div>
-              <div className="absolute bg-yellow w-20 h-4 bottom-3 right-40 lg:w-32 lg:h-6 lg:bottom-6 lg:right-72"></div>
+              <div className="absolute bg-green w-20 h-4 top-5 left-40 lg:w-32 lg:h-4 lg:top-10 lg:left-80"></div>
+              <div className="absolute bg-green w-20 h-4 bottom-3 right-40 lg:w-32 lg:h-6 lg:bottom-6 lg:right-72"></div>
             </div>
             <span className="text-[15px] md:text-xl font-normal text-center text-black">
               {t("tenth_section_frequently_questions_content")}
@@ -113,7 +113,7 @@ export default function FAQs() {
             {FAQ_TYPES.map((type, index) => (
               <span
                 className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-black rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis ${
-                  index === tabIndex ? "bg-black text-yellow" : ""
+                  index === tabIndex ? "bg-black text-green" : ""
                 }`}
                 onClick={() => {
                   setTabIndex(index);

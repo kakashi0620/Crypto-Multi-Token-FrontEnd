@@ -14,7 +14,7 @@ export default function Roadmap() {
         {/* <div className="text-[40px] lg:text-[80px] font-bold leading-[46px] w-full flex justify-center">
           <span className="text-center">
             {t("tenth_section_explore_our")}{" "}
-            <span className="text-yellow">{t("roadmap")}</span>
+            <span className="text-green">{t("roadmap")}</span>
           </span>
         </div>
 

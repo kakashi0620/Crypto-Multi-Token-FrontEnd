@@ -74,7 +74,7 @@ export default function HamburgerMenu() {
             </motion.div>
             <div className="flex flex-col items-center">
               <div className="mb-8">
-                <LogoIcon className="text-yellow size-24" />
+                <LogoIcon className="text-green size-24" />
               </div>
               <ul className="grid gap-4 mb-8">
                 {NavList.map((item, idx) => {

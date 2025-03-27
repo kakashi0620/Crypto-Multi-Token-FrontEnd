@@ -27,7 +27,7 @@ export default function SelectBank() {
           {t("third_section_which_bank_account_1")} <br />{" "}
           {t("third_section_which_bank_account_2")}
         </span>
-        <div className="bg-yellow h-4 w-24 absolute top-2 left-20 z-0"></div>
+        <div className="bg-green h-4 w-24 absolute top-2 left-20 z-0"></div>
       </div>
 
       <div className="flex flex-col px-8">
@@ -80,7 +80,7 @@ export default function SelectBank() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center h-[44.15px] md:h-[64.17px] relative bg-black rounded-[10.7px] cursor-pointer hover:bg-yellow text-white hover:text-black transition-all">
+      <div className="flex items-center justify-center h-[44.15px] md:h-[64.17px] relative bg-black rounded-[10.7px] cursor-pointer hover:bg-green text-white hover:text-black transition-all">
         <img
           className="absolute left-4"
           src="/images/background/button-left.svg"

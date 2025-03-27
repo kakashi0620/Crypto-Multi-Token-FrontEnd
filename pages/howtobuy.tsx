@@ -13,7 +13,7 @@ const HowToBuyPage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-12 relative z-10 px-4 md:px-12 py-20 md:mt-20 mx-auto max-w-[943px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-yellow text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
           {t("how_to_buy_remittix_1")}
         </h1>
         <div className="flex flex-col gap-8">

@@ -19,7 +19,7 @@ export default function HowtoBuy() {
                 {/* {t("seventh_section_how_to_buy")} */}
                 How to work
               </span>
-              {/* <div className="absolute h-4 w-24 bg-yellow top-6 -right-4 lg:right-0 lg:top-16 z-0" /> */}
+              {/* <div className="absolute h-4 w-24 bg-green top-6 -right-4 lg:right-0 lg:top-16 z-0" /> */}
             </div>
             <span className="text-[15px] lg:text-xl font-normal text-center">
               {/* {t("seventh_section_how_to_buy_content")} */}
@@ -37,7 +37,7 @@ export default function HowtoBuy() {
           <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10">
             {t("eighth_section_powered_by")}
           </span>
-          <div className="absolute h-5 w-28 bg-yellow left-0 bottom-0 lg:bottom-6 z-0" />
+          <div className="absolute h-5 w-28 bg-green left-0 bottom-0 lg:bottom-6 z-0" />
         </div>
         <Silder />
       </div> */}
@@ -48,7 +48,7 @@ export default function HowtoBuy() {
             <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10 text-center">
               {t("ninth_section_remittix_in_detail")}
             </span>
-            <div className="absolute h-5 w-36 bg-yellow right-12 bottom-0 lg:bottom-7 z-0" />
+            <div className="absolute h-5 w-36 bg-green right-12 bottom-0 lg:bottom-7 z-0" />
           </div>
           <span className="text-[15px] tracking-[-0.8px] lg:text-xl font-normal text-center">
             {t("ninth_section_remittix_in_detail_content_1")}{" "}
@@ -109,7 +109,7 @@ export default function HowtoBuy() {
           <div className="flex flex-col lg:absolute gap-12 p-4 lg:p-24">
             <span className="text-[30px] lg:text-[44.44px] leading-[37.05px] lg:leading-[45px] tracking-[-1.78px] font-bold max-w-[510px]">
               {t("ninth_section_remittix_in_detail_competition")}{" "}
-              <span className="text-yellow">$250K</span>
+              <span className="text-green">$250K</span>
             </span>
 
             <span className="text-[15px] lg:text-xl font-normal tracking-[-0.8px] max-w-[585px]">

@@ -67,9 +67,10 @@ export default function Header() {
   }, [, isConnected]);
   // vadym wallet end
 
+// bg-[#041019]
   return (
     <main
-      className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#041019]`}
+      className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#101010]`}
     >
       <div className="flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center">
@@ -89,25 +90,25 @@ export default function Header() {
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
             href="/"
-            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Home
           </Link>
           <Link
             href="/profile"
-            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Profile
           </Link>
           <Link
             href="/"
-            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Dashboard
           </Link>
           <Link
             href="/"
-            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Referral
           </Link>
@@ -115,7 +116,7 @@ export default function Header() {
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}
             <div
-              className={`flex items-center justify-center relative bg-yellow text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
+              className={`flex items-center justify-center relative bg-green text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
             >
               <div className="flex w-full justify-between gap-2">
                 {!isConnected ? (
@@ -181,13 +182,13 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="bg-overview">
+      {/* <div className="bg-overview">
         <img
-          className="top-left"
+          className="top-right"
           src="/images/background/header.svg"
           alt="header"
         />
-      </div>
+      </div> */}
     </main>
   );
 }
