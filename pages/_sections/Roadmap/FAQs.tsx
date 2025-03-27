@@ -138,40 +138,6 @@ export default function FAQs() {
                     <span className=" text-[24px] font-bold text-green tracking-[-0.8px] linear-border-top-left">
                       {faq.title}
                     </span>
-                    <div className="flex flex-col pb-12 pr-4">
-                      {/* {faq.url && (
-                        <div className="text-[15px] md:text-[18px] text-[#FFFFFF94] font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px]">
-                          {faq.content}{" "}
-                          <Link
-                            className="underline text-[#FFFFFF94] font-normal hover:text-white break-all"
-                            href={faq.url}
-                            target="_blank"
-                          >
-                            {t("here")}
-                          </Link>
-                          {"."}
-                        </div>
-                      )}
-                      {!faq.url && faq.content && (
-                        <span className="text-[15px] md:text-[18px] text-[#FFFFFF94] font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px]">
-                          {faq.content}
-                        </span>
-                      )}
-                      {faq.contractAddress && (
-                        <span className="text-[15px] md:text-[18px] text-[#FFFFFF94] font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px] break-all">
-                          {faq.contractAddress}
-                        </span>
-                      )}
-                      {faq.email && (
-                        <Link
-                          className="underline text-[#FFFFFF94] font-normal hover:text-white break-all"
-                          href={`mailto:${faq.email}`}
-                          target="_blank"
-                        >
-                          {faq.email}
-                        </Link>
-                      )} */}
-                    </div>
                     <UpIcon className="absolute right-4 bottom-4 border rounded-full border-[#EDEDED1F] bg-[#FFFFFF0F]" />
                   </>
                 ) : (
