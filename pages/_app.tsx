@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Suspense fallback="loading">
       <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
-          {/* <Banner /> */}
+          <Banner />
           <div className="flex">
             <Header />
             <HamburgerMenu />

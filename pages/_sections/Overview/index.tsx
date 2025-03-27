@@ -67,8 +67,18 @@ export default function Overview() {
           </div>
           <div className="flex w-full justify-center mb-10 relative z-10">
             <div >
-              {/* <BuyNow /> */}
-              maybe Welcome image.
+              <div className="onStep flex justify-start z-10 w-full">
+                <video
+                  className="max-w-[576px] w-full pointer-events-none ounded-[11.27px]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/video/welcome.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
           </div>
         </div>
@@ -80,9 +90,8 @@ export default function Overview() {
         <div >
           <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-20 mt-10">
             <div className="flex w-full justify-center mb-10 relative z-0">
-              {/* <div className="onStep flex justify-end z-10 w-full"> */}
-              <div className="onStep flex z-10 w-full">
-                {/* <video
+              <div className="onStep flex justify-end z-10 w-full">
+                <video
                   className="max-w-[576px] w-full pointer-events-none ounded-[11.27px]"
                   autoPlay
                   loop
@@ -91,8 +100,7 @@ export default function Overview() {
                 >
                   <source src="/video/tutorial.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
-                </video> */}
-                maybe why choose image.
+                </video>
               </div>
             </div>
             <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
@@ -132,7 +140,7 @@ export default function Overview() {
         </div>
       </div>
 
-      <div className="bg-overview">
+      {/* <div className="bg-overview">
         <img
           className="bottom-left"
           src="/images/background/bank-account.svg"
@@ -143,7 +151,7 @@ export default function Overview() {
           src="/images/background/cross-border.svg"
           alt="border"
         />
-      </div>
+      </div> */}
     </main>
   );
 }

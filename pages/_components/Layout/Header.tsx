@@ -72,9 +72,9 @@ export default function Header() {
       className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#041019]`}
     >
       <div className="flex items-center justify-between relative z-10">
-        <Link href="/" className="flex items-center ">
+        <Link href="/" className="flex items-center">
           <img
-            className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]"
+            className=""
             src={"./images/logo.png"}
             draggable={false}
             alt="logo"
@@ -89,25 +89,25 @@ export default function Header() {
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
             href="/"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
             Home
           </Link>
           <Link
             href="/profile"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
             Profile
           </Link>
           <Link
             href="/"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
             Dashboard
           </Link>
           <Link
             href="/"
-            className={`cursor-pointer text-sm text-light-white hover:text-yellow transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-yellow transition hidden lg:inline-block`}
           >
             Referral
           </Link>
