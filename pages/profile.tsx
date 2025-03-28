@@ -10,19 +10,52 @@ const poppins = Poppins({
   weight: ["200", "400", "600", "800"],
 });
 
+let tempid = 0;
 const ProfilePage: NextPage = () => {
   const { address } = useAccount();
 
   const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [userID] = useState("ICO0000" + tempid++);
+  const [email, setEmail] = useState("");
+  const [perAddress, setPerAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const [mobilenumber, setMobileNumber] = useState("");
+  const [teleid, setTelegramID] = useState("");
+  const [xid, setXID] = useState("");
+  const [discordid, setDiscordID] = useState("");
+  const [btcwallet, setBTCWallet] = useState("");
+  const [solwallet, setSOLWallet] = useState("");
+  const [wallet1, setOtherWallet1] = useState("");
+  const [wallet2, setOtherWallet2] = useState("");
 
-  const onRigister = () => {
+  const onRigister = (e) => {
+
+    e.preventDefault();
+
     const newUser = {
-      name,
+      userName: name,
+      fullName: fullName,
+      userId: userID,
+      emailAddress: email,
+      permanentAddress: perAddress,
+      country: country,
+      mobileNumber: mobilenumber,
+      telegramId: teleid,
+      twitterId: xid,
+      discordId: discordid,
+      loginWallet: address,
+      btcWallet: btcwallet,
+      solanaWallet: solwallet,
+      anotherWallet1: wallet1,
+      anotherWallet2: wallet2,
     };
 
+    console.log(`register request sendt.`)
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+        // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+        `http://localhost:5000/api/users/register`,
         newUser
       )
       .then((res) => {
@@ -44,7 +77,7 @@ const ProfilePage: NextPage = () => {
           Profile
         </h1>
         <div className="flex flex-col gap-12">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" method="POST">
             {/* Personal Information */}
             <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
               Personal Information
@@ -52,6 +85,7 @@ const ProfilePage: NextPage = () => {
 
             <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
 
+              {/* User name */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="name"
@@ -75,6 +109,7 @@ const ProfilePage: NextPage = () => {
                 </div>
               </div>
 
+              {/* Full Name */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="fullname"
@@ -90,10 +125,15 @@ const ProfilePage: NextPage = () => {
                     autoComplete="fullname"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={fullName}
+                    onChange={(e) => {
+                      setFullName(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* User ID */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="userid"
@@ -108,10 +148,13 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="userid"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    disabled
+                    value={userID}
                   />
                 </div>
               </div>
 
+              {/* Email address */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="email"
@@ -127,10 +170,15 @@ const ProfilePage: NextPage = () => {
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Permanent address */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="permanentaddress"
@@ -145,10 +193,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="permanentaddress"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={perAddress}
+                    onChange={(e) => {
+                      setPerAddress(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Country */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="country"
@@ -163,10 +216,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="country"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Mobile Number */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="mobilenumber"
@@ -181,6 +239,10 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="mobilenumber"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={mobilenumber}
+                    onChange={(e) => {
+                      setMobileNumber(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -192,6 +254,7 @@ const ProfilePage: NextPage = () => {
             </div>
 
             <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+              {/* Telegram ID */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="teleid"
@@ -206,10 +269,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="teleid"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={teleid}
+                    onChange={(e) => {
+                      setTelegramID(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Twitter ID */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="xid"
@@ -224,10 +292,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="xid"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={xid}
+                    onChange={(e) => {
+                      setXID(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Discord ID */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="discordid"
@@ -242,6 +315,10 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="discordid"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={discordid}
+                    onChange={(e) => {
+                      setDiscordID(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -253,6 +330,7 @@ const ProfilePage: NextPage = () => {
             </div>
 
             <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+              {/* Login Wallet */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="loginwallet"
@@ -267,11 +345,13 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="loginwallet"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    disabled
                     value={address}
                   />
                 </div>
               </div>
 
+              {/* BTC Wallet */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="btcwallet"
@@ -286,10 +366,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="btcwallet"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={btcwallet}
+                    onChange={(e) => {
+                      setBTCWallet(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Solana Wallet */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="solanawallet"
@@ -304,10 +389,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="solanawallet"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={solwallet}
+                    onChange={(e) => {
+                      setSOLWallet(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Another Wallet-1 */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="anotherwallet1"
@@ -322,10 +412,15 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="anotherwallet1"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={wallet1}
+                    onChange={(e) => {
+                      setOtherWallet1(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
+              {/* Another Wallet-2 */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="anotherwallet2"
@@ -340,6 +435,10 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="anotherwallet2"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={wallet2}
+                    onChange={(e) => {
+                      setOtherWallet2(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -400,7 +499,7 @@ sm:text-md sm:leading-6"
 px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm 
 hover:bg-black focus-visible:outline focus-visible:outline-2 
 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={() => onRigister()}
+                onClick={(e) => onRigister(e)}
               >
                 Register
               </button>
