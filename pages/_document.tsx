@@ -9,26 +9,26 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" sizes="any" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-          <title>Remittix | Crypto-to-Fiat Network - PayFi</title>
+          <title>Wealthy | Crypto-Multi-Token-ICO-Site</title>
 
           <meta
             name="description"
-            content="Remittix aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
+            content="Wealthy aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
           />
           <meta property="og:locale" content="en_US" />
           <meta property="og:type" content="website" />
           <meta
             property="og:title"
-            content="Remittix | Crypto-to-Fiat Network - PayFi"
+            content="Wealthy | Crypto-Multi-Token-ICO-Site"
           />
           <meta
             property="og:description"
-            content="Remittix aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
+            content="Wealthy aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
           />
           <meta property="og:url" content="" />
           <meta
             property="og:site_name"
-            content="Remittix | Crypto-to-Fiat Network - PayFi"
+            content="Wealthy | Crypto-Multi-Token-ICO-Site"
           />
           <meta property="og:image" content="/images/banner.jpg" />
           <meta property="og:image:secure_url" content="/images/banner.jpg" />
@@ -39,11 +39,11 @@ export default class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content="Remittix | Crypto-to-Fiat Network - PayFi"
+            content="Wealthy | Crypto-Multi-Token-ICO-Site"
           />
           <meta
             name="twitter:description"
-            content="Remittix aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
+            content="Wealthy aims to revolutionize cross-border payments with faster and lower transaction fees. Join the revolution and pay with crypto for anything, anywhere."
           />
           <meta name="twitter:image" content="/images/banner.jpg" />
 

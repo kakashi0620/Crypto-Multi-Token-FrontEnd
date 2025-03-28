@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import HamburgerMenu from "./Hamburger";
@@ -60,9 +61,24 @@ export default function Header() {
   // vadym add for wallet
   const { address, isConnected } = useAccount();
   const router = useRouter()
+  const routeDashboard = async() => {
+    axios.post(
+      `http://localhost:5000/api/users/getuser`, {address}
+    )
+    .then(res => {
+      if (res.data.length > 0)
+        router.push('/')
+      else
+        router.push('/profile')
+    })
+    .catch(e => {
+      console.log('user get error =>', e)
+    });
+  }
+
   useEffect(() => {
     if (isConnected) {
-      router.push('/profile')
+      routeDashboard();
     }
   }, [, isConnected]);
   // vadym wallet end
@@ -125,7 +141,7 @@ export default function Header() {
                     className="h-[30.78px] md:h-[45px] w-full"
                     onClick={() => web3Modal.open()}
                   >
-                    Connect wallet
+                    Sign In
                   </button>
                 ) :
                   (

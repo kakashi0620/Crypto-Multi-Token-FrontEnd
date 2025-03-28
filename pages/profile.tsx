@@ -501,7 +501,7 @@ hover:bg-black focus-visible:outline focus-visible:outline-2
 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onRigister(e)}
               >
-                Register
+                Sign Up
               </button>
             </div>
           </form>
