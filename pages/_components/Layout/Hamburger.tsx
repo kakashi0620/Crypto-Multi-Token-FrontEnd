@@ -23,7 +23,7 @@ const NavList = [
   },
   {
     title: "Dashboard",
-    href: "/",
+    href: "/dashboard",
     page: true,
   },  
   {

@@ -88,8 +88,7 @@ export default function Footer() {
           <div className="flex flex-col w-[88%] text-lg">
             <div className="flex flex-col md:flex-row justify-between w-full md:items-end pb-8 md:pb-12 border-b-2 border-black">
               <div className="flex items-center text-black pb-4 md:pb-0">
-                {/* <LogoIcon className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]" /> */}
-                <span>logo </span>
+                <LogoIcon className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]" />
                 <span className="text-[20.9px] md:text-[37.55px] ml-1 md:ml-2">
                   {/* Remittix */}
                   News letter box

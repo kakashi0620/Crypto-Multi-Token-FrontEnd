@@ -79,44 +79,44 @@ export default function Overview() {
       <div className="max-w-[1320px] w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
 
         {/* Referral Information */}
-        <div>
+        <div className="w-full py-10 item-center flex flex-col gap-8">
           <div className="w-full mb-4 text-2xl font-medium text-green border-b-2 border-green">
             Referral Information
           </div>
 
-          <div className="referrer-table flex flex-col w-full gap-2">
+          <div className="referrer-table flex flex-col gap-2 overflow-scroll whitespace-nowrap">
             <div className="referrer-header referrer-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-green items-center gap-2">
+              <div className="flex text-green items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   No
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Level
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Username
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Joined Date
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Total Invest
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Bonus Earn
                 </span>
@@ -157,50 +157,50 @@ export default function Overview() {
         </div>
 
         {/* Withdrawal History */}
-        <div>
+        <div className="w-full py-10 item-center flex flex-col gap-8">
           <div className="w-full mb-4 text-2xl font-medium text-green border-b-2 border-green">
             Withdrawal History
           </div>
 
-          <div className="withdraw-table flex flex-col w-full gap-2">
+          <div className="withdraw-table flex flex-col w-full gap-2 overflow-scroll whitespace-nowrap">
             <div className="withdraw-header withdraw-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-green items-center gap-2">
+              <div className="flex text-green items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px] text-[11.2px] md:text-[16.34px]">
                   SN
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Date
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Chain
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Wallet Address
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Amount
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Status
                 </span>
                 <VerticalDivider />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   Details
                 </span>

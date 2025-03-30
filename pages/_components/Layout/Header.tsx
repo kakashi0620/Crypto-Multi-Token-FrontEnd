@@ -67,7 +67,7 @@ export default function Header() {
     )
     .then(res => {
       if (res.data.length > 0)
-        router.push('/')
+        router.push('/dashboard')
       else
         router.push('/profile')
     })
@@ -111,7 +111,7 @@ export default function Header() {
             Profile
           </Link>
           <Link
-            href="/"
+            href="/dashboard"
             className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Dashboard
