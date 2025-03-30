@@ -75,8 +75,8 @@ export default function Overview() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center lg:py-32 z-10 relative">
-      <div className="max-w-[1240px] w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
+    <main className="flex flex-col items-center justify-center lg:py-16 z-10 relative">
+      <div className="max-w-[1320px] w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
 
         {/* Referral Information */}
         <div>
