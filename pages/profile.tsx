@@ -22,7 +22,7 @@ const ProfilePage: NextPage = () => {
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
   const [userID] = useState(getUserID());
-  const [referrallink] = useState("http://localhost:5000/signup?r=" + getUserID());
+  const [referrallink] = useState("http://localhost:3000/signup?r=" + getUserID());
   const [email, setEmail] = useState("");
   const [perAddress, setPerAddress] = useState("");
   const [country, setCountry] = useState("");
@@ -85,7 +85,7 @@ const ProfilePage: NextPage = () => {
 
   return (
     <div className={`bg-term ${poppins.className}`}>
-      <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[943px]">
+      <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
         <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
           {/* {t("eleventh_section_profile_policy")} */}
           Profile
@@ -114,7 +114,7 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="name"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
@@ -138,7 +138,7 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="fullname"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={fullName}
                     onChange={(e) => {
                       setFullName(e.target.value);
@@ -161,7 +161,7 @@ const ProfilePage: NextPage = () => {
                     name="userid"
                     type="text"
                     autoComplete="userid"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     disabled
                     value={userID}
                   />
@@ -176,18 +176,26 @@ const ProfilePage: NextPage = () => {
                 >
                   Referral Link
                 </label>
-                <div className="relative">
+                {/* <div>
+                  <div className="relative w-full">
+                    <input type="search" id="search-dropdown" className="block p-1 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search" required />
+                    <button type="submit" className="absolute top-0 end-0 p-1 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg></button>
+                  </div>
+                </div> */}
+                <div className="relative w-full">
                   <input
                     id="referrallink"
                     name="referrallink"
                     type="text"
                     autoComplete="referrallink"
-                    className="block w-5/6 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full z-20 rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     disabled
                     value={referrallink}
                   />
 
-                  <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-0 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
+                  <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-1 top-1/2 -translate-y-1/2 bg-[#1c1c1c] text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
                     {
                       copyState ?
                         <span id="success-icon">
@@ -225,7 +233,7 @@ const ProfilePage: NextPage = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -248,7 +256,7 @@ const ProfilePage: NextPage = () => {
                     name="permanentaddress"
                     type="text"
                     autoComplete="permanentaddress"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={perAddress}
                     onChange={(e) => {
                       setPerAddress(e.target.value);
@@ -271,7 +279,7 @@ const ProfilePage: NextPage = () => {
                     name="country"
                     type="text"
                     autoComplete="country"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={country}
                     onChange={(e) => {
                       setCountry(e.target.value);
@@ -294,7 +302,7 @@ const ProfilePage: NextPage = () => {
                     name="mobilenumber"
                     type="text"
                     autoComplete="mobilenumber"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={mobilenumber}
                     onChange={(e) => {
                       setMobileNumber(e.target.value);
@@ -324,7 +332,7 @@ const ProfilePage: NextPage = () => {
                     name="teleid"
                     type="text"
                     autoComplete="teleid"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={teleid}
                     onChange={(e) => {
                       setTelegramID(e.target.value);
@@ -347,7 +355,7 @@ const ProfilePage: NextPage = () => {
                     name="xid"
                     type="text"
                     autoComplete="xid"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={xid}
                     onChange={(e) => {
                       setXID(e.target.value);
@@ -370,7 +378,7 @@ const ProfilePage: NextPage = () => {
                     name="discordid"
                     type="text"
                     autoComplete="discordid"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={discordid}
                     onChange={(e) => {
                       setDiscordID(e.target.value);
@@ -400,7 +408,7 @@ const ProfilePage: NextPage = () => {
                     name="loginwallet"
                     type="text"
                     autoComplete="loginwallet"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     disabled
                     value={address}
                   />
@@ -421,7 +429,7 @@ const ProfilePage: NextPage = () => {
                     name="btcwallet"
                     type="text"
                     autoComplete="btcwallet"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={btcwallet}
                     onChange={(e) => {
                       setBTCWallet(e.target.value);
@@ -444,7 +452,7 @@ const ProfilePage: NextPage = () => {
                     name="solanawallet"
                     type="text"
                     autoComplete="solanawallet"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={solwallet}
                     onChange={(e) => {
                       setSOLWallet(e.target.value);
@@ -467,7 +475,7 @@ const ProfilePage: NextPage = () => {
                     name="anotherwallet1"
                     type="text"
                     autoComplete="anotherwallet1"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={wallet1}
                     onChange={(e) => {
                       setOtherWallet1(e.target.value);
@@ -490,7 +498,7 @@ const ProfilePage: NextPage = () => {
                     name="anotherwallet2"
                     type="text"
                     autoComplete="anotherwallet2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={wallet2}
                     onChange={(e) => {
                       setOtherWallet2(e.target.value);
@@ -517,7 +525,7 @@ const ProfilePage: NextPage = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 
+                  className="block w-full rounded-md border-0 p-1 text-gray-900 
 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                 />
@@ -540,7 +548,7 @@ focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 
+                  className="block w-full rounded-md border-0 p-1 
 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 
 sm:text-md sm:leading-6"
@@ -552,7 +560,7 @@ sm:text-md sm:leading-6"
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-green 
-px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm 
+px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm 
 hover:bg-black focus-visible:outline focus-visible:outline-2 
 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onRigister(e)}
