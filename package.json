@@ -20,6 +20,7 @@
     "@web3modal/react": "^2.7.1",
     "@web3modal/wagmi": "^5.1.11",
     "axios": "^1.8.4",
+    "clipboard-copy": "^4.0.1",
     "ethers": "^6.8.1",
     "framer-motion": "^11.11.11",
     "hamburger-react": "^2.5.1",

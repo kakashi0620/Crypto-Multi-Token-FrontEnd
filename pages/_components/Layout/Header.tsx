@@ -89,19 +89,13 @@ export default function Header() {
       className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#101010]`}
     >
       <div className="flex items-center justify-between relative z-10">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="md:flex hidden md:items-center">
           <img
             className=""
             src={"./images/logo.png"}
             draggable={false}
             alt="logo"
           />
-          {/* <div
-            className={`text-[20.9px] md:text-[37.55px] font-bold ml-1 md:ml-2 text-white`}
-          >
-            Remittix
-            Pro Name or abbr
-          </div> */}
         </Link>
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
@@ -123,7 +117,7 @@ export default function Header() {
             Dashboard
           </Link>
           <Link
-            href="/"
+            href="/referral"
             className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Referral

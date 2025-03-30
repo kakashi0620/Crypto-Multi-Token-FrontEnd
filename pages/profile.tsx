@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
 import React, { useEffect, useState } from "react";
+import copy from 'clipboard-copy';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,9 +15,14 @@ let tempid = 0;
 const ProfilePage: NextPage = () => {
   const { address } = useAccount();
 
+  const getUserID = () => {
+    return "ICO0000" + tempid;
+  }
+
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
-  const [userID] = useState("ICO0000" + tempid++);
+  const [userID] = useState(getUserID());
+  const [referrallink] = useState("http://localhost:5000/signup?r=" + getUserID());
   const [email, setEmail] = useState("");
   const [perAddress, setPerAddress] = useState("");
   const [country, setCountry] = useState("");
@@ -28,6 +34,9 @@ const ProfilePage: NextPage = () => {
   const [solwallet, setSOLWallet] = useState("");
   const [wallet1, setOtherWallet1] = useState("");
   const [wallet2, setOtherWallet2] = useState("");
+  const [copyState, setCopyState] = useState(false);
+
+  ++tempid;
 
   const onRigister = (e) => {
 
@@ -67,6 +76,11 @@ const ProfilePage: NextPage = () => {
           error.response ? error.response.data : error.message
         );
       });
+  }
+
+  const onCopy = async () => {
+    await copy(referrallink);
+    setCopyState(true)
   }
 
   return (
@@ -151,6 +165,48 @@ const ProfilePage: NextPage = () => {
                     disabled
                     value={userID}
                   />
+                </div>
+              </div>
+
+              {/* Referral Link */}
+              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <label
+                  htmlFor="referrallink"
+                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                >
+                  Referral Link
+                </label>
+                <div className="relative">
+                  <input
+                    id="referrallink"
+                    name="referrallink"
+                    type="text"
+                    autoComplete="referrallink"
+                    className="block w-5/6 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    disabled
+                    value={referrallink}
+                  />
+
+                  <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-0 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
+                    {
+                      copyState ?
+                        <span id="success-icon">
+                          <svg className="w-3.5 h-3.5 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                          </svg>
+                        </span> :
+                        <span id="default-icon">
+                          <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                            <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                          </svg>
+                        </span>
+                    }
+                  </button>
+                  <div id="tooltip-referrallink-copy-button" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                    <span id="default-tooltip-message">Copy to clipboard</span>
+                    <span id="success-tooltip-message" className="hidden">Copied!</span>
+                    <div className="tooltip-arrow" data-popper-arrow></div>
+                  </div>
                 </div>
               </div>
 

@@ -16,7 +16,7 @@ import "../lib/i18n";
 import Banner from "./_components/Layout/Banner";
 import HamburgerMenu from "./_components/Layout/Hamburger";
 
-const projectId = "8be043177030c8c966a8bb5ae3f5c591";
+const projectId = "12b8a841a230c15448f1dd353b5384ad";
 
 export const wagmiConfig = createConfig({
   chains: [mainnet],

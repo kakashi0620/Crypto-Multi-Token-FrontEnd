@@ -25,10 +25,10 @@ const NavList = [
     title: "Dashboard",
     href: "/",
     page: true,
-  },
+  },  
   {
     title: "Referral",
-    href: "/",
+    href: "/referral",
     page: true,
   }
 ];
