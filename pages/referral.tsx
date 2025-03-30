@@ -1,18 +1,8 @@
 import React from "react";
-import Divider from "./_components/Icons/Divider";
-import Twitter from "./_components/Icons/Twitter";
-import Telegram from "./_components/Icons/Telegram";
-import Medium from "./_components/Icons/Medium";
-import RightIcon from "./_components/Icons/Right";
-import Link from "next/link";
-import { Element, Link as ScrollLink } from "react-scroll";
-import Instagram from "./_components/Icons/Instagram";
-import { useTranslation } from "react-i18next";
 import VerticalDivider from "./_components/Icons/VerticalDivider";
 
 export default function Overview() {
-  const { t } = useTranslation();
-
+  
   const Referrers = [
     {
       no: "1",

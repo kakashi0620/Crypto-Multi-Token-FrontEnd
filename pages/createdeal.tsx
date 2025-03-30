@@ -1,10 +1,6 @@
-import axios from "axios";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import { useTranslation } from "react-i18next";
-import { useAccount } from "wagmi";
 import React, { useEffect, useState } from "react";
-import copy from 'clipboard-copy';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,8 +9,6 @@ const poppins = Poppins({
 
 let tempid = 0;
 const ProfilePage: NextPage = () => {
-  const { address } = useAccount();
-
 
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
@@ -29,6 +23,7 @@ const ProfilePage: NextPage = () => {
   const [investmin, setInvestMin] = useState("");
   const [investmax, setInvestMax] = useState("");
   const [test, setTest] = useState("");
+  const [weburl, setWebURL] = useState("");
   const [xurl, setXURL] = useState("");
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
@@ -60,26 +55,21 @@ const ProfilePage: NextPage = () => {
     };
 
     console.log(`register request sendt.`)
-    axios
-      .post(
-        // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-        `http://localhost:5000/api/users/register`,
-        newUser
-      )
-      .then((res) => {
-        // toast.success("Profile successfully registered!", { position: "top-right" });
-      })
-      .catch((error) => {
-        console.log(
-          "Profile Register error:",
-          error.response ? error.response.data : error.message
-        );
-      });
-  }
-
-  const onCopy = async () => {
-    await copy(referrallink);
-    setCopyState(true)
+    // axios
+    //   .post(
+    //     // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+    //     `http://localhost:5000/api/users/register`,
+    //     newUser
+    //   )
+    //   .then((res) => {
+    //     // toast.success("Profile successfully registered!", { position: "top-right" });
+    //   })
+    //   .catch((error) => {
+    //     console.log(
+    //       "Profile Register error:",
+    //       error.response ? error.response.data : error.message
+    //     );
+    //   });
   }
 
   return (
@@ -161,7 +151,6 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="banner"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-                    disabled
                     value={banner}
                     onChange={(e) => {
                       setBanner(e.target.value);
