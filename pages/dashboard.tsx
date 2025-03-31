@@ -47,10 +47,13 @@ const ProfilePage: NextPage = () => {
 
           <div className="flex flex-col gap-y-4 md:gap-x-6 md:flex md:flex-row overflow-x-auto whitespace-nowrap">
 
+            {/* Deal Cards */}
             {
               Deals.map((item, index) => (
                 <div onClick={() => onCreateDeal()} className="min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
                   <div className="w-full h-full grid grid-rows-4 bg-white rounded-xl overflow-hidden">
+
+                    {/* Image part */}
                     <div className="row-span-3 relative overflow-hidden ">
                       <img className="object-cover" src={`/images/blog/blog-pic${index + 1}.png`} alt="Card Image" />
                       <div className="absolute top-0 start-0 end-0 h-full">
@@ -81,6 +84,7 @@ const ProfilePage: NextPage = () => {
                       </div>
                     </div>
 
+                    {/* Bid part */}
                     <div className="w-full row-span-1 flex items-center pl-6">
                       <div className="w-full flex justify-between text-gray">
                         <div className="flex items-center">
