@@ -2,7 +2,7 @@ import React from "react";
 import VerticalDivider from "./_components/Icons/VerticalDivider";
 
 export default function Overview() {
-  
+
   const Referrers = [
     {
       no: "1",
@@ -74,7 +74,7 @@ export default function Overview() {
             Referral Information
           </div>
 
-          <div className="referrer-table flex flex-col gap-2 overflow-scroll whitespace-nowrap">
+          <div className="referrer-table flex flex-col gap-2 overflow-x-auto whitespace-nowrap">
             <div className="referrer-header referrer-row items-center h-[33.76px] md:h-[49.28px]">
               <div className="flex text-green items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
@@ -152,10 +152,10 @@ export default function Overview() {
             Withdrawal History
           </div>
 
-          <div className="withdraw-table flex flex-col w-full gap-2 overflow-scroll whitespace-nowrap">
+          <div className="withdraw-table flex flex-col w-full gap-2 overflow-x-auto whitespace-nowrap">
             <div className="withdraw-header withdraw-row items-center h-[33.76px] md:h-[49.28px]">
               <div className="flex text-green items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px] text-[11.2px] md:text-[16.34px]">
+                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   SN
                 </span>
                 <VerticalDivider />
