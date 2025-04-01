@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import Header from "./_components/Layout/Header";
+import { Toaster } from "react-hot-toast";
 import Head from "next/head";
 import Footer from "./_components/Layout/Footer";
 import { ToastContainer } from "react-toastify";
@@ -40,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
           <Banner />
+          <Toaster position="top-right" reverseOrder={false} />
           <div className="flex">
             <Header />
             <HamburgerMenu />

@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import { useTranslation } from "react-i18next";
@@ -60,7 +61,7 @@ const ProfilePage: NextPage = () => {
       anotherWallet2: wallet2,
     };
 
-    console.log(`register request sendt.`)
+    console.log(`register request sendt => login Wallet: ${newUser.loginWallet}`)
     axios
       .post(
         // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
@@ -68,7 +69,7 @@ const ProfilePage: NextPage = () => {
         newUser
       )
       .then((res) => {
-        // toast.success("Profile successfully registered!", { position: "top-right" });
+        toast.success("Profile successfully registered! 🎉");
       })
       .catch((error) => {
         console.log(
