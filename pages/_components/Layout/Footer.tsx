@@ -82,7 +82,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="relative z-30 pt-[43px] md:pt-[55px] pb-[26px] md:pb-[103px] bg-white">
+    <div className="relative z-10 pt-[43px] md:pt-[55px] pb-[26px] md:pb-[103px] bg-white">
       <Fade duration={300} className="relative z-10">
         <footer className="relative flex items-center justify-center">
           <div className="flex flex-col w-[88%] text-lg">

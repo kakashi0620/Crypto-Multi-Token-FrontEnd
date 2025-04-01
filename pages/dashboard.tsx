@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import RightIcon from "./_components/Icons/Right";
+import DealOverview from "./_components/Dialog/DealOverview";
 
 
 const poppins = Poppins({
@@ -10,36 +11,73 @@ const poppins = Poppins({
   weight: ["200", "400", "600", "800"],
 });
 
-const ProfilePage: NextPage = () => {
+export interface Deal {
+  name: string;
+  date: string;
+  round: string;
+  price: string;
+  status: string;
+  fdv: string;
+  vesting: string;
+  limit: string;
+  bid: string;
+  ask: string;
+  last: string;
+  logo: string;
+};
+
+const DashboardPage: NextPage = () => {
+
+  const Deals: Deal[] = [
+    {
+      name: "Navi",
+      date: "Deal will Live on 2 day 17:31:25",
+      round: "Private",
+      price: "$0.83",
+      status: "Pre-Launch",
+      fdv: "$1.5M",
+      vesting: "10% TGE, 1 Month Cliff, 10 month Liner Vesting",
+      limit: "Min: $50, Max: $1000",
+      bid: "0.86x",
+      ask: "1x",
+      last: "0.72x",
+      logo: "/images/blog/blog-pic1.png"
+    },
+    {
+      name: "Yoko",
+      date: "Deal will Live on 5 day 17:31:25",
+      round: "Private",
+      price: "$0.28",
+      status: "Post-Launch",
+      fdv: "$1.5M",
+      vesting: "15% TGE, 2 Month Cliff, 10 month Liner Vesting",
+      limit: "Min: $60, Max: $1200",
+      bid: "-",
+      ask: "-",
+      last: "$0.206",
+      logo: "/images/blog/blog-pic2.png"
+    },
+  ];
+
+  const [bOpenDeal, setOpenDeal] = useState(false);
+  const [selectedDeal, selectDeal] = useState<Deal | null>(null);
+  useEffect(() => {
+    if (selectedDeal) {
+      setOpenDeal(true);
+    }
+  }, [selectedDeal])
 
   const router = useRouter()
   const onCreateDeal = () => {
     router.push('/createdeal')
   }
 
-  const Deals = [
-    {
-      name: "Navi",
-      price: "$0.83",
-      status: "Pre-Launch",
-      bid: "0.86x",
-      ask: "1x",
-      last: "0.72x",
-    },
-    {
-      name: "Yoko",
-      price: "$0.28",
-      status: "Post-Launch",
-      bid: "-",
-      ask: "-",
-      last: "$0.206",
-    },
-  ];
-
   return (
+    <>
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
         <div className="flex flex-col gap-12">
+          
           {/* Upcoming Deal */}
           <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
             Upcoming Deal
@@ -50,12 +88,12 @@ const ProfilePage: NextPage = () => {
             {/* Deal Cards */}
             {
               Deals.map((item, index) => (
-                <div onClick={() => onCreateDeal()} className="min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
+                <div onClick={() => selectDeal(item)} key={index} className="min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
                   <div className="w-full h-full grid grid-rows-4 bg-white rounded-xl overflow-hidden">
 
                     {/* Image part */}
                     <div className="row-span-3 relative overflow-hidden ">
-                      <img className="object-cover" src={`/images/blog/blog-pic${index + 1}.png`} alt="Card Image" />
+                      <img className="object-cover" src={item.logo} alt="Card Image" />
                       <div className="absolute top-0 start-0 end-0 h-full">
                         <div className="px-6 text-white grid grid-cols-2 h-full">
 
@@ -123,7 +161,10 @@ const ProfilePage: NextPage = () => {
         </div>
       </div>
     </div>
+
+    <DealOverview deal={selectedDeal} isOpen={bOpenDeal} onConfirm={() => setOpenDeal(false)} onClose={() => setOpenDeal(false)} />
+    </>
   );
 };
 
-export default ProfilePage;
+export default DashboardPage;
