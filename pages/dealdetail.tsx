@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 let tempid = 0;
-const ProfilePage: NextPage = () => {
+const DealDetailPage: NextPage = () => {
 
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
@@ -28,14 +28,34 @@ const ProfilePage: NextPage = () => {
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
 
+  useEffect(() => {
+    const currentDealName: string = JSON.parse(localStorage.getItem("currentDealName") as string)
+    currentDealName;
+    // find deal from currentDealName on db.
+    setName("deal.setName");
+    setLogo("deal.setLogo");
+    setBanner("deal.setBanner");
+    setRound("deal.setRound");
+    setTokenPrice("deal.setTokenPrice");
+    setFDV("deal.setFDV");
+    setMC("deal.setMC");
+    setVest("deal.setVest");
+    setFundrasing("deal.setFundrasing");
+    setFee("deal.setFee");
+    setInvestMin("deal.setInvestMin");
+    setInvestMax("deal.setInvestMax");
+    setTest("deal.setTest");
+    setWebURL("deal.setWebURL");
+    setXURL("deal.setXURL");
+    setDiscordURL("deal.setDiscordURL");
+    setTeleURL("deal.setTeleURL");
+  }, [])
 
-  ++tempid;
-
-  const onCreateDeal = (e) => {
+  const onUpdatDeal = (e: Event) => {
 
     e.preventDefault();
 
-    const newUser = {
+    const deal = {
       userName: name,
       logo: logo,
       banner: banner,
@@ -54,7 +74,7 @@ const ProfilePage: NextPage = () => {
       teleurl: teleurl,
     };
 
-    console.log(`register request sendt.`)
+    console.log(`Deal successfully updated.`)
     // axios
     //   .post(
     //     // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
@@ -62,11 +82,11 @@ const ProfilePage: NextPage = () => {
     //     newUser
     //   )
     //   .then((res) => {
-    //     // toast.success("Profile successfully registered!", { position: "top-right" });
+    //     // toast.success("DealDetail successfully registered!", { position: "top-right" });
     //   })
     //   .catch((error) => {
     //     console.log(
-    //       "Profile Register error:",
+    //       "DealDetail Register error:",
     //       error.response ? error.response.data : error.message
     //     );
     //   });
@@ -76,7 +96,7 @@ const ProfilePage: NextPage = () => {
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
         <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
-          Create new deal
+          Deal Detail
         </h1>
         <div className="flex flex-col gap-12">
           <form className="space-y-6" method="POST">
@@ -228,7 +248,6 @@ const ProfilePage: NextPage = () => {
                     autoComplete="fdv"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={fdv}
-                    disabled
                     onChange={(e) => {
                       setFDV(e.target.value);
                     }}
@@ -252,7 +271,6 @@ const ProfilePage: NextPage = () => {
                     autoComplete="mc"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={mc}
-                    disabled
                     onChange={(e) => {
                       setMC(e.target.value);
                     }}
@@ -276,7 +294,6 @@ const ProfilePage: NextPage = () => {
                     autoComplete="vest"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={vest}
-                    disabled
                     onChange={(e) => {
                       setVest(e.target.value);
                     }}
@@ -414,7 +431,7 @@ const ProfilePage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Website URL */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
@@ -437,7 +454,7 @@ const ProfilePage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Twitter URL */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
@@ -460,7 +477,7 @@ const ProfilePage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Discord URL */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
@@ -483,7 +500,7 @@ const ProfilePage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Telegram URL */}
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
@@ -515,9 +532,9 @@ const ProfilePage: NextPage = () => {
 px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm 
 hover:bg-black focus-visible:outline focus-visible:outline-2 
 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={(e) => onCreateDeal(e)}
+                onClick={(e) => onUpdatDeal(e)}
               >
-                Create
+                Update
               </button>
             </div>
           </form>
@@ -527,4 +544,4 @@ focus-visible:outline-offset-2 focus-visible:outline-green"
   );
 };
 
-export default ProfilePage;
+export default DealDetailPage;

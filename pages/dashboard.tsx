@@ -69,7 +69,7 @@ const DashboardPage: NextPage = () => {
 
   const router = useRouter()
   const onCreateDeal = () => {
-    router.push('/createdeal')
+    router.push('/dealcreate')
   }
 
   return (

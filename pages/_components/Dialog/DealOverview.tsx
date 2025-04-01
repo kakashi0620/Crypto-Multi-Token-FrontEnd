@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface Deal {
   name: string;
@@ -26,110 +27,14 @@ interface DealOverviewProps {
 }
 
 const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, onClose }) => {
-  // const { deal, isOpen, onClose, onConfirm } = prop;
-
-  // const [formData, setFormData] = useState({
-  //   name: user?.name,
-  //   birthday: user?.birthday,
-  //   unit: user?.unit,
-  //   group: user?.group,
-  //   email: user?.email,
-  //   enter: user?.enter,
-  //   retire: user?.retire,
-  // });
-
-  // useEffect(() => {
-  //   if (formData.name === undefined && user)
-  //     setFormData({
-  //       name: user?.name,
-  //       birthday: user?.birthday,
-  //       unit: user?.unit,
-  //       group: user?.group,
-  //       email: user?.email,
-  //       enter: user?.enter,
-  //       retire: user?.retire,
-  //     })
-  // })
-
-  // const [errors, setErrors] = useState({ name: "", email: "" });
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  // const validateForm = () => {
-  //   let tempErrors = {
-  //     name: "",
-  //     birthday: "",
-  //     unit: "",
-  //     group: "",
-  //     email: "",
-  //     enter: "",
-  //   };
-  //   let isValid = true;
-
-  //   if (!formData.name) {
-  //     tempErrors.name = "Name is required";
-  //     isValid = false;
-  //   }
-  //   if (!formData.birthday) {
-  //     tempErrors.birthday = "Birthday is required";
-  //     isValid = false;
-  //   }
-  //   if (!formData.unit) {
-  //     tempErrors.unit = "Unit is required";
-  //     isValid = false;
-  //   }
-  //   if (!formData.group) {
-  //     tempErrors.group = "Group is required";
-  //     isValid = false;
-  //   }
-
-  //   if (!formData.email) {
-  //     tempErrors.email = "Email is required";
-  //     isValid = false;
-  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-  //     tempErrors.email = "Email format is invalid";
-  //     isValid = false;
-  //   }
-  //   if (!formData.enter) {
-  //     tempErrors.enter = "Enter is required";
-  //     isValid = false;
-  //   }
-
-  //   setErrors(tempErrors);
-  //   return isValid;
-  // };
-
-  // const currentUser = JSON.parse(localStorage.getItem("currentUser"))
-  // const onSaveBtnClick = async () => {
-  //   if (!validateForm()) {
-  //     // Proceed with form submission
-  //   }
-
-  //   const changedUserData = {
-  //     name: formData.name,
-  //     birthday: formData.birthday,
-  //     unit: formData.unit,
-  //     group: formData.group,
-  //     email: formData.email,
-  //     enter: formData.enter,
-  //     retire: formData.retire,
-  //   };
-
-  //   const response = await axios.post(
-  //     `${process.env.REACT_APP_BACKEND_URL}/api/users/updateuser/${user?._id}`,
-  //     changedUserData
-  //   );
-  //   if (response) {
-  //     toast.success("Profile successfully updated!", { position: "top-right" });
-
-  //     if (currentUser._id === user?._id)
-  //       localStorage.setItem("currentUser", JSON.stringify(response.data));
-
-  //     onConfirm();
-  //   }
-  // };
+  
+  const router = useRouter();
+  const onDetail = () => {
+    if (deal?.name !== "") {
+      localStorage.setItem("currentDealName", JSON.stringify(deal?.name));
+      router.push("/dealdetail")
+    }
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm}>
@@ -204,7 +109,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
           <button
             type="button"
             className="text-white bg-green hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green dark:focus:ring-blue-800"
-          // onClick={onSaveBtnClick}
+            onClick={() => onDetail()}
           >
             Deal Detail
           </button>
