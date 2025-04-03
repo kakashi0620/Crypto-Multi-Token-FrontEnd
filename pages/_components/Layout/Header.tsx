@@ -122,6 +122,24 @@ export default function Header() {
           >
             Referral
           </Link>
+          <Link
+            href="/memberinfo"
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+          >
+            MemberInfo
+          </Link>
+          <Link
+            href="/alldeals"
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+          >
+            All Deals
+          </Link>
+          <Link
+            href="/everydeal"
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+          >
+            Every Deal
+          </Link>
         </div>
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}

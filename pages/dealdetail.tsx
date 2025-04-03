@@ -51,7 +51,7 @@ const DealDetailPage: NextPage = () => {
     setTeleURL("deal.setTeleURL");
   }, [])
 
-  const onUpdatDeal = (e) => {
+  const onUpdatDeal = (e: Event) => {
 
     e.preventDefault();
 
