@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 
-const Modal = ({ isOpen, onClose, onConfirm, children }) => {
+const Modal = ({ isOpen, title, onClose, onConfirm, children }) => {
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -54,6 +54,11 @@ const Modal = ({ isOpen, onClose, onConfirm, children }) => {
         >
           &#x2715; {/* Close button */}
         </button>
+
+        <h1 className='absolute top-2 left-5 text-1xl'>
+          {title || 'Title'}
+        </h1>
+
         {children}
       </div>
     </div>

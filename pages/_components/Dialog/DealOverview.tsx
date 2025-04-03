@@ -35,9 +35,15 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
       router.push("/dealdetail")
     }
   }
+  const onContribute = () => {
+    if (deal?.name !== "") {
+      localStorage.setItem("currentDealName", JSON.stringify(deal?.name));
+      router.push("/dealcontribute")
+    }
+  }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm}>
+    <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} title="">
       <div className="flex flex-col gap-y-10 p-1 md:p-3 text-black">
         <div className="flex w-full justify-center">
           {deal?.date}
@@ -116,7 +122,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
           <button
             type="button"
             className="text-white bg-green hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green dark:focus:ring-blue-800"
-          // onClick={onSaveBtnClick}
+            onClick={() => onContribute()}
           >
             Contribute
           </button>

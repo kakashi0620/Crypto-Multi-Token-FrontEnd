@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import axios from 'axios';
-import { PROXY_URL } from "../../docs/data";
+import { PROXY_URL } from "../../../docs/data";
 import EveryDealTableGrid from './EveryDealTableGrid';
 import EveryDealAddDialog from './EveryDealAddDialog';
 
@@ -16,7 +16,7 @@ export default function EveryDealListCard(props) {
   const [dlginfo, setDlgData] = React.useState(default_dialogInfo);
   const [data, setData] = React.useState([]);
   const [users] = React.useState([]);
-  const isadmin = JSON.parse(localStorage.getItem("user"))?.role === "admin";
+  const isadmin = JSON.parse(localStorage.getItem("user") as string)?.role === "admin";
   // const id = JSON.parse(localStorage.getItem("user"))?._id;
 
   React.useEffect(() => {
@@ -36,11 +36,11 @@ export default function EveryDealListCard(props) {
   }, [isadmin, dlginfo])
 
   const handleClickOpen = (isadmin) => {
-    setDlgData({ info: null, open: true, action: 'add', admin: isadmin == true ? true : false });
+    setDlgData({ info: null, open: true, action: 'add'});//, admin: isadmin == true ? true : false });
   };
 
   const handleClose = (info) => {
-    setDlgData({ info: null, open: false });
+    // setDlgData({ info: null, open: false });
   };
 
   const handleOpenEditDialog = (info) => {
@@ -48,7 +48,7 @@ export default function EveryDealListCard(props) {
   };
 
   const updateEveryDealTable = () => {
-    setDlgData({ info: null, open: false, remove: true });
+    // setDlgData({ info: null, open: false, remove: true });
   };
 
   return (

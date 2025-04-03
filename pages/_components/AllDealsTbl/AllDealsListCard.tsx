@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import axios from 'axios';
-import { PROXY_URL } from "../../docs/data";
+import { PROXY_URL } from "../../../docs/data";
 import AllDealsTableGrid from './AllDealsTableGrid';
 import AllDealsAddDialog from './AllDealsAddDialog';
 
@@ -16,7 +16,7 @@ export default function AllDealsListCard(props) {
   const [dlginfo, setDlgData] = React.useState(default_dialogInfo);
   const [data, setData] = React.useState([]);
   const [users] = React.useState([]);
-  const isadmin = JSON.parse(localStorage.getItem("user"))?.role === "admin";
+  const isadmin = JSON.parse(localStorage.getItem("user") as string)?.role === "admin";
   // const id = JSON.parse(localStorage.getItem("user"))?._id;
 
   React.useEffect(() => {
@@ -36,27 +36,28 @@ export default function AllDealsListCard(props) {
   }, [isadmin, dlginfo])
 
   const handleClickOpen = (isadmin) => {
-    setDlgData({ info: null, open: true, action: 'add', admin: isadmin == true ? true : false });
+    setDlgData({ info: null, open: true, action: 'add'});//, admin: isadmin == true ? true : false });
   };
 
-  const handleClose = (info) => {
-    setDlgData({ info: null, open: false });
-  };
+  // const handleClose = (info) => {
+  //   setDlgData({ info: null, open: false });
+  // };
 
   const handleOpenEditDialog = (info) => {
     setDlgData({ open: true, info: info, action: 'edit' });
   };
 
-  const updateAllDealsTable = () => {
-    setDlgData({ info: null, open: false, remove: true });
-  };
+  // const updateAllDealsTable = () => {
+  //   setDlgData({ info: null, open: false, remove: true });
+  // };
 
   return (
     <div className='flex justify-center items-center'>
       <div className='flex flex-col break-words w-full bg-white shadow-2xl rounded-lg overflow-hidden'>
         <div className='rounded-b px-6 py-4'>
           <AllDealsTableGrid data={data} handleClickOpen={handleClickOpen} isadmin={isadmin} handleOpenEditDialog={(info) => handleOpenEditDialog(info)} />
-          <AllDealsAddDialog info={dlginfo} handleClose={(info) => handleClose(info)} />
+          {/* <AllDealsAddDialog info={dlginfo} handleClose={(info) => handleClose(info)} /> */}
+          <AllDealsAddDialog info={dlginfo} />
         </div>
       </div>
     </div>

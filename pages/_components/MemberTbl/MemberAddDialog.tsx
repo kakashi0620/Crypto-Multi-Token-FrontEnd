@@ -1,10 +1,10 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import { PROXY_URL } from '../../docs/data';
-import Toast from '../Toast';
-import Modal from '../basic/Modal';
-import ModalItem from '../basic/ModalItem';
+import { PROXY_URL } from '../../../docs/data';
+import toast from "react-hot-toast";;
+import Modal from '../Dialog/Modal';
+import ModalItem from '../Dialog/ModalItem';
 
 const default_formdata = {
   sn: null,
@@ -22,7 +22,7 @@ const default_formdata = {
 }
 
 export default function MemberAddDialog(props) {
-  const isadmin = JSON.parse(localStorage.getItem("user"))?.role === "admin";
+  const isadmin: Boolean = (JSON.parse(localStorage.getItem("user") as string)?.role === "admin");
 
   const { info, handleClose, users } = props;
 
@@ -56,7 +56,7 @@ export default function MemberAddDialog(props) {
       )
         .then(res => {
           if (res.data.success === true) {
-            Toast.success(res.data.message);
+            toast.success(res.data.message);
             handleClose(null);
           }
         })
@@ -72,7 +72,7 @@ export default function MemberAddDialog(props) {
       )
         .then(res => {
           if (res.data.success === true) {
-            Toast.success(res.data.message);
+            toast.success(res.data.message);
             handleClose(res.data.retdata);
           }
         })
@@ -80,47 +80,47 @@ export default function MemberAddDialog(props) {
     }
   }
 
-  const handleChangeStartDate = (value) => {
-    console.log("handleChangeStartDate---------------------", value);
-    setFormData({ ...formdata, startdate: value });
-  };
+  // const handleChangeStartDate = (value) => {
+  //   console.log("handleChangeStartDate---------------------", value);
+  //   setFormData({ ...formdata, startdate: value });
+  // };
 
-  const handleChangeEndDate = (value) => {
-    console.log("handleChangeEndDate---------------------", value);
-    setFormData({ ...formdata, enddate: value });
-  };
+  // const handleChangeEndDate = (value) => {
+  //   console.log("handleChangeEndDate---------------------", value);
+  //   setFormData({ ...formdata, enddate: value });
+  // };
 
   const handleChange = (event) => {
     event.preventDefault();
     setFormData({ ...formdata, [event.target.id]: event.target.value });
   };
 
-  const handleChangerb = (event) => {
-    event.preventDefault();
-    setFormData({ ...formdata, [event.target.id]: event.target.value });
-  };
+  // const handleChangerb = (event) => {
+  //   event.preventDefault();
+  //   setFormData({ ...formdata, [event.target.id]: event.target.value });
+  // };
 
-  const handleChangeUser = (event) => {
-    event.preventDefault();
-    setFormData({ ...formdata, userid: null });
-    for (let i = 0; i < users.length; i++) {
-      if (users[i]._id === event.target.value) {
-        setFormData({ ...formdata, userid: users[i]._id });
-      }
-    }
-  }
+  // const handleChangeUser = (event) => {
+  //   event.preventDefault();
+  //   setFormData({ ...formdata, userid: null });
+  //   for (let i = 0; i < users.length; i++) {
+  //     if (users[i]._id === event.target.value) {
+  //       setFormData({ ...formdata, userid: users[i]._id });
+  //     }
+  //   }
+  // }
 
-  function canBeSubmitted() {
-    return formdata.user !== '' && formdata.destination !== '';
-  }
+  // function canBeSubmitted() {
+  //   return formdata.user !== '' && formdata.destination !== '';
+  // }
   return (
-    <Modal isOpen={info.open} onClose={handleClose} title={info.action === 'add' ? "Add Memberation" : "Edit Memberation"} >
+    <Modal isOpen={info.open} onConfirm={handleClose} onClose={handleClose} title={info.action === 'add' ? "Add Memberation" : "Edit Memberation"} >
 
-      <form method="POST" onSubmit={handleSubmit} class="w-full flex flex-wrap justify-start">
+      <form method="POST" onSubmit={handleSubmit} className="w-full flex flex-wrap justify-start">
         <ModalItem>
           <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">UserName</label>
           <div>
-            <input type="text" disabled={!isadmin} onChange={handleChange} value={formdata.userId?.name} id="username" className="flex w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-none placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder='UserName' />
+            <input type="text" disabled={!isadmin} onChange={handleChange} value={formdata.username} id="username" className="flex w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-none placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder='UserName' />
           </div>
         </ModalItem>
 
@@ -136,12 +136,12 @@ export default function MemberAddDialog(props) {
           </div>
         </ModalItem>
 
-        <ModalItem>
+        {/* <ModalItem>
           <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">Destination</label>
           <div>
             <input type="text" onChange={handleChange} value={formdata.destination} id="destination" className="flex w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-none placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" placeholder='Destination' />
           </div>
-        </ModalItem>
+        </ModalItem> */}
 
         <div className="flex w-full justify-end px-2 mt-2">
           <button type='submit' autoFocus onClick={handleSubmit} className='text-blue-600 text-sm mt-2 border-2 border-blue-500  hover:bg-blue-300 md:mx-2 rounded-lg py-2 px-4 block'>Save</button>
