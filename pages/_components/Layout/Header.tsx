@@ -111,7 +111,7 @@ export default function Header() {
             Profile
           </Link>
           <Link
-            href="/dashboard"
+            href="/dashboardadmin"
             className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
           >
             Dashboard
@@ -147,7 +147,7 @@ export default function Header() {
             User Ranking
           </Link>
         </div>
-        
+
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}
             <div
