@@ -112,7 +112,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="name"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Deal Name
                 </label>
@@ -136,7 +136,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="logo"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Logo
                 </label>
@@ -160,7 +160,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="banner"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Banner
                 </label>
@@ -190,7 +190,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="round"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Round
                 </label>
@@ -213,7 +213,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="tokenprice"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Token Price
                 </label>
@@ -236,7 +236,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="fdv"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Fully Diluted Valuation
                 </label>
@@ -259,7 +259,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="mc"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Initial Market Cap
                 </label>
@@ -282,7 +282,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="vest"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Vesting Summary
                 </label>
@@ -313,7 +313,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="fundrasing"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Fundraising Target
                 </label>
@@ -336,7 +336,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="fee"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Fees
                 </label>
@@ -359,7 +359,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="investmin"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Min Invest Limit
                 </label>
@@ -382,7 +382,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="investmax"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Max Invest Limit
                 </label>
@@ -413,7 +413,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="test"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Test
                 </label>
@@ -436,7 +436,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="weburl"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Website URL
                 </label>
@@ -459,7 +459,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="xurl"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Twitter URL
                 </label>
@@ -482,7 +482,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="discordurl"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Discord URL
                 </label>
@@ -505,7 +505,7 @@ const DealDetailPage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="teleurl"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Telegram URL
                 </label>

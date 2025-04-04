@@ -104,7 +104,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="name"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Username*
                 </label>
@@ -128,7 +128,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="fullname"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Full Name
                 </label>
@@ -152,7 +152,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="userid"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   User ID
                 </label>
@@ -173,7 +173,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="referrallink"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Referral Link
                 </label>
@@ -223,7 +223,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="email"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Email address*
                 </label>
@@ -247,7 +247,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="permanentaddress"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Permanent address
                 </label>
@@ -270,7 +270,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="country"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Country
                 </label>
@@ -293,7 +293,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="mobilenumber"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Mobile Number
                 </label>
@@ -323,7 +323,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="teleid"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Telegram ID
                 </label>
@@ -346,7 +346,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="xid"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Twitter ID
                 </label>
@@ -369,7 +369,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="discordid"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Discord ID
                 </label>
@@ -399,7 +399,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="loginwallet"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Login Wallet
                 </label>
@@ -420,7 +420,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="btcwallet"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   BTC Wallet
                 </label>
@@ -443,7 +443,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="solanawallet"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Solana Wallet
                 </label>
@@ -466,7 +466,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="anotherwallet1"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Another Wallet-1
                 </label>
@@ -489,7 +489,7 @@ const ProfilePage: NextPage = () => {
               <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <label
                   htmlFor="anotherwallet2"
-                  className="block h-full text-md text-left sm:text-right align-middle font-medium leading-6 text-gray-900"
+                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
                 >
                   Another Wallet-2
                 </label>
