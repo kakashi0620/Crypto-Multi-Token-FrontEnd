@@ -55,21 +55,41 @@ export default function EveryDealTableGird(props) {
   const [rowData, setRowData] = useState<any[]>([]);
 
   const [columnDefs, setColumnDefs] = useState<ColDef[]>([
-    { field: "athlete", filter: 'agTextColumnFilter' },
-    { field: "age", filter: true },
-    { field: "date", filter: 'agDateColumnFilter' },
-    { field: "country", filter: 'agTextColumnFilter' },
-    { field: "sport", filter: 'agTextColumnFilter' },
-    { field: "gold", filter: 'agTextColumnFilter' },
-    { field: "silver", filter: 'agTextColumnFilter' },
-    { field: "bronze", filter: 'agTextColumnFilter' },
-    { field: "total", filter: 'agTextColumnFilter' },
+    { field: "S/N", filter: true },
+    { field: "Deal Detail", filter: 'agTextColumnFilter' },
+    { field: "Status", filter: 'agTextColumnFilter' },
+    { field: "Deal Time", filter: 'agDateColumnFilter' },
+    { field: "Amount Raised", filter: 'agTextColumnFilter' },
+    { field: "Distribution", filter: 'agTextColumnFilter' },
+    { field: "Progress", filter: 'agTextColumnFilter' }
   ]);
 
   useEffect(() => {
-    fetch("https://www.ag-grid.com/example-assets/olympic-winners.json") // Fetch data from server
-      .then((result) => result.json()) // Convert to JSON
-      .then((rowData) => setRowData(rowData)); // Update state of `rowData`
+    // fetch("https://www.ag-grid.com/example-assets/olympic-winners.json") // Fetch data from server
+    //   .then((result) => result.json()) // Convert to JSON
+    //   .then((rowData) => setRowData(rowData)); // Update state of `rowData`
+    setRowData(
+      [
+        {
+          "S/N":"1",
+          "Deal Detail":"Laika Ai, KOL, $0.00469 11 % TGE, 2M Cliff, 12M vesting",
+          "Status":"Closed",
+          "Deal Time":"29-Jun-24 10.15 UTC",
+          "Amount Raised":"$10,000/$10,0000 28 Investors",
+          "Distribution":"Create Distribution Schedule Or Batch -1: 15%",
+          "Progress":"15%"
+        },
+        {
+          "S/N":"2",
+          "Deal Detail":"Navi, S, $0.061 15 % TGE, 1.5M Cliff, 8M vesting",
+          "Status":"Closed",
+          "Deal Time":"16-Mar-25 04.32 UTC",
+          "Amount Raised":"$6,230/$10,0000 17 Investors",
+          "Distribution":"Create Distribution Schedule Or Batch -1: 25%",
+          "Progress":"25%"
+        }
+      ]
+    )
   }, []);
 
   const [defaultColDef, setDefaultColDef] = useState({
@@ -149,7 +169,7 @@ export default function EveryDealTableGird(props) {
         <div className='flex'><button onClick={handleClickOpen} variant="contained" className='flex p-2 rounded-md bg-blue-600 text-white hover:bg-blue-800' ><AddIcon />Add</button></div>
       </div> */}
       {/* <div className="ag-theme-alpine" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}> */}
-      <div style={{ width: "100%", height: "100vh" }}>
+      <div style={{ width: "100%", height: "30vh" }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
