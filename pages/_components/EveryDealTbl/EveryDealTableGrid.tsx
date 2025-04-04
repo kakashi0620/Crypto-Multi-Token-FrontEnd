@@ -1,4 +1,5 @@
 import * as React from 'react';
+import toast from "react-hot-toast";
 import axios from 'axios';
 import moment from 'moment';
 import { format } from 'date-fns';
@@ -7,44 +8,13 @@ import { PROXY_URL } from '../../../docs/data';
 import Swal from 'sweetalert2';
 import TableCellRender from '../TableCellRender';
 import { AgGridReact } from 'ag-grid-react';
-import toast from "react-hot-toast";;
+import { useEffect, useState } from "react";
+import type { ColDef, RowSelectionOptions } from "ag-grid-community";
+import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css'
+ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
-import {
-  ClientSideRowModelModule,
-  CsvExportModule,
-  ModuleRegistry,
-  NumberFilterModule,
-  RowSelectionModule,
-  TextFilterModule,
-  ValidationModule,
-} from "ag-grid-community";
-
-import {
-  ColumnMenuModule,
-  ContextMenuModule,
-  ExcelExportModule,
-  AllEnterpriseModule,
-  LicenseManager
-} from "ag-grid-enterprise";
-
-// Register all enterprise features
-ModuleRegistry.registerModules([
-  TextFilterModule,
-  NumberFilterModule,
-  RowSelectionModule,
-  ClientSideRowModelModule,
-  CsvExportModule,
-  ExcelExportModule,
-  ColumnMenuModule,
-  ContextMenuModule,
-  ValidationModule,
-  AllEnterpriseModule /* Development Only */,
-]);
-
-LicenseManager.setLicenseKey('your License Key');
+// LicenseManager.setLicenseKey('your License Key');
 
 export default function EveryDealTableGird(props) {
 
@@ -82,35 +52,43 @@ export default function EveryDealTableGird(props) {
   //   });
   // }
 
-  const [rowData, setRowData] = React.useState([]);
-  const [columnDefs, setColumnDefs] = React.useState([]);
+  const [rowData, setRowData] = useState<any[]>([]);
 
-  React.useEffect(() => {
-    if (data) {
-      let newdata = data.map((item) => {
-        return ({ ...item, startdate: moment(item.startdate).format('YYYY-MM-DD'), enddate: moment(item.enddate).format('YYYY-MM-DD') });
-      })
-      setRowData(newdata);
-    }
+  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
+    { field: "athlete", filter: 'agTextColumnFilter' },
+    { field: "age", filter: true },
+    { field: "date", filter: 'agDateColumnFilter' },
+    { field: "country", filter: 'agTextColumnFilter' },
+    { field: "sport", filter: 'agTextColumnFilter' },
+    { field: "gold", filter: 'agTextColumnFilter' },
+    { field: "silver", filter: 'agTextColumnFilter' },
+    { field: "bronze", filter: 'agTextColumnFilter' },
+    { field: "total", filter: 'agTextColumnFilter' },
+  ]);
 
-    // setColumnDefs([
-    //   { field: 'sn', headerName: 'S/N', flex: 1 },
-    //   { field: 'dealdetail', headerName: 'Deal Detail', flex: 1 },
-    //   { field: 'status', headerName: 'Status', flex: 1 },
-    //   { field: 'dealtime', headerName: 'Deal Time', flex: 1 },
-    //   { field: 'amountraised', headerName: 'Amount Raised', flex: 1 },
-    //   { field: 'distribution', headerName: 'Distribution', flex: 1 },
-    //   { field: 'progress', headerName: 'Progress', flex: 1 },
-    //   {
-    //     field: 'action', headerName: 'Action', flex: 1, sortable: false, filter: false, cellRenderer: TableCellRender,
-    //     cellRendererParams: {
-    //       onEditClick: handleOpenEditDialog,
-    //       onRemoveClick: handleRemoveEveryDeal // Pass additional data here
-    //     }
-    //   },
-    // ]);
+  useEffect(() => {
+    fetch("https://www.ag-grid.com/example-assets/olympic-winners.json") // Fetch data from server
+      .then((result) => result.json()) // Convert to JSON
+      .then((rowData) => setRowData(rowData)); // Update state of `rowData`
+  }, []);
 
-  }, [data, isadmin, handleOpenEditDialog]);
+  const [defaultColDef, setDefaultColDef] = useState({
+    resizable: true,
+  });
+
+  const rowSelection = React.useMemo(() => { 
+    return {
+      mode: 'multiRow',
+    };
+  }, []);
+
+  const gridOption = React.useMemo(() => {
+    return {
+      pagination: true,
+      paginationPageSize: 10,
+      // paginationPageSizeSelector: [10, 20, 30, 40, 50],
+    };
+  }, []);
 
   // const onBtExport = React.useCallback(() => {
   //   const spreadsheets = [];
@@ -152,15 +130,15 @@ export default function EveryDealTableGird(props) {
   //   }
   // }, []);
 
-  const rowSelection = React.useMemo(() => {
-    return {
-      mode: "multiRow",
-    };
-  }, []);
+  // const rowSelection = React.useMemo(() => {
+  //   return {
+  //     mode: "multiRow",
+  //   };
+  // }, []);
 
-  const onRowDoubleClicked = (event) => {
-    handleOpenEditDialog(event.data);
-  };
+  // const onRowDoubleClicked = (event) => {
+  //   handleOpenEditDialog(event.data);
+  // };
 
   return (
     <div className='flex flex-col w-full h-full px-6 pt-4'>
@@ -170,21 +148,14 @@ export default function EveryDealTableGird(props) {
         </button>
         <div className='flex'><button onClick={handleClickOpen} variant="contained" className='flex p-2 rounded-md bg-blue-600 text-white hover:bg-blue-800' ><AddIcon />Add</button></div>
       </div> */}
-      <div className="ag-theme-alpine" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        {/* <AgGridReact
+      {/* <div className="ag-theme-alpine" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}> */}
+      <div style={{ width: "100%", height: "100vh" }}>
+        <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
-          ref={gridRef}
-          rowSelection={rowSelection}
-          // onRowDoubleClicked={onRowDoubleClicked}
-          pagination={true}
-          defaultColDef={{
-            sortable: true,
-            filter: true,
-            resizable: true,
-          }}
-          domLayout='autoHeight'
-        /> */}
+          defaultColDef={defaultColDef}
+          rowSelection={rowSelection as RowSelectionOptions}
+          gridOptions={gridOption} />
       </div>
     </div>
   );

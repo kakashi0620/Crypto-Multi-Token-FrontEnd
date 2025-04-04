@@ -24,7 +24,7 @@ export default function EveryDealListCard(props) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token_info")}`,
+          Authorization: `Bearer ${localStorage.getItem("token_info") as string}`,
         },
       })
       .then(res => {

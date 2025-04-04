@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 
 import { PROXY_URL } from '../../../docs/data';
-import toast from "react-hot-toast";;
+import toast from "react-hot-toast";
 import Modal from '../Dialog/Modal';
 import ModalItem from '../Dialog/ModalItem';
 

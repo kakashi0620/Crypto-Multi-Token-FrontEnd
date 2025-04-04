@@ -7,7 +7,7 @@ import { PROXY_URL } from '../../../docs/data';
 import Swal from 'sweetalert2';
 import TableCellRender from '../TableCellRender';
 import { AgGridReact } from 'ag-grid-react';
-import toast from "react-hot-toast";;
+import toast from "react-hot-toast";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css'
