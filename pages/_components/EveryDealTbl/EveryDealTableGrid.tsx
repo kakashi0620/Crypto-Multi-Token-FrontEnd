@@ -161,7 +161,7 @@ export default function EveryDealTableGird(props) {
   // };
 
   return (
-    <div className='flex flex-col w-full h-full px-6 pt-4'>
+    <div className='flex flex-col w-full h-full'>
       {/* <div className='flex flex-wrap justify-end mb-4 space-x-2'>
         <button onClick={onBtExport} className="p-2 text-sm font-bold border-2 border-blue-400 text-blue-800 hover:bg-blue-300 rounded-md">
           Export to Excel

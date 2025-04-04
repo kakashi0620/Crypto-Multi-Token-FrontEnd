@@ -140,7 +140,14 @@ export default function Header() {
           >
             Every Deal
           </Link>
+          <Link
+            href="/userranking"
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+          >
+            User Ranking
+          </Link>
         </div>
+        
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}
             <div
