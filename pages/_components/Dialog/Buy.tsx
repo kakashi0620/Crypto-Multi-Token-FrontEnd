@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { useRouter } from "next/router";
 
-const DealOverview = ({ isOpen, onConfirm, onClose }) => {
+const Buy = ({ isOpen, onConfirm, onClose }) => {
 
   const [amountUSD, setAmountUSD] = useState(0)
   const [amountBNB, setAmountBNB] = useState(0)
@@ -15,7 +15,7 @@ const DealOverview = ({ isOpen, onConfirm, onClose }) => {
 
   const router = useRouter();
   const onBuyNow = (e) => {
-    router.push("/dealdetail")
+    router.push("/portfolio")
   }
 
   return (
@@ -87,4 +87,4 @@ const DealOverview = ({ isOpen, onConfirm, onClose }) => {
   );
 };
 
-export default DealOverview;
+export default Buy;
