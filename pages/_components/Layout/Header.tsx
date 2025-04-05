@@ -61,29 +61,33 @@ export default function Header() {
   // vadym add for wallet
   const { address, isConnected } = useAccount();
   const router = useRouter()
-  const routeDashboard = async() => {
+  const routeDashboard = async () => {
     axios.post(
-      `http://localhost:5000/api/users/getuser`, {address}
+      `http://localhost:5000/api/users/getuser`, { address }
     )
-    .then(res => {
-      if (res.data.length > 0)
-        router.push('/dashboard')
-      else
-        router.push('/profile')
-    })
-    .catch(e => {
-      console.log('user get error =>', e)
-    });
+      .then(res => {
+        console.log(res.data)
+        if (res.data === "")
+          router.push('/profile')
+        else
+          router.push('/dashboard')
+      })
+      .catch(e => {
+        console.log('user get error =>', e)
+      });
   }
 
   useEffect(() => {
     if (isConnected) {
       routeDashboard();
     }
+    else {
+      router.push('/')
+    }
   }, [, isConnected]);
   // vadym wallet end
 
-// bg-[#041019]
+  // bg-[#041019]
   return (
     <main
       className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#101010]`}
@@ -104,12 +108,17 @@ export default function Header() {
           >
             Home
           </Link>
-          <Link
-            href="/profile"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            Profile
-          </Link>
+          {
+            isConnected ?
+              <Link
+                href="/profile"
+                className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+              >
+                Profile
+              </Link> :
+              <></>
+          }
+
           <Link
             href="/dashboard"
             className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
@@ -147,34 +156,34 @@ export default function Header() {
             User Ranking
           </Link>
         </div>
-        
+
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}
-            <div
-              className={`flex items-center justify-center relative bg-green text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
-            >
-              <div className="flex w-full justify-between gap-2">
-                {!isConnected ? (
-                  // primary 
+          <div
+            className={`flex items-center justify-center relative bg-green text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
+          >
+            <div className="flex w-full justify-between gap-2">
+              {!isConnected ? (
+                // primary 
+                <button
+                  className="h-[30.78px] md:h-[45px] w-full"
+                  onClick={() => web3Modal.open()}
+                >
+                  Sign In
+                </button>
+              ) :
+                (
+                  // secondary
                   <button
-                    className="h-[30.78px] md:h-[45px] w-full"
-                    onClick={() => web3Modal.open()}
+                    className="h-[30.78px] md:h-[45px] w-full relative"
+                    onClick={() => disconnect(wagmiConfig)}
                   >
-                    Sign In
+                    <span>{shortenAddress(address)}</span>
+                    <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
                   </button>
-                ) :
-                  (
-                    // secondary
-                    <button
-                      className="h-[30.78px] md:h-[45px] w-full relative"
-                      onClick={() => disconnect(wagmiConfig)}
-                    >
-                      <span>{shortenAddress(address)}</span>
-                      <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
-                    </button>
-                  )}
-              </div>
+                )}
             </div>
+          </div>
           {/* </Link> */}
 
           {/* <div className="relative">

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import VerticalDivider from "./_components/Icons/VerticalDivider";
+import { useRouter } from "next/router";
 
-export default function Overview() {
+export default function Referral() {
+
+  const router = useRouter();
+  useEffect(() => {
+    const { referred_by } = router.query;
+    if (referred_by && referred_by !=="" && referred_by !== undefined) {
+      localStorage.setItem("referred_by", JSON.stringify(referred_by));
+      console.log('referred_by:', referred_by)
+      router.push('/')
+    }
+  }, [])
 
   const Referrers = [
     {

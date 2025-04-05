@@ -6,24 +6,23 @@ import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
 import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
+import { useRouter } from "next/router";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
 
-let tempid = 0;
 const ProfilePage: NextPage = () => {
-  const { address } = useAccount();
 
-  const getUserID = () => {
-    return "ICO0000" + tempid;
-  }
+  const { address, isConnected } = useAccount();
+  const router = useRouter()
 
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
-  const [userID] = useState(getUserID());
-  const [referrallink] = useState("http://localhost:3000/signup?r=" + getUserID());
+  const [userID, setUserID] = useState("");
+  const [referrallink, setReferrallink] = useState("");
   const [email, setEmail] = useState("");
   const [perAddress, setPerAddress] = useState("");
   const [country, setCountry] = useState("");
@@ -35,9 +34,48 @@ const ProfilePage: NextPage = () => {
   const [solwallet, setSOLWallet] = useState("");
   const [wallet1, setOtherWallet1] = useState("");
   const [wallet2, setOtherWallet2] = useState("");
-  const [copyState, setCopyState] = useState(false);
 
-  ++tempid;
+  const [copyState, setCopyState] = useState(false); // referral link copy
+  const [bUserExist, setUserExist] = useState(false);
+
+  const getUserID = async () => {
+    const userCount = await axios.get(`http://localhost:5000/api/users/getUserCount`);
+    return "ICO00" + (Number(userCount.data) + 1);
+  }
+
+  const initValues = async () => {
+    const res = await axios.post(`http://localhost:5000/api/users/getuser`, { address });
+
+    const userData = res.data;
+    if (userData !== "") {
+      setName(userData.userName);
+      setFullName(userData.fullName);
+      setUserID(userData.userId);
+      setReferrallink("http://localhost:3000/referral?referred_by=" + userData.userId);
+      setEmail(userData.emailAddress);
+      setPerAddress(userData.permanentAddress);
+      setCountry(userData.country);
+      setMobileNumber(userData.mobileNumber);
+      setTelegramID(userData.telegramId);
+      setXID(userData.twitterId);
+      setDiscordID(userData.discordId);
+      setBTCWallet(userData.btcWallet);
+      setSOLWallet(userData.solanaWallet);
+      setOtherWallet1(userData.anotherWallet1);
+      setOtherWallet2(userData.anotherWallet2);
+
+      setUserExist(true);
+    }
+    else {
+      const id = await getUserID();
+      setUserID(id);
+      // setReferrallink("http://localhost:3000/referral?referred_by=" + id);
+    } 
+  }
+
+  useEffect(() => {
+    initValues()
+  }, [])
 
   const onRigister = (e) => {
 
@@ -70,6 +108,7 @@ const ProfilePage: NextPage = () => {
       )
       .then((res) => {
         toast.success("Profile successfully registered! 🎉");
+        router.push('/dashboard')
       })
       .catch((error) => {
         console.log(
@@ -195,27 +234,33 @@ const ProfilePage: NextPage = () => {
                     disabled
                     value={referrallink}
                   />
+                  {
+                    bUserExist ?
+                      <>
+                        <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-1 top-1/2 -translate-y-1/2 bg-[#1c1c1c] text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
+                          {
+                            copyState ?
+                              <span id="success-icon">
+                                <svg className="w-3.5 h-3.5 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                                </svg>
+                              </span> :
+                              <span id="default-icon">
+                                <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                                </svg>
+                              </span>
+                          }
+                        </button>
+                        <div id="tooltip-referrallink-copy-button" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                          <span id="default-tooltip-message">Copy to clipboard</span>
+                          <span id="success-tooltip-message" className="hidden">Copied!</span>
+                          <div className="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                      </> :
+                      <></>
+                  }
 
-                  <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-1 top-1/2 -translate-y-1/2 bg-[#1c1c1c] text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
-                    {
-                      copyState ?
-                        <span id="success-icon">
-                          <svg className="w-3.5 h-3.5 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                          </svg>
-                        </span> :
-                        <span id="default-icon">
-                          <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
-                          </svg>
-                        </span>
-                    }
-                  </button>
-                  <div id="tooltip-referrallink-copy-button" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                    <span id="default-tooltip-message">Copy to clipboard</span>
-                    <span id="success-tooltip-message" className="hidden">Copied!</span>
-                    <div className="tooltip-arrow" data-popper-arrow></div>
-                  </div>
                 </div>
               </div>
 
@@ -566,7 +611,7 @@ hover:bg-black focus-visible:outline focus-visible:outline-2
 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onRigister(e)}
               >
-                Sign Up
+                {bUserExist ? "Update" : "Sign Up"}
               </button>
             </div>
           </form>
