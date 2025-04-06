@@ -79,7 +79,7 @@ export default function Referral() {
 
         {/* Referral Information */}
         <div className="w-full py-10 item-center flex flex-col gap-8">
-          <div className="w-full mb-4 text-2xl font-medium text-green border-b-2 border-green">
+          <div className="w-full mb-4 text-2xl font-medium text-white border-b-2 border-white">
             Referral Information
           </div>
 
@@ -157,7 +157,7 @@ export default function Referral() {
 
         {/* Withdrawal History */}
         <div className="w-full py-10 item-center flex flex-col gap-8">
-          <div className="w-full mb-4 text-2xl font-medium text-green border-b-2 border-green">
+          <div className="w-full mb-4 text-2xl font-medium text-white border-b-2 border-white">
             Withdrawal History
           </div>
 

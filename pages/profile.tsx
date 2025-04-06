@@ -82,13 +82,13 @@ const ProfilePage: NextPage = () => {
     e.preventDefault();
 
     const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
-    console.log('referred_by', referred_by)
-
+    
     const newUser = referred_by === "" ?
     {
       userName: name,
       fullName: fullName,
       userId: userID,
+      enterDate: new Date(),
       emailAddress: email,
       permanentAddress: perAddress,
       country: country,
@@ -106,6 +106,7 @@ const ProfilePage: NextPage = () => {
       userName: name,
       fullName: fullName,
       userId: userID,
+      enterDate: new Date(),
       emailAddress: email,
       permanentAddress: perAddress,
       country: country,
