@@ -5,13 +5,13 @@ import { AgGridReact } from 'ag-grid-react';
 import type { ColDef, RowSelectionOptions } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 
+
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
-
 
 const UserRankingPage: NextPage = () => {
 
@@ -24,16 +24,16 @@ const UserRankingPage: NextPage = () => {
 
   const [memberRowData, setMemberRowData] = useState<any[]>([]);
   const [memberColumnDefs, setMemberColumnDefs] = useState<ColDef[]>([
-    { field: "SN" },
-    { field: "Username", filter: 'agTextColumnFilter' },
-    { field: "Team Size", filter: 'agTextColumnFilter' }
+    { field: "SN", flex:1 },
+    { field: "Username", flex:2, filter: 'agTextColumnFilter' },
+    { field: "Team Size", flex:2, filter: 'agTextColumnFilter' }
   ]);
 
   const [incomeRowData, setIncomeRowData] = useState<any[]>([]);
   const [incomeColumnDefs, setIncomeColumnDefs] = useState<ColDef[]>([
-    { field: "SN" },
-    { field: "Username", filter: 'agTextColumnFilter' },
-    { field: "Total Income", filter: 'agTextColumnFilter' }
+    { field: "SN", flex:1 },
+    { field: "Username", flex:2, filter: 'agTextColumnFilter' },
+    { field: "Total Income", flex:2, filter: 'agTextColumnFilter' }
   ]);
 
   useEffect(() => {
@@ -93,23 +93,6 @@ const UserRankingPage: NextPage = () => {
     };
   }, []);
 
-  const gridOption = React.useMemo(() => {
-    return {
-      // pagination: true,
-      // paginationPageSize: 10
-      autoSizeStrategy: {
-        type: 'fitGridWidth',
-        // defaultMinWidth: 100,
-        // columnLimits: [
-        //   {
-        //     colId: 'SN',
-        //     width: 100
-        //   }
-        // ]
-      }
-    };
-  }, []);
-
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1480px]">
@@ -129,7 +112,7 @@ const UserRankingPage: NextPage = () => {
                 columnDefs={referralColumnDefs}
                 defaultColDef={defaultColDef}
                 rowSelection={rowSelection as RowSelectionOptions}
-                gridOptions={gridOption}
+                
               />
             </div>
           </div>
@@ -145,7 +128,7 @@ const UserRankingPage: NextPage = () => {
                 columnDefs={memberColumnDefs}
                 defaultColDef={defaultColDef}
                 rowSelection={rowSelection as RowSelectionOptions}
-                gridOptions={gridOption}
+                
               />
             </div>
           </div>
@@ -161,7 +144,7 @@ const UserRankingPage: NextPage = () => {
                 columnDefs={incomeColumnDefs}
                 defaultColDef={defaultColDef}
                 rowSelection={rowSelection as RowSelectionOptions}
-                gridOptions={gridOption}
+                
               />
             </div>
           </div>

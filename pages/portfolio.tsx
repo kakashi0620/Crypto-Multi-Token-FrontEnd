@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { AgGridReact } from 'ag-grid-react';
-import type { ColDef, RowSelectionOptions } from "ag-grid-community";
+import type { ColDef } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import Schedule from "./_components/Dialog/Schedule";
 
@@ -14,9 +14,6 @@ const poppins = Poppins({
 });
 
 const PortfolioPage: NextPage = () => {
-
-  const [dealCount, setDealCount] = useState(4)
-  const [investment, setInvestment] = useState(1000)
 
   const [rowData, setRowData] = useState<any[]>([]);
   const [columnDefs, setColumnDefs] = useState<ColDef[]>([
@@ -70,29 +67,6 @@ const PortfolioPage: NextPage = () => {
   const [defaultColDef, setDefaultColDef] = useState({
     resizable: true,
   });
-
-  // const rowSelection = React.useMemo(() => {
-  //   return {
-  //     mode: 'multiRow',
-  //   };
-  // }, []);
-
-  const gridOption = React.useMemo(() => {
-    return {
-      // pagination: true,
-      // paginationPageSize: 10
-      autoSizeStrategy: {
-        type: 'fitGridWidth',
-        // defaultMinWidth: 100,
-        // columnLimits: [
-        //   {
-        //     colId: 'SN',
-        //     width: 100
-        //   }
-        // ]
-      }
-    };
-  }, []);
 
   const [nextDate, setNextDate] = useState("")
   const [nextAmount, setNextAmount] = useState("")
@@ -148,11 +122,9 @@ const PortfolioPage: NextPage = () => {
                 rowData={rowData}
                 columnDefs={columnDefs}
                 defaultColDef={defaultColDef}
-                gridOptions={gridOption}
                 onRowClicked={onRowClicked}
               />
             </div>
-
           </div>
         </div>
       </div>
