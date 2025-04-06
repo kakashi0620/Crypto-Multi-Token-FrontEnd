@@ -8,7 +8,7 @@ import Footer from "./_components/Layout/Footer";
 import { ToastContainer } from "react-toastify";
 import BackToTop from "./_components/Layout/BackToTop";
 import { Suspense, useEffect, useState } from "react";
-import { mainnet } from "viem/chains";
+import { bsc } from "viem/chains";
 import { createWeb3Modal } from "@web3modal/wagmi";
 import { createConfig, http, WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -20,9 +20,9 @@ import HamburgerMenu from "./_components/Layout/Hamburger";
 const projectId = "12b8a841a230c15448f1dd353b5384ad";
 
 export const wagmiConfig = createConfig({
-  chains: [mainnet],
+  chains: [bsc],
   transports: {
-    [mainnet.id]: http(),
+    [bsc.id]: http(),
   },
   connectors: [injected(), walletConnect({ projectId })],
 });
@@ -30,7 +30,7 @@ export const wagmiConfig = createConfig({
 export const web3Modal = createWeb3Modal({
   wagmiConfig,
   projectId,
-  defaultChain: mainnet,
+  defaultChain: bsc,
 });
 
 const queryClient = new QueryClient();
