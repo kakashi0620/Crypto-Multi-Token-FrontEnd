@@ -122,8 +122,26 @@ const ProfilePage: NextPage = () => {
       referred_by: referred_by,
     };
 
-    console.log(`register request sendt => login Wallet: ${newUser.loginWallet}`)
-    axios
+    if (bUserExist) {
+      axios
+      .post(
+        // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
+        `http://localhost:5000/api/users/update`,
+        newUser
+      )
+      .then((res) => {
+        toast.success("Profile successfully updated! 🎉");
+        router.push('/dashboard')
+      })
+      .catch((error) => {
+        console.log(
+          "Profile Update error:",
+          error.response ? error.response.data : error.message
+        );
+      });
+    }
+    else {
+      axios
       .post(
         // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
         `http://localhost:5000/api/users/register`,
@@ -139,6 +157,7 @@ const ProfilePage: NextPage = () => {
           error.response ? error.response.data : error.message
         );
       });
+    }
   }
 
   const onCopy = async () => {
