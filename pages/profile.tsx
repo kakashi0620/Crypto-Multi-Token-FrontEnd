@@ -41,7 +41,7 @@ const ProfilePage: NextPage = () => {
 
 
   const getUserID = async () => {
-    const userCount = await axios.get(`http://198.19.255.253:5000/api/users/getUserCount`);
+    const userCount = await axios.get(`http://localhost:5000/api/users/getUserCount`);
 
     let uidStr = "WC";
     console.log(userCount.data)
@@ -57,7 +57,7 @@ const ProfilePage: NextPage = () => {
   }
 
   const getReferralLink = (userID: string) => {
-    return "http://198.19.255.253:3000/signup?ref=" + userID
+    return "http://localhost:3000/signup?ref=" + userID
   }
 
   const initValues = async () => {
@@ -143,7 +143,7 @@ const ProfilePage: NextPage = () => {
       axios
         .post(
           // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
-          `http://198.19.255.253:5000/api/users/update`,
+          `http://localhost:5000/api/users/update`,
           newUser
         )
         .then((res) => {
@@ -163,7 +163,7 @@ const ProfilePage: NextPage = () => {
       axios
         .post(
           // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-          `http://198.19.255.253:5000/api/users/register`,
+          `http://localhost:5000/api/users/register`,
           newUser
         )
         .then((res) => {

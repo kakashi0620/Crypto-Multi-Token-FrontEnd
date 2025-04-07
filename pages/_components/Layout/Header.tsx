@@ -65,7 +65,7 @@ export default function Header() {
   const router = useRouter()
   const routeDashboard = async () => {
     axios.post(
-      `http://198.19.255.253:5000/api/users/getuser`, { address }
+      `http://localhost:5000/api/users/getuser`, { address }
     )
       .then(res => {
         console.log(res.data)
