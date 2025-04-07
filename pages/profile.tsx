@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
 import { useRouter } from "next/router";
+import { useUser } from "../hooks/userContext";
 
 
 const poppins = Poppins({
@@ -15,8 +16,9 @@ const poppins = Poppins({
 
 const ProfilePage: NextPage = () => {
 
-  const { address, isConnected } = useAccount();
-  const router = useRouter()
+  const router = useRouter();
+  const { address } = useAccount();
+  const { user, setUser } = useUser();
 
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
@@ -36,6 +38,7 @@ const ProfilePage: NextPage = () => {
 
   const [copyState, setCopyState] = useState(false); // referral link copy
   const [bUserExist, setUserExist] = useState(false);
+
 
   const getUserID = async () => {
     const userCount = await axios.get(`http://localhost:5000/api/users/getUserCount`);
@@ -58,10 +61,15 @@ const ProfilePage: NextPage = () => {
   }
 
   const initValues = async () => {
-    const res = await axios.post(`http://localhost:5000/api/users/getuser`, { address });
 
-    const userData = res.data;
-    if (userData !== "") {
+    const userData = user;
+
+    if (!userData) {
+      const id = await getUserID();
+      setUserID(id);
+      setReferrallink(getReferralLink(id));
+    }
+    else {
       setName(userData.userName);
       setFullName(userData.fullName);
       setUserID(userData.userId);
@@ -80,16 +88,11 @@ const ProfilePage: NextPage = () => {
 
       setUserExist(true);
     }
-    else {
-      const id = await getUserID();
-      setUserID(id);
-      setReferrallink(getReferralLink(id));
-    }
   }
 
   useEffect(() => {
     initValues()
-  }, [address])
+  }, [])
 
   const onRigister = (e) => {
 
@@ -144,6 +147,8 @@ const ProfilePage: NextPage = () => {
           newUser
         )
         .then((res) => {
+          setUser(res.data);
+
           toast.success("Profile successfully updated! 🎉");
           router.push('/dashboard')
         })
@@ -162,6 +167,8 @@ const ProfilePage: NextPage = () => {
           newUser
         )
         .then((res) => {
+          setUser(res.data);
+          
           toast.success("Profile successfully registered! 🎉");
           router.push('/dashboard')
         })

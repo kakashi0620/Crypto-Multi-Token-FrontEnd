@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import RightIcon from "./_components/Icons/Right";
 import DealOverview from "./_components/Dialog/DealOverview";
+import { useUser } from "../hooks/userContext";
 
 
 const poppins = Poppins({
@@ -27,6 +28,9 @@ export interface Deal {
 };
 
 const DashboardPage: NextPage = () => {
+
+  const { user } = useUser();
+  console.log('dashboard user =>', user);
 
   const Deals: Deal[] = [
     {

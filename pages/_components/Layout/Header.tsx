@@ -25,6 +25,7 @@ import {
 import DisconnectIcon from "../../_components/Icons/Disconnect";
 
 import { useRouter } from 'next/navigation' // move to profile
+import { useUser } from "../../../hooks/userContext";
 // vadym wallet end
 
 export default function Header() {
@@ -60,6 +61,7 @@ export default function Header() {
 
   // vadym add for wallet
   const { address, isConnected } = useAccount();
+  const { user, setUser } = useUser();
   const router = useRouter()
   const routeDashboard = async () => {
     axios.post(
@@ -69,8 +71,11 @@ export default function Header() {
         console.log(res.data)
         if (res.data === "")
           router.push('/profile')
-        else
+        else {
+          setUser(res.data)
           router.push('/dashboard')
+        }
+          
       })
       .catch(e => {
         console.log('user get error =>', e)

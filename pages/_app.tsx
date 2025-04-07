@@ -3,11 +3,9 @@ import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import Header from "./_components/Layout/Header";
 import { Toaster } from "react-hot-toast";
-import Head from "next/head";
 import Footer from "./_components/Layout/Footer";
 import { ToastContainer } from "react-toastify";
-import BackToTop from "./_components/Layout/BackToTop";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { bsc } from "viem/chains";
 import { createWeb3Modal } from "@web3modal/wagmi";
 import { createConfig, http, WagmiProvider } from "wagmi";
@@ -16,6 +14,7 @@ import { injected, walletConnect } from "wagmi/connectors";
 import "../lib/i18n";
 import Banner from "./_components/Layout/Banner";
 import HamburgerMenu from "./_components/Layout/Hamburger";
+import { UserProvider } from "../hooks/userContext";
 
 const projectId = "12b8a841a230c15448f1dd353b5384ad";
 
@@ -39,21 +38,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Suspense fallback="loading">
       <WagmiProvider config={wagmiConfig}>
-        <QueryClientProvider client={queryClient}>
-          <Banner />
-          <Toaster position="top-right" reverseOrder={false} />
-          <div className="flex">
-            <Header />
-            <HamburgerMenu />
-          </div>
+        <UserProvider>
+          <QueryClientProvider client={queryClient}>
+            <Banner />
+            <Toaster position="top-right" reverseOrder={false} />
+            <div className="flex">
+              <Header />
+              <HamburgerMenu />
+            </div>
 
-          <div className="relative z-30">
-            <Component {...pageProps} />
-          </div>
+            <div className="relative z-30">
+              <Component {...pageProps} />
+            </div>
 
-          <Footer />
-          <ToastContainer />
-        </QueryClientProvider>
+            <Footer />
+            <ToastContainer />
+          </QueryClientProvider>
+        </UserProvider>
       </WagmiProvider>
     </Suspense>
   );
