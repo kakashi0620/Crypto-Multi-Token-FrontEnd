@@ -40,7 +40,18 @@ const ProfilePage: NextPage = () => {
 
   const getUserID = async () => {
     const userCount = await axios.get(`http://localhost:5000/api/users/getUserCount`);
-    return "ICO00" + (Number(userCount.data) + 1);
+
+    let uidStr = "WC";
+    console.log(userCount.data)
+    const zeroCount = 5 - userCount.data.toString().length;
+    for(let i=0; i < zeroCount; ++i) {
+      uidStr += '0'
+    }
+
+    uidStr += (userCount.data + 1)
+
+    console.log('user id =>', uidStr);
+    return uidStr;
   }
 
   const initValues = async () => {
@@ -69,7 +80,7 @@ const ProfilePage: NextPage = () => {
     else {
       const id = await getUserID();
       setUserID(id);
-      setReferrallink("http://localhost:3000/referral?referred_by=" + id);
+      setReferrallink("http://localhost:3000/signup?ref=" + id);
     } 
   }
 
@@ -168,28 +179,28 @@ const ProfilePage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
+        <h1 className="page-title">
           {/* {t("eleventh_section_profile_policy")} */}
           Profile
         </h1>
         <div className="flex flex-col gap-12">
           <form className="space-y-6" method="POST">
             {/* Personal Information */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Personal Information
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
 
               {/* User name */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="name"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Username*
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="name"
                     name="name"
@@ -206,14 +217,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Full Name */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="fullname"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Full Name
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="fullname"
                     name="fullname"
@@ -230,14 +241,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* User ID */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="userid"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   User ID
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="userid"
                     name="userid"
@@ -251,16 +262,15 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Referral Link */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="referrallink"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Referral Link
                 </label>
 
-                <div className="relative w-full">
-                  
+                <div className="relative w-full input-input">
                   <input
                     id="referrallink"
                     name="referrallink"
@@ -302,14 +312,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Email address */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="email"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Email address*
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="email"
                     name="email"
@@ -326,14 +336,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Permanent address */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="permanentaddress"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Permanent address
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="permanentaddress"
                     name="permanentaddress"
@@ -349,14 +359,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Country */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="country"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Country
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="country"
                     name="country"
@@ -372,14 +382,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Mobile Number */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="mobilenumber"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Mobile Number
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="mobilenumber"
                     name="mobilenumber"
@@ -396,20 +406,20 @@ const ProfilePage: NextPage = () => {
             </div>
 
             {/* Social Information */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Social Information
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
               {/* Telegram ID */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="teleid"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Telegram ID
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="teleid"
                     name="teleid"
@@ -425,14 +435,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Twitter ID */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="xid"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Twitter ID
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="xid"
                     name="xid"
@@ -448,14 +458,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Discord ID */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="discordid"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Discord ID
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="discordid"
                     name="discordid"
@@ -472,20 +482,20 @@ const ProfilePage: NextPage = () => {
             </div>
 
             {/* Wallet Information */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Wallet Information
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
               {/* Login Wallet */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="loginwallet"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Login Wallet
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="loginwallet"
                     name="loginwallet"
@@ -499,14 +509,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* BTC Wallet */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="btcwallet"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   BTC Wallet
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="btcwallet"
                     name="btcwallet"
@@ -522,14 +532,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Solana Wallet */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="solanawallet"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Solana Wallet
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="solanawallet"
                     name="solanawallet"
@@ -545,14 +555,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Another Wallet-1 */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="anotherwallet1"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Another Wallet-1
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="anotherwallet1"
                     name="anotherwallet1"
@@ -568,14 +578,14 @@ const ProfilePage: NextPage = () => {
               </div>
 
               {/* Another Wallet-2 */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="anotherwallet2"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Another Wallet-2
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="anotherwallet2"
                     name="anotherwallet2"
@@ -601,7 +611,7 @@ const ProfilePage: NextPage = () => {
                   Password
                 </label>
               </div>
-              <div className="">
+              <div className="input-input">
                 <input
                   id="password"
                   name="password"
@@ -624,7 +634,7 @@ focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                   Confirm Password
                 </label>
               </div>
-              <div className="">
+              <div className="input-input">
                 <input
                   id="confirmpassword"
                   name="confirmpassword"
@@ -648,7 +658,8 @@ hover:bg-black focus-visible:outline focus-visible:outline-2
 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onRigister(e)}
               >
-                {bUserExist ? "Update" : "Sign Up"}
+                Save Data
+                {/* {bUserExist ? "Update" : "Sign Up"} */}
               </button>
             </div>
           </form>

@@ -75,28 +75,28 @@ const CreateDealPage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
+        <h1 className="page-title">
           Create new deal
         </h1>
         <div className="flex flex-col gap-12">
           <form className="space-y-6" method="POST">
 
             {/* Personal Information */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Header
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
 
               {/* Deal name */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="name"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Deal Name
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="name"
                     name="name"
@@ -113,14 +113,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Logo */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="logo"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Logo
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="logo"
                     name="logo"
@@ -137,14 +137,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Banner */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="banner"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Banner
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="banner"
                     name="banner"
@@ -161,20 +161,20 @@ const CreateDealPage: NextPage = () => {
             </div>
 
             {/* Deal Bio */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Deal Bio
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
               {/* Round */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="round"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Round
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="round"
                     name="round"
@@ -190,14 +190,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Token Price */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="tokenprice"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Token Price
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="tokenprice"
                     name="tokenprice"
@@ -213,14 +213,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Fully Diluted Valuation */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="fdv"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Fully Diluted Valuation
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="fdv"
                     name="fdv"
@@ -237,14 +237,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Initial Market Cap */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="mc"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Initial Market Cap
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="mc"
                     name="mc"
@@ -261,14 +261,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Vesting Summary */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="vest"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Vesting Summary
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="vest"
                     name="vest"
@@ -286,21 +286,21 @@ const CreateDealPage: NextPage = () => {
             </div>
 
             {/* Deal Limit */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Deal Limit
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
 
               {/* Fundraising Target */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="fundrasing"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Fundraising Target
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="fundrasing"
                     name="fundrasing"
@@ -316,14 +316,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Fees */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="fee"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Fees
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="fee"
                     name="fee"
@@ -339,14 +339,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Min Invest Limit */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="investmin"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Min Invest Limit
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="investmin"
                     name="investmin"
@@ -362,14 +362,14 @@ const CreateDealPage: NextPage = () => {
               </div>
 
               {/* Max Invest Limit */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="investmax"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Max Invest Limit
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="investmax"
                     name="investmax"
@@ -386,21 +386,21 @@ const CreateDealPage: NextPage = () => {
             </div>
 
             {/* Deal Summary */}
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Deal Summary
             </div>
 
-            <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-x-6">
+            <div className="input-part">
 
               {/* Test */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="test"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Test
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="test"
                     name="test"
@@ -416,14 +416,14 @@ const CreateDealPage: NextPage = () => {
               </div>
               
               {/* Website URL */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="weburl"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Website URL
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="weburl"
                     name="weburl"
@@ -439,14 +439,14 @@ const CreateDealPage: NextPage = () => {
               </div>
               
               {/* Twitter URL */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="xurl"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Twitter URL
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="xurl"
                     name="xurl"
@@ -462,14 +462,14 @@ const CreateDealPage: NextPage = () => {
               </div>
               
               {/* Discord URL */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="discordurl"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Discord URL
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="discordurl"
                     name="discordurl"
@@ -485,14 +485,14 @@ const CreateDealPage: NextPage = () => {
               </div>
               
               {/* Telegram URL */}
-              <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+              <div className="input-container">
                 <label
                   htmlFor="teleurl"
-                  className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   Telegram URL
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="teleurl"
                     name="teleurl"

@@ -79,7 +79,7 @@ const DashboardPage: NextPage = () => {
         <div className="flex flex-col gap-12">
           
           {/* Upcoming Deal */}
-          <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+          <div className="subtitle">
             Upcoming Deal
           </div>
 

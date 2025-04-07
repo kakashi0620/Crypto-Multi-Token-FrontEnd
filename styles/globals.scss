@@ -12,6 +12,7 @@
 
 @import "tailwindcss/base";
 @import "tailwindcss/utilities";
+@import "tailwindcss/components";
 
 * {
   font-family: "Onest", serif;
@@ -217,5 +218,47 @@ ul {
 
   .swiper-pagination {
     bottom: 8px !important;
+  }
+}
+
+.page-title {
+  @apply text-3xl font-bold text-green text-center;
+
+  @screen md {
+    @apply text-5xl #{!important};
+  }
+}
+
+.subtitle {
+  @apply text-xl font-medium text-white border-b-2 border-white;
+}
+
+.input-part {
+  @apply flex flex-col gap-y-4;
+
+  @screen md {
+    @apply grid grid-cols-2 gap-x-16 #{!important};
+  }
+}
+
+.input-container {
+  @apply flex flex-col gap-y-2;
+
+  @screen sm {
+    @apply grid grid-cols-5 #{!important};
+  }
+}
+
+.input-label {
+  @apply block h-full text-base text-left align-middle font-medium leading-6 text-white;
+
+  @screen sm {
+    @apply col-span-2 #{!important};
+  }
+}
+
+.input-input {
+  @screen sm {
+    @apply col-start-3 col-span-3 #{!important};
   }
 }

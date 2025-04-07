@@ -56,14 +56,14 @@ const ContributePage: NextPage = () => {
     <>
       <div className={`bg-term ${poppins.className}`}>
         <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
-          <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
+          <h1 className="page-title">
             Deal Contribute
           </h1>
           <div className="flex flex-col gap-4">
             <div className="space-y-6">
 
               {/* Logo, name, progress */}
-              <div className="flex flex-col gap-y-4 h-full items-center md:grid md:grid-cols-2 md:gap-x-6">
+              <div className="input-part h-full items-center">
 
                 <div className="flex w-full justify-center">
                   <img src="/images/blog/blog-pic1.png" alt="Logo Image" />
@@ -72,14 +72,14 @@ const ContributePage: NextPage = () => {
                 <div className="flex flex-col gap-y-4">
 
                   {/* Deal name */}
-                  <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                  <div className="input-container">
                     <label
                       htmlFor="name"
-                      className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                      className="input-label"
                     >
                       Deal Name
                     </label>
-                    <div className="">
+                    <div className="input-input">
                       <input
                         id="name"
                         name="name"
@@ -115,16 +115,16 @@ const ContributePage: NextPage = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-4 md:pt-5 md:grid md:grid-cols-2 md:gap-x-6">
+              <div className="input-part">
                 {/* Metamask Login Wallet */}
-                <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-container">
                   <label
                     htmlFor="loginWallet"
-                    className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                    className="input-label"
                   >
                     Metamask Login Wallet
                   </label>
-                  <div className=" items-center h-full">
+                  <div className="input-input">
                     <input
                       id="loginWallet"
                       name="loginWallet"
@@ -138,14 +138,14 @@ const ContributePage: NextPage = () => {
                 </div>
 
                 {/* Token claim Wallet */}
-                <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-container">
                   <label
                     htmlFor="claimWallet"
-                    className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                    className="input-label"
                   >
                     Token claim Wallet
                   </label>
-                  <div className="">
+                  <div className="input-input">
                     <input
                       id="claimWallet"
                       name="claimWallet"
@@ -161,15 +161,15 @@ const ContributePage: NextPage = () => {
                 </div>
 
                 {/* Deal's limit */}
-                <div className="flex flex-col gap-y-2 md:grid md:grid-cols-2 md:gap-x-6">
-                  <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-part">
+                  <div className="input-container">
                     <label
                       htmlFor="limitMin"
-                      className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                      className="input-label"
                     >
                       Min
                     </label>
-                    <div className="">
+                    <div className="input-input">
                       <input
                         id="limitMin"
                         name="limitMin"
@@ -184,14 +184,14 @@ const ContributePage: NextPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                  <div className="input-container">
                     <label
                       htmlFor="limitMax"
-                      className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                      className="input-label"
                     >
                       Max
                     </label>
-                    <div className="">
+                    <div className="input-input">
                       <input
                         id="limitMax"
                         name="limitMax"
@@ -208,14 +208,14 @@ const ContributePage: NextPage = () => {
                 </div>
 
                 {/* Metamask Balance */}
-                <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-container">
                   <label
                     htmlFor="balance"
-                    className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                    className="input-label"
                   >
                     Metamask Balance
                   </label>
-                  <div className="">
+                  <div className="input-input">
                     <input
                       id="balance"
                       name="balance"
@@ -231,14 +231,14 @@ const ContributePage: NextPage = () => {
                 </div>
 
                 {/* Invest Amount Box */}
-                <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-container">
                   <label
                     htmlFor="investAmount"
-                    className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                    className="input-label"
                   >
                     Invest Amount Box
                   </label>
-                  <div className="">
+                  <div className="input-input">
                     <input
                       id="investAmount"
                       name="investAmount"
@@ -254,14 +254,14 @@ const ContributePage: NextPage = () => {
                 </div>
 
                 {/* Token Receive */}
-                <div className="flex flex-col gap-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+                <div className="input-container">
                   <label
                     htmlFor="receivedToken"
-                    className="block h-full text-md text-left sm:text-left align-middle font-medium leading-6 text-gray-900"
+                    className="input-label"
                   >
                     Token Receive
                   </label>
-                  <div className="">
+                  <div className="input-input">
                     <input
                       id="receivedToken"
                       name="receivedToken"
@@ -281,11 +281,11 @@ const ContributePage: NextPage = () => {
               <div className="flex flex-col gap-y-2">
                 <label
                   htmlFor="terms"
-                  className="block h-full text-md text-left align-middle font-medium leading-6 text-gray-900"
+                  className="input-label"
                 >
                   T & C
                 </label>
-                <div className="">
+                <div className="input-input">
                   <input
                     id="terms"
                     name="terms"

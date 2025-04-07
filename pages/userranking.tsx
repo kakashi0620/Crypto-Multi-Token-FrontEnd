@@ -96,13 +96,13 @@ const UserRankingPage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1480px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
+        <h1 className="page-title">
           User Ranking
         </h1>
 
         <div className="flex flex-col gap-y-4 lg:grid lg:grid-cols-3 lg:gap-x-12">
           <div className="flex flex-col gap-y-4">
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Rank of Referral L1
             </div>
 
@@ -118,7 +118,7 @@ const UserRankingPage: NextPage = () => {
           </div>
 
           <div className="flex flex-col gap-y-4">
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Rank of Total Team Members
             </div>
 
@@ -134,7 +134,7 @@ const UserRankingPage: NextPage = () => {
           </div>
 
           <div className="flex flex-col gap-y-4">
-            <div className="text-xl font-medium text-green-400 border-b-2 border-green-400">
+            <div className="subtitle">
               Rank of Ref.Income
             </div>
 
