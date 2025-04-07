@@ -54,6 +54,10 @@ const ProfilePage: NextPage = () => {
     return uidStr;
   }
 
+  const getReferralLink = (userID: string) => {
+    return "http://localhost:3000/signup?ref=" + userID
+  }
+
   const initValues = async () => {
     const res = await axios.post(`http://localhost:5000/api/users/getuser`, { address });
 
@@ -62,7 +66,7 @@ const ProfilePage: NextPage = () => {
       setName(userData.userName);
       setFullName(userData.fullName);
       setUserID(userData.userId);
-      setReferrallink("http://localhost:3000/referral?referred_by=" + userData.userId);
+      setReferrallink(getReferralLink(userData.userId));
       setEmail(userData.emailAddress);
       setPerAddress(userData.permanentAddress);
       setCountry(userData.country);
@@ -80,7 +84,7 @@ const ProfilePage: NextPage = () => {
     else {
       const id = await getUserID();
       setUserID(id);
-      setReferrallink("http://localhost:3000/signup?ref=" + id);
+      setReferrallink(getReferralLink(id));
     } 
   }
 
@@ -299,11 +303,11 @@ const ProfilePage: NextPage = () => {
                               </span>
                           }
                         </button>
-                        <div id="tooltip-referrallink-copy-button" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                        {/* <div id="tooltip-referrallink-copy-button" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
                           <span id="default-tooltip-message">Copy to clipboard</span>
                           <span id="success-tooltip-message" className="hidden">Copied!</span>
                           <div className="tooltip-arrow" data-popper-arrow></div>
-                        </div>
+                        </div> */}
                       </> :
                       <></>
                   }
