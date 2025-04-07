@@ -2,7 +2,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import { useTranslation } from "react-i18next";
 import { useAccount } from "wagmi";
 import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
@@ -44,7 +43,7 @@ const ProfilePage: NextPage = () => {
     let uidStr = "WC";
     console.log(userCount.data)
     const zeroCount = 5 - userCount.data.toString().length;
-    for(let i=0; i < zeroCount; ++i) {
+    for (let i = 0; i < zeroCount; ++i) {
       uidStr += '0'
     }
 
@@ -85,100 +84,112 @@ const ProfilePage: NextPage = () => {
       const id = await getUserID();
       setUserID(id);
       setReferrallink(getReferralLink(id));
-    } 
+    }
   }
 
   useEffect(() => {
     initValues()
-  }, [])
+  }, [address])
 
   const onRigister = (e) => {
 
     e.preventDefault();
 
     const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
-    
+
     const newUser = referred_by === "" ?
-    {
-      userName: name,
-      fullName: fullName,
-      userId: userID,
-      enterDate: new Date(),
-      emailAddress: email,
-      permanentAddress: perAddress,
-      country: country,
-      mobileNumber: mobilenumber,
-      telegramId: teleid,
-      twitterId: xid,
-      discordId: discordid,
-      loginWallet: address,
-      btcWallet: btcwallet,
-      solanaWallet: solwallet,
-      anotherWallet1: wallet1,
-      anotherWallet2: wallet2,
-    } :
-    {
-      userName: name,
-      fullName: fullName,
-      userId: userID,
-      enterDate: new Date(),
-      emailAddress: email,
-      permanentAddress: perAddress,
-      country: country,
-      mobileNumber: mobilenumber,
-      telegramId: teleid,
-      twitterId: xid,
-      discordId: discordid,
-      loginWallet: address,
-      btcWallet: btcwallet,
-      solanaWallet: solwallet,
-      anotherWallet1: wallet1,
-      anotherWallet2: wallet2,
-      referred_by: referred_by,
-    };
+      {
+        userName: name,
+        fullName: fullName,
+        userId: userID,
+        enterDate: new Date(),
+        emailAddress: email,
+        permanentAddress: perAddress,
+        country: country,
+        mobileNumber: mobilenumber,
+        telegramId: teleid,
+        twitterId: xid,
+        discordId: discordid,
+        loginWallet: address,
+        btcWallet: btcwallet,
+        solanaWallet: solwallet,
+        anotherWallet1: wallet1,
+        anotherWallet2: wallet2,
+      } :
+      {
+        userName: name,
+        fullName: fullName,
+        userId: userID,
+        enterDate: new Date(),
+        emailAddress: email,
+        permanentAddress: perAddress,
+        country: country,
+        mobileNumber: mobilenumber,
+        telegramId: teleid,
+        twitterId: xid,
+        discordId: discordid,
+        loginWallet: address,
+        btcWallet: btcwallet,
+        solanaWallet: solwallet,
+        anotherWallet1: wallet1,
+        anotherWallet2: wallet2,
+        referred_by: referred_by,
+      };
 
     if (bUserExist) {
       axios
-      .post(
-        // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
-        `http://localhost:5000/api/users/update`,
-        newUser
-      )
-      .then((res) => {
-        toast.success("Profile successfully updated! 🎉");
-        router.push('/dashboard')
-      })
-      .catch((error) => {
-        console.log(
-          "Profile Update error:",
-          error.response ? error.response.data : error.message
-        );
-      });
+        .post(
+          // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
+          `http://localhost:5000/api/users/update`,
+          newUser
+        )
+        .then((res) => {
+          toast.success("Profile successfully updated! 🎉");
+          router.push('/dashboard')
+        })
+        .catch((error) => {
+          console.log(
+            "Profile Update error:",
+            error.response ? error.response.data : error.message
+          );
+        });
     }
     else {
       axios
-      .post(
-        // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-        `http://localhost:5000/api/users/register`,
-        newUser
-      )
-      .then((res) => {
-        toast.success("Profile successfully registered! 🎉");
-        router.push('/dashboard')
-      })
-      .catch((error) => {
-        console.log(
-          "Profile Register error:",
-          error.response ? error.response.data : error.message
-        );
-      });
+        .post(
+          // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+          `http://localhost:5000/api/users/register`,
+          newUser
+        )
+        .then((res) => {
+          toast.success("Profile successfully registered! 🎉");
+          router.push('/dashboard')
+        })
+        .catch((error) => {
+          console.log(
+            "Profile Register error:",
+            error.response ? error.response.data : error.message
+          );
+        });
     }
   }
 
-  const onCopy = async () => {
+  const onCopy = async (e) => {
+    
+    e.preventDefault();
+
     await copy(referrallink);
     setCopyState(true)
   }
+
+  // Country start.
+  const [countries, setCountries] = useState(["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas (the)", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory (the)", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands (the)", "Central African Republic (the)", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands (the)", "Colombia", "Comoros (the)", "Congo (the Democratic Republic of the)", "Congo (the)", "Cook Islands (the)", "Costa Rica", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czechia", "Côte d'Ivoire", "Denmark", "Djibouti", "Dominica", "Dominican Republic (the)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (the) [Malvinas]", "Faroe Islands (the)", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories (the)", "Gabon", "Gambia (the)", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See (the)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (the Democratic People's Republic of)", "Korea (the Republic of)", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic (the)", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands (the)", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia (Federated States of)", "Moldova (the Republic of)", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands (the)", "New Caledonia", "New Zealand", "Nicaragua", "Niger (the)", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands (the)", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines (the)", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of North Macedonia", "Romania", "Russian Federation (the)", "Rwanda", "Réunion", "Saint Barthélemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "Sudan (the)", "Suriname", "Svalbard and Jan Mayen", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands (the)", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates (the)", "United Kingdom (the)", "United States Minor Outlying Islands (the)", "United States of America (the)", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", "Åland Islands"]);
+
+  // Handle country selection change
+  const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountry(event.target.value);
+  };
+  // Country end
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -288,7 +299,7 @@ const ProfilePage: NextPage = () => {
                   {
                     bUserExist ?
                       <>
-                        <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-1 top-1/2 -translate-y-1/2 bg-[#1c1c1c] text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={() => onCopy()}>
+                        <button data-copy-to-clipboard-target="referrallink" data-tooltip-target="tooltip-referrallink-copy-button" className="absolute end-1 top-1/2 -translate-y-1/2 bg-[#1c1c1c] text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center" onClick={(e) => onCopy(e)}>
                           {
                             copyState ?
                               <span id="success-icon">
@@ -371,17 +382,20 @@ const ProfilePage: NextPage = () => {
                   Country
                 </label>
                 <div className="input-input">
-                  <input
+                  <select
                     id="country"
                     name="country"
-                    type="text"
-                    autoComplete="country"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                    }}
-                  />
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    onChange={handleCountryChange}
+                  >
+                    <option value="">Select a country</option>
+                    {countries.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -421,7 +435,7 @@ const ProfilePage: NextPage = () => {
                   htmlFor="teleid"
                   className="input-label"
                 >
-                  Telegram ID
+                  Telegram ID*
                 </label>
                 <div className="input-input">
                   <input
@@ -444,7 +458,7 @@ const ProfilePage: NextPage = () => {
                   htmlFor="xid"
                   className="input-label"
                 >
-                  Twitter ID
+                  Twitter ID*
                 </label>
                 <div className="input-input">
                   <input
