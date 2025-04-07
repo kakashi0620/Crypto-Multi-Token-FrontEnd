@@ -511,10 +511,7 @@ const CreateDealPage: NextPage = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-green 
-px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm 
-hover:bg-black focus-visible:outline focus-visible:outline-2 
-focus-visible:outline-offset-2 focus-visible:outline-green"
+                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onCreateDeal(e)}
               >
                 Create
