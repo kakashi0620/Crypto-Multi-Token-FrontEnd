@@ -1,18 +1,18 @@
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import ImpageUpload from './_components/ImageUpload'
+import { useRef } from "react";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
 
-let tempid = 0;
 const CreateDealPage: NextPage = () => {
 
   const [name, setName] = useState("");
-  const [logo, setLogo] = useState("");
-  const [banner, setBanner] = useState("");
   const [round, setRound] = useState("");
   const [tokenprice, setTokenPrice] = useState("");
   const [fdv, setFDV] = useState("");
@@ -28,8 +28,55 @@ const CreateDealPage: NextPage = () => {
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
 
+  const [logo, setLogo] = useState<File | null>(null);
+  const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null); // To store the preview URL
+  const [logoFilename, setLogoFilename] = useState<string>(''); // To store the file name
+  const logoImagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
+  const logoUploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
 
-  ++tempid;
+    if (file) {
+      setLogoFilename(file.name);
+      setLogo(file);
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogoPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setLogoFilename('');
+      setLogo(null);
+      setLogoPreviewUrl(null);
+    }
+  };
+
+  const [banner, setBanner] = useState<File | null>(null);
+  const [bannerPreviewUrl, setBannerPreviewUrl] = useState<string | null>(null); // To store the preview URL
+  const [bannerFilename, setBannerFilename] = useState<string>(''); // To store the file name
+  const bannerImagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
+  const bannerUploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element
+  const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+
+    if (file) {
+      setBannerFilename(file.name);
+      setBanner(file);
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBannerPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setBannerFilename('');
+      setBanner(null);
+      setBannerPreviewUrl(null);
+    }
+  };
 
   const onCreateDeal = (e) => {
 
@@ -55,21 +102,6 @@ const CreateDealPage: NextPage = () => {
     };
 
     console.log(`register request sendt.`)
-    // axios
-    //   .post(
-    //     // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-    //     `http://localhost:5000/api/users/register`,
-    //     newUser
-    //   )
-    //   .then((res) => {
-    //     // toast.success("CreateDeal successfully registered!", { position: "top-right" });
-    //   })
-    //   .catch((error) => {
-    //     console.log(
-    //       "CreateDeal Register error:",
-    //       error.response ? error.response.data : error.message
-    //     );
-    //   });
   }
 
   return (
@@ -112,6 +144,9 @@ const CreateDealPage: NextPage = () => {
                 </div>
               </div>
 
+              {/* Empty space */}
+              <div className="hidden sm:gap-y-2 sm:grid sm:grid-cols-5" />
+
               {/* Logo */}
               <div className="input-container">
                 <label
@@ -121,18 +156,13 @@ const CreateDealPage: NextPage = () => {
                   Logo
                 </label>
                 <div className="input-input">
-                  <input
-                    id="logo"
-                    name="logo"
-                    type="text"
-                    autoComplete="logo"
-                    required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-                    value={logo}
-                    onChange={(e) => {
-                      setLogo(e.target.value);
-                    }}
-                  />
+                  <ImpageUpload
+                    target="logo"
+                    previewUrl={logoPreviewUrl}
+                    filename={logoFilename}
+                    imagePreviewRef={logoImagePreviewRef}
+                    uploadInputRef={logoUploadInputRef}
+                    handleImageChange={handleLogoChange} />
                 </div>
               </div>
 
@@ -145,17 +175,13 @@ const CreateDealPage: NextPage = () => {
                   Banner
                 </label>
                 <div className="input-input">
-                  <input
-                    id="banner"
-                    name="banner"
-                    type="text"
-                    autoComplete="banner"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-                    value={banner}
-                    onChange={(e) => {
-                      setBanner(e.target.value);
-                    }}
-                  />
+                  <ImpageUpload
+                    target="banner"
+                    previewUrl={bannerPreviewUrl}
+                    filename={bannerFilename}
+                    imagePreviewRef={bannerImagePreviewRef}
+                    uploadInputRef={bannerUploadInputRef}
+                    handleImageChange={handleBannerChange} />
                 </div>
               </div>
             </div>
@@ -414,7 +440,7 @@ const CreateDealPage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Website URL */}
               <div className="input-container">
                 <label
@@ -437,7 +463,7 @@ const CreateDealPage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Twitter URL */}
               <div className="input-container">
                 <label
@@ -460,7 +486,7 @@ const CreateDealPage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Discord URL */}
               <div className="input-container">
                 <label
@@ -483,7 +509,7 @@ const CreateDealPage: NextPage = () => {
                   />
                 </div>
               </div>
-              
+
               {/* Telegram URL */}
               <div className="input-container">
                 <label

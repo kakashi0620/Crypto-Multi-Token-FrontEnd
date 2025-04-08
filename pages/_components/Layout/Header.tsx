@@ -68,7 +68,6 @@ export default function Header() {
       `http://localhost:5000/api/users/getuser`, { address }
     )
       .then(res => {
-        console.log(res.data)
         if (res.data === "")
           router.push('/profile')
         else {
