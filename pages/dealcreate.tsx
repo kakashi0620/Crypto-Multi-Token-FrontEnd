@@ -13,6 +13,8 @@ const poppins = Poppins({
 const CreateDealPage: NextPage = () => {
 
   const [name, setName] = useState("");
+  const [logo, setLogo] = useState<File | null>(null);
+  const [banner, setBanner] = useState<File | null>(null);
   const [round, setRound] = useState("");
   const [tokenprice, setTokenPrice] = useState("");
   const [fdv, setFDV] = useState("");
@@ -28,55 +30,6 @@ const CreateDealPage: NextPage = () => {
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
 
-  const [logo, setLogo] = useState<File | null>(null);
-  const [logoPreviewUrl, setLogoPreviewUrl] = useState<string | null>(null); // To store the preview URL
-  const [logoFilename, setLogoFilename] = useState<string>(''); // To store the file name
-  const logoImagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
-  const logoUploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-
-    if (file) {
-      setLogoFilename(file.name);
-      setLogo(file);
-
-      // Preview the image
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setLogoPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setLogoFilename('');
-      setLogo(null);
-      setLogoPreviewUrl(null);
-    }
-  };
-
-  const [banner, setBanner] = useState<File | null>(null);
-  const [bannerPreviewUrl, setBannerPreviewUrl] = useState<string | null>(null); // To store the preview URL
-  const [bannerFilename, setBannerFilename] = useState<string>(''); // To store the file name
-  const bannerImagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
-  const bannerUploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element
-  const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-
-    if (file) {
-      setBannerFilename(file.name);
-      setBanner(file);
-
-      // Preview the image
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setBannerPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setBannerFilename('');
-      setBanner(null);
-      setBannerPreviewUrl(null);
-    }
-  };
 
   const onCreateDeal = (e) => {
 
@@ -158,11 +111,7 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="logo"
-                    previewUrl={logoPreviewUrl}
-                    filename={logoFilename}
-                    imagePreviewRef={logoImagePreviewRef}
-                    uploadInputRef={logoUploadInputRef}
-                    handleImageChange={handleLogoChange} />
+                    setImage={setLogo} />
                 </div>
               </div>
 
@@ -177,11 +126,7 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="banner"
-                    previewUrl={bannerPreviewUrl}
-                    filename={bannerFilename}
-                    imagePreviewRef={bannerImagePreviewRef}
-                    uploadInputRef={bannerUploadInputRef}
-                    handleImageChange={handleBannerChange} />
+                    setImage={setBanner} />
                 </div>
               </div>
             </div>

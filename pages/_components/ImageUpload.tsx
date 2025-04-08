@@ -1,13 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ImageUpload = ({
   target,
-  previewUrl,
-  filename,
-  imagePreviewRef,
-  uploadInputRef,
-  handleImageChange
+  setImage
 }) => {
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null); // To store the preview URL
+  const [filename, setFilename] = useState<string>(''); // To store the file name
+  const imagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
+  const uploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+
+    if (file) {
+      setFilename(file.name);
+      setImage(file);
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFilename('');
+      setImage(null);
+      setPreviewUrl(null);
+    }
+  };
 
   useEffect(() => {
     const imagePreview = imagePreviewRef.current;
@@ -32,7 +52,7 @@ const ImageUpload = ({
   }, []);
 
   return (
-    <div className="w-full max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
+    <div className="w-full h-[250px] max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
       <input
         id={target}
         ref={uploadInputRef}
@@ -69,7 +89,6 @@ const ImageUpload = ({
             )}
           </label>
       }
-
 
       {/* Image preview */}
       <div
