@@ -1,8 +1,10 @@
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useState } from "react";
 import ImpageUpload from './_components/ImageUpload'
-import { useRef } from "react";
 
 
 const poppins = Poppins({
@@ -11,6 +13,8 @@ const poppins = Poppins({
 });
 
 const CreateDealPage: NextPage = () => {
+
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [logo, setLogo] = useState<File | null>(null);
@@ -30,31 +34,59 @@ const CreateDealPage: NextPage = () => {
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
 
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onCreateDeal = (e) => {
 
+  const onCreateDeal = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newUser = {
-      userName: name,
-      logo: logo,
-      banner: banner,
-      round: round,
-      tokenprice: tokenprice,
-      fdv: fdv,
-      mc: mc,
-      vest: vest,
-      fundrasing: fundrasing,
-      fee: fee,
-      investmin: investmin,
-      investmax: investmax,
-      test: test,
-      xurl: xurl,
-      discordurl: discordurl,
-      teleurl: teleurl,
-    };
+    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vest || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl) {
+      setError('Please fill out all fields and select an image.');
+      return;
+    }
 
-    console.log(`register request sendt.`)
+    setUploading(true);
+    setError(null);
+
+    // Create a FormData object to send both text data and the image
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('logo', logo);
+    formData.append('banner', banner);
+    formData.append('round', round);
+    formData.append('tokenprice', tokenprice);
+    formData.append('fdv', fdv);
+    formData.append('mc', mc);
+    formData.append('vest', vest);
+    formData.append('fundrasing', fundrasing);
+    formData.append('fee', fee);
+    formData.append('investmin', investmin);
+    formData.append('investmax', investmax);
+    formData.append('test', test);
+    formData.append('weburl', weburl);
+    formData.append('xurl', xurl);
+    formData.append('discordurl', discordurl);
+    formData.append('teleurl', teleurl);
+
+    // Replace with your own server URL or image hosting API like imgBB
+    axios
+      .post(
+        // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
+        `http://localhost:5000/api/deals/create`,
+        formData
+      )
+      .then((res) => {
+        toast.success("Deal successfully created! 🎉");
+        router.push('/dashboard')
+        setUploading(false);
+      })
+      .catch((error) => {
+        const msg = error.response ? error.response.data : error.message;
+        toast.error(msg);
+        setError(msg);
+        console.log("Deal create error:", msg);
+      });
   }
 
   return (
@@ -64,7 +96,7 @@ const CreateDealPage: NextPage = () => {
           Create new deal
         </h1>
         <div className="flex flex-col gap-12">
-          <form className="space-y-6" method="POST">
+          <form onSubmit={onCreateDeal} className="space-y-6" method="POST">
 
             {/* Personal Information */}
             <div className="subtitle">
@@ -199,7 +231,6 @@ const CreateDealPage: NextPage = () => {
                     autoComplete="fdv"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={fdv}
-                    disabled
                     onChange={(e) => {
                       setFDV(e.target.value);
                     }}
@@ -223,7 +254,6 @@ const CreateDealPage: NextPage = () => {
                     autoComplete="mc"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={mc}
-                    disabled
                     onChange={(e) => {
                       setMC(e.target.value);
                     }}
@@ -247,7 +277,6 @@ const CreateDealPage: NextPage = () => {
                     autoComplete="vest"
                     className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
                     value={vest}
-                    disabled
                     onChange={(e) => {
                       setVest(e.target.value);
                     }}
@@ -361,30 +390,29 @@ const CreateDealPage: NextPage = () => {
               Deal Summary
             </div>
 
-            <div className="input-part">
-
-              {/* Test */}
-              <div className="input-container">
-                <label
-                  htmlFor="test"
-                  className="input-label"
-                >
-                  Test
-                </label>
-                <div className="input-input">
-                  <input
-                    id="test"
-                    name="test"
-                    type="text"
-                    autoComplete="test"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
-                    value={test}
-                    onChange={(e) => {
-                      setTest(e.target.value);
-                    }}
-                  />
-                </div>
+            {/* Test */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="test"
+                className="input-label"
+              >
+                Test
+              </label>
+              <div className="input-input">
+                <textarea
+                  id="test"
+                  name="test"
+                  autoComplete="test"
+                  className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                  value={test}
+                  onChange={(e) => {
+                    setTest(e.target.value);
+                  }}
+                />
               </div>
+            </div>
+
+            <div className="input-part">
 
               {/* Website URL */}
               <div className="input-container">
@@ -483,9 +511,9 @@ const CreateDealPage: NextPage = () => {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={(e) => onCreateDeal(e)}
+                disabled={uploading}
               >
-                Create
+                {uploading ? 'Uploading...' : 'Create'}
               </button>
             </div>
           </form>
