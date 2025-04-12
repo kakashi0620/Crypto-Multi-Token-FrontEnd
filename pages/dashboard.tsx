@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
@@ -15,17 +16,23 @@ const poppins = Poppins({
 
 export interface Deal {
   name: string;
-  date: string;
-  round: string;
-  price: string;
-  status: string;
-  fdv: string;
-  vesting: string;
-  limit: string;
-  bid: string;
-  ask: string;
-  last: string;
   logo: string;
+  banner: string;
+  round: string;
+  tokenprice: string;
+  fdv: string;
+  mc: string;
+  limit: string;
+  vest: string;
+  fundrasing: string;
+  fee: string;
+  investmin: string;
+  investmax: string;
+  test: string;
+  weburl: string;
+  xurl: string;
+  discordurl: string;
+  teleurl: string;
 };
 
 const DashboardPage: NextPage = () => {
@@ -35,36 +42,42 @@ const DashboardPage: NextPage = () => {
     return user && user?.isAdmin;
   }
 
-  const Deals: Deal[] = [
-    {
-      name: "Navi",
-      date: "Deal will Live on 2 day 17:31:25",
-      round: "Private",
-      price: "$0.83",
-      status: "Pre-Launch",
-      fdv: "$1.5M",
-      vesting: "10% TGE, 1 Month Cliff, 10 month Liner Vesting",
-      limit: "Min: $50, Max: $1000",
-      bid: "0.86x",
-      ask: "1x",
-      last: "0.72x",
-      logo: "/images/blog/blog-pic1.png"
-    },
-    {
-      name: "Yoko",
-      date: "Deal will Live on 5 day 17:31:25",
-      round: "Private",
-      price: "$0.28",
-      status: "Post-Launch",
-      fdv: "$1.5M",
-      vesting: "15% TGE, 2 Month Cliff, 10 month Liner Vesting",
-      limit: "Min: $60, Max: $1200",
-      bid: "-",
-      ask: "-",
-      last: "$0.206",
-      logo: "/images/blog/blog-pic2.png"
-    },
-  ];
+  const [deals, setDeals] = useState<Deal[]>(null);
+  useEffect(() => {
+    const fetchDealData = async () => {
+      axios.get(`http://localhost:5000/api/deals/getalldeals`).then(res => {
+        console.log(res.data)
+        setDeals(res.data)
+      })
+    }
+
+    fetchDealData()
+  }, [])
+
+
+    const getBannerURL = (deal:Deal) => {
+      const path = '/home/Crypto-Multi-Token-BackEnd' + deal.banner.substring(1);
+      console.log(path);
+      return path
+    }
+
+  const getStatus = (deal: Deal) => {
+    // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
+    return "Pre-Launch"
+  }
+  const getBid = (deal: Deal) => {
+    // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
+    return "-"
+  }
+  const getAsk = (deal: Deal) => {
+    // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
+    return "-"
+  }
+  const getLast = (deal: Deal) => {
+    // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
+    return "-"
+  }
+
 
   const [bOpenDeal, setOpenDeal] = useState(false);
   const [selectedDeal, selectDeal] = useState<Deal | null>(null);
@@ -95,24 +108,26 @@ const DashboardPage: NextPage = () => {
 
               {/* Deal Cards */}
               {
-                Deals.map((item, index) => (
-                  <div onClick={() => selectDeal(item)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
+                deals?.map((deal, index) => (
+                  <div onClick={() => selectDeal(deal)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
                     <div className="w-full h-full grid grid-rows-4 bg-white rounded-xl overflow-hidden">
 
                       {/* Image part */}
                       <div className="row-span-3 relative overflow-hidden ">
-                        <img className="object-cover" src={item.logo} alt="Card Image" />
+                        <a href={`${getBannerURL(deal)}`} download>
+                          <img className="object-cover" src={`${getBannerURL(deal)}`} alt="Card Image" />
+                        </a>
                         <div className="absolute top-0 start-0 end-0 h-full">
-                          <div className="px-6 text-white grid grid-cols-2 h-full">
+                          <div className="px-6 text-black grid grid-cols-2 h-full">
 
                             {/* Token name and price */}
                             <div className="grid grid-rows-2">
                               <div className="row-start-2">
                                 <h3 className="text-lg font-bold">
-                                  {item.name}
+                                  {deal.name}
                                 </h3>
                                 <p className="mt-1">
-                                  {item.price}
+                                  {deal.tokenprice}
                                 </p>
                               </div>
                             </div>
@@ -121,7 +136,7 @@ const DashboardPage: NextPage = () => {
                             <div className="grid grid-rows-2">
                               <div className="row-start-2 h-full text-right relative">
                                 <p className="border rounded-lg absolute right-0 bottom-2">
-                                  {item.status}
+                                  {getStatus(deal)}
                                 </p>
                               </div>
                             </div>
@@ -135,15 +150,15 @@ const DashboardPage: NextPage = () => {
                         <div className="w-full flex justify-between text-gray">
                           <div className="flex items-center">
                             <span>Bid:&nbsp;</span>
-                            <span className="text-green">{item.bid}</span>
+                            <span className="text-green">{getBid(deal)}</span>
                           </div>
                           <div className="flex items-center">
                             <span>Ask:&nbsp;</span>
-                            <span className="text-red-500">{item.ask}</span>
+                            <span className="text-red-500">{getAsk(deal)}</span>
                           </div>
                           <div className="flex items-center">
                             <span>Last:&nbsp;</span>
-                            <span className="text-black">{item.last}</span>
+                            <span className="text-black">{getLast(deal)}</span>
                           </div>
                           <div>
                             <RightIcon className="scale-50" />
@@ -180,7 +195,7 @@ const DashboardPage: NextPage = () => {
                   Overview
                 </div>
 
-                <div className="w-full flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-12 lg:grid-cols-3">
+                <div className="w-full flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-x-12 xl:grid-cols-3">
                   <AdminDashCard title="Total Members" num="107" detail="View Member Details" target="/memberinfo" />
                   <AdminDashCard title="Total Investors" num="01" detail="View Details" target="/memberinfo" />
                   <AdminDashCard title="Total Deals" num="01" detail="View Details" target="/memberinfo" />

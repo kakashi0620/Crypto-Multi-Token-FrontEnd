@@ -33,6 +33,7 @@ const CreateDealPage: NextPage = () => {
   const [xurl, setXURL] = useState("");
   const [discordurl, setDiscordURL] = useState("");
   const [teleurl, setTeleURL] = useState("");
+  const [dateTime, setDateTime] = useState<string>("");
 
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -198,7 +199,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="tokenprice"
                   className="input-label"
                 >
-                  Token Price
+                  Token Price ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -221,7 +222,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="fdv"
                   className="input-label"
                 >
-                  Fully Diluted Valuation
+                  Fully Diluted Valuation ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -244,7 +245,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="mc"
                   className="input-label"
                 >
-                  Initial Market Cap
+                  Initial Market Cap ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -298,7 +299,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="fundrasing"
                   className="input-label"
                 >
-                  Fundraising Target
+                  Fundraising Target ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -321,7 +322,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="fee"
                   className="input-label"
                 >
-                  Fees
+                  Fees (%)
                 </label>
                 <div className="input-input">
                   <input
@@ -344,7 +345,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="investmin"
                   className="input-label"
                 >
-                  Min Invest Limit
+                  Min Invest Limit ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -367,7 +368,7 @@ const CreateDealPage: NextPage = () => {
                   htmlFor="investmax"
                   className="input-label"
                 >
-                  Max Invest Limit
+                  Max Invest Limit ($)
                 </label>
                 <div className="input-input">
                   <input
@@ -396,7 +397,7 @@ const CreateDealPage: NextPage = () => {
                 htmlFor="test"
                 className="input-label"
               >
-                Test
+                Description
               </label>
               <div className="input-input">
                 <textarea
@@ -501,6 +502,29 @@ const CreateDealPage: NextPage = () => {
                     value={teleurl}
                     onChange={(e) => {
                       setTeleURL(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Date and time */}
+              <div className="input-container">
+                <label
+                  htmlFor="datetime"
+                  className="input-label"
+                >
+                  Date and time
+                </label>
+                <div className="input-input">
+                  <input
+                    id="datetime"
+                    name="datetime"
+                    type="datetime-local"
+                    autoComplete="datetime"
+                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    value={dateTime}
+                    onChange={(e) => {
+                      setDateTime(e.target.value);
                     }}
                   />
                 </div>

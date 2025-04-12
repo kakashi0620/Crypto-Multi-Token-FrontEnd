@@ -6,17 +6,23 @@ import { useRouter } from "next/router";
 
 interface Deal {
   name: string;
-  date: string;
-  round: string;
-  price: string;
-  status: string;
-  fdv: string;
-  vesting: string;
-  limit: string;
-  bid: string;
-  ask: string;
-  last: string;
   logo: string;
+  banner: string;
+  round: string;
+  tokenprice: string;
+  fdv: string;
+  mc: string;
+  limit: string;
+  vest: string;
+  fundrasing: string;
+  fee: string;
+  investmin: string;
+  investmax: string;
+  test: string;
+  weburl: string;
+  xurl: string;
+  discordurl: string;
+  teleurl: string;
 }
 
 interface DealOverviewProps {
