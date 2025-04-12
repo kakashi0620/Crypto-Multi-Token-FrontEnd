@@ -242,7 +242,7 @@ ul {
 }
 
 .input-container {
-  @apply flex flex-col gap-y-2;
+  @apply flex flex-col gap-y-2 mx-5;
 
   @screen sm {
     @apply grid grid-cols-5 #{!important};
@@ -261,4 +261,12 @@ ul {
   @screen sm {
     @apply col-start-3 col-span-3 #{!important};
   }
+}
+
+.input-text {
+  @apply block w-full rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6 #{!important};
+}
+
+.check-container {
+  @apply flex space-x-4 items-center mb-4;
 }

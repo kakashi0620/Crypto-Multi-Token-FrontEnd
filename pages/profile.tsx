@@ -229,7 +229,7 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="name"
                     required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
@@ -253,7 +253,7 @@ const ProfilePage: NextPage = () => {
                     type="text"
                     autoComplete="fullname"
                     required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={fullName}
                     onChange={(e) => {
                       setFullName(e.target.value);
@@ -276,7 +276,7 @@ const ProfilePage: NextPage = () => {
                     name="userid"
                     type="text"
                     autoComplete="userid"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     disabled
                     value={userID}
                   />
@@ -348,7 +348,7 @@ const ProfilePage: NextPage = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -371,7 +371,7 @@ const ProfilePage: NextPage = () => {
                     name="permanentaddress"
                     type="text"
                     autoComplete="permanentaddress"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={perAddress}
                     onChange={(e) => {
                       setPerAddress(e.target.value);
@@ -393,7 +393,7 @@ const ProfilePage: NextPage = () => {
                     id="country"
                     name="country"
                     value={country}
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     onChange={handleCountryChange}
                   >
                     <option value="">Select a country</option>
@@ -420,7 +420,7 @@ const ProfilePage: NextPage = () => {
                     name="mobilenumber"
                     type="text"
                     autoComplete="mobilenumber"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={mobilenumber}
                     onChange={(e) => {
                       setMobileNumber(e.target.value);
@@ -450,7 +450,7 @@ const ProfilePage: NextPage = () => {
                     name="teleid"
                     type="text"
                     autoComplete="teleid"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={teleid}
                     onChange={(e) => {
                       setTelegramID(e.target.value);
@@ -473,7 +473,7 @@ const ProfilePage: NextPage = () => {
                     name="xid"
                     type="text"
                     autoComplete="xid"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={xid}
                     onChange={(e) => {
                       setXID(e.target.value);
@@ -496,7 +496,7 @@ const ProfilePage: NextPage = () => {
                     name="discordid"
                     type="text"
                     autoComplete="discordid"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={discordid}
                     onChange={(e) => {
                       setDiscordID(e.target.value);
@@ -526,7 +526,7 @@ const ProfilePage: NextPage = () => {
                     name="loginwallet"
                     type="text"
                     autoComplete="loginwallet"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     disabled
                     value={address}
                   />
@@ -547,7 +547,7 @@ const ProfilePage: NextPage = () => {
                     name="btcwallet"
                     type="text"
                     autoComplete="btcwallet"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={btcwallet}
                     onChange={(e) => {
                       setBTCWallet(e.target.value);
@@ -570,7 +570,7 @@ const ProfilePage: NextPage = () => {
                     name="solanawallet"
                     type="text"
                     autoComplete="solanawallet"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={solwallet}
                     onChange={(e) => {
                       setSOLWallet(e.target.value);
@@ -593,7 +593,7 @@ const ProfilePage: NextPage = () => {
                     name="anotherwallet1"
                     type="text"
                     autoComplete="anotherwallet1"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={wallet1}
                     onChange={(e) => {
                       setOtherWallet1(e.target.value);
@@ -616,7 +616,7 @@ const ProfilePage: NextPage = () => {
                     name="anotherwallet2"
                     type="text"
                     autoComplete="anotherwallet2"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={wallet2}
                     onChange={(e) => {
                       setOtherWallet2(e.target.value);

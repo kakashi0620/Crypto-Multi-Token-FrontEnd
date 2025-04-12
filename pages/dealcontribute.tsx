@@ -86,7 +86,7 @@ const ContributePage: NextPage = () => {
                         type="text"
                         autoComplete="name"
                         required
-                        className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                        className="input-text"
                         value={name}
                         onChange={(e) => {
                           setName(e.target.value);
@@ -130,7 +130,7 @@ const ContributePage: NextPage = () => {
                       name="loginWallet"
                       type="text"
                       autoComplete="loginWallet"
-                      className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                      className="input-text"
                       value={address}
                       disabled
                     />
@@ -151,7 +151,7 @@ const ContributePage: NextPage = () => {
                       name="claimWallet"
                       type="text"
                       autoComplete="claimWallet"
-                      className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                      className="input-text"
                       value={claimWallet}
                       onChange={(e) => {
                         setClaimWallet(e.target.value);
@@ -175,7 +175,7 @@ const ContributePage: NextPage = () => {
                         name="limitMin"
                         type="text"
                         autoComplete="limitMin"
-                        className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                        className="input-text"
                         value={limitMin}
                         onChange={(e) => {
                           setLimitMin(Number(e.target.value));
@@ -197,7 +197,7 @@ const ContributePage: NextPage = () => {
                         name="limitMax"
                         type="text"
                         autoComplete="limitMax"
-                        className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                        className="input-text"
                         value={limitMax}
                         onChange={(e) => {
                           setLimitMax(Number(e.target.value));
@@ -221,7 +221,7 @@ const ContributePage: NextPage = () => {
                       name="balance"
                       type="text"
                       autoComplete="balance"
-                      className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                      className="input-text"
                       value={balance}
                       onChange={(e) => {
                         setBalance(Number(e.target.value));
@@ -244,7 +244,7 @@ const ContributePage: NextPage = () => {
                       name="investAmount"
                       type="text"
                       autoComplete="investAmount"
-                      className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                      className="input-text"
                       value={investAmount}
                       onChange={(e) => {
                         setInvestAmount(Number(e.target.value));
@@ -267,7 +267,7 @@ const ContributePage: NextPage = () => {
                       name="receivedToken"
                       type="text"
                       autoComplete="receivedToken"
-                      className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                      className="input-text"
                       value={receivedToken}
                       onChange={(e) => {
                         setReceivedToken(Number(e.target.value));
@@ -291,7 +291,7 @@ const ContributePage: NextPage = () => {
                     name="terms"
                     type="text"
                     autoComplete="terms"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={terms}
                     onChange={(e) => {
                       setTerms(e.target.value);

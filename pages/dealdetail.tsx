@@ -123,7 +123,7 @@ const DealDetailPage: NextPage = () => {
                     type="text"
                     autoComplete="name"
                     required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
@@ -147,7 +147,7 @@ const DealDetailPage: NextPage = () => {
                     type="text"
                     autoComplete="logo"
                     required
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={logo}
                     onChange={(e) => {
                       setLogo(e.target.value);
@@ -170,7 +170,7 @@ const DealDetailPage: NextPage = () => {
                     name="banner"
                     type="text"
                     autoComplete="banner"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={banner}
                     onChange={(e) => {
                       setBanner(e.target.value);
@@ -200,7 +200,7 @@ const DealDetailPage: NextPage = () => {
                     name="round"
                     type="text"
                     autoComplete="round"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={round}
                     onChange={(e) => {
                       setRound(e.target.value);
@@ -223,7 +223,7 @@ const DealDetailPage: NextPage = () => {
                     name="tokenprice"
                     type="text"
                     autoComplete="tokenprice"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={tokenprice}
                     onChange={(e) => {
                       setTokenPrice(e.target.value);
@@ -246,7 +246,7 @@ const DealDetailPage: NextPage = () => {
                     name="fdv"
                     type="text"
                     autoComplete="fdv"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={fdv}
                     onChange={(e) => {
                       setFDV(e.target.value);
@@ -269,7 +269,7 @@ const DealDetailPage: NextPage = () => {
                     name="mc"
                     type="text"
                     autoComplete="mc"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={mc}
                     onChange={(e) => {
                       setMC(e.target.value);
@@ -292,7 +292,7 @@ const DealDetailPage: NextPage = () => {
                     name="vest"
                     type="text"
                     autoComplete="vest"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={vest}
                     onChange={(e) => {
                       setVest(e.target.value);
@@ -323,7 +323,7 @@ const DealDetailPage: NextPage = () => {
                     name="fundrasing"
                     type="text"
                     autoComplete="fundrasing"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={fundrasing}
                     onChange={(e) => {
                       setFundrasing(e.target.value);
@@ -346,7 +346,7 @@ const DealDetailPage: NextPage = () => {
                     name="fee"
                     type="text"
                     autoComplete="fee"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={fee}
                     onChange={(e) => {
                       setFee(e.target.value);
@@ -369,7 +369,7 @@ const DealDetailPage: NextPage = () => {
                     name="investmin"
                     type="text"
                     autoComplete="investmin"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={investmin}
                     onChange={(e) => {
                       setInvestMin(e.target.value);
@@ -392,7 +392,7 @@ const DealDetailPage: NextPage = () => {
                     name="investmax"
                     type="text"
                     autoComplete="investmax"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={investmax}
                     onChange={(e) => {
                       setInvestMax(e.target.value);
@@ -423,7 +423,7 @@ const DealDetailPage: NextPage = () => {
                     name="test"
                     type="text"
                     autoComplete="test"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={test}
                     onChange={(e) => {
                       setTest(e.target.value);
@@ -446,7 +446,7 @@ const DealDetailPage: NextPage = () => {
                     name="weburl"
                     type="text"
                     autoComplete="weburl"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={weburl}
                     onChange={(e) => {
                       setWebURL(e.target.value);
@@ -469,7 +469,7 @@ const DealDetailPage: NextPage = () => {
                     name="xurl"
                     type="text"
                     autoComplete="xurl"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={xurl}
                     onChange={(e) => {
                       setXURL(e.target.value);
@@ -492,7 +492,7 @@ const DealDetailPage: NextPage = () => {
                     name="discordurl"
                     type="text"
                     autoComplete="discordurl"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={discordurl}
                     onChange={(e) => {
                       setDiscordURL(e.target.value);
@@ -515,7 +515,7 @@ const DealDetailPage: NextPage = () => {
                     name="teleurl"
                     type="text"
                     autoComplete="teleurl"
-                    className="block w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
+                    className="input-text"
                     value={teleurl}
                     onChange={(e) => {
                       setTeleURL(e.target.value);
