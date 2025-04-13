@@ -21,18 +21,10 @@ export interface Deal {
   round: string;
   tokenprice: string;
   fdv: string;
-  mc: string;
-  limit: string;
   vest: string;
-  fundrasing: string;
-  fee: string;
   investmin: string;
   investmax: string;
-  test: string;
-  weburl: string;
-  xurl: string;
-  discordurl: string;
-  teleurl: string;
+  dateTime: string;
 };
 
 const DashboardPage: NextPage = () => {
@@ -45,7 +37,7 @@ const DashboardPage: NextPage = () => {
   const [deals, setDeals] = useState<Deal[]>(null);
   useEffect(() => {
     const fetchDealData = async () => {
-      axios.get(`http://localhost:5000/api/deals/getalldeals`).then(res => {
+      axios.get(`https://invest.wealthy.capital/api/deals/getalldeals`).then(res => {
         console.log(res.data)
         setDeals(res.data)
       })
@@ -54,12 +46,11 @@ const DashboardPage: NextPage = () => {
     fetchDealData()
   }, [])
 
-
-    const getBannerURL = (deal:Deal) => {
-      const path = '/home/Crypto-Multi-Token-BackEnd' + deal.banner.substring(1);
-      console.log(path);
-      return path
-    }
+  const getBannerURL = (deal: Deal) => {
+    const path = '/home/Crypto-Multi-Token-BackEnd' + deal.banner.substring(1);
+    console.log(path);
+    return path
+  }
 
   const getStatus = (deal: Deal) => {
     // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"

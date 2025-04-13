@@ -41,7 +41,7 @@ const ProfilePage: NextPage = () => {
 
 
   const getUserID = async () => {
-    const userCount = await axios.get(`http://localhost:5000/api/users/getUserCount`);
+    const userCount = await axios.get(`https://invest.wealthy.capital/api/users/getUserCount`);
 
     let uidStr = "WC";
     console.log(userCount.data)
@@ -57,7 +57,7 @@ const ProfilePage: NextPage = () => {
   }
 
   const getReferralLink = (userID: string) => {
-    return "http://localhost:3000/signup?ref=" + userID
+    return "https://invest.wealthy.capital/signup?ref=" + userID
   }
 
   const initValues = async () => {

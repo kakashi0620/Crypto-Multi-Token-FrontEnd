@@ -11,18 +11,10 @@ interface Deal {
   round: string;
   tokenprice: string;
   fdv: string;
-  mc: string;
-  limit: string;
   vest: string;
-  fundrasing: string;
-  fee: string;
   investmin: string;
   investmax: string;
-  test: string;
-  weburl: string;
-  xurl: string;
-  discordurl: string;
-  teleurl: string;
+  dateTime: string;
 }
 
 interface DealOverviewProps {
@@ -33,7 +25,42 @@ interface DealOverviewProps {
 }
 
 const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, onClose }) => {
-  
+
+  const [dateRemained, setDateRemained] = useState("");
+  const [bOverTime, setOverTime] = useState(false);
+
+  // Function to calculate remaining time
+  const calculateRemainingTime = () => {
+    if (deal) {
+      const futureDate = new Date(deal.dateTime);
+      const currentDate = new Date();
+      const diffInMillis = futureDate.getTime() - currentDate.getTime();
+
+      if (diffInMillis <= 0) {
+        setOverTime(true)
+        setDateRemained("Time is up!");
+        return;
+      }
+
+      const days = Math.floor(diffInMillis / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diffInMillis % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffInMillis % (1000 * 60)) / 1000);
+
+      setDateRemained(`Deal will live on ${days} day ${hours}:${minutes}:${seconds}`);
+    }
+  };
+
+  // Update the date every second
+  useEffect(() => {
+    if (deal) {
+      calculateRemainingTime(); // Initial calculation
+      const interval = setInterval(calculateRemainingTime, 1000); // Update every second
+
+      return () => clearInterval(interval); // Clean up the interval on component unmount
+    }
+  }, []);
+
   const router = useRouter();
   const onDetail = () => {
     if (deal?.name !== "") {
@@ -52,7 +79,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
     <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} title="">
       <div className="flex flex-col gap-y-10 p-1 md:p-3 text-black">
         <div className="flex w-full justify-center">
-          {deal?.date}
+          {dateRemained}
         </div>
 
         <div className="flex w-full justify-center">
@@ -75,7 +102,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
           <div className="grid grid-cols-[1fr_1fr_6fr]">
             <div>Price</div>
             <div className="flex w-full justify-center">:</div>
-            <div>{deal?.price}</div>
+            <div>{deal?.tokenprice}</div>
           </div>
 
           <div className="grid grid-cols-[1fr_1fr_6fr]">
@@ -87,13 +114,13 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
           <div className="grid grid-cols-[1fr_1fr_6fr]">
             <div>Vesting</div>
             <div className="flex w-full justify-center">:</div>
-            <div>{deal?.vesting}</div>
+            <div>{deal?.vest}</div>
           </div>
 
           <div className="grid grid-cols-[1fr_1fr_6fr]">
             <div>Limit</div>
             <div className="flex w-full justify-center">:</div>
-            <div>{deal?.limit}</div>
+            <div>{"Min: " + deal?.investmin + " Max: " + deal?.investmax}</div>
           </div>
 
           <div className="grid grid-cols-[1fr_1fr_6fr] pt-3">
@@ -125,13 +152,18 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
           >
             Deal Detail
           </button>
-          <button
-            type="button"
-            className="text-white bg-green hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green dark:focus:ring-blue-800"
-            onClick={() => onContribute()}
-          >
-            Contribute
-          </button>
+          {
+            bOverTime ?
+              <button
+                type="button"
+                className="text-white bg-green hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green dark:focus:ring-blue-800"
+                onClick={() => onContribute()}
+              >
+                Contribute
+              </button>
+              : <></>
+          }
+
         </div>
       </div>
 
