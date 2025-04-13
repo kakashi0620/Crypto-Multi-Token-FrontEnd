@@ -3,29 +3,17 @@ import Modal from "./Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-
-interface Deal {
-  name: string;
-  logo: string;
-  banner: string;
-  round: string;
-  tokenprice: string;
-  fdv: string;
-  vest: string;
-  investmin: string;
-  investmax: string;
-  dateTime: string;
-}
+import { useDeal } from "../../../hooks/dealContext";
 
 interface DealOverviewProps {
-  deal: Deal | null;
   isOpen: boolean;
   onConfirm: () => void;
   onClose: () => void;
 }
 
-const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, onClose }) => {
+const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose }) => {
 
+  const {deal} = useDeal();
   const [dateRemained, setDateRemained] = useState("");
   const [bOverTime, setOverTime] = useState(false);
 
@@ -59,7 +47,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ deal, isOpen, onConfirm, on
 
       return () => clearInterval(interval); // Clean up the interval on component unmount
     }
-  }, []);
+  }, [deal]);
 
   const router = useRouter();
   const onDetail = () => {

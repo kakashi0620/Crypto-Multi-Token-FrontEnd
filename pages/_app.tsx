@@ -15,6 +15,7 @@ import "../lib/i18n";
 import Banner from "./_components/Layout/Banner";
 import HamburgerMenu from "./_components/Layout/Hamburger";
 import { UserProvider } from "../hooks/userContext";
+import { DealProvider } from "../hooks/dealContext";
 
 const projectId = "12b8a841a230c15448f1dd353b5384ad";
 
@@ -39,21 +40,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Suspense fallback="loading">
       <WagmiProvider config={wagmiConfig}>
         <UserProvider>
-          <QueryClientProvider client={queryClient}>
-            <Banner />
-            <Toaster position="top-right" reverseOrder={false} />
-            <div className="flex">
-              <Header />
-              <HamburgerMenu />
-            </div>
+          <DealProvider>
+            <QueryClientProvider client={queryClient}>
+              <Banner />
+              <Toaster position="top-right" reverseOrder={false} />
+              <div className="flex">
+                <Header />
+                <HamburgerMenu />
+              </div>
 
-            <div className="relative z-30">
-              <Component {...pageProps} />
-            </div>
+              <div className="relative z-30">
+                <Component {...pageProps} />
+              </div>
 
-            <Footer />
-            <ToastContainer />
-          </QueryClientProvider>
+              <Footer />
+              <ToastContainer />
+            </QueryClientProvider>
+          </DealProvider>
         </UserProvider>
       </WagmiProvider>
     </Suspense>

@@ -8,25 +8,13 @@ import DealOverview from "./_components/Dialog/DealOverview";
 import { useUser } from "../hooks/userContext";
 import AdminDashCard from "./_components/AdminDashCard";
 import { getBackend } from "./utils";
+import { Deal, useDeal } from "../hooks/dealContext";
 
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
-
-export interface Deal {
-  name: string;
-  logo: string;
-  banner: string;
-  round: string;
-  tokenprice: string;
-  fdv: string;
-  vest: string;
-  investmin: string;
-  investmax: string;
-  dateTime: string;
-};
 
 const DashboardPage: NextPage = () => {
 
@@ -35,8 +23,11 @@ const DashboardPage: NextPage = () => {
     return user && user?.isAdmin;
   }
 
-  const [deals, setDeals] = useState<Deal[]>(null);
+  const {deal, setDeal} = useDeal();
+  const [deals, setDeals] = useState<Deal[]>();
   useEffect(() => {
+    setDeal(null)
+
     const fetchDealData = async () => {
       axios.get(`${getBackend()}/api/deals/getalldeals`).then(res => {
         console.log(res.data)
@@ -72,12 +63,15 @@ const DashboardPage: NextPage = () => {
 
 
   const [bOpenDeal, setOpenDeal] = useState(false);
-  const [selectedDeal, selectDeal] = useState<Deal | null>(null);
+  const closeModal = () => {
+    setOpenDeal(false)
+    setDeal(null)
+  }
   useEffect(() => {
-    if (selectedDeal) {
+    if (deal) {
       setOpenDeal(true);
     }
-  }, [selectedDeal])
+  }, [deal])
 
   const router = useRouter()
   const onCreateDeal = () => {
@@ -101,7 +95,7 @@ const DashboardPage: NextPage = () => {
               {/* Deal Cards */}
               {
                 deals?.map((deal, index) => (
-                  <div onClick={() => selectDeal(deal)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
+                  <div onClick={() => setDeal(deal)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
                     <div className="w-full h-full grid grid-rows-4 bg-white rounded-xl overflow-hidden">
 
                       {/* Image part */}
@@ -204,7 +198,7 @@ const DashboardPage: NextPage = () => {
         </div>
       </div>
 
-      <DealOverview deal={selectedDeal} isOpen={bOpenDeal} onConfirm={() => setOpenDeal(false)} onClose={() => setOpenDeal(false)} />
+      <DealOverview isOpen={bOpenDeal} onConfirm={() => closeModal()} onClose={() => closeModal()} />
     </>
   );
 };
