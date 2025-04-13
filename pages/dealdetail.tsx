@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React from "react";
 import { useDeal } from "../hooks/dealContext";
+import ImageView from "./_components/ImageView";
 
 
 const poppins = Poppins({
@@ -11,7 +12,7 @@ const poppins = Poppins({
 
 const DealDetailPage: NextPage = () => {
 
-  const {deal} = useDeal()
+  const { deal } = useDeal()
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -50,6 +51,9 @@ const DealDetailPage: NextPage = () => {
                 </div>
               </div>
 
+              {/* Empty space */}
+              <div className="hidden sm:gap-y-2 sm:grid sm:grid-cols-5" />
+              
               {/* Logo */}
               <div className="input-container">
                 <label
@@ -59,14 +63,7 @@ const DealDetailPage: NextPage = () => {
                   Logo
                 </label>
                 <div className="input-input">
-                  <input
-                    id="logo"
-                    name="logo"
-                    type="text"
-                    autoComplete="logo"
-                    className="input-text"
-                    value={deal?.logo}
-                  />
+                  <ImageView imgurl={deal?.logo} />
                 </div>
               </div>
 
@@ -79,14 +76,7 @@ const DealDetailPage: NextPage = () => {
                   Banner
                 </label>
                 <div className="input-input">
-                  <input
-                    id="banner"
-                    name="banner"
-                    type="text"
-                    autoComplete="banner"
-                    className="input-text"
-                    value={deal?.banner}
-                  />
+                  <ImageView imgurl={deal?.banner} />
                 </div>
               </div>
             </div>
