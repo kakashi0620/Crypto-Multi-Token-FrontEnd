@@ -45,7 +45,6 @@ const ProfilePage: NextPage = () => {
     const userCount = await axios.get(`${getBackend()}/api/users/getUserCount`);
 
     let uidStr = "WC";
-    console.log(userCount.data)
     const zeroCount = 5 - userCount.data.toString().length;
     for (let i = 0; i < zeroCount; ++i) {
       uidStr += '0'
@@ -53,7 +52,6 @@ const ProfilePage: NextPage = () => {
 
     uidStr += (userCount.data + 1)
 
-    console.log('user id =>', uidStr);
     return uidStr;
   }
 
@@ -154,10 +152,7 @@ const ProfilePage: NextPage = () => {
           router.push('/dashboard')
         })
         .catch((error) => {
-          console.log(
-            "Profile Update error:",
-            error.response ? error.response.data : error.message
-          );
+          toast.error(error.response ? error.response.data : error.message);
         });
     }
     else {
@@ -174,10 +169,7 @@ const ProfilePage: NextPage = () => {
           router.push('/dashboard')
         })
         .catch((error) => {
-          console.log(
-            "Profile Register error:",
-            error.response ? error.response.data : error.message
-          );
+          toast.error(error.response ? error.response.data : error.message)
         });
     }
   }

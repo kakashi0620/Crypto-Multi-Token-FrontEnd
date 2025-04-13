@@ -8,7 +8,6 @@ const Signup: NextPage = () => {
   const { ref } = router.query;
   if (ref && ref !== "" && ref !== undefined) {
     localStorage.setItem("referred_by", JSON.stringify(ref));
-    console.log("referred_by", ref)
     router.push('/')
   }
 

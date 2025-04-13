@@ -30,7 +30,6 @@ const DashboardPage: NextPage = () => {
 
     const fetchDealData = async () => {
       axios.get(`${getBackend()}/api/deals/getalldeals`).then(res => {
-        console.log(res.data)
         setDeals(res.data)
       })
     }
@@ -40,7 +39,6 @@ const DashboardPage: NextPage = () => {
 
   const getBannerURL = (deal: Deal) => {
     const path = '/home/Crypto-Multi-Token-BackEnd' + deal.banner.substring(1);
-    console.log(path);
     return path
   }
 

@@ -467,7 +467,6 @@ const CreateDealPage: NextPage = () => {
         const msg = error.response ? error.response.data : error.message;
         toast.error(msg);
         setError(msg);
-        console.log("Deal create error:", msg);
       });
   }
 

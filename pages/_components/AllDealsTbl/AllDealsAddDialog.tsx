@@ -46,7 +46,6 @@ export default function AllDealsAddDialog(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("formdata---------------------------------", formdata);
     if (info.action === 'add') {
       axios.post(PROXY_URL + '/api/AllDeals/', formdata,
         {

@@ -30,7 +30,6 @@ export default function MemberListCard(props) {
         },
       })
       .then(res => {
-        console.log("res.data.vacs", res.data);
         setData(res.data.vac);
       })
       .catch(err => console.log(err));
