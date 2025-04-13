@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
-import axios from "axios";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useDeal } from "../../../hooks/dealContext";
 
@@ -52,13 +50,11 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
   const router = useRouter();
   const onDetail = () => {
     if (deal?.name !== "") {
-      localStorage.setItem("currentDealName", JSON.stringify(deal?.name));
       router.push("/dealdetail")
     }
   }
   const onContribute = () => {
     if (deal?.name !== "") {
-      localStorage.setItem("currentDealName", JSON.stringify(deal?.name));
       router.push("/dealcontribute")
     }
   }

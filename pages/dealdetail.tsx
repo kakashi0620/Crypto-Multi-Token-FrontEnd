@@ -1,96 +1,17 @@
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDeal } from "../hooks/dealContext";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
 
-let tempid = 0;
 const DealDetailPage: NextPage = () => {
 
-  const [name, setName] = useState("");
-  const [logo, setLogo] = useState("");
-  const [banner, setBanner] = useState("");
-  const [round, setRound] = useState("");
-  const [tokenprice, setTokenPrice] = useState("");
-  const [fdv, setFDV] = useState("");
-  const [mc, setMC] = useState("");
-  const [vest, setVest] = useState("");
-  const [fundrasing, setFundrasing] = useState("");
-  const [fee, setFee] = useState("");
-  const [investmin, setInvestMin] = useState("");
-  const [investmax, setInvestMax] = useState("");
-  const [test, setTest] = useState("");
-  const [weburl, setWebURL] = useState("");
-  const [xurl, setXURL] = useState("");
-  const [discordurl, setDiscordURL] = useState("");
-  const [teleurl, setTeleURL] = useState("");
-
-  useEffect(() => {
-    const currentDealName: string = JSON.parse(localStorage.getItem("currentDealName") as string)
-    currentDealName;
-    // find deal from currentDealName on db.
-    setName("deal.setName");
-    setLogo("deal.setLogo");
-    setBanner("deal.setBanner");
-    setRound("deal.setRound");
-    setTokenPrice("deal.setTokenPrice");
-    setFDV("deal.setFDV");
-    setMC("deal.setMC");
-    setVest("deal.setVest");
-    setFundrasing("deal.setFundrasing");
-    setFee("deal.setFee");
-    setInvestMin("deal.setInvestMin");
-    setInvestMax("deal.setInvestMax");
-    setTest("deal.setTest");
-    setWebURL("deal.setWebURL");
-    setXURL("deal.setXURL");
-    setDiscordURL("deal.setDiscordURL");
-    setTeleURL("deal.setTeleURL");
-  }, [])
-
-  const onUpdatDeal = (e) => {
-
-    e.preventDefault();
-
-    const deal = {
-      userName: name,
-      logo: logo,
-      banner: banner,
-      round: round,
-      tokenprice: tokenprice,
-      fdv: fdv,
-      mc: mc,
-      vest: vest,
-      fundrasing: fundrasing,
-      fee: fee,
-      investmin: investmin,
-      investmax: investmax,
-      test: test,
-      xurl: xurl,
-      discordurl: discordurl,
-      teleurl: teleurl,
-    };
-
-    console.log(`Deal successfully updated.`)
-    // axios
-    //   .post(
-    //     // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-    //     `${getBackend()}/api/users/register`,
-    //     newUser
-    //   )
-    //   .then((res) => {
-    //     // toast.success("DealDetail successfully registered!", { position: "top-right" });
-    //   })
-    //   .catch((error) => {
-    //     console.log(
-    //       "DealDetail Register error:",
-    //       error.response ? error.response.data : error.message
-    //     );
-    //   });
-  }
+  const {deal} = useDeal()
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -122,12 +43,9 @@ const DealDetailPage: NextPage = () => {
                     name="name"
                     type="text"
                     autoComplete="name"
-                    required
+                    disabled
                     className="input-text"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
+                    value={deal?.name}
                   />
                 </div>
               </div>
@@ -146,12 +64,8 @@ const DealDetailPage: NextPage = () => {
                     name="logo"
                     type="text"
                     autoComplete="logo"
-                    required
                     className="input-text"
-                    value={logo}
-                    onChange={(e) => {
-                      setLogo(e.target.value);
-                    }}
+                    value={deal?.logo}
                   />
                 </div>
               </div>
@@ -171,10 +85,7 @@ const DealDetailPage: NextPage = () => {
                     type="text"
                     autoComplete="banner"
                     className="input-text"
-                    value={banner}
-                    onChange={(e) => {
-                      setBanner(e.target.value);
-                    }}
+                    value={deal?.banner}
                   />
                 </div>
               </div>
@@ -199,12 +110,10 @@ const DealDetailPage: NextPage = () => {
                     id="round"
                     name="round"
                     type="text"
+                    disabled
                     autoComplete="round"
                     className="input-text"
-                    value={round}
-                    onChange={(e) => {
-                      setRound(e.target.value);
-                    }}
+                    value={deal?.round}
                   />
                 </div>
               </div>
@@ -222,12 +131,10 @@ const DealDetailPage: NextPage = () => {
                     id="tokenprice"
                     name="tokenprice"
                     type="text"
+                    disabled
                     autoComplete="tokenprice"
                     className="input-text"
-                    value={tokenprice}
-                    onChange={(e) => {
-                      setTokenPrice(e.target.value);
-                    }}
+                    value={deal?.tokenprice}
                   />
                 </div>
               </div>
@@ -245,12 +152,10 @@ const DealDetailPage: NextPage = () => {
                     id="fdv"
                     name="fdv"
                     type="text"
+                    disabled
                     autoComplete="fdv"
                     className="input-text"
-                    value={fdv}
-                    onChange={(e) => {
-                      setFDV(e.target.value);
-                    }}
+                    value={deal?.fdv}
                   />
                 </div>
               </div>
@@ -268,12 +173,10 @@ const DealDetailPage: NextPage = () => {
                     id="mc"
                     name="mc"
                     type="text"
+                    disabled
                     autoComplete="mc"
                     className="input-text"
-                    value={mc}
-                    onChange={(e) => {
-                      setMC(e.target.value);
-                    }}
+                    value={deal?.mc}
                   />
                 </div>
               </div>
@@ -291,12 +194,10 @@ const DealDetailPage: NextPage = () => {
                     id="vest"
                     name="vest"
                     type="text"
+                    disabled
                     autoComplete="vest"
                     className="input-text"
-                    value={vest}
-                    onChange={(e) => {
-                      setVest(e.target.value);
-                    }}
+                    value={deal?.vest}
                   />
                 </div>
               </div>
@@ -322,12 +223,10 @@ const DealDetailPage: NextPage = () => {
                     id="fundrasing"
                     name="fundrasing"
                     type="text"
+                    disabled
                     autoComplete="fundrasing"
                     className="input-text"
-                    value={fundrasing}
-                    onChange={(e) => {
-                      setFundrasing(e.target.value);
-                    }}
+                    value={deal?.fundrasing}
                   />
                 </div>
               </div>
@@ -345,12 +244,10 @@ const DealDetailPage: NextPage = () => {
                     id="fee"
                     name="fee"
                     type="text"
+                    disabled
                     autoComplete="fee"
                     className="input-text"
-                    value={fee}
-                    onChange={(e) => {
-                      setFee(e.target.value);
-                    }}
+                    value={deal?.fee}
                   />
                 </div>
               </div>
@@ -368,12 +265,10 @@ const DealDetailPage: NextPage = () => {
                     id="investmin"
                     name="investmin"
                     type="text"
+                    disabled
                     autoComplete="investmin"
                     className="input-text"
-                    value={investmin}
-                    onChange={(e) => {
-                      setInvestMin(e.target.value);
-                    }}
+                    value={deal?.investmin}
                   />
                 </div>
               </div>
@@ -391,12 +286,10 @@ const DealDetailPage: NextPage = () => {
                     id="investmax"
                     name="investmax"
                     type="text"
+                    disabled
                     autoComplete="investmax"
                     className="input-text"
-                    value={investmax}
-                    onChange={(e) => {
-                      setInvestMax(e.target.value);
-                    }}
+                    value={deal?.investmax}
                   />
                 </div>
               </div>
@@ -422,12 +315,10 @@ const DealDetailPage: NextPage = () => {
                     id="test"
                     name="test"
                     type="text"
+                    disabled
                     autoComplete="test"
                     className="input-text"
-                    value={test}
-                    onChange={(e) => {
-                      setTest(e.target.value);
-                    }}
+                    value={deal?.test}
                   />
                 </div>
               </div>
@@ -445,12 +336,10 @@ const DealDetailPage: NextPage = () => {
                     id="weburl"
                     name="weburl"
                     type="text"
+                    disabled
                     autoComplete="weburl"
                     className="input-text"
-                    value={weburl}
-                    onChange={(e) => {
-                      setWebURL(e.target.value);
-                    }}
+                    value={deal?.weburl}
                   />
                 </div>
               </div>
@@ -468,12 +357,10 @@ const DealDetailPage: NextPage = () => {
                     id="xurl"
                     name="xurl"
                     type="text"
+                    disabled
                     autoComplete="xurl"
                     className="input-text"
-                    value={xurl}
-                    onChange={(e) => {
-                      setXURL(e.target.value);
-                    }}
+                    value={deal?.xurl}
                   />
                 </div>
               </div>
@@ -491,12 +378,10 @@ const DealDetailPage: NextPage = () => {
                     id="discordurl"
                     name="discordurl"
                     type="text"
+                    disabled
                     autoComplete="discordurl"
                     className="input-text"
-                    value={discordurl}
-                    onChange={(e) => {
-                      setDiscordURL(e.target.value);
-                    }}
+                    value={deal?.discordurl}
                   />
                 </div>
               </div>
@@ -514,28 +399,13 @@ const DealDetailPage: NextPage = () => {
                     id="teleurl"
                     name="teleurl"
                     type="text"
+                    disabled
                     autoComplete="teleurl"
                     className="input-text"
-                    value={teleurl}
-                    onChange={(e) => {
-                      setTeleURL(e.target.value);
-                    }}
+                    value={deal?.teleurl}
                   />
                 </div>
               </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-green 
-px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm 
-hover:bg-black focus-visible:outline focus-visible:outline-2 
-focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={(e) => onUpdatDeal(e)}
-              >
-                Update
-              </button>
             </div>
           </form>
         </div>

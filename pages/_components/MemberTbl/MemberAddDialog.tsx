@@ -5,6 +5,7 @@ import { PROXY_URL } from '../../../docs/data';
 import toast from "react-hot-toast";
 import Modal from '../Dialog/Modal';
 import ModalItem from '../Dialog/ModalItem';
+import { useUser } from '../../../hooks/userContext';
 
 const default_formdata = {
   sn: null,
@@ -22,7 +23,8 @@ const default_formdata = {
 }
 
 export default function MemberAddDialog(props) {
-  const isadmin: Boolean = (JSON.parse(localStorage.getItem("user") as string)?.role === "admin");
+  const {user} = useUser();
+  const isadmin = user?.isAdmin;
 
   const { info, handleClose, users } = props;
 

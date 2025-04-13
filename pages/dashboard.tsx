@@ -71,6 +71,9 @@ const DashboardPage: NextPage = () => {
     if (deal) {
       setOpenDeal(true);
     }
+    else {
+      closeModal()
+    }
   }, [deal])
 
   const router = useRouter()

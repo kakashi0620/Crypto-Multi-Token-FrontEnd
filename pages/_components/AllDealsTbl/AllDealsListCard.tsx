@@ -4,6 +4,7 @@ import axios from 'axios';
 import { PROXY_URL } from "../../../docs/data";
 import AllDealsTableGrid from './AllDealsTableGrid';
 import AllDealsAddDialog from './AllDealsAddDialog';
+import { useUser } from '../../../hooks/userContext';
 
 const default_dialogInfo = {
   open: false,
@@ -16,8 +17,9 @@ export default function AllDealsListCard(props) {
   const [dlginfo, setDlgData] = React.useState(default_dialogInfo);
   const [data, setData] = React.useState([]);
   const [users] = React.useState([]);
-  const isadmin = JSON.parse(localStorage.getItem("user") as string)?.role === "admin";
-  // const id = JSON.parse(localStorage.getItem("user"))?._id;
+  
+  const {user} = useUser();
+  const isadmin = user?.isAdmin;
 
   React.useEffect(() => {
     axios.post(`${PROXY_URL}/api/vac/getAllDealss`, {},
