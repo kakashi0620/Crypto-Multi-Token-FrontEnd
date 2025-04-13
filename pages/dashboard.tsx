@@ -7,6 +7,7 @@ import RightIcon from "./_components/Icons/Right";
 import DealOverview from "./_components/Dialog/DealOverview";
 import { useUser } from "../hooks/userContext";
 import AdminDashCard from "./_components/AdminDashCard";
+import { getBackend } from "./utils";
 
 
 const poppins = Poppins({
@@ -37,7 +38,7 @@ const DashboardPage: NextPage = () => {
   const [deals, setDeals] = useState<Deal[]>(null);
   useEffect(() => {
     const fetchDealData = async () => {
-      axios.get(`https://invest.wealthy.capital/api/deals/getalldeals`).then(res => {
+      axios.get(`${getBackend()}/api/deals/getalldeals`).then(res => {
         console.log(res.data)
         setDeals(res.data)
       })

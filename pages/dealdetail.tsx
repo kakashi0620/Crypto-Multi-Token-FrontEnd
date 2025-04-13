@@ -78,7 +78,7 @@ const DealDetailPage: NextPage = () => {
     // axios
     //   .post(
     //     // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-    //     `http://localhost:5000/api/users/register`,
+    //     `${getBackend()}/api/users/register`,
     //     newUser
     //   )
     //   .then((res) => {

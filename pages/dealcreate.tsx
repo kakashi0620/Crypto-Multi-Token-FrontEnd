@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useState } from "react";
 import ImpageUpload from './_components/ImageUpload'
+import { getBackend } from "./utils";
 
 
 const poppins = Poppins({
@@ -454,7 +455,7 @@ const CreateDealPage: NextPage = () => {
     axios
       .post(
         // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
-        `http://localhost:5000/api/deals/create`,
+        `${getBackend()}/api/deals/create`,
         formData
       )
       .then((res) => {

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
 import { useRouter } from "next/router";
 import { useUser } from "../hooks/userContext";
+import { getBackend } from "./utils";
 
 
 const poppins = Poppins({
@@ -41,7 +42,7 @@ const ProfilePage: NextPage = () => {
 
 
   const getUserID = async () => {
-    const userCount = await axios.get(`https://invest.wealthy.capital/api/users/getUserCount`);
+    const userCount = await axios.get(`${getBackend()}/api/users/getUserCount`);
 
     let uidStr = "WC";
     console.log(userCount.data)
@@ -57,7 +58,7 @@ const ProfilePage: NextPage = () => {
   }
 
   const getReferralLink = (userID: string) => {
-    return "https://invest.wealthy.capital/signup?ref=" + userID
+    return `${getBackend()}/signup?ref=` + userID
   }
 
   const initValues = async () => {
@@ -143,7 +144,7 @@ const ProfilePage: NextPage = () => {
       axios
         .post(
           // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
-          `http://localhost:5000/api/users/update`,
+          `${getBackend()}/api/users/update`,
           newUser
         )
         .then((res) => {
@@ -163,7 +164,7 @@ const ProfilePage: NextPage = () => {
       axios
         .post(
           // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
-          `http://localhost:5000/api/users/register`,
+          `${getBackend()}/api/users/register`,
           newUser
         )
         .then((res) => {

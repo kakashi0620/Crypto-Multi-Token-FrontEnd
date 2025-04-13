@@ -1,6 +1,10 @@
 import { keyframes } from "@emotion/react";
 import { formatUnits } from "viem";
+import dotenv from 'dotenv'
 import { PresaleConfig } from "../config/presaleConfig";
+
+
+dotenv.config()
 
 export const fadeInUp = keyframes`
   0% {
@@ -62,4 +66,8 @@ export function shortenAddress(address: string | undefined) {
     address.length - 6,
     address.length
   )}`;
+}
+
+export function getBackend() {
+  return process.env.NEXT_PUBLIC_BACKEND_URL;
 }

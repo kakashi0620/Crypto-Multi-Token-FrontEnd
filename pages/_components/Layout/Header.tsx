@@ -20,6 +20,7 @@ import { wagmiConfig, web3Modal } from "../../_app";
 import {
   calculateTokenPrice,
   formatLocalString,
+  getBackend,
   shortenAddress,
 } from "../../utils";
 import DisconnectIcon from "../../_components/Icons/Disconnect";
@@ -65,7 +66,7 @@ export default function Header() {
   const router = useRouter()
   const routeDashboard = async () => {
     axios.post(
-      `http://localhost:5000/api/users/getuser`, { address }
+      `${getBackend()}/api/users/getuser`, { address }
     )
       .then(res => {
         if (res.data === "")
