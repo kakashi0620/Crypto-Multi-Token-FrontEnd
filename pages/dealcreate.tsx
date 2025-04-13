@@ -942,7 +942,7 @@ const CreateDealPage: NextPage = () => {
                   onChange={(e) => setAnswer(e.target.checked)}
                   className="font-semibold w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                 <label htmlFor="tc_answer" className="input-label">
-                  I confirm I have answered all the questions and that I've answered them truthfully.
+                  {"I confirm I have answered all the questions and that I've answered them truthfully."}
                 </label>
               </div>
 
@@ -994,7 +994,7 @@ const CreateDealPage: NextPage = () => {
                   onChange={(e) => setNever(e.target.checked)}
                   className="font-semibold w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                 <label htmlFor="tc_never" className="input-label">
-                  You agree to NEVER mention or leak any details (even partial details) of our private deals with anyone outside our group. You understand we have a zero-tolerance policy and ANY hint of leakage results in permanent ban and blacklisting in not just our group but all our partnering groups. Telegram community and may also result in refunding contributions for pools you contributed in. The leaker's contribution may also be withheld to cover damages he might have caused.
+                  {"You agree to NEVER mention or leak any details (even partial details) of our private deals with anyone outside our group. You understand we have a zero-tolerance policy and ANY hint of leakage results in permanent ban and blacklisting in not just our group but all our partnering groups. Telegram community and may also result in refunding contributions for pools you contributed in. The leaker's contribution may also be withheld to cover damages he might have caused."}
                 </label>
               </div>
             </div>
