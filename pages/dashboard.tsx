@@ -9,6 +9,12 @@ import { useUser } from "../hooks/userContext";
 import AdminDashCard from "./_components/AdminDashCard";
 import { getBackend } from "./utils";
 import { Deal, useDeal } from "../hooks/dealContext";
+import VerticalDivider from "./_components/Icons/VerticalDivider";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
+import Twitter from "./_components/Icons/Twitter";
+import Telegram from "./_components/Icons/Telegram";
+import Youtube from "./_components/Icons/Youtube";
 
 
 const poppins = Poppins({
@@ -23,7 +29,7 @@ const DashboardPage: NextPage = () => {
     return user && user?.isAdmin;
   }
 
-  const {deal, setDeal} = useDeal();
+  const { deal, setDeal } = useDeal();
   const [deals, setDeals] = useState<Deal[]>();
   useEffect(() => {
     setDeal(null)
@@ -58,6 +64,73 @@ const DashboardPage: NextPage = () => {
     // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
     return "-"
   }
+
+  const { t } = useTranslation();
+
+  const topInvestors = [
+    {
+      name: t("sixth_section_tokenomics_presale"),
+      million: "750",
+      percent: "50%",
+    },
+    {
+      name: t("sixth_section_tokenomics_marketing"),
+      million: "225",
+      percent: "15%",
+    },
+    {
+      name: t("sixth_section_tokenomics_exchange_listings"),
+      million: "180",
+      percent: "12%",
+    },
+    {
+      name: t("sixth_section_tokenomics_ecosystem"),
+      million: "150",
+      percent: "10%",
+    },
+    {
+      name: t("sixth_section_tokenomics_team"),
+      million: "135",
+      percent: "9%",
+    },
+    {
+      name: t("sixth_section_tokenomics_rewards"),
+      million: "60",
+      percent: "4%",
+    },
+  ];
+  const topLeaders = [
+    {
+      name: t("sixth_section_tokenomics_presale"),
+      million: "750",
+      percent: "50%",
+    },
+    {
+      name: t("sixth_section_tokenomics_marketing"),
+      million: "225",
+      percent: "15%",
+    },
+    {
+      name: t("sixth_section_tokenomics_exchange_listings"),
+      million: "180",
+      percent: "12%",
+    },
+    {
+      name: t("sixth_section_tokenomics_ecosystem"),
+      million: "150",
+      percent: "10%",
+    },
+    {
+      name: t("sixth_section_tokenomics_team"),
+      million: "135",
+      percent: "9%",
+    },
+    {
+      name: t("sixth_section_tokenomics_rewards"),
+      million: "60",
+      percent: "4%",
+    },
+  ];
 
 
   const [bOpenDeal, setOpenDeal] = useState(false);
@@ -196,6 +269,151 @@ const DashboardPage: NextPage = () => {
               :
               <></>
           }
+
+          {/* Important Update */}
+          <div className="flex flex-col gap-12">
+            <div className="subtitle">
+              Important Update
+            </div>
+
+            <div className="flex flex-col mx-5">
+              <div className="input-input">
+                <textarea
+                  id="test"
+                  name="test"
+                  autoComplete="test"
+                  className="input-text"
+                  value=""
+                />
+              </div>
+            </div>
+
+            <div className="input-part">
+              {/* Our Top Investors */}
+              <div className="flex flex-col gap-4">
+                <div className="subtitle">
+                  Our Top Investors
+                </div>
+
+                <div className="percent-table flex flex-col max-w-[544px] w-full gap-2">
+                  <div className="header row items-center h-[33.76px] md:h-[49.28px]">
+                    <div className="flex text-green items-center gap-2">
+                      {/* <LogoIcon className="w-[31.19px] h-[16.12px] md:w-[45.53px] md:h-[23.52px]" /> */}
+                      <span className="text-[11.2px] md:text-[16.34px]">
+                        {t("sixth_section_tokenomics_coins")}
+                      </span>
+                      <VerticalDivider />
+                    </div>
+                    <span className="w-full text-right">
+                      {t("sixth_section_tokenomics_million")}
+                    </span>
+                    <div className="flex justify-center">
+                      <VerticalDivider />
+                    </div>
+                    <span className="w-full text-center">%</span>
+                  </div>
+
+                  <div className="body flex flex-col font-normal py-4 gap-2 md:gap-4 linear-border-top-left">
+                    {topInvestors.map((item) => (
+                      <div
+                        key={item.name}
+                        className={
+                          "row " +
+                          (item.name === "Exchange Listings" ? "text-[#50EBFF]" : "")
+                        }
+                      >
+                        <span>{item.name}</span>
+                        <span className="w-full text-right">{item.million}</span>
+                        <span />
+                        <span className="text-center">{item.percent}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="header row items-center h-[38.07px] md:h-[55.57px] linear-border-top-left linear-border-bottom-right">
+                    <span>{t("sixth_section_tokenomics_total")}</span>
+                    <span className="w-full text-right">1,500</span>
+                    <span />
+                    <span>100%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Our Top Leaders */}
+              <div className="flex flex-col gap-4">
+                <div className="subtitle">
+                  Our Top Leaders
+                </div>
+
+                <div className="percent-table flex flex-col max-w-[544px] w-full gap-2">
+                  <div className="header row items-center h-[33.76px] md:h-[49.28px]">
+                    <div className="flex text-green items-center gap-2">
+                      {/* <LogoIcon className="w-[31.19px] h-[16.12px] md:w-[45.53px] md:h-[23.52px]" /> */}
+                      <span className="text-[11.2px] md:text-[16.34px]">
+                        {t("sixth_section_tokenomics_coins")}
+                      </span>
+                      <VerticalDivider />
+                    </div>
+                    <span className="w-full text-right">
+                      {t("sixth_section_tokenomics_million")}
+                    </span>
+                    <div className="flex justify-center">
+                      <VerticalDivider />
+                    </div>
+                    <span className="w-full text-center">%</span>
+                  </div>
+
+                  <div className="body flex flex-col font-normal py-4 gap-2 md:gap-4 linear-border-top-left">
+                    {topLeaders.map((item) => (
+                      <div
+                        key={item.name}
+                        className={
+                          "row " +
+                          (item.name === "Exchange Listings" ? "text-[#50EBFF]" : "")
+                        }
+                      >
+                        <span>{item.name}</span>
+                        <span className="w-full text-right">{item.million}</span>
+                        <span />
+                        <span className="text-center">{item.percent}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="header row items-center h-[38.07px] md:h-[55.57px] linear-border-top-left linear-border-bottom-right">
+                    <span>{t("sixth_section_tokenomics_total")}</span>
+                    <span className="w-full text-right">1,500</span>
+                    <span />
+                    <span>100%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex w-full gap-12 items-center justify-center lg:justify-start">
+              <Link
+                href="https://x.com/remittix"
+                className="hover:scale-110 cursor-pointer"
+                target="_blank"
+              >
+                <Twitter />
+              </Link>
+              <Link
+                href={"https://t.me/remittixofficial"}
+                className="hover:scale-110 cursor-pointer"
+                target="_blank"
+              >
+                <Telegram />
+              </Link>
+              <Link
+                href={"https://t.me/remittixofficial"}
+                className="hover:scale-110 cursor-pointer"
+                target="_blank"
+              >
+                <Youtube />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 

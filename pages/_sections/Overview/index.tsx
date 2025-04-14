@@ -33,7 +33,7 @@ export default function Overview() {
                 {/* {t("first_section_welcome")} */}
                 Welcome to our site!
               </div>
-              <div className="flex gap-12 items-center justify-center lg:justify-start">
+              {/* <div className="flex gap-12 items-center justify-center lg:justify-start">
                 <Link
                   href="https://x.com/remittix"
                   className="hover:scale-110 cursor-pointer"
@@ -62,7 +62,7 @@ export default function Overview() {
                 >
                   <Instagram />
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex w-full justify-center mb-10 relative z-10">
