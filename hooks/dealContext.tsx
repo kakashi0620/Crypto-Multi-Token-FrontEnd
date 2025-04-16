@@ -25,8 +25,10 @@ export interface Deal {
     tc_acknowledge: boolean;
     tc_allocation: boolean;
     tc_never: boolean;
-    dateTime: string;
+    livedate: Date;
+    createdate: Date;
     timezone: string;
+    state: string;
 }
 
 interface DealContextType {

@@ -53,7 +53,7 @@ const DealDetailPage: NextPage = () => {
 
               {/* Empty space */}
               <div className="hidden sm:gap-y-2 sm:grid sm:grid-cols-5" />
-              
+
               {/* Logo */}
               <div className="input-container">
                 <label
@@ -290,28 +290,27 @@ const DealDetailPage: NextPage = () => {
               Deal Summary
             </div>
 
-            <div className="input-part">
-
-              {/* Test */}
-              <div className="input-container">
-                <label
-                  htmlFor="test"
-                  className="input-label"
-                >
-                  Test
-                </label>
-                <div className="input-input">
-                  <input
-                    id="test"
-                    name="test"
-                    type="text"
-                    disabled
-                    autoComplete="test"
-                    className="input-text"
-                    value={deal?.test}
-                  />
-                </div>
+            {/* Description */}
+            <div className="flex flex-col mx-5">
+              <label
+                htmlFor="test"
+                className="input-label"
+              >
+                Description
+              </label>
+              <div className="input-input">
+                <textarea
+                  id="test"
+                  name="test"
+                  disabled
+                  autoComplete="test"
+                  className="input-text h-[200px]"
+                  value={deal?.test}
+                />
               </div>
+            </div>
+
+            <div className="input-part">
 
               {/* Website URL */}
               <div className="input-container">

@@ -41,7 +41,7 @@ const CreateDealPage: NextPage = () => {
   const [tc_acknowledge, setAcknowledge] = useState(false);
   const [tc_allocation, setAllocation] = useState(false);
   const [tc_never, setNever] = useState(false);
-  const [dateTime, setDateTime] = useState<string>("");
+  const [livedate, setLiveDate] = useState<string>("");
   const [timezone, setTimeZone] = useState("");
 
   const selectAll = (checked: boolean) => {
@@ -411,10 +411,10 @@ const CreateDealPage: NextPage = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onCreateDeal = async (e: React.FormEvent) => {
+  const onCreateDeal = async (e: React.FormEvent, state: string) => {
     e.preventDefault();
 
-    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vest || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !dateTime || !timezone) {
+    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vest || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !livedate || !timezone) {
       setError('Please fill out all fields and select an image.');
       return;
     }
@@ -448,8 +448,10 @@ const CreateDealPage: NextPage = () => {
     formData.append('tc_acknowledge', Boolean(tc_acknowledge).toString());
     formData.append('tc_allocation', Boolean(tc_allocation).toString());
     formData.append('tc_never', Boolean(tc_never).toString());
-    formData.append('dateTime', dateTime);
+    formData.append('livedate', new Date(livedate as string).toISOString());
+    formData.append('createdate', new Date().toISOString());
     formData.append('timezone', timezone);
+    formData.append('state', state);
 
     // Replace with your own server URL or image hosting API like imgBB
     axios
@@ -477,7 +479,7 @@ const CreateDealPage: NextPage = () => {
           Create new deal
         </h1>
         <div className="flex flex-col gap-12">
-          <form onSubmit={onCreateDeal} className="space-y-6" method="POST">
+          <div className="space-y-6">
 
             {/* Personal Information */}
             <div className="subtitle">
@@ -784,7 +786,7 @@ const CreateDealPage: NextPage = () => {
                   id="test"
                   name="test"
                   autoComplete="test"
-                  className="input-text"
+                  className="input-text h-[200px]"
                   value={test}
                   onChange={(e) => {
                     setTest(e.target.value);
@@ -1021,9 +1023,9 @@ const CreateDealPage: NextPage = () => {
                     type="datetime-local"
                     autoComplete="datetime"
                     className="input-text"
-                    value={dateTime}
+                    value={livedate}
                     onChange={(e) => {
-                      setDateTime(e.target.value);
+                      setLiveDate(e.target.value);
                     }}
                   />
                 </div>
@@ -1056,16 +1058,25 @@ const CreateDealPage: NextPage = () => {
               </div>
             </div>
 
-            <div>
+            <div className="flex w-full justify-center space-x-10">
               <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                type="button"
+                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                onClick={(e) => onCreateDeal(e, 'Draft')}
                 disabled={uploading}
               >
-                {uploading ? 'Uploading...' : 'Create'}
+                {uploading ? 'Uploading...' : 'Draft'}
+              </button>
+              <button
+                type="button"
+                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                onClick={(e) => onCreateDeal(e, 'Upcoming')}
+                disabled={uploading}
+              >
+                {uploading ? 'Uploading...' : 'Publish'}
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

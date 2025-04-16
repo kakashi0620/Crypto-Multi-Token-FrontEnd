@@ -138,7 +138,7 @@ const ContributePage: NextPage = () => {
                   </div>
 
                   {/* Progress bar */}
-                  <div className="flex flex-col gap-y-2">
+                  <div className="flex flex-col gap-y-2 mx-5">
                     <div className="bg-[#091F2F] h-[22px] w-full relative flex items-center">
                       <div
                         className={`progress-bar w-[0%] max-w-full transition-all duration-300 ease-in-out`}
@@ -291,7 +291,7 @@ const ContributePage: NextPage = () => {
               </div>
 
               {/* T & C */}
-              <div className="flex flex-col gap-y-2">
+              <div className="flex flex-col gap-y-2 mx-5">
                 <label
                   htmlFor="terms"
                   className="input-label"
