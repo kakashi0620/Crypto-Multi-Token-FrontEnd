@@ -7,6 +7,9 @@ import Buy from "./_components/Dialog/Buy";
 import { useDeal } from "../hooks/dealContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useUser } from "../hooks/userContext";
+import axios from "axios";
+import { getBackend } from "./utils";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,9 +40,30 @@ const ContributePage: NextPage = () => {
   const [bOpenDeal, setOpenDeal] = useState(false);
 
   const router = useRouter()
+  const { user } = useUser()
   const purchaseToken = () => {
+    const newInvest =
+    {
+      investor: user?.userName,
+      dealname: deal?.name,
+      amount: investAmount
+    }
+
+    axios
+      .post(
+        // `${process.env.REACT_APP_BACKEND_URL}/api/users/register`,
+        `${getBackend()}/api/invests/invest`,
+        newInvest
+      )
+      .then((res) => {
+        toast.success(`🎉 ${newInvest.investor} invested ${newInvest.amount} to ${newInvest.dealname}. 🎉`);
+        router.push('/portfolio')
+      })
+      .catch((error) => {
+        toast.error(error.response ? error.response.data : error.message)
+      });
+
     setOpenDeal(false)
-    router.push("/portfolio")
   }
 
   useEffect(() => {
@@ -245,13 +269,13 @@ const ContributePage: NextPage = () => {
                   </div>
                 </div>
 
-                {/* Invest Amount Box */}
+                {/* Invest Amount */}
                 <div className="input-container">
                   <label
                     htmlFor="investAmount"
                     className="input-label"
                   >
-                    Invest Amount Box
+                    Invest Amount
                   </label>
                   <div className="input-input">
                     <input
