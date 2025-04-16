@@ -1,3 +1,5 @@
+import axios from "axios";
+import toast from "react-hot-toast";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
@@ -5,6 +7,8 @@ import { AgGridReact } from 'ag-grid-react';
 import type { ColDef } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import Schedule from "./_components/Dialog/Schedule";
+import { getBackend } from "./utils";
+import { useUser } from "../hooks/userContext";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -25,43 +29,50 @@ const PortfolioPage: NextPage = () => {
     { field: "NextUnlock", flex: 1, filter: 'agTextColumnFilter' },
   ]);
 
+  const { user } = useUser()
+  const [dealCount, setDealCount] = useState(0);
+  const [totalInvest, setTotalInvest] = useState(0);
+  const fetchInvestData = async () => {
+    try {
+      const investData = await axios.post(`${getBackend()}/api/invests/getbyuser`, { userName: user?.userName })
+      setDealCount(investData.data.length);
+
+      let total = 0;
+      let investArray: any[] = [];
+
+      const promises = investData.data.map(async (invest: any) => {
+        try {
+          const dealData = await axios.post(`${getBackend()}/api/deals/getdeal`, { name: invest.dealname })
+          const realPaidAmount = invest.amount * (100 + dealData.data.fee) / 100;
+
+          investArray.push({
+            "Deal": invest.dealname,
+            "Status": dealData.data.state,
+            "Allocation": `${realPaidAmount} / ${invest.amount}`,
+            "Token Received": `${invest.amount / dealData.data.tokenprice}`,
+            "Value Locked": "",
+            "NextUnlock": ""
+          });
+
+          total += realPaidAmount;
+
+        } catch (e) {
+          toast.error("Error: Can not fetch deal data!");
+        }
+      });
+
+      await Promise.all(promises);
+      
+      setTotalInvest(total);
+      setRowData(investArray)
+    }
+    catch (e) {
+      toast.error("Error: Can not fetch invest data!")
+    }
+  }
+
   useEffect(() => {
-    setRowData(
-      [
-        {
-          "Deal": "Lakia AI",
-          "Status": "Distributing",
-          "Allocation": "$500.00\n$437.50",
-          "Token Received": "45,152.69\n93,085 LKI",
-          "Value Locked": "$268.66\n🔒 47,932.41 LKI",
-          "NextUnlock": "06.Mar 2025 🔓\n93,085 LKI",
-        },
-        {
-          "Deal": "Piena finance",
-          "Status": "Distributing",
-          "Allocation": "$500.00\n$450.00",
-          "Token Received": "8,901.52\n34,090.91 PLENA",
-          "Value Locked": "$74.88\n🔒 25,189.39 PLENA",
-          "NextUnlock": "22.Mar 2025 🔓\n3,598.48 PLENA",
-        },
-        {
-          "Deal": "Hybrid",
-          "Status": "Awaiting TGE",
-          "Allocation": "$0.00\n$0.00",
-          "Token Received": "Not started\n0 TOKENS",
-          "Value Locked": "Token value not available\n🔒 0 TOKENS",
-          "NextUnlock": "Not schedule set 🔓\nTGE",
-        },
-        {
-          "Deal": "Tars AI",
-          "Status": "completed",
-          "Allocation": "$500.00\n$450.00",
-          "Token Received": "34,615.38\n34,615.38 USDT",
-          "Value Locked": "Token value not available\n0 B-USDT",
-          "NextUnlock": "",
-        },
-      ]
-    )
+    fetchInvestData();
   }, []);
 
   const [defaultColDef, setDefaultColDef] = useState({
@@ -101,7 +112,7 @@ const PortfolioPage: NextPage = () => {
                 {"My Deals"}
               </h1>
               <h1>
-                {"4"}
+                {dealCount}
               </h1>
             </div>
 
@@ -110,7 +121,7 @@ const PortfolioPage: NextPage = () => {
                 {"My Investment"}
               </h1>
               <h1>
-                {"$1000"}
+                {totalInvest}
               </h1>
             </div>
           </div>

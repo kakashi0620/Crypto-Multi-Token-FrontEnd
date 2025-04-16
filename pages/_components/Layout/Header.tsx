@@ -72,10 +72,11 @@ export default function Header() {
         if (res.data === "")
           router.push('/profile')
         else {
+          console.log('setUser(res.data)', res.data)
           setUser(res.data)
           router.push('/dashboard')
         }
-          
+
       })
       .catch(e => {
         console.log('user get error =>', e)
@@ -113,6 +114,91 @@ export default function Header() {
           >
             Home
           </Link>
+          <Link
+            href="/dashboard"
+            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+          >
+            Dashboard
+          </Link>
+          {
+            user ?
+              <>
+                {
+                  user.isAdmin ?
+                    <>
+                      <Link
+                        href="/"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        All members
+                      </Link>
+                      <Link
+                        href="/"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        All investors
+                      </Link>
+                      <Link
+                        href="/dealcreate"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Create New Deal
+                      </Link>
+                      <Link
+                        href="/alldeal"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        All Deals
+                      </Link>
+                      <Link
+                        href="/"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Distribution
+                      </Link>
+                      <Link
+                        href="/referral"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Referral
+                      </Link>
+                    </> :
+                    <>
+                      <Link
+                        href="/portfolio"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Portfolios
+                      </Link>
+                      <Link
+                        href="/"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Withdraw
+                      </Link>
+                      <Link
+                        href="/referral"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        Referral
+                      </Link>
+                      <Link
+                        href="/"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        KYC
+                      </Link>
+                      <Link
+                        href="/userranking"
+                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                      >
+                        User Ranking
+                      </Link>
+                    </>
+                }
+              </> :
+              <></>
+          }
           {
             isConnected ?
               <Link
@@ -123,43 +209,6 @@ export default function Header() {
               </Link> :
               <></>
           }
-
-          <Link
-            href="/dashboard"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/referral"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            Referral
-          </Link>
-          <Link
-            href="/memberinfo"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            MemberInfo
-          </Link>
-          <Link
-            href="/alldeals"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            All Deals
-          </Link>
-          <Link
-            href="/everydeal"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            Every Deal
-          </Link>
-          <Link
-            href="/userranking"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
-          >
-            User Ranking
-          </Link>
         </div>
 
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
