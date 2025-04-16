@@ -1,85 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Modal from "./Modal";
-import { useRouter } from "next/router";
+import { useDeal } from "../../../hooks/dealContext";
 
-const Buy = ({ isOpen, onConfirm, onClose }) => {
+const Buy = ({ investAmount, isOpen, onConfirm, onClose }) => {
 
-  const [amountUSD, setAmountUSD] = useState(0)
-  const [amountBNB, setAmountBNB] = useState(0)
-  const [amountToken, setAmountToken] = useState(0)
-
-  useEffect(() => {
-    setAmountBNB(amountUSD)
-    setAmountToken(amountUSD)
-  }, [amountUSD])
-
-  const router = useRouter();
-  const onBuyNow = (e) => {
-    router.push("/portfolio")
-  }
+  const {deal} = useDeal()
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} title="Buy">
-      <div className="flex flex-col gap-y-6 p-1 md:p-2 text-black">
+      <div className="flex flex-col gap-y-6 p-1 text-black">
         <div className="flex flex-col gap-y-1">
-          <p>Enter amount in USD</p>
+          <p>Invest amount</p>
           <input
             id="amountUSD"
             name="amountUSD"
             type="text"
             autoComplete="amountUSD"
-            required
+            disabled
             className="block bg-white w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             placeholder="Enter Amount"
-            value={amountUSD}
-            onChange={(e) => {
-              setAmountUSD(Number(e.target.value));
-            }}
+            value={investAmount}
           />
         </div>
 
         <div className="flex flex-col gap-y-1">
-          <p>Amount of <span className="text-green">BNB</span> you pay</p>
+          <p>Pay amount</p>
           <input
             id="amountBNB"
             name="amountBNB"
             type="text"
             autoComplete="amountBNB"
-            required
+            disabled
             className="block bg-white w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             placeholder="0"
-            readOnly
-            value={amountBNB}
-            onChange={(e) => {
-              setAmountBNB(Number(e.target.value));
-            }}
+            value={investAmount * (100 + Number(deal?.fee)) / 100}
           />
         </div>
 
         <div className="flex flex-col gap-y-1">
-          <p>Amount of <span className="text-green">Xxx</span> you receive</p>
+          <p>Amount of <span className="text-green">{deal?.name}</span></p>
           <input
             id="amountToken"
             name="amountToken"
             type="text"
             autoComplete="amountToken"
-            required
+            disabled
             className="block bg-white w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6"
             placeholder="0"
-            readOnly
-            value={amountToken}
-            onChange={(e) => {
-              setAmountToken(Number(e.target.value));
-            }}
+            value={investAmount / Number(deal?.tokenprice)}
           />
         </div>
 
         <button
           type="submit"
           className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-          onClick={(e) => onBuyNow(e)}
+          onClick={() => onConfirm()}
         >
-          Buy Now
+          Purchase
         </button>
       </div>
 

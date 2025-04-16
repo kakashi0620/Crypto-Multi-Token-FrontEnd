@@ -1,34 +1,46 @@
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useRef, useState } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
+import { formatUnits } from 'viem';
 import Buy from "./_components/Dialog/Buy";
+import { useDeal } from "../hooks/dealContext";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"],
 });
 
+const USDT_BSC_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
+
 const ContributePage: NextPage = () => {
 
   const { address } = useAccount();
+  const { data, isLoading, isError } = useBalance({
+    address,
+    token: USDT_BSC_ADDRESS
+  });
 
-  const [name, setName] = useState("");
+  const { deal } = useDeal()
 
   const progressRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [toSellAmount, setToSellAmount] = useState(10000);
   const [soldAmount, setSoldAmount] = useState(2630);
 
-  const [claimWallet, setClaimWallet] = useState("");
-  const [limitMin, setLimitMin] = useState(0);
-  const [limitMax, setLimitMax] = useState(0);
-  const [balance, setBalance] = useState(0);
+  const [claimWallet, setClaimWallet] = useState<string>(address as string);
   const [investAmount, setInvestAmount] = useState(0);
-  const [receivedToken, setReceivedToken] = useState(0);
-  const [terms, setTerms] = useState("");
+  const [tokenAmount, setTokenAmount] = useState(0);
 
   const [bOpenDeal, setOpenDeal] = useState(false);
+
+  const router = useRouter()
+  const purchaseToken = () => {
+    setOpenDeal(false)
+    router.push("/portfolio")
+  }
 
   useEffect(() => {
     if (1) {
@@ -52,6 +64,39 @@ const ContributePage: NextPage = () => {
     ).toFixed(2)}%`;
   }, [progress, progressRef]);
 
+  useEffect(() => {
+    setTokenAmount(investAmount / Number(deal?.tokenprice))
+  }, [investAmount])
+
+  const onPurchase = () => {
+    if (investAmount < Number(deal?.investmin) || Number(deal?.investmax) < investAmount) {
+      toast.error('Invest amount should be in limit range. Please consider Limit field values.')
+      return;
+    }
+
+    setOpenDeal(true)
+  }
+
+  const getTCString = () => {
+    let tc: string = "";
+    if (deal?.tc_pulltrust)
+      tc += "This Pool is based on Trust."
+    if (deal?.tc_pinmsg)
+      tc += "\nYou agree to regularly and carefully read the announcement channel and pinned messgae, and reread it again every tme the pinned message is updated. I agree to respect and follow all the rules."
+    if (deal?.tc_answer)
+      tc += "\nI confirm I have answered all the questions and that I've answered them truthfully."
+    if (deal?.tc_responsible)
+      tc += "\nYou agree to the Fact that we will not in any way, legally or Otherwise, Be held responsible for your investment. You have done your own research."
+    if (deal?.tc_acknowledge)
+      tc += "\nYou acknowledge and agree that this is not an investment service, legal service, or a finanial service of an kind."
+    if (deal?.tc_allocation)
+      tc += "\nAll allocation will be deducted a 9% Fee which constitutes Govt taxes, Operational costs and Gas fees."
+    if (deal?.tc_never)
+      tc += "\nYou agree to NEVER mention or leak any details (even partial details) of our private deals with anyone outside our group. You understand we have a zero-tolerance policy and ANY hint of leakage results in permanent ban and blacklisting in not just our group but all our partnering groups. Telegram community and may also result in refunding contributions for pools you contributed in. The leaker's contribution may also be withheld to cover damages he might have caused."
+
+    return tc;
+  }
+
   return (
     <>
       <div className={`bg-term ${poppins.className}`}>
@@ -63,13 +108,13 @@ const ContributePage: NextPage = () => {
             <div className="space-y-6">
 
               {/* Logo, name, progress */}
-              <div className="input-part h-full items-center">
+              <div className="input-container h-full items-center">
 
-                <div className="flex w-full justify-center">
-                  <img src="/images/blog/blog-pic1.png" alt="Logo Image" />
+                <div className="flex w-full justify-center sm:col-span-2">
+                  <img src={deal?.logo} alt="Logo Image" />
                 </div>
 
-                <div className="flex flex-col gap-y-4">
+                <div className="flex flex-col gap-y-4 sm:col-start-3 sm:col-span-3">
 
                   {/* Deal name */}
                   <div className="input-container">
@@ -85,12 +130,9 @@ const ContributePage: NextPage = () => {
                         name="name"
                         type="text"
                         autoComplete="name"
-                        required
+                        disabled
                         className="input-text"
-                        value={name}
-                        onChange={(e) => {
-                          setName(e.target.value);
-                        }}
+                        value={deal?.name}
                       />
                     </div>
                   </div>
@@ -160,50 +202,25 @@ const ContributePage: NextPage = () => {
                   </div>
                 </div>
 
-                {/* Deal's limit */}
-                <div className="input-part">
-                  <div className="input-container">
-                    <label
-                      htmlFor="limitMin"
-                      className="input-label"
-                    >
-                      Min
-                    </label>
-                    <div className="input-input">
-                      <input
-                        id="limitMin"
-                        name="limitMin"
-                        type="text"
-                        autoComplete="limitMin"
-                        className="input-text"
-                        value={limitMin}
-                        onChange={(e) => {
-                          setLimitMin(Number(e.target.value));
-                        }}
-                      />
-                    </div>
-                  </div>
+                {/* Deal's limit (min / max) */}
 
-                  <div className="input-container">
-                    <label
-                      htmlFor="limitMax"
-                      className="input-label"
-                    >
-                      Max
-                    </label>
-                    <div className="input-input">
-                      <input
-                        id="limitMax"
-                        name="limitMax"
-                        type="text"
-                        autoComplete="limitMax"
-                        className="input-text"
-                        value={limitMax}
-                        onChange={(e) => {
-                          setLimitMax(Number(e.target.value));
-                        }}
-                      />
-                    </div>
+                <div className="input-container">
+                  <label
+                    htmlFor="limit"
+                    className="input-label"
+                  >
+                    Limit
+                  </label>
+                  <div className="input-input">
+                    <input
+                      id="limit"
+                      name="limit"
+                      type="text"
+                      autoComplete="limit"
+                      className="input-text"
+                      value={"Min: " + deal?.investmin + "  Max: " + deal?.investmax}
+                      disabled
+                    />
                   </div>
                 </div>
 
@@ -220,12 +237,10 @@ const ContributePage: NextPage = () => {
                       id="balance"
                       name="balance"
                       type="text"
+                      disabled
                       autoComplete="balance"
                       className="input-text"
-                      value={balance}
-                      onChange={(e) => {
-                        setBalance(Number(e.target.value));
-                      }}
+                      value={isError ? "Error getting balance." : isLoading ? "Loading balance..." : formatUnits(data?.value as bigint, data?.decimals as number)}
                     />
                   </div>
                 </div>
@@ -266,12 +281,10 @@ const ContributePage: NextPage = () => {
                       id="receivedToken"
                       name="receivedToken"
                       type="text"
+                      disabled
                       autoComplete="receivedToken"
                       className="input-text"
-                      value={receivedToken}
-                      onChange={(e) => {
-                        setReceivedToken(Number(e.target.value));
-                      }}
+                      value={tokenAmount}
                     />
                   </div>
                 </div>
@@ -286,16 +299,13 @@ const ContributePage: NextPage = () => {
                   T & C
                 </label>
                 <div className="input-input">
-                  <input
-                    id="terms"
-                    name="terms"
-                    type="text"
-                    autoComplete="terms"
-                    className="input-text"
-                    value={terms}
-                    onChange={(e) => {
-                      setTerms(e.target.value);
-                    }}
+                  <textarea
+                    id="test"
+                    name="test"
+                    disabled
+                    autoComplete="test"
+                    className="input-text h-[200px]"
+                    value={getTCString()}
                   />
                 </div>
               </div>
@@ -304,17 +314,17 @@ const ContributePage: NextPage = () => {
                 <button
                   type="button"
                   className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-                  onClick={(e) => setOpenDeal(true)}
+                  onClick={() => onPurchase()}
                 >
-                  Contribute
+                  Purchase
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <Buy isOpen={bOpenDeal} onConfirm={() => setOpenDeal(false)} onClose={() => setOpenDeal(false)} />
+
+      <Buy investAmount={investAmount} isOpen={bOpenDeal} onConfirm={() => purchaseToken()} onClose={() => setOpenDeal(false)} />
     </>
   );
 };
