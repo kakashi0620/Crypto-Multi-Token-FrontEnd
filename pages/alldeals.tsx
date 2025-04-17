@@ -8,6 +8,10 @@ import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRe
 
 import { Deal, useDeal } from "../hooks/dealContext";
 import { getBackend } from './utils';
+import { IDealGridRowData } from '../interface/DealGridRowData';
+import DealNameCell from './_components/GridTable/DealNameCell';
+import DealProgressCell from './_components/GridTable/DealProgressCell';
+import DealActionCell from './_components/GridTable/DealActionCell';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -19,18 +23,18 @@ const poppins = Poppins({
 
 const AllDeals: NextPage = () => {
 
-  const [rowData, setRowData] = useState<any[]>([]);
+  const [rowData, setRowData] = useState<IDealGridRowData[]>([]);
 
-  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
-    { field: "SN", flex: 1, filter: 'agTextColumnFilter' },
-    { field: "Deal Detail", flex: 3, filter: true },
-    { field: "Status", flex: 2, filter: true },
-    { field: "Deal Time", flex: 3, filter: true },
-    { field: "Amount Raised", flex: 3, filter: true },
-    { field: "Distribution", flex: 3, filter: true },
-    { field: "Progress", flex: 2, filter: true },
-    { field: "Action", flex: 2, filter: true }
-  ]);
+  const columnDefs: ColDef[] =[
+    { headerName: "SN", field:'no', flex: 1 },
+    { headerName: "Deal Detail", field:'name', cellRenderer: DealNameCell, flex: 3 },
+    { headerName: "Status", field:'status', flex: 2, filter: 'agTextColumnFilter' },
+    { headerName: "Deal Time", field:'time', flex: 3, filter: 'agDateColumnFilter' },
+    { headerName: "Amount Raised", field:'amount', flex: 3 },
+    { headerName: "Distribution", field:'distribution', flex: 3 },
+    { headerName: "Progress", field:'progress', flex: 2, cellRenderer: DealProgressCell },
+    { headerName: "Action", field:'action', flex: 2, cellRenderer: DealActionCell }
+  ];
 
   const { deal, setDeal } = useDeal();
   const [deals, setDeals] = useState<Deal[]>();
@@ -56,18 +60,21 @@ const AllDeals: NextPage = () => {
   }
 
   useEffect(() => {
-    let investArray: any[] = [];
+    let investArray: IDealGridRowData[] = [];
     deals?.map((deal, index) => {
-      console.log(`${index} deal data got`)
+      
+      const liveDate = deal.livedate ? new Date(deal.livedate) : null; // Ensure it's a valid Date object or null
+      const timeString = liveDate ? liveDate.toISOString() : '';
+
       investArray.push({
-        "SN": index + 1,
-        "Deal Detail": deal.name,
-        "Status": deal.state,
-        "Deal Time": deal.livedate,
-        "Amount Raised": "",
-        "Distribution": "",
-        "Progress": "",
-        "Action": ""
+        no: index + 1,
+        name: deal.name,
+        logo: '/images/metamask.png', //deal.logo,
+        status: deal.state,
+        time: timeString,
+        amount: "",
+        distribution: "",
+        progress: (index + 1) * 10
       });
     })
 
@@ -142,6 +149,7 @@ const AllDeals: NextPage = () => {
             <AgGridReact
               rowData={rowData}
               columnDefs={columnDefs}
+              domLayout="autoHeight"
               defaultColDef={defaultColDef}
               rowSelection={rowSelection as RowSelectionOptions}
               gridOptions={gridOption} />
