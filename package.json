@@ -25,6 +25,7 @@
     "ag-grid-community": "^33.0.3",
     "ag-grid-enterprise": "^33.0.3",
     "ag-grid-react": "^33.2.1",
+    "amcharts": "^3.14.5",
     "axios": "^1.8.4",
     "clipboard-copy": "^4.0.1",
     "dotenv": "^16.5.0",

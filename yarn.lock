@@ -2165,6 +2165,11 @@ ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+amcharts@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/amcharts/-/amcharts-3.14.5.tgz#0c83e6aad505ffc20d528d7823e03fa41335c0ef"
+  integrity sha512-kkRTeI6x3KBdZKk0VbFQ8zzEcLr2U64POw70UM94BHdPgx0NgbE2jGSsj4cUEdXu39WNH0qkdoSDiAKfwztNjA==
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"

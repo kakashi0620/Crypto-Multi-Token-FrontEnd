@@ -145,7 +145,7 @@ export default function Header() {
                         Create New Deal
                       </Link>
                       <Link
-                        href="/alldeal"
+                        href="/alldeals"
                         className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
                       >
                         All Deals
