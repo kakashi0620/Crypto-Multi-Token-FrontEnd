@@ -7,7 +7,7 @@ const DealNameCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data })
   if (!data) return null;
 
   return (
-    <div className="flex items-center gap-2 h-full">
+    <div className="flex items-center gap-2">
       <img src={data.logo} alt={data.name} className="w-6 h-6 rounded-full" />
       <span className="text-sm font-medium">{data.name}</span>
     </div>

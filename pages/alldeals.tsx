@@ -21,19 +21,34 @@ const poppins = Poppins({
   weight: ["200", "400", "600", "800"],
 });
 
+interface SingleDealSummary {
+  dealname: string;
+  investorCount: number;
+  totalAmount: number;
+}
+
 const AllDeals: NextPage = () => {
 
   const [rowData, setRowData] = useState<IDealGridRowData[]>([]);
 
-  const columnDefs: ColDef[] =[
-    { headerName: "SN", field:'no', flex: 1 },
-    { headerName: "Deal Detail", field:'name', cellRenderer: DealNameCell, flex: 3 },
-    { headerName: "Status", field:'status', flex: 2, filter: 'agTextColumnFilter' },
-    { headerName: "Deal Time", field:'time', flex: 3, filter: 'agDateColumnFilter' },
-    { headerName: "Amount Raised", field:'amount', flex: 3 },
-    { headerName: "Distribution", field:'distribution', flex: 3 },
-    { headerName: "Progress", field:'progress', flex: 2, cellRenderer: DealProgressCell },
-    { headerName: "Action", field:'action', flex: 2, cellRenderer: DealActionCell }
+  const columnDefs: ColDef[] = [
+    { headerName: "SN", field: 'no', flex: 1 },
+    { headerName: "Deal Detail", field: 'name', cellRenderer: DealNameCell, flex: 2 },
+    { headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter' },
+    { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter' },
+    { headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
+      cellRenderer: (params: any) => {
+        const [line1, line2] = params.value?.split('\n') || ['', ''];
+        return (
+          <div className="whitespace-pre-wrap">
+            <p>{line1}</p>
+            <p>{line2}</p>
+          </div>
+        );
+      } },
+    { headerName: "Distribution", field: 'distribution', flex: 3 },
+    { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
+    { headerName: "Action", field: 'action', flex: 3, cellRenderer: DealActionCell }
   ];
 
   const { deal, setDeal } = useDeal();
@@ -60,25 +75,47 @@ const AllDeals: NextPage = () => {
   }
 
   useEffect(() => {
-    let investArray: IDealGridRowData[] = [];
-    deals?.map((deal, index) => {
-      
-      const liveDate = deal.livedate ? new Date(deal.livedate) : null; // Ensure it's a valid Date object or null
-      const timeString = liveDate ? liveDate.toISOString() : '';
+    if (deals) {
+      const fillTable = async () => {
+        let investArray: any[] = [];
 
-      investArray.push({
-        no: index + 1,
-        name: deal.name,
-        logo: '/images/metamask.png', //deal.logo,
-        status: deal.state,
-        time: timeString,
-        amount: "",
-        distribution: "",
-        progress: (index + 1) * 10
-      });
-    })
+        const promises = deals.map(async (deal, index) => {
 
-    setRowData(investArray)
+          const liveDate = deal.livedate ? new Date(deal.livedate) : null; // Ensure it's a valid Date object or null
+          const timeString = liveDate ? liveDate.toISOString() : '';
+
+          let investorCount = 0;
+          let progress = 0;
+
+          try {
+            const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
+            console.log('sumarize:', res.data);
+            progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
+            investorCount = res.data.investorCount
+          }
+          catch (e) {
+            console.log('invest summary failed:', e)
+          }
+
+          investArray.push({
+            no: index + 1,
+            name: deal.name,
+            logo: '/images/metamask.png', //deal.logo,
+            status: deal.state,
+            time: timeString,
+            amount: `$${deal.fundrasing}/$${deal.fdv}\n${investorCount} Investors`,
+            distribution: `${progress}%`,
+            progress: progress
+          });
+        })
+
+        await Promise.all(promises);
+
+        setRowData(investArray)
+      }
+
+      fillTable();
+    }
   }, [deals])
 
   const [dealState, setDealState] = useState("All");
@@ -145,7 +182,7 @@ const AllDeals: NextPage = () => {
 
         <div className="flex w-full">
 
-          <div style={{ width: "100%", height: "30vh" }}>
+          <div style={{ width: "100%", height: "60vh" }}>
             <AgGridReact
               rowData={rowData}
               columnDefs={columnDefs}

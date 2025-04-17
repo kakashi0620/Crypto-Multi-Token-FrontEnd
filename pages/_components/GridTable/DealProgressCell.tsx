@@ -6,11 +6,13 @@ const DealProgressCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ dat
   if (!data) return null;
 
   return (
-    <div className="w-full bg-gray-200 rounded-full h-2.5">
-      <div
-        className="bg-green-500 h-2.5 rounded-full"
-        style={{ width: `${data.progress}%` }}
-      />
+    <div className='flex h-full items-center'>
+      <div className="w-full bg-gray rounded-full h-2.5">
+        <div
+          className="bg-green h-2.5 rounded-full"
+          style={{ width: `${data.progress}%` }}
+        />
+      </div>
     </div>
   );
 };
