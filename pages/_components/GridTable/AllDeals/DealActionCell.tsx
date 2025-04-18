@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { IDealGridRowData } from '../../../interface/DealGridRowData';
-import { getBackend } from '../../utils';
+import { IDealGridRowData } from '../../../../interface/DealGridRowData';
+import { getBackend } from '../../../utils';
 
 
 const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data }) => {

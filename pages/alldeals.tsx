@@ -9,9 +9,9 @@ import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRe
 import { Deal, useDeal } from "../hooks/dealContext";
 import { getBackend } from './utils';
 import { IDealGridRowData } from '../interface/DealGridRowData';
-import DealNameCell from './_components/GridTable/DealNameCell';
-import DealProgressCell from './_components/GridTable/DealProgressCell';
-import DealActionCell from './_components/GridTable/DealActionCell';
+import DealNameCell from './_components/GridTable/AllDeals/DealNameCell';
+import DealProgressCell from './_components/GridTable/AllDeals/DealProgressCell';
+import DealActionCell from './_components/GridTable/AllDeals/DealActionCell';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -179,9 +179,7 @@ const AllDeals: NextPage = () => {
           </select>
         </div>
 
-
         <div className="flex w-full">
-
           <div style={{ width: "100%", height: "60vh" }}>
             <AgGridReact
               rowData={rowData}

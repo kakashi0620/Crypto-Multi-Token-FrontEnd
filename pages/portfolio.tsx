@@ -9,6 +9,7 @@ import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRe
 import Schedule from "./_components/Dialog/Schedule";
 import { getBackend } from "./utils";
 import { useUser } from "../hooks/userContext";
+import PortfolioTable, { IPortfolioRowData } from "./_components/GridTable/Portfolio/PortfolioTable";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -19,7 +20,7 @@ const poppins = Poppins({
 
 const PortfolioPage: NextPage = () => {
 
-  const [rowData, setRowData] = useState<any[]>([]);
+  const [rowData, setRowData] = useState<IPortfolioRowData[]>([]);
   const [columnDefs, setColumnDefs] = useState<ColDef[]>([
     { field: "Deal", flex: 1 },
     { field: "Status", flex: 1 },
@@ -38,20 +39,23 @@ const PortfolioPage: NextPage = () => {
       setDealCount(investData.data.length);
 
       let total = 0;
-      let investArray: any[] = [];
+      let investArray: IPortfolioRowData[] = [];
 
       const promises = investData.data.map(async (invest: any) => {
         try {
           const dealData = await axios.post(`${getBackend()}/api/deals/getdeal`, { name: invest.dealname })
           const realPaidAmount = invest.amount * (100 + dealData.data.fee) / 100;
 
+          const tokenReceived = invest.amount / dealData.data.tokenprice;
+          const tokenReceiving = dealData.data.fundrasing / dealData.data.tokenprice;
+          const percent = 100 * tokenReceived / tokenReceiving;
           investArray.push({
-            "Deal": invest.dealname,
-            "Status": dealData.data.state,
-            "Allocation": `${realPaidAmount} / ${invest.amount}`,
-            "Token Received": `${invest.amount / dealData.data.tokenprice}`,
-            "Value Locked": "",
-            "NextUnlock": ""
+            deal: { logo: '/images/metamask.png', name: invest.dealname },
+            status: dealData.data.state,
+            allocation: { pay: realPaidAmount.toString(), invest: invest.amount },
+            tokensReceived: { percent: percent, received: tokenReceived.toString(), receiving: tokenReceiving.toString() },
+            valueLocked: { free: tokenReceiving.toString(), locked: dealData.data.fdv },
+            nextUnlock: { date: '2025-05-01', amount: tokenReceiving.toString() },
           });
 
           total += realPaidAmount;
@@ -127,14 +131,8 @@ const PortfolioPage: NextPage = () => {
           </div>
 
           <div className="flex w-full">
-
-            <div style={{ width: "100%", height: "40vh" }}>
-              <AgGridReact
-                rowData={rowData}
-                columnDefs={columnDefs}
-                defaultColDef={defaultColDef}
-                onRowClicked={onRowClicked}
-              />
+            <div className="aaa_123" style={{ width: "100%", height: "40vh" }}>
+              <PortfolioTable rowData={rowData} />
             </div>
           </div>
         </div>
