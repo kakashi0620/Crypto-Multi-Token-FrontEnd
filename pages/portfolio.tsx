@@ -63,13 +63,14 @@ const PortfolioPage: NextPage = () => {
           const tokenReceived = invest.amount / dealData.data.tokenprice;
           const tokenReceiving = dealData.data.fundrasing / dealData.data.tokenprice;
           const percent = 100 * tokenReceived / tokenReceiving;
+          const symbol = invest.dealname;
           investArray.push({
             deal: { logo: '/images/metamask.png', name: invest.dealname },
             status: dealData.data.state,
-            allocation: { pay: realPaidAmount.toString(), invest: invest.amount },
-            tokensReceived: { percent: percent, received: tokenReceived.toString(), receiving: tokenReceiving.toString() },
-            valueLocked: { free: tokenReceiving.toString(), locked: dealData.data.fdv },
-            nextUnlock: { date: '2025-05-01', amount: tokenReceiving.toLocaleString() + " " + invest.dealname },
+            allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(invest.amount).toLocaleString() },
+            tokensReceived: { percent: percent, received: tokenReceived.toLocaleString(), receiving: tokenReceiving.toLocaleString() + symbol },
+            valueLocked: { free: '$' + Number(invest.amount).toLocaleString(), locked: '🔒 ' + (tokenReceiving - tokenReceived).toLocaleString() + symbol },
+            nextUnlock: { date: '2025-05-01 🔓', amount: tokenReceiving.toLocaleString() + symbol },
           });
 
           total += realPaidAmount;
@@ -157,7 +158,7 @@ const PortfolioPage: NextPage = () => {
       headerName: 'Next Unlock',
       field: 'nextUnlock',
       flex: 1,
-      cellRenderer: NextValueCell,
+      cellRenderer: DualValueCell,
     },
   ];
 
@@ -166,7 +167,7 @@ const PortfolioPage: NextPage = () => {
       <div className={`bg-term ${poppins.className}`}>
         <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1480px]">
           <div className="flex flex-col gap-y-4 lg:grid lg:grid-cols-2 lg:gap-x-12 text-3xl md:text-4xl font-bold text-white text-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-y-3">
               <h1>
                 {"My Deals"}
               </h1>
@@ -175,12 +176,12 @@ const PortfolioPage: NextPage = () => {
               </h1>
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-y-3">
               <h1>
                 {"My Investment"}
               </h1>
               <h1>
-                {totalInvest}
+                {"$ " + totalInvest.toLocaleString()}
               </h1>
             </div>
           </div>

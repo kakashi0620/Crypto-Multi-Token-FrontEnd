@@ -10,11 +10,10 @@ const DualValueCell: FC<any> = ({ value }) => {
                     {
                         index === 0 ?
                             <p key={key}>
-                                <strong>{'$' + Number(value[key]).toLocaleString()}</strong>
-                            </p>
-                            :
+                                <strong>{value[key]}</strong>
+                            </p> :
                             <p key={key} className='text-gray'>
-                                {'$' + Number(value[key]).toLocaleString()}
+                                {value[key]}
                             </p>
                     }
                 </>
