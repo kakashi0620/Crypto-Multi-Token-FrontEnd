@@ -9,7 +9,12 @@ import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRe
 import Schedule from "./_components/Dialog/Schedule";
 import { getBackend } from "./utils";
 import { useUser } from "../hooks/userContext";
-import PortfolioTable, { IPortfolioRowData } from "./_components/GridTable/Portfolio/PortfolioTable";
+// import PortfolioTable, { IPortfolioRowData } from "./_components/GridTable/Portfolio/PortfolioTable";
+import DealCell from './_components/GridTable/Portfolio/cells/DealCell';
+import StatusCell from './_components/GridTable/Portfolio/cells/StatusCell';
+import TokensReceivedCell from './_components/GridTable/Portfolio/cells/TokensReceivedCell';
+import DualValueCell from './_components/GridTable/Portfolio/cells/DualValueCell';
+import NextValueCell from "./_components/GridTable/Portfolio/cells/NextValueCell";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -18,17 +23,26 @@ const poppins = Poppins({
   weight: ["200", "400", "600", "800"],
 });
 
+interface IPortfolioRowData {
+  deal: { logo: string; name: string };
+  status: string;
+  allocation: { pay: string; invest: string };
+  tokensReceived: { percent: number; received: string; receiving: string };
+  valueLocked: { free: string; locked: string };
+  nextUnlock: { date: string; amount: string };
+}
+
 const PortfolioPage: NextPage = () => {
 
   const [rowData, setRowData] = useState<IPortfolioRowData[]>([]);
-  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
-    { field: "Deal", flex: 1 },
-    { field: "Status", flex: 1 },
-    { field: "Allocation", flex: 1, filter: 'agTextColumnFilter' },
-    { field: "Token Received", flex: 1, filter: 'agTextColumnFilter' },
-    { field: "Value Locked", flex: 1, filter: 'agTextColumnFilter' },
-    { field: "NextUnlock", flex: 1, filter: 'agTextColumnFilter' },
-  ]);
+  // const [columnDefs, setColumnDefs] = useState<ColDef[]>([
+  //   { field: "Deal", flex: 1 },
+  //   { field: "Status", flex: 1 },
+  //   { field: "Allocation", flex: 1, filter: 'agTextColumnFilter' },
+  //   { field: "Token Received", flex: 1, filter: 'agTextColumnFilter' },
+  //   { field: "Value Locked", flex: 1, filter: 'agTextColumnFilter' },
+  //   { field: "NextUnlock", flex: 1, filter: 'agTextColumnFilter' },
+  // ]);
 
   const { user } = useUser()
   const [dealCount, setDealCount] = useState(0);
@@ -55,7 +69,7 @@ const PortfolioPage: NextPage = () => {
             allocation: { pay: realPaidAmount.toString(), invest: invest.amount },
             tokensReceived: { percent: percent, received: tokenReceived.toString(), receiving: tokenReceiving.toString() },
             valueLocked: { free: tokenReceiving.toString(), locked: dealData.data.fdv },
-            nextUnlock: { date: '2025-05-01', amount: tokenReceiving.toString() },
+            nextUnlock: { date: '2025-05-01', amount: tokenReceiving.toLocaleString() + " " + invest.dealname },
           });
 
           total += realPaidAmount;
@@ -66,7 +80,7 @@ const PortfolioPage: NextPage = () => {
       });
 
       await Promise.all(promises);
-      
+
       setTotalInvest(total);
       setRowData(investArray)
     }
@@ -106,6 +120,47 @@ const PortfolioPage: NextPage = () => {
     setModalOpen(true);
   };
 
+  const columnDefs: ColDef[] = [
+    {
+      headerName: 'Deal',
+      field: 'deal',
+      flex: 1,
+      cellRenderer: DealCell,
+    },
+    {
+      headerName: 'Status',
+      field: 'status',
+      flex: 1,
+      filter: 'agTextColumnFilter',
+      cellRenderer: StatusCell,
+    },
+    {
+      headerName: 'Allocation',
+      field: 'allocation',
+      flex: 1,
+      cellRenderer: DualValueCell,
+    },
+    {
+      headerName: 'Tokens Received',
+      field: 'tokensReceived',
+      flex: 1,
+      autoHeight: true,
+      cellRenderer: TokensReceivedCell,
+    },
+    {
+      headerName: 'Value Locked',
+      field: 'valueLocked',
+      flex: 1,
+      cellRenderer: DualValueCell,
+    },
+    {
+      headerName: 'Next Unlock',
+      field: 'nextUnlock',
+      flex: 1,
+      cellRenderer: NextValueCell,
+    },
+  ];
+
   return (
     <>
       <div className={`bg-term ${poppins.className}`}>
@@ -132,7 +187,12 @@ const PortfolioPage: NextPage = () => {
 
           <div className="flex w-full">
             <div className="aaa_123" style={{ width: "100%", height: "40vh" }}>
-              <PortfolioTable rowData={rowData} />
+              {/* <PortfolioTable rowData={rowData} /> */}
+              <AgGridReact
+                columnDefs={columnDefs}
+                rowData={rowData}
+                defaultColDef={defaultColDef}
+              />
             </div>
           </div>
         </div>

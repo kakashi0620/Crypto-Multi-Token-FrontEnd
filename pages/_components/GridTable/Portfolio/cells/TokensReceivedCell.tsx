@@ -33,8 +33,8 @@ const TokensReceivedCell: FC<any> = ({ value }) => {
 
       {/* Chat Data */}
       <div className="text-sm">
-        <p><strong>{value.received}</strong> received</p>
-        <p><strong>{value.receiving}</strong> receiving</p>
+        <p><strong>{'$' + Number(value.received).toLocaleString()}</strong></p>
+        <p className='text-gray'>{'$' + Number(value.receiving).toLocaleString()}</p>
       </div>
     </div>
   );
