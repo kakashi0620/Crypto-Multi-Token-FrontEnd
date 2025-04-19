@@ -27,6 +27,9 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
         setDateRemained("Time is up!");
         return;
       }
+      else {
+        setOverTime(false)
+      }
 
       const days = Math.floor(diffInMillis / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

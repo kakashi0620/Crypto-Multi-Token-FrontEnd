@@ -1,9 +1,9 @@
 import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { IDealGridRowData } from '../../../interface/DealGridRowData';
+// import { IDealGridRowData } from '../../../interface/DealGridRowData';
 
 
-const DealNameCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data }) => {
+const DealNameCell: React.FC<any> = ({ data }) => {
   if (!data) return null;
 
   return (

@@ -14,7 +14,7 @@ import DealCell from './_components/GridTable/Portfolio/cells/DealCell';
 import StatusCell from './_components/GridTable/Portfolio/cells/StatusCell';
 import TokensReceivedCell from './_components/GridTable/Portfolio/cells/TokensReceivedCell';
 import DualValueCell from './_components/GridTable/Portfolio/cells/DualValueCell';
-import NextValueCell from "./_components/GridTable/Portfolio/cells/NextValueCell";
+
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
