@@ -12,7 +12,7 @@ import {
   parseUnits,
 } from "viem";
 import { mainnet } from "viem/chains";
-import { wagmiConfig } from "../pages/_app";
+// import { wagmiConfig } from "../pages/_app";
 
 export const publicClient = createPublicClient({
   chain: mainnet,
@@ -119,22 +119,22 @@ export const fetchPresaleId = () => {
 
   const handlePresaleId = useCallback(async () => {
     try {
-      const data = await readContracts(wagmiConfig, {
-        contracts: [
-          {
-            address: PresaleConfig.presaleAddress as `0x${string}`,
-            abi: presaleContractABI,
-            functionName: "presaleId",
-          },
-          {
-            address: PresaleConfig.presaleAddress as `0x${string}`,
-            abi: presaleContractABI,
-            functionName: "currentSale",
-          },
-        ],
-      });
-      setPresaleId(Number(data[0].result));
-      setCurrentPresale(Number(data[1].result));
+      // const data = await readContracts(wagmiConfig, {
+      //   contracts: [
+      //     {
+      //       address: PresaleConfig.presaleAddress as `0x${string}`,
+      //       abi: presaleContractABI,
+      //       functionName: "presaleId",
+      //     },
+      //     {
+      //       address: PresaleConfig.presaleAddress as `0x${string}`,
+      //       abi: presaleContractABI,
+      //       functionName: "currentSale",
+      //     },
+      //   ],
+      // });
+      // setPresaleId(Number(data[0].result));
+      // setCurrentPresale(Number(data[1].result));
     } catch (error) {
       console.error("Error fetching contract data:", error);
     }

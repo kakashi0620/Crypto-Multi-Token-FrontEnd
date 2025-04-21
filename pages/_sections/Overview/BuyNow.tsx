@@ -12,7 +12,7 @@ import {
   fetchUSDTBal,
   fetchUserData,
 } from "../../../hooks/useContractData";
-import { wagmiConfig, web3Modal } from "../../_app";
+import { web3Modal } from "../../_app";
 import {
   erc20Abi,
   formatEther,
@@ -103,27 +103,27 @@ export default function BuyNow() {
     if (selectToken === "eth") {
       setDepositLoading(true);
       try {
-        const hash = await writeContract(wagmiConfig, {
-          address: PresaleConfig.presaleAddress as `0x${string}`,
-          abi: presaleContractABI,
-          functionName: "buyWithEth",
-          value: parseEther(String(fromAmount)),
-        });
-        const res = await waitForTransactionReceipt(wagmiConfig, {
-          hash,
-        });
+        // const hash = await writeContract(wagmiConfig, {
+        //   address: PresaleConfig.presaleAddress as `0x${string}`,
+        //   abi: presaleContractABI,
+        //   functionName: "buyWithEth",
+        //   value: parseEther(String(fromAmount)),
+        // });
+        // const res = await waitForTransactionReceipt(wagmiConfig, {
+        //   hash,
+        // });
 
-        console.log("data ==> ", res, hash);
+        // console.log("data ==> ", res, hash);
 
-        if (res?.blockHash) {
-          console.log(res?.blockHash);
+        // if (res?.blockHash) {
+        //   console.log(res?.blockHash);
 
-          toast.success("Transaction complete!");
+        //   toast.success("Transaction complete!");
 
-          getContractData();
-          onPresale(currentPresale);
-          setFromAmount("");
-        }
+        //   getContractData();
+        //   onPresale(currentPresale);
+        //   setFromAmount("");
+        // }
       } catch (err: any) {
         console.log("err ==> ", err);
         if (!String(err).includes("User rejected the request.")) {
@@ -134,28 +134,28 @@ export default function BuyNow() {
     } else if (allowance < Number(fromAmount)) {
       setApproveLoading(true);
       try {
-        const hash = await writeContract(wagmiConfig, {
-          address: PresaleConfig.usdtAddress as `0x${string}`,
-          abi: erc20Abi,
-          functionName: "approve",
-          args: [
-            PresaleConfig.presaleAddress as `0x${string}`,
-            parseUnits(String(fromAmount), 6),
-          ],
-        });
-        const res = await waitForTransactionReceipt(wagmiConfig, {
-          hash,
-        });
+        // const hash = await writeContract(wagmiConfig, {
+        //   address: PresaleConfig.usdtAddress as `0x${string}`,
+        //   abi: erc20Abi,
+        //   functionName: "approve",
+        //   args: [
+        //     PresaleConfig.presaleAddress as `0x${string}`,
+        //     parseUnits(String(fromAmount), 6),
+        //   ],
+        // });
+        // const res = await waitForTransactionReceipt(wagmiConfig, {
+        //   hash,
+        // });
 
-        console.log("data ==> ", res, hash);
+        // console.log("data ==> ", res, hash);
 
-        if (res?.blockHash) {
-          console.log(res?.blockHash);
+        // if (res?.blockHash) {
+        //   console.log(res?.blockHash);
 
-          toast.success("Transaction complete!");
+        //   toast.success("Transaction complete!");
 
-          getContractData();
-        }
+        //   getContractData();
+        // }
       } catch (err: any) {
         console.log("err ==> ", err);
         if (!String(err).includes("User rejected the request.")) {
@@ -166,27 +166,27 @@ export default function BuyNow() {
     } else {
       setDepositLoading(true);
       try {
-        const hash = await writeContract(wagmiConfig, {
-          address: PresaleConfig.presaleAddress as `0x${string}`,
-          abi: presaleContractABI,
-          functionName: "buyWithUSDT",
-          args: [parseUnits(String(fromAmount), 6)],
-        });
-        const res = await waitForTransactionReceipt(wagmiConfig, {
-          hash,
-        });
+        // const hash = await writeContract(wagmiConfig, {
+        //   address: PresaleConfig.presaleAddress as `0x${string}`,
+        //   abi: presaleContractABI,
+        //   functionName: "buyWithUSDT",
+        //   args: [parseUnits(String(fromAmount), 6)],
+        // });
+        // const res = await waitForTransactionReceipt(wagmiConfig, {
+        //   hash,
+        // });
 
-        console.log("data ==> ", res, hash);
+        // console.log("data ==> ", res, hash);
 
-        if (res?.blockHash) {
-          console.log(res?.blockHash);
+        // if (res?.blockHash) {
+        //   console.log(res?.blockHash);
 
-          toast.success("Transaction complete!");
+        //   toast.success("Transaction complete!");
 
-          getContractData();
-          onPresale(currentPresale);
-          setFromAmount("");
-        }
+        //   getContractData();
+        //   onPresale(currentPresale);
+        //   setFromAmount("");
+        // }
       } catch (err: any) {
         console.log("err ==> ", err);
         if (!String(err).includes("User rejected the request.")) {
@@ -437,7 +437,7 @@ export default function BuyNow() {
               </button>
               <button
                 className="secondary h-[30.78px] md:h-[45px] w-full relative"
-                onClick={() => disconnect(wagmiConfig)}
+                onClick={() => web3Modal.disconnect()}
               >
                 <span>{shortenAddress(address)}</span>
                 <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
