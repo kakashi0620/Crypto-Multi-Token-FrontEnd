@@ -1,25 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Link as ScrollLink } from "react-scroll";
-import HamburgerMenu from "./Hamburger";
 import Link from "next/link";
-import RightIcon from "../Icons/Right";
 import { useClickAway, useLocation } from "react-use";
 import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import { LanugageConfig } from "../../../config/languageConfig";
 
-// vadym add for wallet
-import { useAccount, useBalance } from "wagmi";
-import {
-  disconnect,
-  waitForTransactionReceipt,
-  writeContract,
-} from "@wagmi/core";
+import { useAccount } from "wagmi";
 import { web3Modal } from "../../_app";
 import {
-  calculateTokenPrice,
-  formatLocalString,
   getBackend,
   shortenAddress,
 } from "../../utils";
@@ -27,13 +16,11 @@ import DisconnectIcon from "../../_components/Icons/Disconnect";
 
 import { useRouter } from 'next/navigation' // move to profile
 import { useUser } from "../../../hooks/userContext";
-import { useAppKit } from '@reown/appkit/react';
-// vadym wallet end
+
 
 export default function Header() {
   const { t } = useTranslation();
 
-  const appKitContext = useAppKit();
   const [showLang, setShowLang] = useState<boolean>(false);
   const [lang, setLang] = useState({
     flag: "en",
@@ -232,7 +219,6 @@ export default function Header() {
                   // secondary
                   <button
                     className="h-[30.78px] md:h-[45px] w-full relative"
-                    // onClick={() => appKitContext.walletManager.disconnect()}
                     onClick={() => web3Modal.disconnect()}
                   >
                     <span>{shortenAddress(address)}</span>
