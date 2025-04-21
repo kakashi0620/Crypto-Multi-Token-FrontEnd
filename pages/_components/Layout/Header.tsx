@@ -16,7 +16,7 @@ import {
   waitForTransactionReceipt,
   writeContract,
 } from "@wagmi/core";
-import { wagmiConfig, web3Modal } from "../../_app";
+import { web3Modal } from "../../_app";
 import {
   calculateTokenPrice,
   formatLocalString,
@@ -27,11 +27,13 @@ import DisconnectIcon from "../../_components/Icons/Disconnect";
 
 import { useRouter } from 'next/navigation' // move to profile
 import { useUser } from "../../../hooks/userContext";
+import { useAppKit } from '@reown/appkit/react';
 // vadym wallet end
 
 export default function Header() {
   const { t } = useTranslation();
 
+  const appKitContext = useAppKit();
   const [showLang, setShowLang] = useState<boolean>(false);
   const [lang, setLang] = useState({
     flag: "en",
@@ -230,7 +232,8 @@ export default function Header() {
                   // secondary
                   <button
                     className="h-[30.78px] md:h-[45px] w-full relative"
-                    onClick={() => disconnect(wagmiConfig)}
+                    // onClick={() => appKitContext.walletManager.disconnect()}
+                    onClick={() => web3Modal.disconnect()}
                   >
                     <span>{shortenAddress(address)}</span>
                     <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
