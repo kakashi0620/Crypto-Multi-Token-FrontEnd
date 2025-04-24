@@ -67,8 +67,8 @@ const PortfolioPage: NextPage = () => {
             deal: { logo: '/images/metamask.png', name: invest.dealname },
             status: dealData.data.state,
             allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(invest.amount).toLocaleString() },
-            tokensReceived: { percent: percent, received: tokenReceived.toLocaleString(), receiving: tokenReceiving.toLocaleString() + symbol },
-            valueLocked: { free: '$' + Number(invest.amount).toLocaleString(), locked: '🔒 ' + (tokenReceiving - tokenReceived).toLocaleString() + symbol },
+            tokensReceived: { percent: percent, received: tokenReceived.toFixed(1).toLocaleString(), receiving: tokenReceiving.toLocaleString() + symbol },
+            valueLocked: { free: '$' + Number(invest.amount).toLocaleString(), locked: '🔒 ' + (tokenReceiving - tokenReceived).toFixed(1).toLocaleString() + symbol },
             nextUnlock: { date: '2025-05-01 🔓', amount: tokenReceiving.toLocaleString() + symbol },
           });
 

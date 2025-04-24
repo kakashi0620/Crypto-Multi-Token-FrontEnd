@@ -83,7 +83,7 @@ const AllDeals: NextPage = () => {
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
-            progress = 100 * res.data.tge / Number(deal.fundrasing)
+            progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
             investorCount = res.data.investorCount
           }
           catch (e) {

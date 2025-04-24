@@ -13,6 +13,9 @@ const poppins = Poppins({
 const DealDetailPage: NextPage = () => {
 
   const { deal } = useDeal()
+  const getVestingSummary = () => {
+    return deal?.vesttge + "% TGE, " + deal?.vestcliff + "M Cliff, " + deal?.vestgap + "M vesting"
+  }
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -187,7 +190,7 @@ const DealDetailPage: NextPage = () => {
                     disabled
                     autoComplete="vest"
                     className="input-text"
-                    value={deal?.vest}
+                    value={getVestingSummary()}
                   />
                 </div>
               </div>

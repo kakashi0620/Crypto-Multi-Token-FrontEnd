@@ -19,7 +19,8 @@ const TokensReceivedCell: FC<any> = ({ value }) => {
           />
           <path
             d="M18 2.0845
-               a 15.9155 15.9155 0 0 1 0 31.831"
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
             fill="none"
             stroke="#22c55e"
             strokeWidth="2"
@@ -27,7 +28,7 @@ const TokensReceivedCell: FC<any> = ({ value }) => {
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center text-sm font-medium">
-          {percent}%
+          {percent.toFixed(1)}%
         </div>
       </div>
 

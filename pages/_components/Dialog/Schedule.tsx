@@ -5,6 +5,7 @@ import { format, parseISO } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 import Modal from "./Modal";
 import { getBackend } from "../../utils";
+import { useDeal } from '../../../hooks/dealContext';
 
 
 type Step = {
@@ -14,52 +15,59 @@ type Step = {
   percent: number;
 };
 
-const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
+const Schedule = ({ isOpen, onConfirm, onClose }) => {
 
+  const { deal } = useDeal();
   const [newIDs, setNewIDs] = useState<string[]>([]);
   const [steps, setSteps] = useState<Step[]>([]);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [batchCount, setBatchCount] = useState(0);
+  const [lastDate, setLastDate] = useState("");
+  const [totalPercent, setTotalPercent] = useState(0);
 
   useEffect(() => {
     setNewIDs([])
     setBatchCount(0)
-    
+
     if (isOpen) {
-      axios.get(`${getBackend()}/api/distributions/getbydeal/${dealname}`)
+      axios.get(`${getBackend()}/api/distributions/getbydeal/${deal?.name}`)
         .then((res) => {
-          console.log('getbydeal =>', res.data)
           setBatchCount(res.data.length)
 
           if (res.data.length > 0) {
             setSteps(res.data.map((d: any) => ({ ...d, id: uuidv4() })));
-            res.data.map((d: any) => { console.log(d.date)})
+            setTotalPercent(res.data.reduce((sum, schedule) => sum + schedule.percent, 0))
             setIsFirstLoad(false);
+            setLastDate(res.data[res.data.length - 1].date)
           } else {
             const newID = uuidv4()
-            console.log('new dateddddddddddddd', format(new Date(), 'yyyy-MM-dd'))
             setSteps([{
               id: newID,
               type: 'TGE',
               date: format(new Date(), 'yyyy-MM-dd'),
-              percent: 11,
+              percent: Number(deal?.vesttge),
             }]);
+            setTotalPercent(Number(deal?.vesttge))
             setNewIDs([newID]);
             setIsFirstLoad(true);
           }
         });
     }
-  }, [isOpen]);
+  }, [, isOpen]);
 
   const handleAdd = () => {
+    let nextDate = new Date(lastDate)
+    nextDate.setMonth(nextDate.getMonth() + Number(batchCount === 1 ? deal?.vestcliff : 1))
+
+    const vestingPercent = ((100 - Number(deal?.vesttge)) / Number(deal?.vestgap)).toFixed(1)
     const newID = uuidv4()
     setSteps(prev => [
       ...prev,
       {
         id: newID,
         type: 'Batch' + (batchCount + newIDs.length),
-        date: format(new Date(), 'yyyy-MM-dd'),
-        percent: 7.4,
+        date: format(nextDate, 'yyyy-MM-dd'),
+        percent: Math.min((100 - totalPercent), Number(vestingPercent)),
       },
     ]);
     setNewIDs(prev => [...prev, newID]);
@@ -81,17 +89,17 @@ const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
       const step = steps.find(s => s.id === id);
       if (step) {
         axios.post(`${getBackend()}/api/distributions/add`,
-        {
-          dealname: dealname,
-          type: step.type,
-          date: step.date,
-          percent: step.percent
-        })
-        .then(res => {
-          toast.success("Vesting schedule successfully added! 🎉");
-        })
+          {
+            dealname: deal?.name,
+            type: step.type,
+            date: step.date,
+            percent: step.percent
+          })
+          .then(res => {
+            toast.success("Vesting schedule successfully added! 🎉");
+          })
       }
-      
+
     })
     onClose();
   };
@@ -99,7 +107,7 @@ const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} title="Buy">
       {/* Title */}
-      <div className="text-xl font-semibold text-black">{`Vesting schedule for ${dealname}`}</div>
+      <div className="text-xl font-semibold text-black">{`Vesting schedule for ${deal?.name}`}</div>
       <hr className="border-gray border-t-2 my-4" />
 
       {
@@ -119,7 +127,7 @@ const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
             {/* Type */}
             <input
               value={step.type}
-              readOnly
+              disabled={true}
               className="input-text-bright"
             />
 
@@ -127,31 +135,34 @@ const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
             <input
               type="date"
               value={step.date}
+              disabled={index < batchCount}
               onChange={(e) => handleChange(step.id, 'date', e.target.value)}
               className="input-text-bright"
             />
 
             {/* Percent */}
-            <input
-              type="number"
-              step={0.1}
-              value={step.percent}
-              onChange={(e) => handleChange(step.id, 'percent', parseFloat(e.target.value))}
-              className="input-text-bright"
-            />
+            <div className='flex w-full gap-x-2'>
+              <input
+                type="number"
+                step={0.1}
+                value={step.percent}
+                disabled={index < batchCount}
+                onChange={(e) => handleChange(step.id, 'percent', parseFloat(e.target.value))}
+                className="input-text-bright"
+              />
+              <label className='text-black flex h-full items-center'>%</label>
+            </div>
 
-            {/* Tick mark */}
-            {!isFirstLoad && index === 0 && (
-              <p>
-                ✔️
-              </p>
-            )}
-            {/* Delete button for added batches */}
-            {!isFirstLoad && index !== 0 && (
-              <button onClick={() => handleDelete(step.id)} className="text-red-500 hover:text-red-700">
-                ❌
-              </button>
-            )}
+            {/* Tick mark & delete button*/}
+            {
+              index < batchCount ?
+                <p>
+                  ✔️
+                </p> :
+                index !== 0 && (<button onClick={() => handleDelete(step.id)} className="text-red-500 hover:text-red-700">
+                  ❌
+                </button>)
+            }
           </div>
         ))}
 
@@ -159,7 +170,7 @@ const Schedule = ({ dealname, isOpen, onConfirm, onClose }) => {
           <div className="flex w-full justify-end">
             <button
               onClick={handleAdd}
-              className="text-blue-600 hover:underline text-lg mt-2"
+              className="text-blue-600 hover:underline text-md mt-2"
             >
               + Add batches
             </button>

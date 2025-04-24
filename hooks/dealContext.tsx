@@ -8,7 +8,9 @@ export interface Deal {
     tokenprice: string;
     fdv: string;
     mc: string;
-    vest: string;
+    vesttge: string;
+    vestcliff: string;
+    vestgap: string;
     fundrasing: string;
     fee: string;
     investmin: string;

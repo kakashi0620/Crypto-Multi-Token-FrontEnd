@@ -12,6 +12,10 @@ interface DealOverviewProps {
 const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose }) => {
 
   const {deal} = useDeal();
+  const getVestingSummary = () => {
+    return deal?.vesttge + "% TGE, " + deal?.vestcliff + "M Cliff, " + deal?.vestgap + "M vesting"
+  }
+
   const [dateRemained, setDateRemained] = useState("");
   const [bOverTime, setOverTime] = useState(false);
 
@@ -101,7 +105,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
           <div className="grid grid-cols-[1fr_1fr_6fr]">
             <div>Vesting</div>
             <div className="flex w-full justify-center">:</div>
-            <div>{deal?.vest}</div>
+            <div>{getVestingSummary()}</div>
           </div>
 
           <div className="grid grid-cols-[1fr_1fr_6fr]">

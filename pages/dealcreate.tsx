@@ -24,7 +24,9 @@ const CreateDealPage: NextPage = () => {
   const [tokenprice, setTokenPrice] = useState("");
   const [fdv, setFDV] = useState("");
   const [mc, setMC] = useState("");
-  const [vest, setVest] = useState("");
+  const [vesttge, setVestTGE] = useState("");
+  const [vestcliff, setVestCliff] = useState("");
+  const [vestgap, setVestGap] = useState("");
   const [fundrasing, setFundrasing] = useState("");
   const [fee, setFee] = useState("");
   const [investmin, setInvestMin] = useState("");
@@ -414,7 +416,7 @@ const CreateDealPage: NextPage = () => {
   const onCreateDeal = async (e: React.FormEvent, state: string) => {
     e.preventDefault();
 
-    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vest || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !livedate || !timezone) {
+    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vesttge || !vestcliff || !vestgap || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !livedate || !timezone) {
       setError('Please fill out all fields and select an image.');
       return;
     }
@@ -431,7 +433,9 @@ const CreateDealPage: NextPage = () => {
     formData.append('tokenprice', tokenprice);
     formData.append('fdv', fdv);
     formData.append('mc', mc);
-    formData.append('vest', vest);
+    formData.append('vesttge', vesttge);
+    formData.append('vestcliff', vestcliff);
+    formData.append('vestgap', vestgap);
     formData.append('fundrasing', fundrasing);
     formData.append('fee', fee);
     formData.append('investmin', investmin);
@@ -643,27 +647,74 @@ const CreateDealPage: NextPage = () => {
                   />
                 </div>
               </div>
+            </div>
 
-              {/* Vesting Summary */}
-              <div className="input-container">
-                <label
-                  htmlFor="vest"
-                  className="input-label"
-                >
-                  Vesting Summary
-                </label>
-                <div className="col-start-3 col-span-8">
-                  <input
-                    id="vest"
-                    name="vest"
-                    type="text"
-                    autoComplete="vest"
-                    className="input-text"
-                    value={vest}
-                    onChange={(e) => {
-                      setVest(e.target.value);
-                    }}
-                  />
+            {/* Vesting Summary */}
+            <div className="flex flex-col gap-y-2 mx-5 md:grid md:grid-cols-11">
+              <label
+                className="block h-full text-base text-left align-middle font-medium leading-6 text-white md:col-span-2"
+              >
+                Vesting Summary
+              </label>
+              <div className="md:col-start-3 md:col-span-9">
+                <div className=" flex flex-col gap-y-4 sm:grid sm:grid-cols-3 sm:gap-x-12">
+                  <div className='flex justify-between gap-x-2'>
+                    <input
+                      id="vesttge"
+                      name="vesttge"
+                      type="text"
+                      autoComplete="vesttge"
+                      className="input-text"
+                      value={vesttge}
+                      onChange={(e) => {
+                        setVestTGE(e.target.value);
+                      }}
+                    />
+                    <label
+                      htmlFor="vesttge"
+                      className="input-label whitespace-nowrap"
+                    >
+                      % TGE
+                    </label>
+                  </div>
+                  <div className='flex justify-between gap-x-2'>
+                    <input
+                      id="vestcliff"
+                      name="vestcliff"
+                      type="text"
+                      autoComplete="vestcliff"
+                      className="input-text"
+                      value={vestcliff}
+                      onChange={(e) => {
+                        setVestCliff(e.target.value);
+                      }}
+                    />
+                    <label
+                      htmlFor="vestcliff"
+                      className="input-label whitespace-nowrap"
+                    >
+                      M Cliff
+                    </label>
+                  </div>
+                  <div className='flex justify-between gap-x-2'>
+                    <input
+                      id="vestgap"
+                      name="vestgap"
+                      type="text"
+                      autoComplete="vestgap"
+                      className="input-text"
+                      value={vestgap}
+                      onChange={(e) => {
+                        setVestGap(e.target.value);
+                      }}
+                    />
+                    <label
+                      htmlFor="vestgap"
+                      className="input-label whitespace-nowrap"
+                    >
+                      M vesting
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>

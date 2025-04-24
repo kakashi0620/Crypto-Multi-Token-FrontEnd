@@ -119,7 +119,11 @@ const Distribution: NextPage = () => {
   const [curDealName, setCurDealName] = useState("")
   useEffect(() => {
     if (curDealName) {
-      setOpenSchedule(true)
+      const deal = deals?.find(d => d.name === curDealName);
+      if (deal) {
+        setDeal(deal)
+        setOpenSchedule(true)
+      }
     }
   }, [curDealName])
 
@@ -131,7 +135,6 @@ const Distribution: NextPage = () => {
   const handleRowClick = (event: RowClickedEvent) => {
     const clickedRowData = event.data as IDealGridRowData;
     setCurDealName(clickedRowData.name)
-    console.log('Clicked row:', clickedRowData);
   };
 
   return (
@@ -159,7 +162,7 @@ const Distribution: NextPage = () => {
         </div>
       </div>
 
-      <Schedule dealname={curDealName} isOpen={bOpenSchedule} onConfirm={() => closeSchedule()} onClose={() => closeSchedule()} />
+      <Schedule isOpen={bOpenSchedule} onConfirm={() => closeSchedule()} onClose={() => closeSchedule()} />
     </>
 
   );
