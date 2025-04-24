@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import type { ColDef } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-import Schedule from "./_components/Dialog/Schedule";
 import { getBackend } from "./utils";
 import { useUser } from "../hooks/userContext";
 // import PortfolioTable, { IPortfolioRowData } from "./_components/GridTable/Portfolio/PortfolioTable";
@@ -103,24 +102,6 @@ const PortfolioPage: NextPage = () => {
   const [nextSymbol, setNextSymbol] = useState("")
   const [curSymbol, setCurSymbol] = useState("")
 
-  const [bModalOpen, setModalOpen] = useState(false)
-
-  const onRowClicked = (event: any) => {
-    // Example: Navigate to a dynamic page based on row data (e.g., a profile page)
-    let next = event.data.NextUnlock.split(' 🔓\n');
-    if (next.length <= 0)
-      return;
-
-    let abstract = next[1].split(' ');
-
-    setNextDate(next[0]);
-    setNextAmount(abstract.length > 1 ? abstract[0] : '');
-    setNextSymbol(abstract.length > 1 ? abstract[1] : next[1]);
-    setCurSymbol(event.data.Deal)
-
-    setModalOpen(true);
-  };
-
   const columnDefs: ColDef[] = [
     {
       headerName: 'Deal',
@@ -198,8 +179,6 @@ const PortfolioPage: NextPage = () => {
           </div>
         </div>
       </div>
-
-      <Schedule curSymbol={curSymbol} nextSymbol={nextSymbol} date={nextDate} amount={nextAmount} isOpen={bModalOpen} onConfirm={() => setModalOpen(false)} onClose={() => setModalOpen(false)} />
     </>
   );
 };

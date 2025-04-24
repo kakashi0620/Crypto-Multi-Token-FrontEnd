@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import type { ColDef, RowClickedEvent } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
@@ -11,7 +11,7 @@ import { getBackend } from './utils';
 import { IDealGridRowData } from '../interface/DealGridRowData';
 import DealNameCell from './_components/GridTable/AllDeals/DealNameCell';
 import DealProgressCell from './_components/GridTable/AllDeals/DealProgressCell';
-import DealActionCell from './_components/GridTable/AllDeals/DealActionCell';
+import Schedule from './_components/Dialog/Schedule';
 
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
@@ -73,7 +73,6 @@ const Distribution: NextPage = () => {
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
-            console.log('sumarize:', res.data);
             progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
             investorCount = res.data.investorCount
           }
@@ -117,34 +116,52 @@ const Distribution: NextPage = () => {
     };
   }, []);
 
+  const [curDealName, setCurDealName] = useState("")
+  useEffect(() => {
+    if (curDealName) {
+      setOpenSchedule(true)
+    }
+  }, [curDealName])
+
+  const [bOpenSchedule, setOpenSchedule] = useState(false)
+  const closeSchedule = () => {
+    setCurDealName("")
+    setOpenSchedule(false)
+  }
   const handleRowClick = (event: RowClickedEvent) => {
     const clickedRowData = event.data as IDealGridRowData;
+    setCurDealName(clickedRowData.name)
     console.log('Clicked row:', clickedRowData);
   };
 
   return (
-    <div className={`bg-term ${poppins.className}`}>
-      <div className="flex flex-col gap-8 md:gap-16 z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1480px]">
+    <>
+      <div className={`bg-term ${poppins.className}`}>
+        <div className="flex flex-col gap-8 md:gap-16 z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1480px]">
 
-        {/* Title */}
-        <h1 className="page-title">
-          Distribution
-        </h1>
+          {/* Title */}
+          <h1 className="page-title">
+            Distribution
+          </h1>
 
-        <div className="flex w-full">
-          <div style={{ width: "100%", height: "60vh" }}>
-            <AgGridReact
-              rowData={rowData}
-              columnDefs={columnDefs}
-              domLayout="autoHeight"
-              defaultColDef={defaultColDef}
-              gridOptions={gridOption}
-              onRowClicked={handleRowClick}
-            />
+          <div className="flex w-full">
+            <div style={{ width: "100%", height: "60vh" }}>
+              <AgGridReact
+                rowData={rowData}
+                columnDefs={columnDefs}
+                domLayout="autoHeight"
+                defaultColDef={defaultColDef}
+                gridOptions={gridOption}
+                onRowClicked={handleRowClick}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <Schedule dealname={curDealName} isOpen={bOpenSchedule} onConfirm={() => closeSchedule()} onClose={() => closeSchedule()} />
+    </>
+
   );
 };
 
