@@ -140,7 +140,7 @@ export default function Header() {
                         All Deals
                       </Link>
                       <Link
-                        href="/"
+                        href="/distribution"
                         className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
                       >
                         Distribution

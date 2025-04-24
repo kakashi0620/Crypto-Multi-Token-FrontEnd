@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from 'ag-grid-react';
-import type { ColDef, RowSelectionOptions } from "ag-grid-community";
+import type { ColDef, RowClickedEvent } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 
 import { Deal, useDeal } from "../hooks/dealContext";
@@ -21,16 +21,17 @@ const poppins = Poppins({
   weight: ["200", "400", "600", "800"],
 });
 
-const AllDeals: NextPage = () => {
+const Distribution: NextPage = () => {
 
   const [rowData, setRowData] = useState<IDealGridRowData[]>([]);
 
   const columnDefs: ColDef[] = [
     { headerName: "SN", field: 'no', flex: 1 },
     { headerName: "Deal Detail", field: 'name', cellRenderer: DealNameCell, flex: 2 },
-    { headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter' },
+    { headerName: "Status", field: 'status', flex: 2 },
     { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter' },
-    { headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
+    {
+      headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
       cellRenderer: (params: any) => {
         const [line1, line2] = params.value?.split('\n') || ['', ''];
         return (
@@ -39,33 +40,22 @@ const AllDeals: NextPage = () => {
             <p>{line2}</p>
           </div>
         );
-      } },
+      }
+    },
     { headerName: "Distribution", field: 'distribution', flex: 3 },
     { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
-    { headerName: "Action", field: 'action', flex: 3, cellRenderer: DealActionCell }
   ];
 
   const { deal, setDeal } = useDeal();
   const [deals, setDeals] = useState<Deal[]>();
-  const fetchDealData = async (dealState: string) => {
-    if (dealState == "All") {
-      axios.get(`${getBackend()}/api/deals/getalldeals`)
-        .then(res => {
-          setDeals(res.data)
-        })
-        .catch(e => {
-          console.log("get all deal error:", e)
-        })
-    }
-    else {
-      axios.post(`${getBackend()}/api/deals/getdealbystate`, { state: dealState })
-        .then(res => {
-          setDeals(res.data)
-        })
-        .catch(e => {
-          console.log("get deal by state error:", e)
-        })
-    }
+  const fetchDealData = async () => {
+    axios.get(`${getBackend()}/api/deals/getfordistribution`)
+      .then(res => {
+        setDeals(res.data)
+      })
+      .catch(e => {
+        console.log("get deal by state error:", e)
+      })
   }
 
   useEffect(() => {
@@ -84,7 +74,7 @@ const AllDeals: NextPage = () => {
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
             console.log('sumarize:', res.data);
-            progress = 100 * res.data.tge / Number(deal.fundrasing)
+            progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
             investorCount = res.data.investorCount
           }
           catch (e) {
@@ -112,40 +102,25 @@ const AllDeals: NextPage = () => {
     }
   }, [deals])
 
-  const [dealState, setDealState] = useState("All");
   useEffect(() => {
-    fetchDealData(dealState)
-  }, [dealState])
-
-  const [stateList, setStateList] = useState([
-    'All',
-    'Draft',
-    'Upcoming',
-    'Fundraising',
-    'Awaiting TGE',
-    'Distributing',
-    'Completed',
-    'Refunded',
-    'Archived'
-  ])
+    fetchDealData()
+  }, [])
 
   const [defaultColDef, setDefaultColDef] = useState({
     resizable: true,
   });
 
-  const rowSelection = React.useMemo(() => {
-    return {
-      mode: 'multiRow',
-    };
-  }, []);
-
   const gridOption = React.useMemo(() => {
     return {
       pagination: true,
       paginationPageSize: 10,
-      // paginationPageSizeSelector: [10, 20, 30, 40, 50],
     };
   }, []);
+
+  const handleRowClick = (event: RowClickedEvent) => {
+    const clickedRowData = event.data as IDealGridRowData;
+    console.log('Clicked row:', clickedRowData);
+  };
 
   return (
     <div className={`bg-term ${poppins.className}`}>
@@ -153,25 +128,8 @@ const AllDeals: NextPage = () => {
 
         {/* Title */}
         <h1 className="page-title">
-          All Deals
+          Distribution
         </h1>
-
-        {/* Deal state */}
-        <div className="flex w-full justify-start">
-          <select
-            id="dealstate"
-            name="dealstate"
-            value={dealState}
-            className="flex rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6"
-            onChange={(e) => setDealState(e.target.value)}
-          >
-            {stateList.map((state) => (
-              <option key={state} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
-        </div>
 
         <div className="flex w-full">
           <div style={{ width: "100%", height: "60vh" }}>
@@ -180,8 +138,9 @@ const AllDeals: NextPage = () => {
               columnDefs={columnDefs}
               domLayout="autoHeight"
               defaultColDef={defaultColDef}
-              rowSelection={rowSelection as RowSelectionOptions}
-              gridOptions={gridOption} />
+              gridOptions={gridOption}
+              onRowClicked={handleRowClick}
+            />
           </div>
         </div>
       </div>
@@ -189,4 +148,4 @@ const AllDeals: NextPage = () => {
   );
 };
 
-export default AllDeals;
+export default Distribution;

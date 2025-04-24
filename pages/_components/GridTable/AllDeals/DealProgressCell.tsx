@@ -10,7 +10,7 @@ const DealProgressCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ dat
       <div className="w-full bg-gray rounded-full h-2.5">
         <div
           className="bg-green h-2.5 rounded-full"
-          style={{ width: `${data.progress}%` }}
+          style={{ width: `${Math.min(100, data.progress)}%` }}
         />
       </div>
     </div>
