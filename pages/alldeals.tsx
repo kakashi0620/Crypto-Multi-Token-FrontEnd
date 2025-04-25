@@ -107,7 +107,7 @@ const AllDeals: NextPage = () => {
               logo: '/images/metamask.png', //deal.logo,
               status: deal.state,
               time: timeString,
-              amount: `$${totalInvest}/$${deal.fundrasing}\n${investorCount} Investors`,
+              amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
               distribution: `${percent}%`,
               progress: percent
             });
