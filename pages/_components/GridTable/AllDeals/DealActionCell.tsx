@@ -19,10 +19,8 @@ const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data 
       
       const user = await axios.post(`${getBackend()}/api/users/getuserbyname/`, {userName: username});
       const userid = user.data.userId;
-      console.log('tokenprice', userid)
       const deal = await axios.post(`${getBackend()}/api/deals/getdeal/`, {name: dealname});
       const tokenprice = deal.data.tokenprice;
-      console.log('tokenprice', tokenprice)
 
       rowForExport.push({
         'S/N': index + 1,

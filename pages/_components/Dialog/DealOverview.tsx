@@ -22,9 +22,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
   // Function to calculate remaining time
   const calculateRemainingTime = () => {
     if (deal) {
-      const futureDate = new Date(deal.livedate);
-      const currentDate = new Date();
-      const diffInMillis = futureDate.getTime() - currentDate.getTime();
+      const diffInMillis = new Date(deal.livedate).getTime() - new Date().getTime();
 
       if (diffInMillis <= 0) {
         setOverTime(true)

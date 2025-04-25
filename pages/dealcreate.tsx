@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from 'moment-timezone';
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Poppins } from "next/font/google";
@@ -452,7 +453,7 @@ const CreateDealPage: NextPage = () => {
     formData.append('tc_acknowledge', Boolean(tc_acknowledge).toString());
     formData.append('tc_allocation', Boolean(tc_allocation).toString());
     formData.append('tc_never', Boolean(tc_never).toString());
-    formData.append('livedate', new Date(livedate as string).toISOString());
+    formData.append('livedate', new Date(moment.tz(livedate, timezone).utc().format()).toISOString());
     formData.append('createdate', new Date().toISOString());
     formData.append('timezone', timezone);
     formData.append('state', state);
