@@ -35,7 +35,7 @@ const DashboardPage: NextPage = () => {
     setDeal(null)
 
     const fetchDealData = async () => {
-      axios.get(`${getBackend()}/api/deals/getalldeals`).then(res => {
+      axios.get(`${getBackend()}/api/deals/getgallery`).then(res => {
         setDeals(res.data)
       })
     }

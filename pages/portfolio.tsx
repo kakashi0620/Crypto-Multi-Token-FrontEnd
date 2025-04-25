@@ -1,4 +1,6 @@
 import axios from "axios";
+import moment from 'moment-timezone';
+import { format } from 'date-fns';
 import toast from "react-hot-toast";
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
@@ -51,38 +53,69 @@ const PortfolioPage: NextPage = () => {
       const investData = await axios.post(`${getBackend()}/api/invests/getbyuser`, { userName: user?.userName })
       setDealCount(investData.data.length);
 
-      let total = 0;
-      let investArray: IPortfolioRowData[] = [];
+      if (investData.data.length > 0) {
+        let total = 0;
+        let investArray: IPortfolioRowData[] = [];
+  
+        const promises = investData.data.map(async (invest: any) => {
+          const dealname = invest.dealname
+          const investamount = invest.amount
+          let dealData: any = null
+          let realPaidAmount = 0
 
-      const promises = investData.data.map(async (invest: any) => {
-        try {
-          const dealData = await axios.post(`${getBackend()}/api/deals/getdeal`, { name: invest.dealname })
-          const realPaidAmount = invest.amount * (100 + dealData.data.fee) / 100;
-
-          const tokenReceived = invest.amount / dealData.data.tokenprice;
-          const tokenReceiving = dealData.data.fundrasing / dealData.data.tokenprice;
-          const percent = 100 * tokenReceived / tokenReceiving;
-          const symbol = invest.dealname;
-          investArray.push({
-            deal: { logo: '/images/metamask.png', name: invest.dealname },
-            status: dealData.data.state,
-            allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(invest.amount).toLocaleString() },
-            tokensReceived: { percent: percent, received: tokenReceived.toFixed(1).toLocaleString(), receiving: tokenReceiving.toLocaleString() + symbol },
-            valueLocked: { free: '$' + Number(invest.amount).toLocaleString(), locked: '🔒 ' + (tokenReceiving - tokenReceived).toFixed(1).toLocaleString() + symbol },
-            nextUnlock: { date: '2025-05-01 🔓', amount: tokenReceiving.toLocaleString() + symbol },
-          });
-
-          total += realPaidAmount;
-
-        } catch (e) {
-          toast.error("Error: Can not fetch deal data!");
-        }
-      });
-
-      await Promise.all(promises);
-
-      setTotalInvest(total);
-      setRowData(investArray)
+          // Get deal data
+          try {
+            dealData = await axios.post(`${getBackend()}/api/deals/getdeal`, { name: dealname })
+            realPaidAmount = Number(investamount) * (100 + Number(dealData.data.fee)) / 100
+            total += realPaidAmount
+          }
+          catch (e) {
+            toast.error("Error: Can not fetch deal data!");
+          }
+  
+          // Get distribution schedule
+          if (dealData !== null) {
+            const status = dealData.data.state
+            const tokenPrice = dealData.data.tokenprice
+  
+            try {
+              const { data } = await axios.get(`${getBackend()}/api/distributions/summary`, {
+                params: { dealname: dealname, date: moment.utc() }
+              })
+  
+              const tokenReceived = data.totalReceived
+              const tokenTotal = investamount / tokenPrice
+              const percent = 100 * tokenReceived / tokenTotal
+  
+              const tokenLocked = tokenTotal - tokenReceived
+              const assetsLocked = tokenLocked * tokenPrice
+              const symbol = dealname
+  
+              const nextDate = data.date
+              const nextTokenAmount = tokenTotal * data.percent / 100
+  
+              investArray.push({
+                deal: { logo: '/images/metamask.png', name: dealname },
+                status: status,
+                allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(investamount).toLocaleString() },
+                tokensReceived: { percent: percent, received: tokenReceived.toFixed(2).toLocaleString(), receiving: tokenTotal.toFixed(2).toLocaleString() + symbol },
+                valueLocked: { free: '$' + assetsLocked.toFixed(2).toLocaleString(), locked: '🔒 ' + tokenLocked.toFixed(2).toLocaleString() + symbol },
+                nextUnlock: { date: nextDate === 'No schedule' ? nextDate : format(nextDate, 'yyyy-MM-dd') + ' 🔓', amount: nextTokenAmount.toFixed(2).toLocaleString() + symbol },
+              })
+  
+            } catch (e) {
+              toast.error("Error: Can not fetch schedule data!")
+              console.log("Error: Can not fetch schedule data =>", e)
+            }
+          }
+  
+        });
+  
+        await Promise.all(promises);
+  
+        setTotalInvest(total);
+        setRowData(investArray)
+      }
     }
     catch (e) {
       toast.error("Error: Can not fetch invest data!")

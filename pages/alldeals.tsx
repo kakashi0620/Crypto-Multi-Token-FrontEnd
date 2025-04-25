@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment-timezone';
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
@@ -74,16 +75,17 @@ const AllDeals: NextPage = () => {
         let investArray: any[] = [];
 
         const promises = deals.map(async (deal, index) => {
+          const liveDate = new Date(deal.livedate)
+          const timeString = moment.tz(liveDate, 'UTC').utc().format('YYYY-MM-DD HH:mm:ss')
 
-          const liveDate = deal.livedate ? new Date(deal.livedate) : null; // Ensure it's a valid Date object or null
-          const timeString = liveDate ? liveDate.toISOString() : '';
-
+          let totalInvest = 0;
           let investorCount = 0;
           let progress = 0;
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
-            progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
+            totalInvest = res.data.totalAmount
+            progress = 100 * totalInvest / Number(deal.fundrasing)
             investorCount = res.data.investorCount
           }
           catch (e) {
@@ -96,8 +98,8 @@ const AllDeals: NextPage = () => {
             logo: '/images/metamask.png', //deal.logo,
             status: deal.state,
             time: timeString,
-            amount: `$${deal.fundrasing}/$${deal.fdv}\n${investorCount} Investors`,
-            distribution: `${progress}%`,
+            amount: `$${totalInvest}/$${deal.fdv}\n${investorCount} Investors`,
+            distribution: `${progress.toFixed(1)}%`,
             progress: progress
           });
         })
