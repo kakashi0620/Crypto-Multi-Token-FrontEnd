@@ -83,7 +83,7 @@ const PortfolioPage: NextPage = () => {
                 params: { dealname: dealname, date: moment.utc() }
               })
   
-              const tokenReceived = data.totalReceived
+              const tokenReceived = (investamount * data.totalReceived / 100) / tokenPrice
               const tokenTotal = investamount / tokenPrice
               const percent = 100 * tokenReceived / tokenTotal
   

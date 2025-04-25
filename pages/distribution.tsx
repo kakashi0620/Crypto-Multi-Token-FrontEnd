@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment-timezone';
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
@@ -64,32 +65,46 @@ const Distribution: NextPage = () => {
         let investArray: any[] = [];
 
         const promises = deals.map(async (deal, index) => {
-
-          const liveDate = deal.livedate ? new Date(deal.livedate) : null; // Ensure it's a valid Date object or null
-          const timeString = liveDate ? liveDate.toISOString() : '';
+          const liveDate = new Date(deal.livedate)
+          const timeString = moment.tz(liveDate, 'UTC').utc().format('YYYY-MM-DD HH:mm:ss')
 
           let investorCount = 0;
-          let progress = 0;
+          let totalInvest = 0;
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
-            progress = 100 * res.data.totalAmount / Number(deal.fundrasing)
+            totalInvest = res.data.totalAmount
             investorCount = res.data.investorCount
           }
           catch (e) {
-            console.log('invest summary failed:', e)
+            console.log('Fetching invest summary failed:', e)
           }
+          
+          try {
+            const { data } = await axios.get(`${getBackend()}/api/distributions/summary`, {
+              params: { dealname: deal.name, date: moment.utc() }
+            })
 
-          investArray.push({
-            no: index + 1,
-            name: deal.name,
-            logo: '/images/metamask.png', //deal.logo,
-            status: deal.state,
-            time: timeString,
-            amount: `$${deal.fundrasing}/$${deal.fdv}\n${investorCount} Investors`,
-            distribution: `${progress}%`,
-            progress: progress
-          });
+            const tokenPrice = Number(deal.tokenprice)
+            const fundraising = Number(deal.fundrasing)
+            const tokenReceived = (fundraising * data.totalReceived / 100) / tokenPrice
+            const tokenTotal = fundraising / tokenPrice
+            const percent = 100 * tokenReceived / tokenTotal
+
+            investArray.push({
+              no: index + 1,
+              name: deal.name,
+              logo: '/images/metamask.png', //deal.logo,
+              status: deal.state,
+              time: timeString,
+              amount: `$${totalInvest}/$${deal.fundrasing}\n${investorCount} Investors`,
+              distribution: `${percent}%`,
+              progress: percent
+            });
+          }
+          catch(e) {
+            console.log('Fetching schedule summary failed:', e)
+          }
         })
 
         await Promise.all(promises);

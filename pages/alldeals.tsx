@@ -80,28 +80,41 @@ const AllDeals: NextPage = () => {
 
           let totalInvest = 0;
           let investorCount = 0;
-          let progress = 0;
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
             totalInvest = res.data.totalAmount
-            progress = 100 * totalInvest / Number(deal.fundrasing)
             investorCount = res.data.investorCount
           }
           catch (e) {
-            console.log('invest summary failed:', e)
+            console.log('Fetching invest summary failed:', e)
           }
 
-          investArray.push({
-            no: index + 1,
-            name: deal.name,
-            logo: '/images/metamask.png', //deal.logo,
-            status: deal.state,
-            time: timeString,
-            amount: `$${totalInvest}/$${deal.fdv}\n${investorCount} Investors`,
-            distribution: `${progress.toFixed(1)}%`,
-            progress: progress
-          });
+          try {
+            const { data } = await axios.get(`${getBackend()}/api/distributions/summary`, {
+              params: { dealname: deal.name, date: moment.utc() }
+            })
+
+            const tokenPrice = Number(deal.tokenprice)
+            const fundraising = Number(deal.fundrasing)
+            const tokenReceived = (fundraising * data.totalReceived / 100) / tokenPrice
+            const tokenTotal = fundraising / tokenPrice
+            const percent = 100 * tokenReceived / tokenTotal
+
+            investArray.push({
+              no: index + 1,
+              name: deal.name,
+              logo: '/images/metamask.png', //deal.logo,
+              status: deal.state,
+              time: timeString,
+              amount: `$${totalInvest}/$${deal.fundrasing}\n${investorCount} Investors`,
+              distribution: `${percent}%`,
+              progress: percent
+            });
+          }
+          catch(e) {
+            console.log('Fetching schedule summary failed:', e)
+          }
         })
 
         await Promise.all(promises);
