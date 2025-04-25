@@ -66,7 +66,7 @@ const DealDetailPage: NextPage = () => {
                   Logo
                 </label>
                 <div className="input-input">
-                  <ImageView imgurl={deal?.logo} />
+                  <ImageView imgurl={"http://localhost:5000" + deal?.logo.substring(1)} />
                 </div>
               </div>
 
@@ -79,7 +79,7 @@ const DealDetailPage: NextPage = () => {
                   Banner
                 </label>
                 <div className="input-input">
-                  <ImageView imgurl={deal?.banner} />
+                  <ImageView imgurl={"http://localhost:5000" + deal?.banner.substring(1)} />
                 </div>
               </div>
             </div>

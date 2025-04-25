@@ -104,7 +104,7 @@ const AllDeals: NextPage = () => {
             investArray.push({
               no: index + 1,
               name: deal.name,
-              logo: '/images/metamask.png', //deal.logo,
+              logo: "http://localhost:5000" + deal.logo.substring(1),
               status: deal.state,
               time: timeString,
               amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,

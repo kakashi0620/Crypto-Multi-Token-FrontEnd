@@ -44,7 +44,7 @@ const DashboardPage: NextPage = () => {
   }, [])
 
   const getBannerURL = (deal: Deal) => {
-    const path = '/home/Crypto-Multi-Token-BackEnd' + deal.banner.substring(1);
+    const path = "http://localhost:5000" + deal.banner.substring(1);
     return path
   }
 
@@ -174,16 +174,16 @@ const DashboardPage: NextPage = () => {
 
                       {/* Image part */}
                       <div className="row-span-3 relative overflow-hidden ">
-                        <a href={`${getBannerURL(deal)}`} download>
+                        <a href={`${getBannerURL(deal)}`}>
                           <img className="object-cover" src={`${getBannerURL(deal)}`} alt="Card Image" />
                         </a>
                         <div className="absolute top-0 start-0 end-0 h-full">
-                          <div className="px-6 text-black grid grid-cols-2 h-full">
+                          <div className="px-6 text-white overview-title tracking-widest grid grid-cols-2 h-full">
 
                             {/* Token name and price */}
                             <div className="grid grid-rows-2">
                               <div className="row-start-2">
-                                <h3 className="text-lg font-bold">
+                                <h3 className="text-xl">
                                   {deal.name}
                                 </h3>
                                 <p className="mt-1">
@@ -195,7 +195,7 @@ const DashboardPage: NextPage = () => {
                             {/* Launching state */}
                             <div className="grid grid-rows-2">
                               <div className="row-start-2 h-full text-right relative">
-                                <p className="border rounded-lg absolute right-0 bottom-2">
+                                <p className="border rounded-lg absolute right-0 bottom-2 shadow-xl/30">
                                   {getStatus(deal)}
                                 </p>
                               </div>

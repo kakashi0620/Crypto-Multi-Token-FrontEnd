@@ -3,10 +3,27 @@ import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { IDealGridRowData } from '../../../../interface/DealGridRowData';
 import { getBackend } from '../../../utils';
+import { useDeal } from '../../../../hooks/dealContext';
+import { useRouter } from 'next/router';
 
 
 const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data }) => {
   if (!data) return null;
+
+  const {setDeal} = useDeal()
+  const router = useRouter()
+
+  const handleDetail = async (bEdit: Boolean) => {
+    const dealname = data.name;
+    try {
+      const {data} = await axios.post(`${getBackend()}/api/deals/getdeal/`, {name: dealname});
+      setDeal(data)
+      router.push(bEdit ? '/dealedit' : '/dealdetail')
+    }
+    catch(e) {
+      console.log('Get deal failed:', e)
+    }
+  }
 
   const handleExport = async () => {
     // 1. Prepare custom data to export
@@ -74,10 +91,10 @@ const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data 
 
   return (
     <div className="flex gap-2 items-center h-full">
-      <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 text-xs rounded">
+      <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 text-xs rounded" onClick={() => handleDetail(true)}>
         Edit
       </button>
-      <button className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 text-xs rounded">
+      <button className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 text-xs rounded" onClick={() => handleDetail(false)}>
         Detail
       </button>
       <button className="bg-black hover:bg-black text-white px-2 py-1 text-xs rounded" onClick={handleExport}>

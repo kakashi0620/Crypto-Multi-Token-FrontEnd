@@ -133,9 +133,10 @@ const ContributePage: NextPage = () => {
 
               {/* Logo, name, progress */}
               <div className="input-container h-full items-center">
-
                 <div className="flex w-full justify-center sm:col-span-2">
-                  <img src={deal?.logo} alt="Logo Image" />
+                  <div className="flex max-w-[100px] max-h-[150px]">
+                    <img src={"http://localhost:5000" + deal?.logo.substring(1)} className="object-cover" alt="Logo Image" />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-y-4 sm:col-start-3 sm:col-span-3">

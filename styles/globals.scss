@@ -274,3 +274,15 @@ ul {
 .check-container {
   @apply flex space-x-4 items-center mb-4;
 }
+
+.overview-title{
+  -webkit-text-stroke: 1px white;
+  text-shadow: -2px -2px 0 #38131A,
+  2px -2px 0 #38131A,
+ -2px  2px 0 #38131A,
+  2px  2px 0 #38131A,
+  0px -2px 0 #38131A,
+  0px  2px 0 #38131A,
+ -2px  0px 0 #38131A,
+  2px  0px 0 #38131A;
+}

@@ -95,7 +95,7 @@ const PortfolioPage: NextPage = () => {
               const nextTokenAmount = tokenTotal * data.percent / 100
   
               investArray.push({
-                deal: { logo: '/images/metamask.png', name: dealname },
+                deal: { logo: "http://localhost:5000" + dealData.data.logo.substring(1), name: dealname },
                 status: status,
                 allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(investamount).toLocaleString() },
                 tokensReceived: { percent: percent, received: tokenReceived.toFixed(2).toLocaleString(), receiving: tokenTotal.toFixed(2).toLocaleString() + symbol },

@@ -11,7 +11,7 @@ interface DealOverviewProps {
 
 const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose }) => {
 
-  const {deal} = useDeal();
+  const { deal } = useDeal();
   const getVestingSummary = () => {
     return deal?.vesttge + "% TGE, " + deal?.vestcliff + "M Cliff, " + deal?.vestgap + "M vesting"
   }
@@ -63,6 +63,10 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
       router.push("/dealcontribute")
     }
   }
+  const getLogoURL = () => {
+    const path = "http://localhost:5000" + deal?.logo.substring(1);
+    return path
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} title="">
@@ -72,7 +76,9 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
         </div>
 
         <div className="flex w-full justify-center">
-          <img src={deal?.logo} alt="Logo Image" />
+          <div className="flex max-w-[100px] max-h-[150px]">
+            <img src={getLogoURL()} className="object-cover" alt="Logo Image" />
+          </div>
         </div>
 
         <div className="flex flex-col gap-y-2">
