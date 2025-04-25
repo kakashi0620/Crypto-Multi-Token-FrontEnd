@@ -250,7 +250,7 @@ ul {
 }
 
 .input-label {
-  @apply block h-full text-base text-left align-middle font-medium leading-6 text-white;
+  @apply block h-full text-base text-left align-middle font-medium text-white;
 
   @screen sm {
     @apply col-span-2 #{!important};

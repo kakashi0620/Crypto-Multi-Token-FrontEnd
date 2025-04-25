@@ -659,7 +659,7 @@ const CreateDealPage: NextPage = () => {
               </label>
               <div className="md:col-start-3 md:col-span-9">
                 <div className=" flex flex-col gap-y-4 sm:grid sm:grid-cols-3 sm:gap-x-12">
-                  <div className='flex justify-between gap-x-2'>
+                  <div className='flex justify-between gap-x-2 h-full items-center'>
                     <input
                       id="vesttge"
                       name="vesttge"
@@ -678,7 +678,7 @@ const CreateDealPage: NextPage = () => {
                       % TGE
                     </label>
                   </div>
-                  <div className='flex justify-between gap-x-2'>
+                  <div className='flex justify-between gap-x-2 h-full items-center'>
                     <input
                       id="vestcliff"
                       name="vestcliff"
@@ -697,7 +697,7 @@ const CreateDealPage: NextPage = () => {
                       M Cliff
                     </label>
                   </div>
-                  <div className='flex justify-between gap-x-2'>
+                  <div className='flex justify-between gap-x-2 h-full items-center'>
                     <input
                       id="vestgap"
                       name="vestgap"

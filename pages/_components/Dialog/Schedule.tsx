@@ -141,7 +141,7 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
             />
 
             {/* Percent */}
-            <div className='flex w-full gap-x-2'>
+            <div className='flex w-full gap-x-2 h-full items-center'>
               <input
                 type="number"
                 step={0.1}
@@ -150,7 +150,7 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
                 onChange={(e) => handleChange(step.id, 'percent', parseFloat(e.target.value))}
                 className="input-text-bright"
               />
-              <label className='text-black flex h-full items-center'>%</label>
+              <label className='text-black flex'>%</label>
             </div>
 
             {/* Tick mark & delete button*/}
