@@ -29,8 +29,8 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
     setNewIDs([])
     setBatchCount(0)
 
-    if (isOpen) {
-      axios.get(`${getBackend()}/api/distributions/getbydeal/${deal?.name}`)
+    if (isOpen && deal) {
+      axios.get(`${getBackend()}/api/distributions/getbydeal/${deal.name}`)
         .then((res) => {
           setBatchCount(res.data.length)
 
@@ -45,9 +45,9 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
               id: newID,
               type: 'TGE',
               date: format(new Date(), 'yyyy-MM-dd'),
-              percent: Number(deal?.vesttge),
+              percent: Number(deal.vesttge),
             }]);
-            setTotalPercent(Number(deal?.vesttge))
+            setTotalPercent(Number(deal.vesttge))
             setNewIDs([newID]);
             setIsFirstLoad(true);
           }
@@ -56,10 +56,13 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
   }, [, isOpen]);
 
   const handleAdd = () => {
-    let nextDate = new Date(lastDate)
-    nextDate.setMonth(nextDate.getMonth() + Number(batchCount === 1 ? deal?.vestcliff : 1))
+    if (!deal)
+      return;
 
-    const vestingPercent = ((100 - Number(deal?.vesttge)) / Number(deal?.vestgap)).toFixed(1)
+    let nextDate = new Date(lastDate)
+    nextDate.setMonth(nextDate.getMonth() + Number(batchCount === 1 ? deal.vestcliff : 1))
+
+    const vestingPercent = ((100 - Number(deal.vesttge)) / Number(deal.vestgap)).toFixed(1)
     const newID = uuidv4()
     setSteps(prev => [
       ...prev,
@@ -85,12 +88,15 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
   };
 
   const handleSave = async () => {
+    if (!deal)
+      return;
+
     newIDs.map(async (id) => {
       const step = steps.find(s => s.id === id);
       if (step) {
         axios.post(`${getBackend()}/api/distributions/add`,
           {
-            dealname: deal?.name,
+            dealname: deal.name,
             type: step.type,
             date: step.date,
             percent: step.percent

@@ -8,10 +8,10 @@ import { useRouter } from 'next/router';
 
 
 const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data }) => {
-  if (!data) return null;
-
   const {setDeal} = useDeal()
   const router = useRouter()
+  
+  if (!data) return null;
 
   const handleDetail = async (bEdit: Boolean) => {
     const dealname = data.name;
