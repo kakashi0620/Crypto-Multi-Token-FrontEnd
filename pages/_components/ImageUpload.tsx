@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const ImageUpload = ({
   target,
-  setImage
+  setImage,
+  initURL
 }) => {
 
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null); // To store the preview URL
+  const [previewUrl, setPreviewUrl] = useState<string | null>(initURL); // To store the preview URL
   const [filename, setFilename] = useState<string>(''); // To store the file name
   const imagePreviewRef = useRef<HTMLDivElement | null>(null); // Ref for image preview div
   const uploadInputRef = useRef<HTMLInputElement | null>(null); // Ref for the file input element

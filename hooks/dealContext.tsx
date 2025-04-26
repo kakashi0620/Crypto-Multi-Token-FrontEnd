@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 export interface Deal {
+    _id: string;
     name: string;
     logo: string;
     banner: string;

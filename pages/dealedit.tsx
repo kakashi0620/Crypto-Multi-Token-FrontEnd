@@ -46,7 +46,7 @@ const CreateDealPage: NextPage = () => {
   const [tc_acknowledge, setAcknowledge] = useState(deal?.tc_acknowledge);
   const [tc_allocation, setAllocation] = useState(deal?.tc_allocation);
   const [tc_never, setNever] = useState(deal?.tc_never);
-  const [livedate, setLiveDate] = useState<string>(moment.utc(deal ? deal.livedate : new Date()).format('MM/dd/yyyy hh:mm A'));
+  const [livedate, setLiveDate] = useState<string>(moment.utc(deal ? deal.livedate : new Date()).format('YYYY-MM-DDTHH:mm'));
   const [timezone, setTimeZone] = useState(deal?.timezone);
 
   const selectAll = (checked: boolean) => {
@@ -416,60 +416,50 @@ const CreateDealPage: NextPage = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onCreateDeal = async (e: React.FormEvent, state: string) => {
+  const onUpdateDeal = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !logo || !banner || !round || !tokenprice || !fdv || !mc || !vesttge || !vestcliff || !vestgap || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !livedate || !timezone) {
+    if (!deal) {
+      setError('Deal information not found!');
+      toast.error(error)
+      console.log(error)
+      return;
+    }
+    if (!name || !round || !tokenprice || !fdv || !mc || !vesttge || !vestcliff || !vestgap || !fundrasing || !fee || !investmin || !investmax || !test || !weburl || !xurl || !discordurl || !teleurl || !livedate || !timezone) {
       setError('Please fill out all fields and select an image.');
+      toast.error(error)
+      console.log(error)
       return;
     }
 
     setUploading(true);
     setError(null);
 
-    // Create a FormData object to send both text data and the image
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('logo', logo);
-    formData.append('banner', banner);
-    formData.append('round', round);
-    formData.append('tokenprice', tokenprice);
-    formData.append('fdv', fdv);
-    formData.append('mc', mc);
-    formData.append('vesttge', vesttge);
-    formData.append('vestcliff', vestcliff);
-    formData.append('vestgap', vestgap);
-    formData.append('fundrasing', fundrasing);
-    formData.append('fee', fee);
-    formData.append('investmin', investmin);
-    formData.append('investmax', investmax);
-    formData.append('test', test);
-    formData.append('weburl', weburl);
-    formData.append('xurl', xurl);
-    formData.append('discordurl', discordurl);
-    formData.append('teleurl', teleurl);
-    formData.append('tc_pulltrust', Boolean(tc_pulltrust).toString());
-    formData.append('tc_pinmsg', Boolean(tc_pinmsg).toString());
-    formData.append('tc_answer', Boolean(tc_answer).toString());
-    formData.append('tc_responsible', Boolean(tc_responsible).toString());
-    formData.append('tc_acknowledge', Boolean(tc_acknowledge).toString());
-    formData.append('tc_allocation', Boolean(tc_allocation).toString());
-    formData.append('tc_never', Boolean(tc_never).toString());
-    formData.append('livedate', new Date(moment.tz(livedate, timezone).utc().format()).toISOString());
-    formData.append('createdate', new Date().toISOString());
-    formData.append('timezone', timezone);
-    formData.append('state', state);
+    let uploadedLogo = deal.logo;
+    let uploadedBanner = deal.banner;
 
-    // Replace with your own server URL or image hosting API like imgBB
-    axios
-      .post(
-        // `${process.env.REACT_APP_BACKEND_URL}/api/users/update`,
-        `${getBackend()}/api/deals/create`,
-        formData
-      )
-      .then((res) => {
-        toast.success("Deal successfully created! 🎉");
-        router.push('/dashboard')
+    if (logo) {
+      const formData = new FormData();
+      formData.append('image', logo);
+      const res = await axios.post(`${getBackend()}/api/deals/upload`, formData);
+      uploadedLogo = res.data.path; // or URL
+    }
+
+    if (banner) {
+      const formData = new FormData();
+      formData.append('image', banner);
+      const res = await axios.post(`${getBackend()}/api/deals/upload`, formData);
+      uploadedBanner = res.data.path;
+    }
+    
+    axios.put(`${getBackend()}/api/deals/update/${deal._id}`, {
+      name, round, tokenprice, fdv, mc, vesttge, vestcliff, vestgap, fundrasing, fee, investmin, investmax, test, weburl, xurl, discordurl, teleurl, livedate, timezone,
+      logo: uploadedLogo,
+      banner: uploadedBanner
+    })
+      .then(res => {
+        toast.success("Deal successfully updated! 🎉");
+        router.push('/alldeals')
         setUploading(false);
       })
       .catch((error) => {
@@ -483,7 +473,7 @@ const CreateDealPage: NextPage = () => {
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-16 relative z-10 px-4 md:px-12 py-20 md:0 mx-auto max-w-[1320px]">
         <h1 className="page-title">
-          Create new deal
+          Edit deal
         </h1>
         <div className="flex flex-col gap-12">
           <div className="space-y-6">
@@ -533,7 +523,8 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="logo"
-                    setImage={setLogo} />
+                    setImage={setLogo}
+                    initURL={"http://localhost:5000" + deal?.logo.substring(1)} />
                 </div>
               </div>
 
@@ -548,7 +539,8 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="banner"
-                    setImage={setBanner} />
+                    setImage={setBanner}
+                    initURL={"http://localhost:5000" + deal?.banner.substring(1)} />
                 </div>
               </div>
             </div>
@@ -1112,22 +1104,14 @@ const CreateDealPage: NextPage = () => {
               </div>
             </div>
 
-            <div className="flex w-full justify-center space-x-10">
+            <div className="flex w-full justify-center">
               <button
                 type="button"
-                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={(e) => onCreateDeal(e, 'Draft')}
+                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                onClick={(e) => onUpdateDeal(e)}
                 disabled={uploading}
               >
-                {uploading ? 'Uploading...' : 'Draft'}
-              </button>
-              <button
-                type="button"
-                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={(e) => onCreateDeal(e, 'Upcoming')}
-                disabled={uploading}
-              >
-                {uploading ? 'Uploading...' : 'Publish'}
+                {uploading ? 'Uploading...' : 'Update'}
               </button>
             </div>
           </div>

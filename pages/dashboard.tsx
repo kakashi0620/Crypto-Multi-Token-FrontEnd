@@ -49,8 +49,7 @@ const DashboardPage: NextPage = () => {
   }
 
   const getStatus = (deal: Deal) => {
-    // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
-    return "Pre-Launch"
+    return deal.state
   }
   const getBid = (deal: Deal) => {
     // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
@@ -195,7 +194,7 @@ const DashboardPage: NextPage = () => {
                             {/* Launching state */}
                             <div className="grid grid-rows-2">
                               <div className="row-start-2 h-full text-right relative">
-                                <p className="border rounded-lg absolute right-0 bottom-2 shadow-xl/30">
+                                <p className="border rounded-lg absolute right-0 bottom-2 shadow-black shadow-xl">
                                   {getStatus(deal)}
                                 </p>
                               </div>

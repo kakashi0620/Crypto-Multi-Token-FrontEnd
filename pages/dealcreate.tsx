@@ -531,7 +531,8 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="logo"
-                    setImage={setLogo} />
+                    setImage={setLogo}
+                    initURL={null} />
                 </div>
               </div>
 
@@ -546,7 +547,8 @@ const CreateDealPage: NextPage = () => {
                 <div className="input-input">
                   <ImpageUpload
                     target="banner"
-                    setImage={setBanner} />
+                    setImage={setBanner}
+                    initURL={null} />
                 </div>
               </div>
             </div>
@@ -1113,7 +1115,7 @@ const CreateDealPage: NextPage = () => {
             <div className="flex w-full justify-center space-x-10">
               <button
                 type="button"
-                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onCreateDeal(e, 'Draft')}
                 disabled={uploading}
               >
@@ -1121,7 +1123,7 @@ const CreateDealPage: NextPage = () => {
               </button>
               <button
                 type="button"
-                className="flex justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onCreateDeal(e, 'Upcoming')}
                 disabled={uploading}
               >
