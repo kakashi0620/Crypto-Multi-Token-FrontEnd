@@ -57,7 +57,7 @@ const Distribution: NextPage = () => {
       const curbatchRes = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`);
       setCurrentBatch(curbatchRes.data.type)
       batchPercent = Number(curbatchRes.data.percent);
-      console.log(`${deal.name}'s curent batch is ${currentBatch} ${batchPercent}`)
+      console.log(`${deal.name}'s curent batch is ${currentBatch} ${batchPercent} of ${deal?.fundrasing} fundraising amount.`)
     }
     catch (e) {
       console.log('Fetching current batch error');
@@ -65,7 +65,7 @@ const Distribution: NextPage = () => {
       return;
     }
 
-    setDistributeAmount(Number(deal?.fundrasing) / batchPercent)
+    setDistributeAmount(Number(deal?.fundrasing) * batchPercent / 100)
 
     // Get network
     console.log("chains =>", chains)
