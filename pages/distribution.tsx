@@ -51,14 +51,13 @@ const Distribution: NextPage = () => {
       return;
 
     setDeal(deal)
-        
+
     // Get current batch
     let batchPercent: number = 0
     try {
       const curbatchRes = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`);
       setCurrentBatch(curbatchRes.data.type)
       batchPercent = Number(curbatchRes.data.percent);
-      console.log(`${deal.name}'s curent batch is ${currentBatch} ${batchPercent} of ${deal?.fundrasing} fundraising amount.`)
     }
     catch (e) {
       console.log('Fetching current batch error');
@@ -69,9 +68,7 @@ const Distribution: NextPage = () => {
     setDistributeAmount(Number(deal?.fundrasing) * batchPercent / 100)
 
     // Get network
-    console.log("chains =>", chains)
     const currentChain = chains.find(c => c.id === chainId);
-    console.log("currentChain =>", currentChain)
     if (currentChain)
       setNetwork(currentChain.name)
 
@@ -118,17 +115,21 @@ const Distribution: NextPage = () => {
   const columnDefs: ColDef[] = [
     { headerName: "SN", field: 'no', flex: 1 },
     { headerName: "Deal Detail", field: 'name', cellRenderer: DealNameCell, flex: 2 },
-    { headerName: "Status", field: 'status', flex: 2,
+    {
+      headerName: "Status", field: 'status', flex: 2,
       filter: 'agTextColumnFilter',
-      cellRenderer: DealStatusCell },
-    { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter',
+      cellRenderer: DealStatusCell
+    },
+    {
+      headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter',
       cellRenderer: (params: any) => {
         return (
           <div className="flex h-full items-center">
             <p>{params.value}</p>
           </div>
         );
-      } },
+      }
+    },
     {
       headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
       cellRenderer: (params: any) => {
@@ -141,14 +142,16 @@ const Distribution: NextPage = () => {
         );
       }
     },
-    { headerName: "Distribution", field: 'distribution', flex: 3,
+    {
+      headerName: "Distribution", field: 'distribution', flex: 3,
       cellRenderer: (params: any) => {
         return (
           <div className="flex h-full items-center">
             <p>{params.value}</p>
           </div>
         );
-      } },
+      }
+    },
     { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
     {
       headerName: "Action", field: 'action', flex: 2, cellRenderer: DistributionActionCell,
@@ -200,31 +203,32 @@ const Distribution: NextPage = () => {
             console.log('Fetching invest summary failed:', e)
           }
 
+          let curBatch = ""
           try {
             const curBatchData = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`)
-            const curBatch = curBatchData.data.type + "-" + curBatchData.data.percent + "%";
-
-            const totalPaymentData = await axios.get(`${getBackend()}/api/payments/total/${deal.name}`);
-            const totalPayment = totalPaymentData.data.totalAmount
-            console.log(`totalPayment: ${totalPayment}, fundrasing: ${deal.fundrasing}, so percent: ${100 * totalPayment / Number(deal.fundrasing)}`)
-
-            const fundraising = Number(deal.fundrasing)
-            const percent = 100 * totalPayment / fundraising
-
-            investArray.push({
-              no: index + 1,
-              name: deal.name,
-              logo: "http://localhost:5000" + deal.logo.substring(1),
-              status: deal.state,
-              time: timeString,
-              amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
-              distribution: curBatch,
-              progress: percent
-            })
+            if (curBatchData.data.type !== "")
+              curBatch = curBatchData.data.type + "-" + curBatchData.data.percent + "%";
           }
           catch (e) {
             console.log('Fetching schedule summary failed:', e)
           }
+
+          const totalPaymentData = await axios.get(`${getBackend()}/api/payments/total/${deal.name}`);
+          const totalPayment = totalPaymentData.data.totalAmount
+
+          const fundraising = Number(deal.fundrasing)
+          const percent = 100 * totalPayment / fundraising
+
+          investArray.push({
+            no: index + 1,
+            name: deal.name,
+            logo: "http://localhost:5000" + deal.logo.substring(1),
+            status: deal.state,
+            time: timeString,
+            amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
+            distribution: curBatch,
+            progress: percent
+          })
         })
 
         await Promise.all(promises);
@@ -282,7 +286,6 @@ const Distribution: NextPage = () => {
                 defaultColDef={defaultColDef}
                 gridOptions={gridOption}
                 onCellClicked={(event) => {
-                  console.log('cell field', event.colDef.field)
                   if (event.colDef.field !== 'action') {
                     handleRowClick(event);
                   }

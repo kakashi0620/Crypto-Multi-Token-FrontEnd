@@ -30,17 +30,22 @@ const AllDeals: NextPage = () => {
   const columnDefs: ColDef[] = [
     { headerName: "SN", field: 'no', flex: 1 },
     { headerName: "Deal Detail", field: 'name', cellRenderer: DealNameCell, flex: 2 },
-    { headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter',
-      cellRenderer: DealStatusCell },
-    { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter',
+    {
+      headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter',
+      cellRenderer: DealStatusCell
+    },
+    {
+      headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter',
       cellRenderer: (params: any) => {
         return (
           <div className="flex h-full items-center">
             <p>{params.value}</p>
           </div>
         );
-      } },
-    { headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
+      }
+    },
+    {
+      headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
       cellRenderer: (params: any) => {
         const [line1, line2] = params.value?.split('\n') || ['', ''];
         return (
@@ -49,15 +54,18 @@ const AllDeals: NextPage = () => {
             <p>{line2}</p>
           </div>
         );
-      } },
-    { headerName: "Distribution", field: 'distribution', flex: 3,
+      }
+    },
+    {
+      headerName: "Distribution", field: 'distribution', flex: 3,
       cellRenderer: (params: any) => {
         return (
           <div className="flex h-full items-center">
             <p>{params.value}</p>
           </div>
         );
-      } },
+      }
+    },
     { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
     { headerName: "Action", field: 'action', flex: 3, cellRenderer: DealActionCell }
   ];
@@ -98,7 +106,7 @@ const AllDeals: NextPage = () => {
           let investorCount = 0;
 
           try {
-            const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
+            const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`)
             totalInvest = res.data.totalAmount
             investorCount = res.data.investorCount
           }
@@ -106,31 +114,32 @@ const AllDeals: NextPage = () => {
             console.log('Fetching invest summary failed:', e)
           }
 
+          let curBatch = ""
           try {
             const curBatchData = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`)
-            const curBatch = curBatchData.data.type + "-" + curBatchData.data.percent + "%";
-
-            const totalPaymentData = await axios.get(`${getBackend()}/api/payments/total/${deal.name}`);
-            const totalPayment = totalPaymentData.data.totalAmount
-            console.log(`totalPayment: ${totalPayment}, fundrasing: ${deal.fundrasing}, so percent: ${100 * totalPayment / Number(deal.fundrasing)}`)
-
-            const fundraising = Number(deal.fundrasing)
-            const percent = 100 * totalPayment / fundraising
-
-            investArray.push({
-              no: index + 1,
-              name: deal.name,
-              logo: "http://localhost:5000" + deal.logo.substring(1),
-              status: deal.state,
-              time: timeString,
-              amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
-              distribution: curBatch,
-              progress: percent
-            });
+            if (curBatchData.data.type !== "")
+              curBatch = curBatchData.data.type + "-" + curBatchData.data.percent + "%";
           }
-          catch(e) {
+          catch (e) {
             console.log('Fetching schedule summary failed:', e)
           }
+
+          const totalPaymentData = await axios.get(`${getBackend()}/api/payments/total/${deal.name}`);
+          const totalPayment = totalPaymentData.data.totalAmount
+
+          const fundraising = Number(deal.fundrasing)
+          const percent = 100 * totalPayment / fundraising
+
+          investArray.push({
+            no: index + 1,
+            name: deal.name,
+            logo: "http://localhost:5000" + deal.logo.substring(1),
+            status: deal.state,
+            time: timeString,
+            amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
+            distribution: curBatch,
+            progress: percent
+          });
         })
 
         await Promise.all(promises);

@@ -79,7 +79,6 @@ const DealActionCell: React.FC<ICellRendererParams<IDealGridRowData>> = ({ data 
           ],
         });
 
-        console.log('1111');
         const writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
