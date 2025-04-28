@@ -13,6 +13,7 @@ import { IDealGridRowData } from '../interface/DealGridRowData';
 import DealNameCell from './_components/GridTable/AllDeals/DealNameCell';
 import DealProgressCell from './_components/GridTable/AllDeals/DealProgressCell';
 import DealActionCell from './_components/GridTable/AllDeals/DealActionCell';
+import DealStatusCell from './_components/GridTable/AllDeals/DealStatusCell';
 
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
@@ -29,8 +30,16 @@ const AllDeals: NextPage = () => {
   const columnDefs: ColDef[] = [
     { headerName: "SN", field: 'no', flex: 1 },
     { headerName: "Deal Detail", field: 'name', cellRenderer: DealNameCell, flex: 2 },
-    { headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter' },
-    { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter' },
+    { headerName: "Status", field: 'status', flex: 2, filter: 'agTextColumnFilter',
+      cellRenderer: DealStatusCell },
+    { headerName: "Deal Time", field: 'time', flex: 3, filter: 'agDateColumnFilter',
+      cellRenderer: (params: any) => {
+        return (
+          <div className="flex h-full items-center">
+            <p>{params.value}</p>
+          </div>
+        );
+      } },
     { headerName: "Amount Raised", field: 'amount', flex: 3, autoHeight: true,
       cellRenderer: (params: any) => {
         const [line1, line2] = params.value?.split('\n') || ['', ''];
@@ -41,7 +50,14 @@ const AllDeals: NextPage = () => {
           </div>
         );
       } },
-    { headerName: "Distribution", field: 'distribution', flex: 3 },
+    { headerName: "Distribution", field: 'distribution', flex: 3,
+      cellRenderer: (params: any) => {
+        return (
+          <div className="flex h-full items-center">
+            <p>{params.value}</p>
+          </div>
+        );
+      } },
     { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
     { headerName: "Action", field: 'action', flex: 3, cellRenderer: DealActionCell }
   ];
