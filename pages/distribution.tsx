@@ -96,6 +96,7 @@ const Distribution: NextPage = () => {
 
       await axios.post(`${getBackend()}/api/payments/pay/`, newPayment);
       toast.success("Payment successfully done! 🎉");
+      fetchDealData()
     }
     catch (e) {
       console.log('Payment failed:', e);
