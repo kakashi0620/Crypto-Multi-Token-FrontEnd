@@ -18,7 +18,6 @@ const DistributionActionCell: React.FC<DistributionActionCellProps> = ({ data, o
       return false
 
     const payable = await axios.get(`${getBackend()}/api/payments/canpay/${data.name}`)
-    console.log('payable', payable)
     setCanPay(payable.data.can);
   }
 

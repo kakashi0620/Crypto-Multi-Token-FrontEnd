@@ -107,15 +107,15 @@ const AllDeals: NextPage = () => {
           }
 
           try {
-            const { data } = await axios.get(`${getBackend()}/api/distributions/summary`, {
-              params: { dealname: deal.name, date: moment.utc() }
-            })
+            const curBatchData = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`)
+            const curBatch = curBatchData.data.type + "-" + curBatchData.data.percent + "%";
 
-            const tokenPrice = Number(deal.tokenprice)
+            const totalPaymentData = await axios.get(`${getBackend()}/api/payments/total/${deal.name}`);
+            const totalPayment = totalPaymentData.data.totalAmount
+            console.log(`totalPayment: ${totalPayment}, fundrasing: ${deal.fundrasing}, so percent: ${100 * totalPayment / Number(deal.fundrasing)}`)
+
             const fundraising = Number(deal.fundrasing)
-            const tokenReceived = (fundraising * data.totalReceived / 100) / tokenPrice
-            const tokenTotal = fundraising / tokenPrice
-            const percent = 100 * tokenReceived / tokenTotal
+            const percent = 100 * totalPayment / fundraising
 
             investArray.push({
               no: index + 1,
@@ -124,7 +124,7 @@ const AllDeals: NextPage = () => {
               status: deal.state,
               time: timeString,
               amount: `$${fundraising}/$${deal.fdv}\n${investorCount} Investors`,
-              distribution: `${percent}%`,
+              distribution: curBatch,
               progress: percent
             });
           }
