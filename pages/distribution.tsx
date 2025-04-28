@@ -1,18 +1,23 @@
 import axios from 'axios'
 import moment from 'moment-timezone';
 import { Poppins } from "next/font/google";
+import toast from 'react-hot-toast';
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
+import { useAccount, useChainId, useChains } from 'wagmi';
 import { AgGridReact } from 'ag-grid-react';
-import type { ColDef, RowClickedEvent } from "ag-grid-community";
+import type { CellClickedEvent, ColDef } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 
 import { Deal, useDeal } from "../hooks/dealContext";
 import { getBackend } from './utils';
 import { IDealGridRowData } from '../interface/DealGridRowData';
+
+import Schedule from './_components/Dialog/Schedule';
 import DealNameCell from './_components/GridTable/AllDeals/DealNameCell';
 import DealProgressCell from './_components/GridTable/AllDeals/DealProgressCell';
-import Schedule from './_components/Dialog/Schedule';
+import DistributionActionCell from './_components/GridTable/Distribution/DistributionActionCell';
+import Distribute from './_components/Dialog/Distribute';
 
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
@@ -24,6 +29,88 @@ const poppins = Poppins({
 
 const Distribution: NextPage = () => {
 
+  const { deal, setDeal } = useDeal();
+
+  // For distribute button
+  const [currentBatch, setCurrentBatch] = useState("")
+  const [network, setNetwork] = useState("")
+  const [distributeAmount, setDistributeAmount] = useState(0)
+
+  const chainId = useChainId();  // get current connected chain id
+  const chains = useChains();    // get all available chains
+  const { address } = useAccount();
+
+  const [bOpenPayDlg, setOpenPayDlg] = useState(false);
+  const [modalData, setModalData] = useState<IDealGridRowData | null>(null);
+
+  const openModal = async (dealRowData: IDealGridRowData) => {
+
+    const deal = deals?.find(d => d.name === dealRowData.name);
+    if (!deal)
+      return;
+
+    setDeal(deal)
+        
+    // Get current batch
+    let batchPercent: number = 0
+    try {
+      const curbatchRes = await axios.get(`${getBackend()}/api/distributions/getcurbatch/${deal.name}`);
+      setCurrentBatch(curbatchRes.data.type)
+      batchPercent = Number(curbatchRes.data.percent);
+      console.log(`${deal.name}'s curent batch is ${currentBatch} ${batchPercent}`)
+    }
+    catch (e) {
+      console.log('Fetching current batch error');
+      toast.error('Fetching current batch error');
+      return;
+    }
+
+    setDistributeAmount(Number(deal?.fundrasing) / batchPercent)
+
+    // Get network
+    console.log("chains =>", chains)
+    const currentChain = chains.find(c => c.id === chainId);
+    console.log("currentChain =>", currentChain)
+    if (currentChain)
+      setNetwork(currentChain.name)
+
+    setModalData(dealRowData);
+    setOpenPayDlg(true);
+  };
+
+  const closeModal = () => {
+    setOpenPayDlg(false);
+    setModalData(null);
+  };
+
+  const onPay = async () => {
+    try {
+      const newPayment = {
+        dealname: deal?.name,
+        batch: currentBatch,
+        network: network,
+        wallet: address,
+        token: deal?.name,
+        amount: distributeAmount
+      }
+
+      await axios.post(`${getBackend()}/api/payments/pay/`, newPayment);
+      toast.success("Payment successfully done! 🎉");
+    }
+    catch (e) {
+      console.log('Payment failed:', e);
+
+      if (axios.isAxiosError(e)) {
+        toast.error(e.response?.data?.message || e.response?.data || e.message);
+      } else {
+        toast.error((e as Error).message || 'Unknown error');
+      }
+    }
+
+    closeModal()
+  }
+
+  // Grid table data
   const [rowData, setRowData] = useState<IDealGridRowData[]>([]);
 
   const columnDefs: ColDef[] = [
@@ -45,9 +132,26 @@ const Distribution: NextPage = () => {
     },
     { headerName: "Distribution", field: 'distribution', flex: 3 },
     { headerName: "Progress", field: 'progress', flex: 2, cellRenderer: DealProgressCell },
+    {
+      headerName: "Action", field: 'action', flex: 2, cellRenderer: DistributionActionCell,
+      cellRendererParams: {
+        openModal,  // Pass openModal into the cell
+      },
+    }
   ];
 
-  const { deal, setDeal } = useDeal();
+  const [defaultColDef, setDefaultColDef] = useState({
+    resizable: true,
+  });
+
+  const gridOption = React.useMemo(() => {
+    return {
+      pagination: true,
+      paginationPageSize: 10,
+    };
+  }, []);
+
+  // Fill table
   const [deals, setDeals] = useState<Deal[]>();
   const fetchDealData = async () => {
     axios.get(`${getBackend()}/api/deals/getfordistribution`)
@@ -69,17 +173,15 @@ const Distribution: NextPage = () => {
           const timeString = moment.tz(liveDate, 'UTC').utc().format('YYYY-MM-DD HH:mm:ss')
 
           let investorCount = 0;
-          let totalInvest = 0;
 
           try {
             const res = await axios.get(`${getBackend()}/api/invests/summary/${deal.name}`);
-            totalInvest = res.data.totalAmount
             investorCount = res.data.investorCount
           }
           catch (e) {
             console.log('Fetching invest summary failed:', e)
           }
-          
+
           try {
             const { data } = await axios.get(`${getBackend()}/api/distributions/summary`, {
               params: { dealname: deal.name, date: moment.utc() }
@@ -102,7 +204,7 @@ const Distribution: NextPage = () => {
               progress: percent
             });
           }
-          catch(e) {
+          catch (e) {
             console.log('Fetching schedule summary failed:', e)
           }
         })
@@ -120,17 +222,7 @@ const Distribution: NextPage = () => {
     fetchDealData()
   }, [])
 
-  const [defaultColDef, setDefaultColDef] = useState({
-    resizable: true,
-  });
-
-  const gridOption = React.useMemo(() => {
-    return {
-      pagination: true,
-      paginationPageSize: 10,
-    };
-  }, []);
-
+  // Schedule dialog.
   const [curDealName, setCurDealName] = useState("")
   useEffect(() => {
     if (curDealName) {
@@ -147,11 +239,12 @@ const Distribution: NextPage = () => {
     setCurDealName("")
     setOpenSchedule(false)
   }
-  const handleRowClick = (event: RowClickedEvent) => {
+  const handleRowClick = (event: CellClickedEvent) => {
     const clickedRowData = event.data as IDealGridRowData;
     setCurDealName(clickedRowData.name)
   };
 
+  // Rendering table
   return (
     <>
       <div className={`bg-term ${poppins.className}`}>
@@ -170,7 +263,12 @@ const Distribution: NextPage = () => {
                 domLayout="autoHeight"
                 defaultColDef={defaultColDef}
                 gridOptions={gridOption}
-                onRowClicked={handleRowClick}
+                onCellClicked={(event) => {
+                  console.log('cell field', event.colDef.field)
+                  if (event.colDef.field !== 'action') {
+                    handleRowClick(event);
+                  }
+                }}
               />
             </div>
           </div>
@@ -178,6 +276,19 @@ const Distribution: NextPage = () => {
       </div>
 
       <Schedule isOpen={bOpenSchedule} onConfirm={() => closeSchedule()} onClose={() => closeSchedule()} />
+
+      {/* Render Distribute Modal OUTSIDE the grid */}
+      {modalData && (
+        <Distribute
+          isOpen={bOpenPayDlg}
+          onClose={closeModal}
+          onConfirm={() => onPay()}
+          network={network}
+          wallet={address}
+          token={deal?.name}
+          amount={distributeAmount}
+        />
+      )}
     </>
 
   );

@@ -51,7 +51,6 @@ export const web3Modal = createAppKit({
   },
 });
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Suspense fallback="loading">
