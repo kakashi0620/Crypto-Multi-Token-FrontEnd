@@ -37,10 +37,10 @@ export default function Levels() {
       {LevelInfos.map((infos, index) => (
         <div className="roadmap-card p-12" key={index}>
           <div className="flex items-center justify-between">
-            <div className="level-title flex items-center px-4 uppercase text-green text-[13.63px] lg:text-[15px] font-normal">
+            <div className="level-title flex items-center px-4 uppercase text-[#6EC1E4] text-[13.63px] lg:text-[15px] font-normal">
               {t("tenth_section_explore_our_level")}
             </div>
-            <div className="level-number text-green text-[24px] font-semibold flex items-center justify-center">
+            <div className="level-number text-[#6EC1E4] text-[24px] font-semibold flex items-center justify-center">
               0{index + 1}
             </div>
           </div>

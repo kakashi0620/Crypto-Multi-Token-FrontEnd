@@ -3,7 +3,7 @@ import DownRightIcon from "../../_components/Icons/DownRight";
 import UpIcon from "../../_components/Icons/Up";
 import FAQIcon from "../../_components/Icons/FAQIcon";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQs() {
   const { t } = useTranslation();
@@ -20,139 +20,142 @@ export default function FAQs() {
   const FAQ_CONTENTS = [
     [
       {
-        title: 'question 1', //t("tenth_section_frequently_questions_general_1"),
-        content: 'answer 1'//t("tenth_section_frequently_questions_general_1_1"),
+        title: 'How Private Deal Works?',
+        content: 'Crypto project owner sell token at lowest price before ICO, IDO or exchanges listing to VC.'
       },
       {
-        title: 'question 2', //t("tenth_section_frequently_questions_general_2"),
-        content: 'answer 2'//t("tenth_section_frequently_questions_general_2_1"),
+        title: 'What is role of Wealthy Capital for Private Deal?',
+        content: 'First, Wealthy capital invest in new crypto token as VC at lowest price. Then, Sell these token to community memebers at same price with lowest fees.'
       },
       {
-        title: 'question 3', //t("tenth_section_frequently_questions_general_3"),
-        content: 'answer 3'//t("tenth_section_frequently_questions_general_3_1"),
+        title: 'How to invest in Private deal?',
+        content: 'Join in Wealthy Capital Portal. Stay connected in Telegram group. Once we will get profitabel deal, we will update is group about invetment date, time & detail about project. Manage your USDT in metamask. Invest your desire amount in Wealthy Capital Portal payment through metamask.'
       },
-      // {
-      //   title: 'question 4', //t("tenth_section_frequently_questions_general_4"),
-      //   contractAddress: "0xC7f59c4bD6927996186696A0A9cF95dD1727b54E",
-      // },
-      // {
-      //   title: 'question 5', //t("tenth_section_frequently_questions_general_5"),
-      //   content: t("tenth_section_frequently_questions_general_5_1"),
-      //   url: "https://remittix-organization.gitbook.io/remittix/tokenomics/vip-program",
-      // },
+      {
+        title: 'What is risk of private deal?',
+        content: 'Cryptocurrency market is volatile. But we have a strong research team to pick best project. Also we deal directly with project team to minimize the risk.'
+      },
+      {
+        title: 'What is risk of private deal?',
+        content: 'The profitability of crypto private deal is unlimited that vary deals to deals e.g: SUI token price was $0.10 in private round. Within 12 months from listing, its price was $5.3. That means its 53X.'
+      },
     ],
-    // [
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_1"),
-    //     content: t("tenth_section_frequently_questions_presale_1_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_2"),
-    //     content: t("tenth_section_frequently_questions_presale_2_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_3"),
-    //     content: t("tenth_section_frequently_questions_presale_3_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_4"),
-    //     content: t("tenth_section_frequently_questions_presale_4_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_5"),
-    //     content: t("tenth_section_frequently_questions_presale_5_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_presale_6"),
-    //     content: t("tenth_section_frequently_questions_presale_6_1"),
-    //   },
-    // ],
-    // [
-    //   {
-    //     title: t("tenth_section_frequently_questions_dashboard_1"),
-    //     content: t("tenth_section_frequently_questions_dashboard_1_1"),
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_dashboard_2"),
-    //     content: t("tenth_section_frequently_questions_dashboard_2_1"),
-    //   },
-    // ],
-    // [
-    //   {
-    //     title: t("tenth_section_frequently_questions_other_1"),
-    //     content: t("tenth_section_frequently_questions_other_1_1"),
-    //     email: "support@remittix.io",
-    //   },
-    //   {
-    //     title: t("tenth_section_frequently_questions_other_2"),
-    //     content: t("tenth_section_frequently_questions_other_2_1"),
-    //     url: "https://gleam.io/FHtn5/250000-remittix-giveaway",
-    //   },
-    // ],
   ];
 
   return (
-    <div className="bg-faq p-4 md:p-20">
-      <div className="flex flex-col w-full text-center gap-4">
-        <div className="flex flex-col w-full gap-4">
-          <span className="text-center text-[40px] leading-[46px] md:text-[80px] md:leading-[86px] tracking-[-2px]">
-            {t("tenth_section_frequently")}{" "}
-            <span className="text-green">
-              {t("tenth_section_frequently_questions")}
-            </span>
-          </span>
-          <span className="text-[15px] md:text-xl font-normal text-center">
-            {t("tenth_section_frequently_questions_content")}
-          </span>
-        </div>
-
-        <div className="flex gap-1 md:gap-4 justify-center py-4 md:py-12">
-          {FAQ_TYPES.map((type, index) => (
-            <span
-              className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-white rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis ${
-                index === tabIndex ? "bg-green text-black" : ""
-              }`}
-              onClick={() => {
-                setTabIndex(index);
-                setSubIndex(0);
-              }}
-              key={index}
-            >
-              {type}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-2 md:gap-8">
-          {FAQ_CONTENTS[tabIndex].map((faq, index) => (
-            <div className="grid md:grid-cols-[80px_1fr]" key={`0-${index}`}>
-              <div className="hidden md:flex faq-item mt-2 items-center justify-center linear-border-top-left">
-                <FAQIcon className="text-[#D4FC34]" />
-              </div>
-              <div
-                className="flex flex-col text-left faq-content px-8 py-4 gap-4 relative cursor-pointer"
-                onClick={() => setSubIndex(index)}
-              >
-                {index === subIndex ? (
-                  <>
-                    <span className=" text-[24px] font-bold text-green tracking-[-0.8px] linear-border-top-left">
-                      {faq.title}
-                    </span>
-                    <UpIcon className="absolute right-4 bottom-4 border rounded-full border-[#EDEDED1F] bg-[#FFFFFF0F]" />
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[20px] font-normal text-[#FFFFFF94] tracking-[-0.8px] pr-4">
-                      {faq.title}
-                    </span>
-                    <DownRightIcon className="absolute right-4 bottom-4 border rounded-full border-[#EDEDED1F] bg-[#FFFFFF0F]" />
-                  </>
-                )}
-              </div>
+    <div className="relative verflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="max-w-4xl w-full relative z-10 mx-auto"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#6EC1E4]/10 via-[#673DE6]/10 to-[#5804FA]/10 rounded-xl blur-xl" />
+        <div className="relative p-8 md:p-16 rounded-xl border border-[#673DE6]/20 bg-black/20 backdrop-blur-xl">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col w-full gap-4">
+              <span className="text-center text-[32px] leading-[38px] md:text-[60px] md:leading-[66px] tracking-[-2px] text-light-white">
+                {t("tenth_section_frequently")}{" "}
+                <span className="text-[#6EC1E4]">
+                  {t("tenth_section_frequently_questions")}
+                </span>
+              </span>
             </div>
-          ))}
+
+            <div className="flex gap-1 md:gap-4 justify-center">
+              {FAQ_TYPES.map((type, index) => (
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-[#673DE6]/20 rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis transition-all duration-300 ${
+                    index === tabIndex 
+                      ? "bg-gradient-to-r from-[#6EC1E4] via-[#673DE6] to-[#5804FA] text-white" 
+                      : "text-light-white hover:border-[#673DE6]/40"
+                  }`}
+                  onClick={() => {
+                    setTabIndex(index);
+                    setSubIndex(0);
+                  }}
+                  key={index}
+                >
+                  {type}
+                </motion.span>
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-2 md:gap-8">
+              {FAQ_CONTENTS[tabIndex].map((faq, index) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="grid md:grid-cols-[80px_1fr]"
+                  key={`0-${index}`}
+                >
+                  <div className="hidden md:flex faq-item mt-2 items-center justify-center">
+                    <FAQIcon className="text-white" />
+                  </div>
+                  <div
+                    className="relative group cursor-pointer"
+                    onClick={() => setSubIndex(index)}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#6EC1E4]/5 via-[#673DE6]/5 to-[#5804FA]/5 rounded-lg blur-sm" />
+                    <div className="relative flex flex-col text-left px-8 py-4 gap-4 border border-[#673DE6]/20 rounded-lg bg-black/20 backdrop-blur-sm transition-all duration-300 group-hover:border-[#673DE6]/40">
+                      <AnimatePresence mode="wait">
+                        {index === subIndex ? (
+                          <motion.div
+                            key="expanded"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <span className="text-[24px] font-bold text-light-white tracking-[-0.8px]">
+                              {faq.title}
+                            </span>
+                            <div className="flex flex-col pb-12 pr-4">
+                              <div className="text-[15px] md:text-[18px] text-gray-400 font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px]">
+                                {faq.content}
+                              </div>
+                            </div>
+                            <motion.div 
+                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white bg-black/20 text-white transition-all duration-300 group-hover:border-white"
+                              animate={{ rotate: 180 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <UpIcon />
+                            </motion.div>
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="collapsed"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <span className="text-[20px] font-normal text-light-white tracking-[-0.8px] pr-4">
+                              {faq.title}
+                            </span>
+                            <motion.div 
+                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white bg-black/20 text-white transition-all duration-300 group-hover:border-white"
+                              animate={{ rotate: 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <DownRightIcon />
+                            </motion.div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

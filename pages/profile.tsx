@@ -42,7 +42,9 @@ const ProfilePage: NextPage = () => {
 
 
   const getUserID = async () => {
-    const userCount = await axios.get(`${getBackend()}/api/users/getUserCount`);
+    console.log("rider getUserCount url=>", `${getBackend()}/api/users/getUserCount`)
+
+    const userCount = await axios.get(`${getBackend()}/api/users/getUserCount`, {withCredentials: true});
 
     let uidStr = "WC";
     const zeroCount = 5 - userCount.data.toString().length;
@@ -670,7 +672,7 @@ sm:text-md sm:leading-6"
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-green 
+                className="flex w-full justify-center rounded-md bg-[#6EC1E4] 
 px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm 
 hover:bg-black focus-visible:outline focus-visible:outline-2 
 focus-visible:outline-offset-2 focus-visible:outline-green"

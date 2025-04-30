@@ -13,7 +13,7 @@ const ErrorPage: NextPage = () => {
   return (
     <div className={`bg-term ${poppins.className}`}>
       <div className="flex flex-col gap-8 md:gap-12 relative z-10 px-4 md:px-12 py-20 md:mt-20 mx-auto max-w-[943px]">
-        <h1 className="text-3xl md:text-5xl font-bold text-green text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-[#6EC1E4] text-center">
           {t("error_common_error_and_fix")}
         </h1>
         <div>

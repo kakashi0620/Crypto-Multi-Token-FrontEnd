@@ -277,7 +277,7 @@ export default function BuyNow() {
           <span className="text-[18.58px] md:text-[27.17px] font-bold">
             {t("buy_now")}
           </span>
-          <span className="text-green text-[18.58px] md:text-[27.17px] font-bold">
+          <span className="text-[#6EC1E4] text-[18.58px] md:text-[27.17px] font-bold">
             {t("before_price_rises")}
           </span>
         </div>
@@ -322,7 +322,7 @@ export default function BuyNow() {
         <div className="w-full">
           <div className="input w-full">
             <input className="w-full" value={`1 $RTX = $${price}`} readOnly />
-            <span className="w-fit text-nowrap text-green">{`${t(
+            <span className="w-fit text-nowrap text-[#6EC1E4]">{`${t(
               "next_price"
             )}: $${nextPrice}`}</span>
           </div>
@@ -374,7 +374,7 @@ export default function BuyNow() {
         <div className="grid grid-cols-2 gap-2">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
-              <span className="text-green">
+              <span className="text-[#6EC1E4]">
                 {t("currency_you_pay", { currency: selectToken.toUpperCase() })}
               </span>
               <button
@@ -402,7 +402,7 @@ export default function BuyNow() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <span className="text-green">$RTX {t("you_receive")}</span>
+            <span className="text-[#6EC1E4]">$RTX {t("you_receive")}</span>
             <div className="input">
               <input className="w-full" value={toAmount} readOnly />
               <img

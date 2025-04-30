@@ -1115,7 +1115,7 @@ const CreateDealPage: NextPage = () => {
             <div className="flex w-full justify-center space-x-10">
               <button
                 type="button"
-                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                className="flex w-full justify-center rounded-md bg-[#6EC1E4] px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onCreateDeal(e, 'Draft')}
                 disabled={uploading}
               >
@@ -1123,7 +1123,7 @@ const CreateDealPage: NextPage = () => {
               </button>
               <button
                 type="button"
-                className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+                className="flex w-full justify-center rounded-md bg-[#6EC1E4] px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={(e) => onCreateDeal(e, 'Upcoming')}
                 disabled={uploading}
               >

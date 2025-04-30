@@ -35,11 +35,11 @@ const wagmiAdapter = new WagmiAdapter({
 export const web3Modal = createAppKit({
   adapters: [wagmiAdapter],
   allWallets: 'HIDE',
-  enableWalletConnect: false,
   featuredWalletIds: [
     "c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96"
   ],
   excludeWalletIds: [
+    "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
     "a797aa35c0fadbfc1a53e7f675162ed5226968b44a19ee3d24385c64d1d3c393",
   ],
   projectId,
@@ -58,14 +58,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <UserProvider>
           <DealProvider>
             <QueryClientProvider client={queryClient}>
-              <Banner />
               <Toaster position="top-right" reverseOrder={false} />
               <div className="flex">
                 <Header />
                 <HamburgerMenu />
               </div>
 
-              <div className="relative z-30">
+              <div className="relative z-30 pt-[120px]">
                 <Component {...pageProps} />
               </div>
 

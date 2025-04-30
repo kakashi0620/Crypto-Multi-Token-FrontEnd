@@ -14,7 +14,7 @@ export default function Competition() {
             <span className="relative text-4xl z-10 ml-2 font-bold md:leading-[38px] md:tracking-[-1px]">
               {t("blog")}
             </span>
-            <div className="bg-green md:h-4 w-14 absolute bottom-0 left-0" />
+            <div className="bg-[#6EC1E4] md:h-4 w-14 absolute bottom-0 left-0" />
           </div>
           <hr className="w-full border border-[#DADADA]"></hr>
         </div>
@@ -22,7 +22,7 @@ export default function Competition() {
           <div className="flex flex-col gap-12 p-4 md:p-24">
             <span className="text-[30px] md:text-[44.44px] leading-[37.05px] md:leading-[45px] tracking-[-1.46px] md:tracking-[-1.78px] font-bold max-w-[510px]">
               {t("blogpage_first_section_enter_our_copmetition")}{" "}
-              <span className="text-green">$250K</span>{" "}
+              <span className="text-[#6EC1E4]">$250K</span>{" "}
               {t("blogpage_first_section_trading_account")}
             </span>
 
@@ -51,7 +51,7 @@ export default function Competition() {
             target="_blank"
             className="w-full"
           >
-            <button className="third w-full md:w-[343px] h-[62.98px] md:h-[71px] relative !bg-black !text-green">
+            <button className="third w-full md:w-[343px] h-[62.98px] md:h-[71px] relative !bg-black !text-[#6EC1E4]">
               <span className="text-[14.61px] md:text-xl font-bold overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
                 {t("join_presale")}
               </span>

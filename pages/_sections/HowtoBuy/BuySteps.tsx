@@ -12,12 +12,12 @@ export default function BuySteps() {
           <SignUpIcon />
           <span className="text-[21px] font-semibold">
             {/* {t("seventh_section_how_to_buy_sign_up")} */}
-            Step 1 Title
+            Step 1
           </span>
         </div>
-        <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
+        <span className="flex-grow text-[#5F5F5FC2] text-[22px]">
           {/* {t("seventh_section_how_to_buy_sign_up_content")} */}
-          Step 1 Content
+          Sign in via Metamask and complete profile
         </span>
       </div>
 
@@ -26,12 +26,12 @@ export default function BuySteps() {
           <SelectCurrencyIcon />
           <span className="text-[21px] font-semibold">
             {/* {t("seventh_section_how_to_buy_select_currency")} */}
-            Step 2 Title
+            Step 2
           </span>
         </div>
-        <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
+        <span className="flex-grow text-[#5F5F5FC2] text-[22px]">
           {/* {t("seventh_section_how_to_buy_select_currency_content")} */}
-          Step 2 Content
+          Stay updated in our Telegram group to get latest deal update.
         </span>
       </div>
 
@@ -40,12 +40,12 @@ export default function BuySteps() {
           <BuyClaimIcon />
           <span className="text-[21px] font-semibold">
             {/* {t("seventh_section_how_to_buy_buy_claim")} */}
-            Step 3 Title
+            Step 3
           </span>
         </div>
-        <span className="flex-grow text-[#5F5F5FC2] text-[15px]">
+        <span className="flex-grow text-[#5F5F5FC2] text-[22px]">
           {/* {t("seventh_section_how_to_buy_buy_claim_content")} */}
-          Step 3 content
+          Invest through Metamask & track your portfolio
         </span>
       </div>
     </div>

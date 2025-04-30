@@ -76,7 +76,7 @@ export default function Referral() {
 
           <div className="referrer-table flex flex-col gap-2 overflow-x-auto whitespace-nowrap">
             <div className="referrer-header referrer-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-green items-center gap-2 cell-ellipsis">
+              <div className="flex text-[#6EC1E4] items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   No
                 </span>
@@ -133,7 +133,7 @@ export default function Referral() {
 
         {/* Withdraw */}
         <div className="w-full py-10 item-center flex flex-col md:flex-row gap-8">
-          <div className={`flex items-center justify-center relative bg-green text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}>
+          <div className={`flex items-center justify-center relative bg-[#6EC1E4] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}>
             <div className="flex w-full justify-between">
               <button className="h-[30.78px] md:h-[45px] w-full" onClick={() => onWithdraw()} >
                 Withdraw
@@ -154,7 +154,7 @@ export default function Referral() {
 
           <div className="withdraw-table flex flex-col w-full gap-2 overflow-x-auto whitespace-nowrap">
             <div className="withdraw-header withdraw-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-green items-center gap-2 cell-ellipsis">
+              <div className="flex text-[#6EC1E4] items-center gap-2 cell-ellipsis">
                 <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
                   SN
                 </span>

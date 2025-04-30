@@ -11,7 +11,7 @@ export default function Tokenomics() {
     <main className="flex flex-col items-center justify-center py-10 z-10 relative">
       <div className="w-full flex flex-col px-4 lg:px-12 2xl:px-20 gap-12 relative z-10">
         <div className="flex flex-col items-center">
-          <span className="text-green text-[40px] lg:text-[80px] font-bold text-center">
+          <span className="text-[#6EC1E4] text-[40px] lg:text-[80px] font-bold text-center">
             {t("tokenomics")}
           </span>
           <span className="text-[15px] lg:text-xl font-normal text-center">

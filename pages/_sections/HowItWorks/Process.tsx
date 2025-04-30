@@ -68,7 +68,7 @@ export default function Settlement() {
                 </span>
               </div>
             </div>
-            <div className="level-number absolute text-green text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
+            <div className="level-number absolute text-[#6EC1E4] text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
               01
             </div>
 
@@ -144,7 +144,7 @@ export default function Settlement() {
                 </span>
               </div>
             </div>
-            <div className="level-number absolute text-green text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
+            <div className="level-number absolute text-[#6EC1E4] text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
               02
             </div>
 
@@ -174,7 +174,7 @@ export default function Settlement() {
                     <img src="images/solana.png"></img>
                     <span className="text-[#F9FF38]">4,312.71 USDC</span>
                   </div>
-                  <div className="w-full bg-green rounded-md text-[6px] lg:text-[10px] text-black text-center font-semibold py-3">
+                  <div className="w-full bg-[#6EC1E4] rounded-md text-[6px] lg:text-[10px] text-black text-center font-semibold py-3">
                     {t("pay_manually")}
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export default function Settlement() {
                     <img src="images/bitcoin.png"></img>
                     <span className="text-[#F9FF38]">4,000 EUR</span>
                   </div>
-                  <div className="w-full bg-[#11181E52] rounded-md text-[6px] lg:text-[10px] text-green text-center font-semibold py-3 border border-[#F9FF3845]">
+                  <div className="w-full bg-[#11181E52] rounded-md text-[6px] lg:text-[10px] text-[#6EC1E4] text-center font-semibold py-3 border border-[#F9FF3845]">
                     {t("Use_Connected_Wallet")}
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export default function Settlement() {
                 <span className="text-sm h-10"></span>
               </div>
             </div>
-            <div className="level-number absolute text-green text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
+            <div className="level-number absolute text-[#6EC1E4] text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
               03
             </div>
 
@@ -271,7 +271,7 @@ export default function Settlement() {
                 </span>
               </div>
             </div>
-            <div className="level-number absolute text-green text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
+            <div className="level-number absolute text-[#6EC1E4] text-[34px] lg:text-[24px] font-semibold flex items-center justify-center scale-150 -bottom-8 left-10 lg:-left-6">
               04
             </div>
 

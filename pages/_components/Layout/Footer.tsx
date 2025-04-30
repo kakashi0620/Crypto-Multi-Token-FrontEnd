@@ -3,7 +3,7 @@ import { Fade } from "react-awesome-reveal";
 import { useTranslation } from "react-i18next";
 import Twitter from "../Icons/Twitter";
 import Telegram from "../Icons/Telegram";
-import Medium from "../Icons/Medium";
+import Facebook from "../Icons/Facebook";
 import LogoIcon from "../Icons/Logo";
 import Link from "next/link";
 import { Link as ScrollLink } from "react-scroll";
@@ -41,28 +41,28 @@ export default function Footer() {
     return (
       <>
         <Link
-          href="https://x.com/remittix"
+          href="https://x.com/wealth_capital"
           className="hover:scale-110"
           target="_blank"
         >
           <Twitter className="size-6" />
         </Link>
         <Link
-          href="https://t.me/remittixofficial"
+          href="https://wealthy.capital/TG"
           className="hover:scale-110"
           target="_blank"
         >
           <Telegram className="size-7" />
         </Link>
         <Link
-          href="https://medium.com/@remittix"
+          href="https://www.facebook.com/wealthycapital"
           className="hover:scale-110"
           target="_blank"
         >
-          <Medium className="size-6" />
+          <Facebook className="size-6" />
         </Link>
         <Link
-          href={"https://linktr.ee/remittix"}
+          href={"https://linktr.ee/wealthycapital"}
           className="hover:scale-110 cursor-pointer"
           target="_blank"
         >
@@ -75,8 +75,7 @@ export default function Footer() {
   const ContactLinks = () => {
     return (
       <>
-        <Link href={"mailto:support@xxx.io"}>support@xxx.io</Link>
-        <Link href={"mailto:marketing@xxx.io"}>marketing@xxx.io</Link>
+        <Link href={"mailto:Info@Wealthy.Capital"}>Info@Wealthy.Capital</Link>
       </>
     );
   };
@@ -86,13 +85,9 @@ export default function Footer() {
       <Fade duration={300} className="relative z-10">
         <footer className="relative flex items-center justify-center">
           <div className="flex flex-col w-[88%] text-lg">
-            <div className="flex flex-col md:flex-row justify-between w-full md:items-end pb-8 md:pb-12 border-b-2 border-black">
+            <div className="flex flex-col md:flex-row justify-between w-full md:items-end pb-8 md:pb-1 border-b-2 border-black">
               <div className="flex items-center text-black pb-4 md:pb-0">
                 <LogoIcon className="w-[31.01px] h-[16.02px] md:w-[55.71px] md:h-[28.78px]" />
-                <span className="text-[20.9px] md:text-[37.55px] ml-1 md:ml-2">
-                  {/* Remittix */}
-                  News letter box
-                </span>
               </div>
               <div className="hidden md:flex text-black gap-x-5 text-[15px]">
                 <Link href={"/privacy"}>
@@ -107,13 +102,8 @@ export default function Footer() {
                 </Link>
               </div>
               <div className="flex md:hidden flex-col text-black md:w-[40%] gap-2 md:gap-4">
-                <p className="text-[12px] text-[#4C4C4C]">
-                  {/* {t("eleventh_section_disclaimer_1")}: */}
-                  Title:
-                </p>
-                <p className="text-wrap leading-4 text-[12px] md:text-lg">
-                  {/* {t("eleventh_section_disclaimer_1_1")} */}
-                  Content
+                <p className="text-[20px]">
+                  News Letter Box
                 </p>
               </div>
             </div>
@@ -152,13 +142,8 @@ export default function Footer() {
             </div>
             <div className="hidden md:flex justify-between w-full items-start border-b-2 py-12 border-black text-[15px]">
               <div className="flex flex-col text-black w-[40%]">
-                <p className="text-[#4C4C4C] pb-[24px]">
-                  {/* {t("eleventh_section_disclaimer_1")}: */}
-                  Title:
-                </p>
-                <p className="text-wrap leading-6">
-                  {/* {t("eleventh_section_disclaimer_1_1")} */}
-                  Content
+                <p className="text-[32px]">
+                  News letter box
                 </p>
               </div>
               <div className="flex flex-col text-black leading-9">
@@ -182,8 +167,7 @@ export default function Footer() {
               </div>
               <div className="text-left md:text-right text-wrap">
                 <p className="text-[12px] md:text-[15px] leading-6 text-[#4C4C4C]">
-                  {/* © {t("eleventh_section_all_right")} - 2024 */}
-                  © All Rights reserved by x x x x - 2025
+                  © All Rights reserved by 2024 - 2025
                 </p>
               </div>
             </div>

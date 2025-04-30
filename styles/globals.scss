@@ -25,7 +25,7 @@ html {
 body {
   color: #fff;
   // background: #041019;
-  background: #101010;
+  background: linear-gradient(180deg, #673DE6, #6EC1E4 45.83%, #673DE6);
   font-size: 15.03px;
   font-weight: 500;
 }
@@ -58,8 +58,8 @@ body {
 }
 
 .slick-slide .slide-item {
-  background: #050913;
-  border: 1px solid #31414d;
+  background: #5804FA;
+  border: 1px solid #6EC1E4;
   /* Add horizontal margin to each slide's inner div */
 }
 
@@ -222,7 +222,7 @@ ul {
 }
 
 .page-title {
-  @apply text-3xl font-bold text-green text-center;
+  @apply text-3xl font-bold text-[#6EC1E4] text-center;
 
   @screen md {
     @apply text-5xl #{!important};

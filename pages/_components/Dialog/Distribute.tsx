@@ -33,7 +33,7 @@ const Distribute = ({ isOpen, onClose, onConfirm, network, wallet, token, amount
         {/* Pay Button */}
         <button
           onClick={onConfirm}
-          className="w-full bg-green text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="w-full bg-[#6EC1E4] text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Pay
         </button>

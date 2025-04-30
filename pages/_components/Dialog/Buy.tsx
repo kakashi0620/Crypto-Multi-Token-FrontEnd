@@ -38,7 +38,7 @@ const Buy = ({ investAmount, isOpen, onConfirm, onClose }) => {
         </div>
 
         <div className="flex flex-col gap-y-1">
-          <p>Amount of <span className="text-green">{deal?.name}</span></p>
+          <p>Amount of <span className="text-[#6EC1E4]">{deal?.name}</span></p>
           <input
             id="amountToken"
             name="amountToken"
@@ -53,7 +53,7 @@ const Buy = ({ investAmount, isOpen, onConfirm, onClose }) => {
 
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-green px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+          className="flex w-full justify-center rounded-md bg-[#6EC1E4] px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
           onClick={() => onConfirm()}
         >
           Purchase

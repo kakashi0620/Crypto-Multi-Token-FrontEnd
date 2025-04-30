@@ -16,7 +16,7 @@ export default function Graves() {
           <h1 className="relative text-[#0B0A2C] font-bold text-[40px] leading-[40px] tracking-[-0.5px] lg:text-[40px] lg:leading-[46px] lg:tracking-[-0.8px] z-10">
             {t("usecase_forth_section_title")}
           </h1>
-          <div className="absolute w-20 h-4 bg-green bottom-0 left-8"></div>
+          <div className="absolute w-20 h-4 bg-[#6EC1E4] bottom-0 left-8"></div>
         </div>
         <div className="flex flex-col items-center">
           <div className="flex flex-col gap-4 xl:grid grid-cols-2 lg:gap-2">

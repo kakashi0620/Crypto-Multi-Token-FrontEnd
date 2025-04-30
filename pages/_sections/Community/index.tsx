@@ -15,8 +15,8 @@ export default function Community() {
             <span className="relative z-10 text-center">
               {t("fifth_section_community")}
             </span>
-            <div className="bg-green h-4 w-32 absolute top-8 left-12" />
-            <div className="bg-green h-4 w-28 absolute bottom-5 -right-2 hidden md:flex" />
+            <div className="bg-[#6EC1E4] h-4 w-32 absolute top-8 left-12" />
+            <div className="bg-[#6EC1E4] h-4 w-28 absolute bottom-5 -right-2 hidden md:flex" />
           </div>
           <img src="/images/fivestar.png" alt="star" />
         </div>

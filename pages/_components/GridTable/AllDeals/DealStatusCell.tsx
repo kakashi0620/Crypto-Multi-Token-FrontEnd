@@ -6,7 +6,7 @@ const DealStatusCell: FC<any> = ({ value }) => {
   const baseStyle = 'px-2 py-1 rounded-full text-sm font-medium border';
   const statusColor =
     value === 'Distributing'
-      ? 'text-green border-green'
+      ? 'text-[#6EC1E4] border-green'
       : value === 'Fundraising' 
       ? 'text-pink border-pink'
       : 'text-gray border-gray';

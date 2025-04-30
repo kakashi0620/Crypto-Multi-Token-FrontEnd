@@ -209,7 +209,7 @@ const DashboardPage: NextPage = () => {
                         <div className="w-full flex justify-between text-gray">
                           <div className="flex items-center">
                             <span>Bid:&nbsp;</span>
-                            <span className="text-green">{getBid(deal)}</span>
+                            <span className="text-[#6EC1E4]">{getBid(deal)}</span>
                           </div>
                           <div className="flex items-center">
                             <span>Ask:&nbsp;</span>
@@ -296,7 +296,7 @@ const DashboardPage: NextPage = () => {
 
                 <div className="percent-table flex flex-col max-w-[544px] w-full gap-2">
                   <div className="header row items-center h-[33.76px] md:h-[49.28px]">
-                    <div className="flex text-green items-center gap-2">
+                    <div className="flex text-[#6EC1E4] items-center gap-2">
                       {/* <LogoIcon className="w-[31.19px] h-[16.12px] md:w-[45.53px] md:h-[23.52px]" /> */}
                       <span className="text-[11.2px] md:text-[16.34px]">
                         {t("sixth_section_tokenomics_coins")}
@@ -346,7 +346,7 @@ const DashboardPage: NextPage = () => {
 
                 <div className="percent-table flex flex-col max-w-[544px] w-full gap-2">
                   <div className="header row items-center h-[33.76px] md:h-[49.28px]">
-                    <div className="flex text-green items-center gap-2">
+                    <div className="flex text-[#6EC1E4] items-center gap-2">
                       {/* <LogoIcon className="w-[31.19px] h-[16.12px] md:w-[45.53px] md:h-[23.52px]" /> */}
                       <span className="text-[11.2px] md:text-[16.34px]">
                         {t("sixth_section_tokenomics_coins")}

@@ -46,10 +46,10 @@ export default function Silder() {
     return (
       <div className="roadmap-card p-12 text-left">
         <div className="flex items-center justify-between">
-          <div className="level-title flex items-center px-4 uppercase text-green text-[13.63px] md:text-[15px] font-normal">
+          <div className="level-title flex items-center px-4 uppercase text-[#6EC1E4] text-[13.63px] md:text-[15px] font-normal">
             level
           </div>
-          <div className="level-number text-green text-[24px] font-semibold flex items-center justify-center">
+          <div className="level-number text-[#6EC1E4] text-[24px] font-semibold flex items-center justify-center">
             0{index + 1}
           </div>
         </div>

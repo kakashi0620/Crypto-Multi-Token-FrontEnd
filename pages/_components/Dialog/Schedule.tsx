@@ -191,7 +191,7 @@ const Schedule = ({ isOpen, onConfirm, onClose }) => {
       <div className="flex w-full justify-end">
         <button
           onClick={handleSave}
-          className="bg-green text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-[#6EC1E4] text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Save vesting schedule
         </button>

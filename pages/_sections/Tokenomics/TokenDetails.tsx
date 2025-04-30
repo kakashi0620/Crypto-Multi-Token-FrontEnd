@@ -25,7 +25,7 @@ export default function TokenDetails() {
     <div className="flex flex-col w-full gap-2">
       <div className="flex flex-col lg:items-center">
         <span className="text-[40px] leading-[46px] lg:leading-[86px] lg:text-[80px] font-bold text-center">
-          <span className="text-green">{t("remittix")}</span>
+          <span className="text-[#6EC1E4]">{t("remittix")}</span>
           <br className="block lg:hidden" /> {t("sixth_section_token_details")}
         </span>
         <span className="text-[15px] lg:text-xl font-normal text-center">

@@ -49,7 +49,7 @@ export default function DigDeep() {
     <main className="flex flex-col items-center justify-center py-9 md:py-32 z-10 relative gap-24 ">
       <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10 gap-3 md:gap-6">
         <div className="text-[40px] md:text-4xl leading-[46px] md:leading-[77px] tracking-[-0.5px] md:tracking-[-0.8px] font-bold">
-          <span className="text-green">
+          <span className="text-[#6EC1E4]">
             {t("blogpage_second_section_digging_deep")}
           </span>{" "}
           <span>{t("blogpage_second_section_a_dive_into")}</span>
@@ -92,7 +92,7 @@ export default function DigDeep() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center relative bg-green rounded-lg text-black w-[250px] h-[48px] cursor-pointer">
+      <div className="flex items-center justify-center relative bg-[#6EC1E4] rounded-lg text-black w-[250px] h-[48px] cursor-pointer">
         <span className="text-[16.5px] lg:text-[21px] font-bold leading-[37px] lg:leading-[27px] overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
           {t("learn_more")}
         </span>

@@ -85,9 +85,15 @@ export default function Header() {
   // bg-[#041019]
   return (
     <main
-      className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#101010]`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full bg-[#673DE6] backdrop-blur-sm bg-opacity-95`}
     >
-      <div className="flex items-center justify-between relative z-10">
+      <div className="marquee-container flex items-center h-8 w-full gap-5 overflow-x-hidden border-b border-[#673DE6]/20">
+        <div className="marquee-bar flex text-sm whitespace-nowrap animate-marquee hover:animation-paused">
+          🚀 We sell crypto tokens to our customer before launching this token. 🤑 So my business is crypto private deal. 🔥
+        </div>
+      </div>
+      
+      <div className="flex items-center justify-between relative z-10 px-4 lg:px-12 2xl:px-20 py-5">
         <Link href="/" className="md:flex hidden md:items-center">
           <img
             className=""
@@ -99,13 +105,13 @@ export default function Header() {
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
             href="/"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Home
           </Link>
           <Link
             href="/dashboard"
-            className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Dashboard
           </Link>
@@ -117,37 +123,37 @@ export default function Header() {
                     <>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All members
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All investors
                       </Link>
                       <Link
                         href="/dealcreate"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Create New Deal
                       </Link>
                       <Link
                         href="/alldeals"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All Deals
                       </Link>
                       <Link
                         href="/distribution"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Distribution
                       </Link>
                       <Link
                         href="/referral"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Referral
                       </Link>
@@ -155,31 +161,31 @@ export default function Header() {
                     <>
                       <Link
                         href="/portfolio"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Portfolios
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Withdraw
                       </Link>
                       <Link
                         href="/referral"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Referral
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         KYC
                       </Link>
                       <Link
                         href="/userranking"
-                        className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         User Ranking
                       </Link>
@@ -192,7 +198,7 @@ export default function Header() {
             isConnected ?
               <Link
                 href="/profile"
-                className={`cursor-pointer text-lg text-light-white hover:text-green transition hidden lg:inline-block`}
+                className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
               >
                 Profile
               </Link> :
@@ -203,7 +209,7 @@ export default function Header() {
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
           {/* <Link to="presale" className="hidden xl:flex"> */}
           <div
-            className={`flex items-center justify-center relative bg-green text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
+            className={`flex items-center justify-center relative bg-[#6EC1E4] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
           >
             <div className="flex w-full justify-between gap-2">
               {!isConnected ? (

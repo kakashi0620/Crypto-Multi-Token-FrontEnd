@@ -6,7 +6,7 @@ export default function InvoicePayment() {
     <div className="card-box border-none">
       <div className="card-content">
         <div className="flex flex-col">
-          <span className="text-green text-[13.69px] md:text-xl font-bold">
+          <span className="text-[#6EC1E4] text-[13.69px] md:text-xl font-bold">
             {t("fourth_section_invloice_payment")}
           </span>
           <span className="text-[9.72px] md:text-[14.2px]">
@@ -16,7 +16,7 @@ export default function InvoicePayment() {
         <div className="flex justify-end -mt-4">
           <div className="bg-[#BAFEB338] rounded-[35px] flex items-center p-1 gap-1">
             <StarCheckIcon />
-            <span className="text-[4.22px] md:text-[6.16px] text-green leading-[5.38px] md:leading-[7.85px]">
+            <span className="text-[4.22px] md:text-[6.16px] text-[#6EC1E4] leading-[5.38px] md:leading-[7.85px]">
               {t("fourth_section_verified_payment_link")}
             </span>
           </div>
@@ -32,7 +32,7 @@ export default function InvoicePayment() {
           <div className="flex justify-between ml-2">
             <span className="text-[7.03px] md:text-[10.26px]">
               {t("fourth_section_transaction_receipt")}{" "}
-              <span className="text-green">brad@alphacorp.com</span>
+              <span className="text-[#6EC1E4]">brad@alphacorp.com</span>
             </span>
             <span className="text-[9.72px] md:text-[14.2px]">
               {t("fourth_section_wallet_address")}
@@ -51,12 +51,12 @@ export default function InvoicePayment() {
           </span>
           <div className="grid grid-cols-[1fr_60px_1fr] xl:grid-cols-[1fr_100px_1fr] items-center">
             <div className="input border-[#F9FF3845] justify-center">
-              <div className="text-green bg-[#F9FF3829] text-[13.43px] md:text-[19.61px] font-bold px-3 py-1 rounded-full">
+              <div className="text-[#6EC1E4] bg-[#F9FF3829] text-[13.43px] md:text-[19.61px] font-bold px-3 py-1 rounded-full">
                 $84.99
               </div>
             </div>
             <div className="flex flex-col items-center justify-center gap-1">
-              <div className="bg-green px-4 text-black text-[13.69px] md:text-xl font-bold rounded-full">
+              <div className="bg-[#6EC1E4] px-4 text-black text-[13.69px] md:text-xl font-bold rounded-full">
                 +
               </div>
               <span className="text-[8.44px] md:text-[12.32px] font-bold">
@@ -64,7 +64,7 @@ export default function InvoicePayment() {
               </span>
             </div>
             <div className="input border-[#F9FF3845] justify-between">
-              <div className="text-green bg-[#F9FF3829] text-[13.43px] md:text-[19.61px] font-bold px-3 py-1 rounded-full">
+              <div className="text-[#6EC1E4] bg-[#F9FF3829] text-[13.43px] md:text-[19.61px] font-bold px-3 py-1 rounded-full">
                 $0.18
               </div>
               <span className="text-[9.72px] md:text-[14.2px] font-bold">
