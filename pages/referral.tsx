@@ -1,5 +1,6 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import VerticalDivider from "./_components/Icons/VerticalDivider";
 
 import { Poppins } from "next/font/google";
@@ -34,7 +35,20 @@ export default function Referral() {
     { headerName: "State", field: 'state', flex: 2 },
   ];
 
+  const [rowData2, setRowData2] = useState<IReferralGridRowData[]>([]);
+
+  const columnDefs2: ColDef[] = [
+    { headerName: "Level", field: 'level', flex: 1 },
+    { headerName: "User name", field: 'from', flex: 2 },
+    { headerName: "Date", field: 'date', flex: 3 },
+    { headerName: "Chain", field: 'chain', flex: 3 },
+    { headerName: "Wallet", field: 'wallet', flex: 4 },
+    { headerName: "Amount", field: 'amount', flex: 1 },
+    { headerName: "State", field: 'state', flex: 2 },
+  ];
+
   const [withdrawable, setWithdrawable] = useState<IReferralGridRowData[]>()
+  const [history, setHistory] = useState<IReferralGridRowData[]>()
   useEffect(() => {
     fetchReferralData()
   }, [])
@@ -47,6 +61,15 @@ export default function Referral() {
       })
       .catch(e => {
         console.log("get withdrawable error:", e)
+      })
+
+    axios.get(`${getBackend()}/api/referrals/history/${user?.userId}`)
+      .then(res => {
+        console.log('referral =.', res.data)
+        setHistory(res.data);
+      })
+      .catch(e => {
+        console.log("get history error:", e)
       })
   }
 
@@ -73,7 +96,30 @@ export default function Referral() {
 
       fillTable();
     }
-  }, [withdrawable])
+
+    if (history) {
+      const fillTable = async () => {
+        let investArray: any[] = [];
+
+        history.map(async (referral, index) => {
+
+          investArray.push({
+            level: referral.level,
+            from: referral.from,
+            date: referral.date,
+            chain: referral.chain,
+            wallet: referral.wallet,
+            amount: referral.amount,
+            state: referral.state,
+          });
+        })
+
+        setRowData2(investArray)
+      }
+
+      fillTable();
+    }
+  }, [withdrawable, history])
 
   const [defaultColDef, setDefaultColDef] = useState({
     resizable: true,
@@ -88,7 +134,14 @@ export default function Referral() {
   }, []);
 
   const onWithdraw = () => {
-
+    axios.post(`${getBackend()}/api/referrals/withdraw/${user?.userId}`)
+    .then(res => {
+      toast.success("Withdraw successfully done! 🎉");
+      fetchReferralData()
+    })
+    .catch(err => {
+      toast.error("Withdraw failed.")
+    })
   }
 
   return (
@@ -134,68 +187,16 @@ export default function Referral() {
             Withdrawal History
           </div>
 
-          {/* <div className="withdraw-table flex flex-col w-full gap-2 overflow-x-auto whitespace-nowrap">
-            <div className="withdraw-header withdraw-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-green items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  SN
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Date
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Chain
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Wallet Address
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Amount
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Status
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Details
-                </span>
-              </div>
+          <div className="flex w-full">
+            <div style={{ width: "100%", height: "30vh" }}>
+              <AgGridReact
+                rowData={rowData2}
+                columnDefs={columnDefs2}
+                domLayout="autoHeight"
+                defaultColDef={defaultColDef}
+                gridOptions={gridOption} />
             </div>
-
-            <div className="withdraw-body flex flex-col font-normal py-4 gap-2 md:gap-4 linear-border-top-left">
-              {WithdrawHistory.map((item) => (
-                <div
-                  key={item.no}
-                  className="withdraw-row"
-                >
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.no}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.date}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.chain}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.wallet}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.amount}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.status}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.details}</span>
-                </div>
-              ))}
-            </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </main>
