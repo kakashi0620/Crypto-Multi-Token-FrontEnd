@@ -225,7 +225,7 @@ ul {
   @apply text-3xl font-bold text-[#6EC1E4] text-center;
 
   @screen md {
-    @apply text-5xl #{!important};
+    @apply text-5xl;
   }
 }
 
@@ -237,7 +237,7 @@ ul {
   @apply flex flex-col gap-y-4;
 
   @screen md {
-    @apply grid grid-cols-2 gap-x-16 #{!important};
+    @apply grid grid-cols-2 gap-x-16;
   }
 }
 
@@ -245,7 +245,7 @@ ul {
   @apply flex flex-col gap-y-2 mx-5;
 
   @screen sm {
-    @apply grid grid-cols-5 #{!important};
+    @apply grid grid-cols-5;
   }
 }
 
@@ -253,36 +253,36 @@ ul {
   @apply block h-full text-base text-left align-middle font-medium text-white;
 
   @screen sm {
-    @apply col-span-2 #{!important};
+    @apply col-span-2;
   }
 }
 
 .input-input {
   @screen sm {
-    @apply col-start-3 col-span-3 #{!important};
+    @apply col-start-3 col-span-3;
   }
 }
 
 .input-text {
-  @apply block w-full rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6 #{!important};
+  @apply block w-full rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6;
 }
 
 .input-text-bright {
-  @apply block w-full rounded-md border-0 p-1 bg-white text-black shadow-sm ring-1 ring-inset ring-black placeholder:text-black focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6 #{!important};
+  @apply block w-full rounded-md border-0 p-1 bg-white text-black shadow-sm ring-1 ring-inset ring-black placeholder:text-black focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6;
 }
 
 .check-container {
   @apply flex space-x-4 items-center mb-4;
 }
 
-.overview-title{
+.overview-title {
   -webkit-text-stroke: 1px white;
   text-shadow: -2px -2px 0 #38131A,
-  2px -2px 0 #38131A,
- -2px  2px 0 #38131A,
-  2px  2px 0 #38131A,
-  0px -2px 0 #38131A,
-  0px  2px 0 #38131A,
- -2px  0px 0 #38131A,
-  2px  0px 0 #38131A;
+               2px -2px 0 #38131A,
+              -2px  2px 0 #38131A,
+               2px  2px 0 #38131A,
+               0px -2px 0 #38131A,
+               0px  2px 0 #38131A,
+              -2px  0px 0 #38131A,
+               2px  0px 0 #38131A;
 }

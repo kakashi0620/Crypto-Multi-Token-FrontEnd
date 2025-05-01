@@ -177,7 +177,7 @@ export default function Referral() {
           </div>
 
           <div className="text-xl traking-[-2px] font-normal text-light-white">
-            After making withdrawal request, balance will show under "Pending Withdrawal". Admin will send this payment manually and update as "Completed Payment" with a note of TrxID from admin dashboard.
+            After making withdrawal request, balance will show under &quot;Pending Withdrawal&quot;. Admin will send this payment manually and update as &quot;Completed Payment&quot; with a note of TrxID from admin dashboard.
           </div>
         </div>
 
