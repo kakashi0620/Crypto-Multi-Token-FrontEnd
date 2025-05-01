@@ -43,18 +43,21 @@ export default function FAQs() {
   ];
 
   return (
-    <div className="relative verflow-hidden">
+    <div className="relative overflow-hidden">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         className="max-w-4xl w-full relative z-10 mx-auto"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#6EC1E4]/10 via-[#673DE6]/10 to-[#5804FA]/10 rounded-xl blur-xl" />
-        <div className="relative p-8 md:p-16 rounded-xl border border-[#673DE6]/20 bg-black/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] rounded-xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2A2A2A]/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2A2A2A]/20 via-transparent to-transparent" />
+        
+        <div className="relative p-8 md:p-16 rounded-xl border border-white/5 bg-black/20 backdrop-blur-xl">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col w-full gap-4">
-              <span className="text-center text-[32px] leading-[38px] md:text-[60px] md:leading-[66px] tracking-[-2px] text-light-white">
+              <span className="text-center text-[32px] leading-[38px] md:text-[60px] md:leading-[66px] tracking-[-2px] text-white">
                 {t("tenth_section_frequently")}{" "}
                 <span className="text-[#6EC1E4]">
                   {t("tenth_section_frequently_questions")}
@@ -68,10 +71,10 @@ export default function FAQs() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-[#673DE6]/20 rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis transition-all duration-300 ${
+                  className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-white/10 rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis transition-all duration-300 ${
                     index === tabIndex 
-                      ? "bg-gradient-to-r from-[#6EC1E4] via-[#673DE6] to-[#5804FA] text-white" 
-                      : "text-light-white hover:border-[#673DE6]/40"
+                      ? "bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-white" 
+                      : "text-gray-300 hover:border-white/20"
                   }`}
                   onClick={() => {
                     setTabIndex(index);
@@ -94,14 +97,14 @@ export default function FAQs() {
                   key={`0-${index}`}
                 >
                   <div className="hidden md:flex faq-item mt-2 items-center justify-center">
-                    <FAQIcon className="text-white" />
+                    <FAQIcon className="text-[#6EC1E4]" />
                   </div>
                   <div
                     className="relative group cursor-pointer"
                     onClick={() => setSubIndex(index)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#6EC1E4]/5 via-[#673DE6]/5 to-[#5804FA]/5 rounded-lg blur-sm" />
-                    <div className="relative flex flex-col text-left px-8 py-4 gap-4 border border-[#673DE6]/20 rounded-lg bg-black/20 backdrop-blur-sm transition-all duration-300 group-hover:border-[#673DE6]/40">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] rounded-lg opacity-50" />
+                    <div className="relative flex flex-col text-left px-8 py-4 gap-4 border border-white/5 rounded-lg bg-black/20 backdrop-blur-sm transition-all duration-300 group-hover:border-white/10">
                       <AnimatePresence mode="wait">
                         {index === subIndex ? (
                           <motion.div
@@ -111,7 +114,7 @@ export default function FAQs() {
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                            <span className="text-[24px] font-bold text-light-white tracking-[-0.8px]">
+                            <span className="text-[24px] font-bold text-white tracking-[-0.8px]">
                               {faq.title}
                             </span>
                             <div className="flex flex-col pb-12 pr-4">
@@ -120,7 +123,7 @@ export default function FAQs() {
                               </div>
                             </div>
                             <motion.div 
-                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white bg-black/20 text-white transition-all duration-300 group-hover:border-white"
+                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
                               animate={{ rotate: 180 }}
                               transition={{ duration: 0.3 }}
                             >
@@ -135,11 +138,11 @@ export default function FAQs() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                            <span className="text-[20px] font-normal text-light-white tracking-[-0.8px] pr-4">
+                            <span className="text-[20px] font-normal text-gray-300 tracking-[-0.8px] pr-4">
                               {faq.title}
                             </span>
                             <motion.div 
-                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white bg-black/20 text-white transition-all duration-300 group-hover:border-white"
+                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
                               animate={{ rotate: 0 }}
                               transition={{ duration: 0.3 }}
                             >

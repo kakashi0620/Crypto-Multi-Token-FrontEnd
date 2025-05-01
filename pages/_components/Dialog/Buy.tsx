@@ -65,7 +65,7 @@ const Buy = ({ investAmount, isOpen, onConfirm, onClose }) => {
 
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-[#673DE6] px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+          className="flex w-full justify-center rounded-md bg-gradient-to-r from-[#1A1A1A] to-[#242424] px-3 p-1 text-md font-semibold leading-6 text-white shadow-sm hover:from-[#242424] hover:to-[#1A1A1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
           onClick={() => onConfirm()}
         >
           Purchase

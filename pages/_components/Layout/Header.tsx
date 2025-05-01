@@ -85,9 +85,9 @@ export default function Header() {
   // bg-[#041019]
   return (
     <main
-      className={`fixed top-0 left-0 right-0 z-50 w-full bg-[#673DE6] backdrop-blur-sm bg-opacity-95`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] backdrop-blur-sm`}
     >
-      <div className="marquee-container flex items-center h-8 w-full gap-5 overflow-x-hidden border-b border-[#673DE6]/20">
+      <div className="marquee-container flex items-center h-8 w-full gap-5 overflow-x-hidden">
         <div className="marquee-bar flex text-sm whitespace-nowrap animate-marquee hover:animation-paused">
           🚀 We sell crypto tokens to our customer before launching this token. 🤑 So my business is crypto private deal. 🔥
         </div>
@@ -105,13 +105,13 @@ export default function Header() {
         <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
             href="/"
-            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Home
           </Link>
           <Link
             href="/dashboard"
-            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+            className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Dashboard
           </Link>
@@ -123,37 +123,37 @@ export default function Header() {
                     <>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All members
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All investors
                       </Link>
                       <Link
                         href="/dealcreate"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Create New Deal
                       </Link>
                       <Link
                         href="/alldeals"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         All Deals
                       </Link>
                       <Link
                         href="/distribution"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Distribution
                       </Link>
                       <Link
                         href="/referral"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Referral
                       </Link>
@@ -161,31 +161,31 @@ export default function Header() {
                     <>
                       <Link
                         href="/portfolio"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Portfolios
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Withdraw
                       </Link>
                       <Link
                         href="/referral"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         Referral
                       </Link>
                       <Link
                         href="/"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         KYC
                       </Link>
                       <Link
                         href="/userranking"
-                        className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                        className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                       >
                         User Ranking
                       </Link>
@@ -198,7 +198,7 @@ export default function Header() {
             isConnected ?
               <Link
                 href="/profile"
-                className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
+                className={`cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition hidden lg:inline-block`}
               >
                 Profile
               </Link> :
@@ -207,71 +207,28 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
-          {/* <Link to="presale" className="hidden xl:flex"> */}
           <div
-            className={`flex items-center justify-center relative bg-[#6EC1E4] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}
+            className={`flex items-center justify-center relative bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-black rounded-lg w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis hover:from-[#4A9BC1] hover:to-[#6EC1E4] transition-all duration-300`}
           >
             <div className="flex w-full justify-between gap-2">
               {!isConnected ? (
-                // primary 
                 <button
                   className="h-[30.78px] md:h-[45px] w-full"
                   onClick={() => web3Modal.open()}
                 >
                   Sign In
                 </button>
-              ) :
-                (
-                  // secondary
-                  <button
-                    className="h-[30.78px] md:h-[45px] w-full relative"
-                    onClick={() => web3Modal.disconnect()}
-                  >
-                    <span>{shortenAddress(address)}</span>
-                    <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
-                  </button>
-                )}
+              ) : (
+                <button
+                  className="h-[30.78px] md:h-[45px] w-full relative"
+                  onClick={() => web3Modal.disconnect()}
+                >
+                  <span>{shortenAddress(address)}</span>
+                  <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
+                </button>
+              )}
             </div>
           </div>
-          {/* </Link> */}
-
-          {/* <div className="relative">
-            <div
-              className="flex gap-1 cursor-pointer"
-              onClick={() => setShowLang((prev) => !prev)}
-            >
-              <img
-                src={`./images/flags/${lang.flag}.svg`}
-                className="w-6 h-6 rounded-lg"
-                alt="flag"
-              />
-              <span className={`leading-6 hidden md:block text-white`}>
-                {lang?.flag.toUpperCase()}
-              </span>
-            </div>
-
-            {showLang && (
-              <div
-                className="absolute flex flex-col right-0 top-8 bg-[#0d213bd0] h-[240px] overflow-y-scroll overflow-x-hidden rounded-lg w-[200px]"
-                ref={ref}
-              >
-                {LanugageConfig.map((language) => (
-                  <div
-                    className="flex gap-2 hover:bg-[#0d213b] px-2 py-1 cursor-pointer"
-                    key={language.language}
-                    onClick={() => onChangeLanguage(language)}
-                  >
-                    <img
-                      src={`./images/flags/${language.flag}.svg`}
-                      className="w-6 h-6 rounded-lg"
-                      alt="flag"
-                    />
-                    <span>{language.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div> */}
         </div>
       </div>
 

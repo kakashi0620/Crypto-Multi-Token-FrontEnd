@@ -168,7 +168,7 @@ export default function Referral() {
 
         {/* Withdraw */}
         <div className="w-full py-10 item-center flex flex-col md:flex-row gap-8">
-          <div className={`flex items-center justify-center relative bg-[#673DE6] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}>
+          <div className={`flex items-center justify-center relative bg-gradient-to-r from-[#1A1A1A] to-[#242424] text-white rounded-lg w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis hover:from-[#242424] hover:to-[#1A1A1A]`}>
             <div className="flex w-full justify-between">
               <button className="h-[30.78px] md:h-[45px] w-full" onClick={() => onWithdraw()} >
                 Withdraw
@@ -177,7 +177,7 @@ export default function Referral() {
           </div>
 
           <div className="text-xl traking-[-2px] font-normal text-light-white">
-            After making withdrawal request, balance will show under “Pending Withdrawal”. Admin will send this payment manually and update as “Completed Payment” with a note of TrxID from admin dashboard.
+            After making withdrawal request, balance will show under "Pending Withdrawal". Admin will send this payment manually and update as "Completed Payment" with a note of TrxID from admin dashboard.
           </div>
         </div>
 

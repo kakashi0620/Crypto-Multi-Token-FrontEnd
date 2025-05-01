@@ -84,7 +84,7 @@ export default function HowtoBuy() {
               >
                 <label className="block text-gray-400 text-lg mb-2">Token Buy Price</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-[#673DE6]/20 overflow-hidden group transition-all duration-300 hover:border-[#673DE6]/40">
+                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
                     <span className="pl-4 text-gray-400">$</span>
                     <input
                       type="number"
@@ -108,7 +108,7 @@ export default function HowtoBuy() {
               >
                 <label className="block text-gray-400 text-lg mb-2">Investment Amount</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-[#673DE6]/20 overflow-hidden group transition-all duration-300 hover:border-[#673DE6]/40">
+                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
                     <span className="pl-4 text-gray-400">$</span>
                     <input
                       type="number"
@@ -132,7 +132,7 @@ export default function HowtoBuy() {
               >
                 <label className="block text-gray-400 text-lg mb-2">Token Sell Price</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-[#673DE6]/20 overflow-hidden group transition-all duration-300 hover:border-[#673DE6]/40">
+                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
                     <span className="pl-4 text-gray-400">$</span>
                     <input
                       type="number"
@@ -156,7 +156,7 @@ export default function HowtoBuy() {
               >
                 <button
                   onClick={calculateProfit}
-                  className="w-full py-3 px-6 text-lg bg-[#673DE6] text-white rounded-lg hover:bg-[#5733C2] transition-all duration-300 transform hover:scale-[1.02]"
+                  className="w-full py-3 px-6 text-lg bg-[#6EC1E4] text-white rounded-lg hover:bg-[#4A9BC1] transition-all duration-300 transform hover:scale-[1.02]"
                 >
                   Calculate
                 </button>
@@ -171,8 +171,8 @@ export default function HowtoBuy() {
             >
               <div className="inline-block relative p-6 rounded-lg">
                 <div className="relative text-xl text-light-white">
-                  <span className="text-[#5804FA] font-bold">${profit}</span> <span className="text-black">is your sell volume from this deal.{' '}
-                  Its </span><span className="text-[#5804FA] font-bold">{multiplier}X</span>
+                  <span className="text-[#6EC1E4] font-bold">${profit}</span> <span className="text-black">is your sell volume from this deal.{' '}
+                  Its </span><span className="text-[#6EC1E4] font-bold">{multiplier}X</span>
                 </div>
               </div>
             </motion.div>

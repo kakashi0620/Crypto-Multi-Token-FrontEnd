@@ -44,7 +44,8 @@ const ProfilePage: NextPage = () => {
   const getUserID = async () => {
     console.log("rider getUserCount url=>", `${getBackend()}/api/users/getUserCount`)
 
-    const userCount = await axios.get(`${getBackend()}/api/users/getUserCount`, {withCredentials: true});
+    const backendURL = getBackend();
+    const userCount = await axios.get(`${backendURL}/api/users/getUserCount`);
 
     let uidStr = "WC";
     const zeroCount = 5 - userCount.data.toString().length;

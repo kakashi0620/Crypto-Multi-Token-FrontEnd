@@ -62,7 +62,7 @@
   max-width: 1294px;
   width: 100%;
   margin: auto;
-  background: #673DE6;
+  background: #1A1A1A;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.52);
   backdrop-filter: blur(15.35px);
   border-radius: 12px;
@@ -71,7 +71,7 @@
     content: "";
     width: 1px;
     position: absolute;
-    background: linear-gradient(0deg, #6EC1E4, #673DE6 17.83%, #6EC1E4);
+    background: linear-gradient(0deg, #242424, #1A1A1A 17.83%, #242424);
     border-radius: 12.582px 12.582px 0 0;
     left: 0;
     top: 10%;
@@ -83,5 +83,5 @@
   // background-image: url("/images/noise.png");
   // background-position: 50% 0%;
   // background-repeat: no-repeat;
-  background: #5804FA;
+  background: #242424;
 }

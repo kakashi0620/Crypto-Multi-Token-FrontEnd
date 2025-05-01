@@ -25,7 +25,7 @@ html {
 body {
   color: #fff;
   // background: #041019;
-  background: linear-gradient(180deg, #673DE6, #6EC1E4 45.83%, #673DE6);
+  background: linear-gradient(180deg, #1A1A1A, #242424 45.83%, #1A1A1A);
   font-size: 15.03px;
   font-weight: 500;
 }
@@ -49,8 +49,8 @@ body {
       rgba(0, 0, 0, 0) 0%,
       #00000000 100%
     ),
-    radial-gradient(99% 99% at 50% 0.21%, #112c4b 0%, rgb(17 40 75) 100%) !important;
-  box-shadow: 0px 3px 6px 0px #34a6f970 inset;
+    radial-gradient(99% 99% at 50% 0.21%, #1A1A1A 0%, #242424 100%) !important;
+  box-shadow: 0px 3px 6px 0px rgba(255, 255, 255, 0.1) inset;
 }
 
 .slick-slide > div {
@@ -58,8 +58,8 @@ body {
 }
 
 .slick-slide .slide-item {
-  background: #5804FA;
-  border: 1px solid #6EC1E4;
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   /* Add horizontal margin to each slide's inner div */
 }
 
@@ -264,11 +264,11 @@ ul {
 }
 
 .input-text {
-  @apply block w-full rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6 #{!important};
+  @apply block w-full rounded-md border-0 p-1 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6 #{!important};
 }
 
 .input-text-bright {
-  @apply block w-full rounded-md border-0 p-1 bg-white text-black shadow-sm ring-1 ring-inset ring-black placeholder:text-black focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6 #{!important};
+  @apply block w-full rounded-md border-0 p-1 bg-white text-black shadow-sm ring-1 ring-inset ring-black placeholder:text-black focus:ring-2 focus:ring-inset focus:ring-[#242424] sm:text-base sm:leading-6 #{!important};
 }
 
 .check-container {
