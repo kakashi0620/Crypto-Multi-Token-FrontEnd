@@ -1,67 +1,147 @@
-import React from "react";
+import axios from "axios"
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import VerticalDivider from "./_components/Icons/VerticalDivider";
+
+import { Poppins } from "next/font/google";
+import { AgGridReact } from 'ag-grid-react';
+import type { ColDef, RowSelectionOptions } from "ag-grid-community";
+import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
+import { IReferralGridRowData } from "../interface/ReferralGridRowData";
+import { useUser } from "../hooks/userContext";
+import { getBackend } from "./utils";
+
+
+ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200", "400", "600", "800"],
+});
 
 export default function Referral() {
 
-  const Referrers = [
-    {
-      no: "1",
-      level: "1",
-      name: "rsi",
-      date: "2025/3/30",
-      total: "24000",
-      bonus: "130",
-    },
-    {
-      no: "2",
-      level: "2",
-      name: "maxym",
-      date: "2025/3/28",
-      total: "35000",
-      bonus: "80",
-    },
-    {
-      no: "3",
-      level: "3",
-      name: "vadym",
-      date: "2025/3/29",
-      total: "11000",
-      bonus: "30",
-    },
+  const { user } = useUser()
+
+  const [rowData1, setRowData1] = useState<IReferralGridRowData[]>([]);
+
+  const columnDefs1: ColDef[] = [
+    { headerName: "Level", field: 'level', flex: 1 },
+    { headerName: "User name", field: 'from', flex: 2 },
+    // { headerName: "Date", field: 'date', flex: 3 },
+    // { headerName: "Chain", field: 'chain', flex: 3 },
+    // { headerName: "Wallet", field: 'wallet', flex: 6 },
+    { headerName: "Amount", field: 'amount', flex: 1 },
+    { headerName: "State", field: 'state', flex: 2 },
   ];
 
-  const WithdrawHistory = [
-    {
-      no: "1",
-      date: "2025/3/30",
-      chain: "BEP-20",
-      wallet: "0x3C8cd0dB9a01EfA063a7760267b822A129bc7DCA",
-      amount: "1732",
-      status: "Pending",
-      details: ""
-    },
-    {
-      no: "2",
-      date: "2025/3/29",
-      chain: "ERC-20",
-      wallet: "0x54F219469f8d6b938BD2D86d2b0256Ed4cC3f8dA",
-      amount: "476",
-      status: "Approved",
-      details: ""
-    },
-    {
-      no: "3",
-      date: "2025/3/28",
-      chain: "ERC-20",
-      wallet: "0x6881B80ea7C858E4aEEf63893e18a8A36f3682f3",
-      amount: "8465",
-      status: "Rejected",
-      details: ""
-    }
+  const [rowData2, setRowData2] = useState<IReferralGridRowData[]>([]);
+
+  const columnDefs2: ColDef[] = [
+    { headerName: "Level", field: 'level', flex: 1 },
+    { headerName: "User name", field: 'from', flex: 2 },
+    { headerName: "Date", field: 'date', flex: 3 },
+    { headerName: "Chain", field: 'chain', flex: 3 },
+    { headerName: "Wallet", field: 'wallet', flex: 4 },
+    { headerName: "Amount", field: 'amount', flex: 1 },
+    { headerName: "State", field: 'state', flex: 2 },
   ];
+
+  const [withdrawable, setWithdrawable] = useState<IReferralGridRowData[]>()
+  const [history, setHistory] = useState<IReferralGridRowData[]>()
+  useEffect(() => {
+    fetchReferralData()
+  }, [])
+
+  const fetchReferralData = async () => {
+    axios.get(`${getBackend()}/api/referrals/withdrawable/${user?.userId}`)
+      .then(res => {
+        console.log('referral =.', res.data)
+        setWithdrawable(res.data);
+      })
+      .catch(e => {
+        console.log("get withdrawable error:", e)
+      })
+
+    axios.get(`${getBackend()}/api/referrals/history/${user?.userId}`)
+      .then(res => {
+        console.log('referral =.', res.data)
+        setHistory(res.data);
+      })
+      .catch(e => {
+        console.log("get history error:", e)
+      })
+  }
+
+  useEffect(() => {
+    if (withdrawable) {
+      const fillTable = async () => {
+        let investArray: any[] = [];
+
+        withdrawable.map(async (referral, index) => {
+
+          investArray.push({
+            level: referral.level,
+            from: referral.from,
+            date: referral.date,
+            chain: referral.chain,
+            wallet: referral.wallet,
+            amount: referral.amount,
+            state: referral.state,
+          });
+        })
+
+        setRowData1(investArray)
+      }
+
+      fillTable();
+    }
+
+    if (history) {
+      const fillTable = async () => {
+        let investArray: any[] = [];
+
+        history.map(async (referral, index) => {
+
+          investArray.push({
+            level: referral.level,
+            from: referral.from,
+            date: referral.date,
+            chain: referral.chain,
+            wallet: referral.wallet,
+            amount: referral.amount,
+            state: referral.state,
+          });
+        })
+
+        setRowData2(investArray)
+      }
+
+      fillTable();
+    }
+  }, [withdrawable, history])
+
+  const [defaultColDef, setDefaultColDef] = useState({
+    resizable: true,
+  });
+
+  const gridOption = React.useMemo(() => {
+    return {
+      pagination: true,
+      paginationPageSize: 10,
+      // paginationPageSizeSelector: [10, 20, 30, 40, 50],
+    };
+  }, []);
 
   const onWithdraw = () => {
-
+    axios.post(`${getBackend()}/api/referrals/withdraw/${user?.userId}`)
+    .then(res => {
+      toast.success("Withdraw successfully done! 🎉");
+      fetchReferralData()
+    })
+    .catch(err => {
+      toast.error("Withdraw failed.")
+    })
   }
 
   return (
@@ -74,66 +154,21 @@ export default function Referral() {
             Referral Information
           </div>
 
-          <div className="referrer-table flex flex-col gap-2 overflow-x-auto whitespace-nowrap">
-            <div className="referrer-header referrer-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-[#6EC1E4] items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  No
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Level
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Username
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Joined Date
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Total Invest
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Bonus Earn
-                </span>
-              </div>
-            </div>
-
-            <div className="referrer-body flex flex-col font-normal py-4 gap-2 md:gap-4 linear-border-top-left">
-              {Referrers.map((item) => (
-                <div
-                  key={item.no}
-                  className="referrer-row"
-                >
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.no}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.level}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.name}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.date}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.total}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.bonus}</span>
-                </div>
-              ))}
+          <div className="flex w-full">
+            <div style={{ width: "100%", height: "30vh" }}>
+              <AgGridReact
+                rowData={rowData1}
+                columnDefs={columnDefs1}
+                domLayout="autoHeight"
+                defaultColDef={defaultColDef}
+                gridOptions={gridOption} />
             </div>
           </div>
         </div>
 
         {/* Withdraw */}
         <div className="w-full py-10 item-center flex flex-col md:flex-row gap-8">
-          <div className={`flex items-center justify-center relative bg-[#6EC1E4] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}>
+          <div className={`flex items-center justify-center relative bg-[#673DE6] text-black rounded-lg  w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis`}>
             <div className="flex w-full justify-between">
               <button className="h-[30.78px] md:h-[45px] w-full" onClick={() => onWithdraw()} >
                 Withdraw
@@ -152,66 +187,14 @@ export default function Referral() {
             Withdrawal History
           </div>
 
-          <div className="withdraw-table flex flex-col w-full gap-2 overflow-x-auto whitespace-nowrap">
-            <div className="withdraw-header withdraw-row items-center h-[33.76px] md:h-[49.28px]">
-              <div className="flex text-[#6EC1E4] items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  SN
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Date
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Chain
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Wallet Address
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Amount
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Status
-                </span>
-                <VerticalDivider />
-              </div>
-              <div className="flex items-center gap-2 cell-ellipsis">
-                <span className="w-full text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">
-                  Details
-                </span>
-              </div>
-            </div>
-
-            <div className="withdraw-body flex flex-col font-normal py-4 gap-2 md:gap-4 linear-border-top-left">
-              {WithdrawHistory.map((item) => (
-                <div
-                  key={item.no}
-                  className="withdraw-row"
-                >
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.no}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.date}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.chain}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.wallet}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.amount}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.status}</span>
-                  <span className="text-center cell-ellipsis text-[11.2px] md:text-[16.34px]">{item.details}</span>
-                </div>
-              ))}
+          <div className="flex w-full">
+            <div style={{ width: "100%", height: "30vh" }}>
+              <AgGridReact
+                rowData={rowData2}
+                columnDefs={columnDefs2}
+                domLayout="autoHeight"
+                defaultColDef={defaultColDef}
+                gridOptions={gridOption} />
             </div>
           </div>
         </div>
