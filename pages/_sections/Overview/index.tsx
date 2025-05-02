@@ -57,7 +57,7 @@ export default function Overview() {
   const { t } = useTranslation();
 
   return (
-    <main className="flex flex-col items-center justify-center py-20 z-10 relative bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A]">
+    <main className="flex flex-col items-center justify-center pt-2 pb-10 md:pb-16 lg:pb-20 z-10 relative bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2A2A2A]/30 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2A2A2A]/20 via-transparent to-transparent" />
       
@@ -65,16 +65,16 @@ export default function Overview() {
         <div className="flex flex-col gap-2 justify-center items-center overflow-hidden">
           <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-8 px-4 lg:px-20">
             {/* Stats Section */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 flex flex-col gap-4">
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-[15px] lg:text-[50px] leading-[54px] lg:leading-[96px] tracking-[-2px] text-white whitespace-nowrap min-w-fit"
+                className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[50px] leading-[32px] sm:leading-[40px] md:leading-[54px] lg:leading-[96px] tracking-[-1px] sm:tracking-[-1.5px] md:tracking-[-2px] text-white whitespace-normal sm:whitespace-nowrap min-w-fit"
               >
                 Invest in Crypto Private Deal
               </motion.h1>
-              <div className="text-gray-400 mb-6 text-2xl font-normal">at VC price</div>
+              <div className="text-gray-400 mb-6 text-lg sm:text-xl md:text-2xl font-normal">at VC price</div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
                 <StatsItem value="$515K" label="Invested" delay={0.1} />
                 <StatsItem value="26" label="Deals" delay={0.2} />
@@ -84,7 +84,7 @@ export default function Overview() {
             </div>
 
             {/* Video Section */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 mt-16 lg:mt-0">
               <div className="onStep flex justify-center z-10 w-full">
                 <div className="relative w-full max-w-[576px]">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#2A2A2A] via-[#333333] to-[#2A2A2A] rounded-[12px] blur-md opacity-50" />
