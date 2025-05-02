@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useClickAway, useLocation } from "react-use";
+import { useClickAway } from "react-use";
 import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import { LanugageConfig } from "../../../config/languageConfig";
 import { motion, AnimatePresence } from "framer-motion";
-import { HamburgerIcon } from "../../_components/Icons/Hamburger";
+import HamburgerIcon from "../../_components/Icons/Hamburger";
 
 import { useAccount } from "wagmi";
 import { web3Modal } from "../../_app";
@@ -28,7 +28,6 @@ export default function Header() {
   const { address, isConnected } = useAccount();
   const { user, setUser } = useUser();
   const router = useRouter();
-  const location = useLocation();
 
   const routeDashboard = async () => {
     axios.post(

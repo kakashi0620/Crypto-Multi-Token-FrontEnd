@@ -4,7 +4,7 @@ interface HamburgerIconProps {
   className?: string;
 }
 
-export const HamburgerIcon: React.FC<HamburgerIconProps> = ({ className = '' }) => {
+const HamburgerIcon: React.FC<HamburgerIconProps> = ({ className = '' }) => {
   return (
     <svg
       className={className}
@@ -21,4 +21,6 @@ export const HamburgerIcon: React.FC<HamburgerIconProps> = ({ className = '' }) 
       />
     </svg>
   );
-}; 
+};
+
+export default HamburgerIcon; 
