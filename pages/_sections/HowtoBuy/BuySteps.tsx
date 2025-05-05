@@ -7,7 +7,7 @@ export default function BuySteps() {
   const { t } = useTranslation();
   return (
     <div className="grid xl:grid-cols-3 w-fit m-auto gap-12">
-      <div className="flex flex-col relative w-[370px] h-[318px] p-4 gap-4 lg:mt-12 bg-white rounded-lg">
+      <div className="flex flex-col relative w-full xl:w-[370px] h-[318px] p-4 gap-4 lg:mt-12 bg-white rounded-lg">
         <div className="flex flex-col gap-2">
           <SignUpIcon />
           <span className="text-[21px] font-semibold">
@@ -21,7 +21,7 @@ export default function BuySteps() {
         </span>
       </div>
 
-      <div className="flex flex-col relative w-[370px] h-[318px] p-4 gap-4 bg-white rounded-lg">
+      <div className="flex flex-col relative w-full xl:w-[370px] h-[318px] p-4 gap-4 bg-white rounded-lg">
         <div className="flex flex-col gap-2">
           <SelectCurrencyIcon />
           <span className="text-[21px] font-semibold">
@@ -35,7 +35,7 @@ export default function BuySteps() {
         </span>
       </div>
 
-      <div className="flex flex-col relative w-[370px] h-[318px] p-4 gap-4 lg:mt-12 bg-white rounded-lg">
+      <div className="flex flex-col relative w-full xl:w-[370px] h-[318px] p-4 gap-4 lg:mt-12 bg-white rounded-lg">
         <div className="flex flex-col gap-2">
           <BuyClaimIcon />
           <span className="text-[21px] font-semibold">

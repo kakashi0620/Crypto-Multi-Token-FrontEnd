@@ -1,16 +1,27 @@
 import React from "react";
 import { useClickAway } from "react-use";
 import { useRef, useState } from "react";
-// import { Link as ScrollLink } from "react-scroll";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { AnimatePresence, motion } from "framer-motion";
-import { Squash as Hamburger } from "hamburger-react";
 import LogoIcon from "../Icons/Logo";
 import NavbarIcon from "../Icons/Navbar";
 import Link from "next/link";
 import RightIcon from "../Icons/Right";
 import { useTranslation } from "react-i18next";
 
-const NavList = [
+import { shortenAddress } from "../../utils";
+import { useAccount } from "wagmi";
+import { web3Modal } from "../../_app";
+import DisconnectIcon from "../../_components/Icons/Disconnect";
+
+interface NavItem {
+  title: string;
+  href: string;
+  page?: boolean;
+  target?: string;
+}
+
+const NavList: NavItem[] = [
   {
     title: "Home",
     href: "/",
@@ -25,7 +36,7 @@ const NavList = [
     title: "Dashboard",
     href: "/dashboard",
     page: true,
-  },  
+  },
   {
     title: "Referral",
     href: "/referral",
@@ -33,17 +44,29 @@ const NavList = [
   }
 ];
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu(): JSX.Element {
   const { t } = useTranslation();
-  const [isOpen, setOpen] = useState(false);
-  const ref = useRef(null);
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const { address, isConnected } = useAccount();
 
   useClickAway(ref, () => setOpen(false));
+
+  const handleScrollToElement = (elementId: string): void => {
+    setOpen(false);
+    const element = document.getElementById(elementId);
+    if (element) {
+      scroll.scrollTo(element.offsetTop, {
+        duration: 500,
+        smooth: true,
+      });
+    }
+  };
 
   return (
     <div
       ref={ref}
-      className="relative flex items-center gap-4 lg:hidden z-40 pr-4 lg:pr-12"
+      className="relative flex items-center gap-2 lg:hidden z-40 pr-4 lg:pr-12"
     >
       <NavbarIcon className="size-6" onClick={() => setOpen(true)} />
       <AnimatePresence>
@@ -93,7 +116,7 @@ export default function HamburgerMenu() {
                     >
                       {item.page ? (
                         <Link
-                          onClick={() => setOpen((prev) => !prev)}
+                          onClick={() => setOpen(false)}
                           href={item.href}
                           className={
                             "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
@@ -103,45 +126,44 @@ export default function HamburgerMenu() {
                             {item.title}
                           </span>
                         </Link>
-                      // ) : item.target ? (
-                      //   <Link
-                      //     onClick={() => setOpen((prev) => !prev)}
-                      //     href={item.href}
-                      //     target="_blank"
-                      //     className={
-                      //       "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
-                      //     }
-                      //   >
-                      //     <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
-                      //       {item.title}
-                      //     </span>
-                      //   </Link>
-                      ) : (<></>
-                        // <ScrollLink
-                        //   onClick={() => setOpen((prev) => !prev)}
-                        //   className={
-                        //     "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
-                        //   }
-                        //   to={item.href}
-                        // >
-                        //   <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
-                        //     {item.title}
-                        //   </span>
-                        // </ScrollLink>
-                      )}
+                      ) : (<></>)}
                     </motion.li>
                   );
                 })}
               </ul>
 
-              {/* <ScrollLink to="presale" onClick={() => setOpen((prev) => !prev)}>
-                <button className="third h-[48px] w-[321px] relative mb-12">
-                  <span className="text-[21px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis max-w-[80%]">
-                    {t("join_presale")}
-                  </span>
-                  <RightIcon className="absolute right-8 scale-50" />
-                </button>
-              </ScrollLink> */}
+              {/* Replace ScrollLink with a button that uses the scroll function */}
+              <div 
+                onClick={() => handleScrollToElement("presale")}
+                className={`flex items-center justify-center relative bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-black rounded-lg 
+                          w-[160px] h-[40px] md:w-[250px] md:h-[48px] mb-2 cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis 
+                        hover:from-[#4A9BC1] hover:to-[#6EC1E4] transition-all duration-300`}
+              >
+                <div className="flex w-full justify-between gap-2">
+                  {!isConnected ? (
+                    <button
+                      className="h-[30.78px] md:h-[45px] w-full"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent triggering the parent onClick
+                        web3Modal.open();
+                      }}
+                    >
+                      Sign In
+                    </button>
+                  ) : (
+                    <button
+                      className="h-[30.78px] md:h-[45px] w-full relative"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent triggering the parent onClick
+                        web3Modal.disconnect();
+                      }}
+                    >
+                      <span>{shortenAddress(address)}</span>
+                      <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

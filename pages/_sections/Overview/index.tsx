@@ -11,12 +11,12 @@ import { useTranslation } from "react-i18next";
 import BuyNow from "./BuyNow";
 import { motion } from "framer-motion";
 
-function StatsItem({ 
-  value, 
+function StatsItem({
+  value,
   label,
   delay
-}: { 
-  value: string; 
+}: {
+  value: string;
   label: string;
   delay: number;
 }) {
@@ -57,66 +57,56 @@ export default function Overview() {
   const { t } = useTranslation();
 
   return (
-    <main className="flex flex-col items-center justify-center pt-2 pb-10 md:pb-16 lg:pb-20 z-10 relative bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2A2A2A]/30 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2A2A2A]/20 via-transparent to-transparent" />
-      
-      <div className="w-full flex flex-col gap-6 relative z-10 font-semibold justify-center items-center">
-        <div className="flex flex-col gap-2 justify-center items-center overflow-hidden">
-          <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-8 px-4 lg:px-20">
+    <main className="flex flex-col items-center justify-center lg:pt-32 z-10 relative">
+      <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 lg:-mt-10">
+          <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
             {/* Stats Section */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-4">
-              <motion.h1 
+            <div className="flex flex-col gap-2 overflow-hidden">
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[50px] leading-[32px] sm:leading-[40px] md:leading-[54px] lg:leading-[96px] tracking-[-1px] sm:tracking-[-1.5px] md:tracking-[-2px] text-white whitespace-normal sm:whitespace-nowrap min-w-fit"
+                className="text-[50px] lg:text-[90px] leading-[54px] lg:leading-[96px] traking-[-2px] text-light-white max-w-[700px] text-center lg:text-left"
               >
                 Invest in Crypto Private Deal
+                {/* <span className="text-lg sm:text-xl md:text-2xl">at VC price</span> */}
               </motion.h1>
-              <div className="text-gray-400 mb-6 text-lg sm:text-xl md:text-2xl font-normal">at VC price</div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+              <div className="flex gap-2 md:gap-4 lg:gap-8 items-center justify-center lg:justify-start">
                 <StatsItem value="$515K" label="Invested" delay={0.1} />
                 <StatsItem value="26" label="Deals" delay={0.2} />
                 <StatsItem value="135" label="Investors" delay={0.3} />
                 <StatsItem value="71" label="Leaders" delay={0.4} />
               </div>
             </div>
-
+          </div>
+          <div className="flex w-full justify-center relative z-10">
             {/* Video Section */}
-            <div className="w-full lg:w-1/2 mt-16 lg:mt-0">
-              <div className="onStep flex justify-center z-10 w-full">
-                <div className="relative w-full max-w-[576px]">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#2A2A2A] via-[#333333] to-[#2A2A2A] rounded-[12px] blur-md opacity-50" />
-                  <video
-                    className="relative w-full pointer-events-none rounded-[11.27px] border border-white/10 bg-[#1A1A1A]"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  >
-                    <source src="/video/welcome.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+            <div className="onStep flex justify-center z-10 w-full">
+              <div className="relative w-full max-w-[576px]">
+                <video
+                  className="relative w-full pointer-events-none rounded-[11.27px] border border-[#6EC1E4]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/video/welcome.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="w-full py-10 hidden lg:flex">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#333333] to-transparent" />
-      </div>
-
-      <div className="w-full px-4 lg:px-20">
-        <div className="w-full flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
-          <div className="flex w-full justify-center mb-10 relative z-0">
-            <div className="onStep flex justify-end z-10 w-full">
+        <div className="w-full py-10 hidden lg:flex">
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#6EC1E4] to-transparent" />
+        </div>
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-20 mb-10">
+          <div className="flex w-full justify-center relative z-0">
+            <div className="onStep flex justify-center z-10 w-full">
               <div className="relative w-full max-w-[576px]">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#2A2A2A] via-[#333333] to-[#2A2A2A] rounded-[12px] blur-md opacity-50" />
                 <video
-                  className="relative w-full pointer-events-none rounded-[11.27px] border border-white/10 bg-[#1A1A1A]"
+                  className="relative w-full pointer-events-none rounded-[11.27px] border border-[#6EC1E4]"
                   autoPlay
                   loop
                   muted
@@ -128,13 +118,12 @@ export default function Overview() {
               </div>
             </div>
           </div>
-          
-          <div className="flex flex-col gap-8 relative z-10">
+          <div className="flex flex-col gap-6 relative z-10 font-semibold justify-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-[36px] lg:text-[50px] leading-[1.2] tracking-[-0.8px] text-white font-semibold"
+              className="text-[36px] lg:text-[50px] leading-[46px] traking-[-0.8px] text-light-white max-w-[700px]"
             >
               Why choose us?
             </motion.h2>

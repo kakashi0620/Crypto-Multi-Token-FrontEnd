@@ -75,7 +75,7 @@ export default function HowtoBuy() {
           className="max-w-5xl w-full relative z-10"
         >
           <div className="relative p-10 lg:p-16 mb-12 rounded-xl border border-white bg-white backdrop-blur-xl">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

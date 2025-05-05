@@ -24,8 +24,7 @@ html {
 
 body {
   color: #fff;
-  // background: #041019;
-  background: linear-gradient(180deg, #1A1A1A, #242424 45.83%, #1A1A1A);
+  background: #041019;
   font-size: 15.03px;
   font-weight: 500;
 }
@@ -49,7 +48,7 @@ body {
       rgba(0, 0, 0, 0) 0%,
       #00000000 100%
     ),
-    radial-gradient(99% 99% at 50% 0.21%, #1A1A1A 0%, #242424 100%) !important;
+    radial-gradient(99% 99% at 50% 0.21%, #112c4b 0%, rgb(17 40 75) 100%) !important;
   box-shadow: 0px 3px 6px 0px rgba(255, 255, 255, 0.1) inset;
 }
 

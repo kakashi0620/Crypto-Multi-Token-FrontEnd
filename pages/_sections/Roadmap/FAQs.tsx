@@ -44,17 +44,14 @@ export default function FAQs() {
 
   return (
     <div className="relative overflow-hidden">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         className="max-w-4xl w-full relative z-10 mx-auto"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] rounded-xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2A2A2A]/30 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2A2A2A]/20 via-transparent to-transparent" />
-        
-        <div className="relative p-8 md:p-16 rounded-xl border border-white/5 bg-black/20 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-faq" />
+        <div className="relative p-8 md:p-16 rounded-xl">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col w-full gap-4">
               <span className="text-center text-[32px] leading-[38px] md:text-[60px] md:leading-[66px] tracking-[-2px] text-white">
@@ -71,11 +68,10 @@ export default function FAQs() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold border border-white/10 rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis transition-all duration-300 ${
-                    index === tabIndex 
-                      ? "bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-white" 
+                  className={`px-2 md:px-8 py-1 md:py-2 text-[14.55px] md:text-[25px] font-semibold rounded-full cursor-pointer overflow-hidden whitespace-nowrap text-ellipsis transition-all duration-300 ${index === tabIndex
+                      ? "bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-white"
                       : "text-gray-300 hover:border-white/20"
-                  }`}
+                    }`}
                   onClick={() => {
                     setTabIndex(index);
                     setSubIndex(0);
@@ -100,11 +96,10 @@ export default function FAQs() {
                     <FAQIcon className="text-[#6EC1E4]" />
                   </div>
                   <div
-                    className="relative group cursor-pointer"
+                    className="flex flex-col text-left faq-content px-1 md:px-6 py-1 md:py-3 gap-4 relative cursor-pointer"
                     onClick={() => setSubIndex(index)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] rounded-lg opacity-50" />
-                    <div className="relative flex flex-col text-left px-8 py-4 gap-4 border border-white/5 rounded-lg bg-black/20 backdrop-blur-sm transition-all duration-300 group-hover:border-white/10">
+                    <div className="relative flex flex-col text-left px-1 md:px-6 py-1 md:py-3 ">
                       <AnimatePresence mode="wait">
                         {index === subIndex ? (
                           <motion.div
@@ -122,8 +117,8 @@ export default function FAQs() {
                                 {faq.content}
                               </div>
                             </div>
-                            <motion.div 
-                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
+                            <motion.div
+                              className="absolute right-1 bottom-1 md:right-2 md:bottom-2 p-1 md:p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
                               animate={{ rotate: 180 }}
                               transition={{ duration: 0.3 }}
                             >
@@ -141,8 +136,8 @@ export default function FAQs() {
                             <span className="text-[20px] font-normal text-gray-300 tracking-[-0.8px] pr-4">
                               {faq.title}
                             </span>
-                            <motion.div 
-                              className="absolute right-4 bottom-4 p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
+                            <motion.div
+                              className="absolute right-1 bottom-1 md:right-2 md:bottom-2 p-1 md:p-2 rounded-full border border-white/10 bg-black/20 text-white transition-all duration-300 group-hover:border-white/20"
                               animate={{ rotate: 0 }}
                               transition={{ duration: 0.3 }}
                             >

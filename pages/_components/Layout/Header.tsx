@@ -6,7 +6,8 @@ import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import { LanugageConfig } from "../../../config/languageConfig";
 import { motion, AnimatePresence } from "framer-motion";
-import HamburgerIcon from "../../_components/Icons/Hamburger";
+// Import scroller instead of ScrollLink
+import { scroller } from "react-scroll";
 
 import { useAccount } from "wagmi";
 import { web3Modal } from "../../_app";
@@ -47,6 +48,16 @@ export default function Header() {
       });
   }
 
+  // Scroll handler function
+  const scrollToPresale = () => {
+    scroller.scrollTo('presale', {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      offset: -70, // Adjust based on header height
+    });
+  };
+
   useEffect(() => {
     if (isConnected) {
       routeDashboard();
@@ -54,22 +65,16 @@ export default function Header() {
     else {
       router.push('/')
     }
-  }, [, isConnected]);
+  }, [isConnected]);
 
   return (
     <main
-      className={`fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-b from-[#1A1A1A] via-[#242424] to-[#1A1A1A] backdrop-blur-sm`}
+      className={`relative z-20 w-full px-4 lg:px-12 2xl:px-20 py-5 bg-[#041019]`}
     >
-      <div className="marquee-container flex items-center h-8 w-full gap-5 overflow-x-hidden">
-        <div className="marquee-bar flex text-sm whitespace-nowrap animate-marquee hover:animation-paused">
-          🚀 We sell crypto tokens to our customer before launching this token. 🤑 So my business is crypto private deal. 🔥
-        </div>
-      </div>
-      
-      <div className="flex items-center justify-between relative z-10 px-4 lg:px-12 2xl:px-20 py-5">
+      <div className="flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center">
           <img
-            className="w-32 md:w-40"
+            className="w-46 md:w-50"
             src={"./images/logo.png"}
             draggable={false}
             alt="logo"
@@ -77,16 +82,16 @@ export default function Header() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
+        <div className="flex items-center gap-2 lg:gap-4 xl:gap-6 text-base">
           <Link
             href="/"
-            className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Home
           </Link>
           <Link
             href="/dashboard"
-            className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+            className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
           >
             Dashboard
           </Link>
@@ -96,37 +101,37 @@ export default function Header() {
                 <>
                   <Link
                     href="/"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     All members
                   </Link>
                   <Link
                     href="/"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     All investors
                   </Link>
                   <Link
                     href="/dealcreate"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Create New Deal
                   </Link>
                   <Link
                     href="/alldeals"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     All Deals
                   </Link>
                   <Link
                     href="/distribution"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Distribution
                   </Link>
                   <Link
                     href="/referral"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Referral
                   </Link>
@@ -135,31 +140,31 @@ export default function Header() {
                 <>
                   <Link
                     href="/portfolio"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Portfolios
                   </Link>
                   <Link
                     href="/"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Withdraw
                   </Link>
                   <Link
                     href="/referral"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     Referral
                   </Link>
                   <Link
                     href="/"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     KYC
                   </Link>
                   <Link
                     href="/userranking"
-                    className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+                    className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
                   >
                     User Ranking
                   </Link>
@@ -170,43 +175,46 @@ export default function Header() {
           {isConnected && (
             <Link
               href="/profile"
-              className="cursor-pointer text-lg text-gray-300 hover:text-[#6EC1E4] transition"
+              className={`cursor-pointer text-lg text-light-white hover:text-[#6EC1E4] transition hidden lg:inline-block`}
             >
               Profile
             </Link>
           )}
         </div>
 
-        <div className="flex items-center gap-4">
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setOpen(!isOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-[#6EC1E4] transition"
-          >
-            <HamburgerIcon className="w-6 h-6" />
-          </button>
-
-          {/* Wallet Button */}
-          <div
-            className={`flex items-center justify-center relative bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-black rounded-lg w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis hover:from-[#4A9BC1] hover:to-[#6EC1E4] transition-all duration-300`}
-          >
-            <div className="flex w-full justify-between gap-2">
-              {!isConnected ? (
-                <button
-                  className="h-[30.78px] md:h-[45px] w-full"
-                  onClick={() => web3Modal.open()}
-                >
-                  Sign In
-                </button>
-              ) : (
-                <button
-                  className="h-[30.78px] md:h-[45px] w-full relative"
-                  onClick={() => web3Modal.disconnect()}
-                >
-                  <span>{shortenAddress(address)}</span>
-                  <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
-                </button>
-              )}
+        <div className="flex items-center gap-4 flex-row-reverse lg:flex-row">
+          {/* Wallet Button - Replaced ScrollLink with div and onClick handler */}
+          <div className="hidden xl:flex">
+            <div
+              className={`flex items-center justify-center relative bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-black rounded-lg 
+              w-[160px] h-[40px] md:w-[250px] md:h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis 
+              hover:from-[#4A9BC1] hover:to-[#6EC1E4] transition-all duration-300`}
+              onClick={scrollToPresale}
+            >
+              <div className="flex w-full justify-between gap-2">
+                {!isConnected ? (
+                  <button
+                    className="h-[30.78px] md:h-[45px] w-full"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent triggering the parent's onClick
+                      web3Modal.open();
+                    }}
+                  >
+                    Sign In
+                  </button>
+                ) : (
+                  <button
+                    className="h-[30.78px] md:h-[45px] w-full relative"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent triggering the parent's onClick
+                      web3Modal.disconnect();
+                    }}
+                  >
+                    <span>{shortenAddress(address)}</span>
+                    <DisconnectIcon className="size-3 md:size-5 absolute right-2 md:right-4" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -395,6 +403,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </main>
+    </main >
   );
 }

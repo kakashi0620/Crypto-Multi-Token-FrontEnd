@@ -58,13 +58,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <UserProvider>
           <DealProvider>
             <QueryClientProvider client={queryClient}>
+              <Banner />
               <Toaster position="top-right" reverseOrder={false} />
               <div className="flex">
                 <Header />
                 <HamburgerMenu />
               </div>
 
-              <div className="relative z-30 pt-[120px]">
+              <div className="relative z-30">
                 <Component {...pageProps} />
               </div>
 

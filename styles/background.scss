@@ -51,8 +51,6 @@
 }
 
 .bg-roadmap {
-  background-image: url("/images/noise.png"), url("/images/noise.png"),
-    url("/images/noise.png");
   background-position-x: -500px, -600px, calc(100% + 300px);
   background-position-y: -500px, calc(100% + 800px), calc(100% + 500px);
   background-repeat: no-repeat, no-repeat, no-repeat;
@@ -62,8 +60,8 @@
   max-width: 1294px;
   width: 100%;
   margin: auto;
-  background: #1A1A1A;
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.52);
+  background: rgba(2, 8, 14, 0.5);
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(15.35px);
   border-radius: 12px;
 
@@ -71,7 +69,7 @@
     content: "";
     width: 1px;
     position: absolute;
-    background: linear-gradient(0deg, #242424, #1A1A1A 17.83%, #242424);
+    background: linear-gradient(0deg, #f9ff3800, #6EC1E4 17.83%, #f9ff3800);
     border-radius: 12.582px 12.582px 0 0;
     left: 0;
     top: 10%;
@@ -80,8 +78,6 @@
 }
 
 .bg-term {
-  // background-image: url("/images/noise.png");
-  // background-position: 50% 0%;
-  // background-repeat: no-repeat;
-  background: #242424;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
 }
