@@ -17,6 +17,8 @@ const poppins = Poppins({
 });
 
 const USDT_BSC_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
+const USDT_TEST_BSC_ADDRESS = '0x7848ec33d21561b0755c423c7cf03f5018e18613';
+
 
 const ContributePage: NextPage = () => {
 

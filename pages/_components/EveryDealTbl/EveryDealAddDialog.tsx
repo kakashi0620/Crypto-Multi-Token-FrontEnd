@@ -115,7 +115,7 @@ export default function EveryDealAddDialog(props) {
   //   return formdata.user !== '' && formdata.destination !== '';
   // }
   return (
-    <Modal isOpen={info.open} onConfirm={handleClose} onClose={handleClose} title={info.action === 'add' ? "Add EveryDealation" : "Edit EveryDealation"} >
+    <Modal isOpen={info?.open} onConfirm={handleClose} onClose={handleClose} title={info?.action === 'add' ? "Add EveryDealation" : "Edit EveryDealation"} >
 
       <form method="POST" onSubmit={handleSubmit} className="w-full flex flex-wrap justify-start">
         <ModalItem>

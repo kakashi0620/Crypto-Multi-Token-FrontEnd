@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import NotFound from "./404";
+import { useEffect } from "react";
 
 const Signup: NextPage = () => {
 
@@ -12,7 +12,7 @@ const Signup: NextPage = () => {
   }
 
   return (
-    <NotFound />
+    <></>
   );
 };
 

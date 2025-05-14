@@ -13,23 +13,27 @@ import { UserProvider } from "../hooks/userContext";
 import { DealProvider } from "../hooks/dealContext";
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiProvider } from 'wagmi'
-import { bsc } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
+import { cookieStorage, createStorage, http } from '@wagmi/core'
+import { bsc, bscTestnet } from '@reown/appkit/networks'
 
-const projectId = "12b8a841a230c15448f1dd353b5384ad";
+const projectId = "c9c77ce190473b75ce5fba7a5fe4f1bb";
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
 
-// 3. Set the networks
+// Set the networks
 const networks = [bsc]
 
-// 4. Create Wagmi Adapter
+// Set up the Wagmi Adapter (Config)
 const wagmiAdapter = new WagmiAdapter({
-  networks,
+  storage: createStorage({
+    storage: cookieStorage
+  }),
+  ssr: true,
   projectId,
-  ssr: true
+  networks
 })
 
 export const web3Modal = createAppKit({

@@ -71,3 +71,7 @@ export function shortenAddress(address: string | undefined) {
 export function getBackend() {
   return process.env.NEXT_PUBLIC_BACKEND_URL;
 }
+
+export function getFrontend() {
+  return process.env.NEXT_PUBLIC_FRONTEND_URL;
+}

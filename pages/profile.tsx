@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
 import { useRouter } from "next/router";
 import { useUser } from "../hooks/userContext";
-import { getBackend } from "./utils";
+import { getBackend, getFrontend } from "./utils";
 
 
 const poppins = Poppins({
@@ -21,6 +21,7 @@ const ProfilePage: NextPage = () => {
   const { address } = useAccount();
   const { user, setUser } = useUser();
 
+  const [referenceBy, setReferenceBy] = useState("");
   const [name, setName] = useState("");
   const [fullName, setFullName] = useState("");
   const [userID, setUserID] = useState("");
@@ -42,8 +43,6 @@ const ProfilePage: NextPage = () => {
 
 
   const getUserID = async () => {
-    console.log("rider getUserCount url=>", `${getBackend()}/api/users/getUserCount`)
-
     const backendURL = getBackend();
     const userCount = await axios.get(`${backendURL}/api/users/getUserCount`);
 
@@ -59,19 +58,23 @@ const ProfilePage: NextPage = () => {
   }
 
   const getReferralLink = (userID: string) => {
-    return `${getBackend()}/signup?ref=` + userID
+    return `${getFrontend()}/signup?ref=` + userID
   }
 
   const initValues = async () => {
-
     const userData = user;
 
     if (!userData) {
       const id = await getUserID();
       setUserID(id);
       setReferrallink(getReferralLink(id));
+
+      const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
+      setReferenceBy(referred_by);
+      localStorage.setItem("referred_by", '');
     }
     else {
+      setReferenceBy(userData.referred_by);
       setName(userData.userName);
       setFullName(userData.fullName);
       setUserID(userData.userId);
@@ -100,10 +103,9 @@ const ProfilePage: NextPage = () => {
 
     e.preventDefault();
 
-    const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
-
-    const newUser = referred_by === "" ?
+    const newUser = referenceBy === "" ?
       {
+        referred_by: referenceBy,
         userName: name,
         fullName: fullName,
         userId: userID,
@@ -122,6 +124,7 @@ const ProfilePage: NextPage = () => {
         anotherWallet2: wallet2,
       } :
       {
+        referred_by: referenceBy,
         userName: name,
         fullName: fullName,
         userId: userID,
@@ -138,7 +141,6 @@ const ProfilePage: NextPage = () => {
         solanaWallet: solwallet,
         anotherWallet1: wallet1,
         anotherWallet2: wallet2,
-        referred_by: referred_by,
       };
 
     if (bUserExist) {
@@ -209,6 +211,26 @@ const ProfilePage: NextPage = () => {
             </div>
 
             <div className="input-part">
+              {/* Reference By */}
+              <div className="input-container">
+                <label
+                  htmlFor="referenceby"
+                  className="input-label"
+                >
+                  Reference By
+                </label>
+                <div className="input-input">
+                  <input
+                    id="referenceby"
+                    name="referenceby"
+                    type="text"
+                    autoComplete="referenceby"
+                    className="input-text"
+                    disabled
+                    value={referenceBy}
+                  />
+                </div>
+              </div>
 
               {/* User name */}
               <div className="input-container">
