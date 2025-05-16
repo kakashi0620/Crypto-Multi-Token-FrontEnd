@@ -41,18 +41,47 @@ const ProfilePage: NextPage = () => {
   const [copyState, setCopyState] = useState(false); // referral link copy
   const [bUserExist, setUserExist] = useState(false);
 
+  const routeDashboard = async () => {
+    axios.post(
+      `${getBackend()}/api/users/getuser`, { address }
+    )
+      .then(res => {
+        if (res.data === "")
+          router.push('/profile')
+        else {
+          console.log('setUser(res.data)', res.data)
+          setUser(res.data)
+          router.push('/dashboard')
+        }
+      })
+      .catch(e => {
+        console.log('user get error =>', e)
+      });
+  }
+
 
   const getUserID = async () => {
     const backendURL = getBackend();
-    const userCount = await axios.get(`${backendURL}/api/users/getUserCount`);
+    const lastUserId = await axios.get(`${backendURL}/api/users/getLastUserId`);
 
     let uidStr = "WC";
-    const zeroCount = 5 - userCount.data.toString().length;
-    for (let i = 0; i < zeroCount; ++i) {
-      uidStr += '0'
-    }
+    console.log(`lastUserId: ${JSON.stringify(lastUserId)}`);
 
-    uidStr += (userCount.data + 1)
+    if (lastUserId.data === "") {
+      uidStr += '00001';
+    } else {
+      const userId = lastUserId.data;
+      const numberStr = userId.replace(/\D/g, '');  // Removes all non-digit characters
+      const number = parseInt(numberStr, 10);
+
+      const zeroCount = 5 - number.toString().length;
+      for (let i = 0; i < zeroCount; ++i) {
+        uidStr += '0';
+      }
+  
+      uidStr += (number + 1)
+
+    }
 
     return uidStr;
   }
@@ -69,9 +98,11 @@ const ProfilePage: NextPage = () => {
       setUserID(id);
       setReferrallink(getReferralLink(id));
 
-      const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
-      setReferenceBy(referred_by);
-      localStorage.setItem("referred_by", '');
+      if (localStorage.getItem("referred_by")) {
+        const referred_by = JSON.parse(localStorage.getItem("referred_by") as string);
+        setReferenceBy(referred_by);
+        localStorage.setItem("referred_by", '');
+      }
     }
     else {
       setReferenceBy(userData.referred_by);
@@ -169,7 +200,7 @@ const ProfilePage: NextPage = () => {
         )
         .then((res) => {
           setUser(res.data);
-          
+
           toast.success("Profile successfully registered! 🎉");
           router.push('/dashboard')
         })
@@ -180,7 +211,7 @@ const ProfilePage: NextPage = () => {
   }
 
   const onCopy = async (e) => {
-    
+
     e.preventDefault();
 
     await copy(referrallink);

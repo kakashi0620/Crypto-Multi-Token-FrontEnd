@@ -112,7 +112,7 @@ export default function FAQs() {
                             <span className="text-[24px] font-bold text-white tracking-[-0.8px]">
                               {faq.title}
                             </span>
-                            <div className="flex flex-col pb-12 pr-4">
+                            <div className="flex flex-col pt-4 pb-12 pr-4">
                               <div className="text-[15px] md:text-[18px] text-gray-400 font-normal max-w-[580px] md:max-w-[90%] tracking-[-0.8px]">
                                 {faq.content}
                               </div>

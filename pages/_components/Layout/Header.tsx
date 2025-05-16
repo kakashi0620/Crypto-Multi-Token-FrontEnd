@@ -74,7 +74,7 @@ export default function Header() {
       <div className="flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center">
           <img
-            className="w-46 md:w-50"
+            className="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-46 2xl:w-50 h-auto object-contain"
             src={"./images/logo.png"}
             draggable={false}
             alt="logo"

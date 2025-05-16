@@ -9,173 +9,173 @@ import { motion } from "framer-motion";
 
 export default function HowtoBuy() {
   const { t } = useTranslation();
-  const [tokenBuy, setTokenBuy] = useState("0.10");
-  const [investAmount, setInvestAmount] = useState("1000");
-  const [tokenSell, setTokenSell] = useState("0.25");
-  const [profit, setProfit] = useState("2500.00");
-  const [multiplier, setMultiplier] = useState("2.5");
+  const [buyPrice, setBuyPrice] = useState<string>("");
+  const [sellPrice, setSellPrice] = useState<string>("");
+  const [investment, setInvestment] = useState<string>("");
+  const [profit, setProfit] = useState<number>(0);
+  const [multiplier, setMultiplier] = useState<number>(0);
+  const [showProfit, setShowProfit] = useState<boolean>(false);
 
   const calculateProfit = () => {
-    const buyPrice = parseFloat(tokenBuy);
-    const amount = parseFloat(investAmount);
-    const sellPrice = parseFloat(tokenSell);
-    
-    if (isNaN(buyPrice) || isNaN(amount) || isNaN(sellPrice) || buyPrice <= 0) {
-      setProfit("0.00");
-      setMultiplier("0.0");
+    const buyPriceNum = parseFloat(buyPrice);
+    const sellPriceNum = parseFloat(sellPrice);
+    const investmentNum = parseFloat(investment);
+
+    if (isNaN(buyPriceNum) || isNaN(sellPriceNum) || isNaN(investmentNum)) {
       return;
     }
-    
-    const tokensReceived = amount / buyPrice;
-    const sellValue = tokensReceived * sellPrice;
-    const profitValue = sellValue - amount;
-    const multiplierValue = sellValue / amount;
-    
-    setProfit(sellValue.toFixed(2));
-    setMultiplier(multiplierValue.toFixed(1));
+
+    const calculatedProfit = (sellPriceNum - buyPriceNum) * (investmentNum / buyPriceNum);
+    const calculatedMultiplier = sellPriceNum / buyPriceNum;
+
+    setProfit(calculatedProfit);
+    setMultiplier(calculatedMultiplier);
+    setShowProfit(true);
   };
 
   return (
     <main className="flex flex-col items-center justify-center z-10 text-black">
-      <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 bg-[#F2F5F6] py-12">
+      <div className="w-full flex flex-col items-center px-4 md:px-8 lg:px-12 2xl:px-20 lg:gap-12 bg-[#02080E80] py-4 lg:pt-12">
         {/* <Element name="howtobuy"> */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-fit">
-              <span className="text-[#041019] text-[40px] leading-[46px] lg:text-[80px] lg:leading-[86px] font-bold relative z-10">
-                How to be a part of Wealthy Capital
-              </span>
-            </div>
+        <div className="flex flex-col items-center">
+          <div className="relative w-fit text-center">
+            <span className="text-white text-[28px] sm:text-[32px] md:text-[40px] lg:text-[60px] xl:text-[80px] leading-[34px] sm:leading-[38px] md:leading-[46px] lg:leading-[66px] xl:leading-[86px] font-bold relative z-10">
+              How to be a part of Wealthy Capital
+            </span>
           </div>
+        </div>
         {/* </Element> */}
-        <div className="flex-grow mt-12">
+        <div className="flex-grow mt-4">
           <BuySteps />
         </div>
-      </div>
 
-      <div className="w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 lg:gap-12 relative overflow-hidden bg-[#F2F5F6]">
-        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mt-12 relative z-10"
+          className="text-center mb-2 mt-4 relative z-10"
         >
-          <h2 className="text-[38px] lg:text-[70px] leading-[1.2] tracking-[-0.8px] text-black font-semibold mb-4">
-            Profit Calculator
+          <h2 className="text-[28px] sm:text-[32px] md:text-[38px] lg:text-[50px] xl:text-[70px] leading-[1.2] tracking-[-0.5px] sm:tracking-[-0.6px] md:tracking-[-0.8px] text-white font-semibold mb-3 sm:mb-4">
+            Calculate Profit
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-white text-base sm:text-lg">
             Calculate your potential returns from token trading
           </p>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
           className="max-w-5xl w-full relative z-10"
         >
-          <div className="relative p-10 lg:p-16 mb-12 rounded-xl border border-white bg-white backdrop-blur-xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="relative p-4 sm:p-8 md:p-10 lg:p-16 mb-8 sm:mb-10 md:mb-12 rounded-xl faq-content">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="md:col-span-1"
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col gap-2 sm:gap-3"
               >
-                <label className="block text-gray-400 text-lg mb-2">Token Buy Price</label>
+                <label className="text-white text-sm sm:text-base">Token Buy Price</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
-                    <span className="pl-4 text-gray-400">$</span>
-                    <input
-                      type="number"
-                      value={tokenBuy}
-                      onChange={(e) => {
-                        setTokenBuy(e.target.value);
-                        calculateProfit();
-                      }}
-                      className="w-full bg-transparent px-4 py-3 text-light-white outline-none"
-                      placeholder="0.10"
-                    />
-                  </div>
+                  <input
+                    type="number"
+                    placeholder="0.00"
+                    className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={buyPrice}
+                    onChange={(e) => {
+                      setBuyPrice(e.target.value);
+                      calculateProfit();
+                    }}
+                  />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-sm sm:text-base">USD</span>
                 </div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="md:col-span-1"
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="flex flex-col gap-2 sm:gap-3"
               >
-                <label className="block text-gray-400 text-lg mb-2">Investment Amount</label>
+                <label className="text-white text-sm sm:text-base">Investment Amount</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
-                    <span className="pl-4 text-gray-400">$</span>
-                    <input
-                      type="number"
-                      value={investAmount}
-                      onChange={(e) => {
-                        setInvestAmount(e.target.value);
-                        calculateProfit();
-                      }}
-                      className="w-full bg-transparent px-4 py-3 text-light-white outline-none"
-                      placeholder="1000"
-                    />
-                  </div>
+                  <input
+                    type="number"
+                    placeholder="0.00"
+                    className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={investment}
+                    onChange={(e) => {
+                      setInvestment(e.target.value);
+                      calculateProfit();
+                    }}
+                  />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-sm sm:text-base">USD</span>
                 </div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="md:col-span-1"
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-col gap-2 sm:gap-3"
               >
-                <label className="block text-gray-400 text-lg mb-2">Token Sell Price</label>
+                <label className="text-white text-sm sm:text-base">Token Sell Price</label>
                 <div className="relative">
-                  <div className="relative flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden group transition-all duration-300 hover:border-white/20">
-                    <span className="pl-4 text-gray-400">$</span>
-                    <input
-                      type="number"
-                      value={tokenSell}
-                      onChange={(e) => {
-                        setTokenSell(e.target.value);
-                        calculateProfit();
-                      }}
-                      className="w-full bg-transparent px-4 py-3 text-light-white outline-none"
-                      placeholder="0.25"
-                    />
-                  </div>
+                  <input
+                    type="number"
+                    placeholder="0.00"
+                    className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={sellPrice}
+                    onChange={(e) => {
+                      setSellPrice(e.target.value);
+                      calculateProfit();
+                    }}
+                  />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-sm sm:text-base">USD</span>
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="flex items-end md:col-span-1"
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex flex-col gap-2 sm:gap-3"
               >
+                <label className="text-white text-sm sm:text-base">Calculate</label>
                 <button
                   onClick={calculateProfit}
-                  className="w-full py-3 px-6 text-lg bg-[#6EC1E4] text-white rounded-lg hover:bg-[#4A9BC1] transition-all duration-300 transform hover:scale-[1.02]"
+                  className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Calculate
+                  Calculate Profit
                 </button>
               </motion.div>
             </div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-              className="mt-8 text-center"
-            >
-              <div className="inline-block relative p-6 rounded-lg">
-                <div className="relative text-xl text-light-white">
-                  <span className="text-[#6EC1E4] font-bold">${profit}</span> <span className="text-black">is your sell volume from this deal.{' '}
-                  Its </span><span className="text-[#6EC1E4] font-bold">{multiplier}X</span>
+
+            {showProfit && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gray-50 rounded-lg"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="text-center sm:text-left">
+                    <p className="text-white text-sm sm:text-base mb-1">Profit</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-green-600">
+                      ${typeof profit === 'number' ? profit.toFixed(2) : '0.00'}
+                    </p>
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <p className="text-white text-sm sm:text-base mb-1">Multiplier</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-green-600">
+                      {typeof multiplier === 'number' ? multiplier.toFixed(2) : '0.00'}x
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </div>
         </motion.div>
       </div>

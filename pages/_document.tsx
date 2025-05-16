@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" sizes="any" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-          <title>Wealthy | Crypto-Multi-Token-ICO-Site</title>
+          <title>Wealthy Capital | Invest in Crypto Private Deal at VC Price</title>
 
           <meta
             name="description"
@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <meta
             property="og:title"
-            content="Wealthy | Crypto-Multi-Token-ICO-Site"
+            content="Wealthy Capital | Invest in Crypto Private Deal at VC Price"
           />
           <meta
             property="og:description"
@@ -28,7 +28,7 @@ export default class MyDocument extends Document {
           <meta property="og:url" content="" />
           <meta
             property="og:site_name"
-            content="Wealthy | Crypto-Multi-Token-ICO-Site"
+            content="Wealthy Capital | Invest in Crypto Private Deal at VC Price"
           />
           <meta property="og:image" content="/images/banner.jpg" />
           <meta property="og:image:secure_url" content="/images/banner.jpg" />
@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content="Wealthy | Crypto-Multi-Token-ICO-Site"
+            content="Wealthy Capital | Invest in Crypto Private Deal at VC Price"
           />
           <meta
             name="twitter:description"
