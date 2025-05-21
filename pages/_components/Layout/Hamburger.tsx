@@ -13,42 +13,16 @@ import { shortenAddress } from "../../utils";
 import { useAccount } from "wagmi";
 import { web3Modal } from "../../_app";
 import DisconnectIcon from "../../_components/Icons/Disconnect";
-
-interface NavItem {
-  title: string;
-  href: string;
-  page?: boolean;
-  target?: string;
-}
-
-const NavList: NavItem[] = [
-  {
-    title: "Home",
-    href: "/",
-    page: true,
-  },
-  {
-    title: "Profile",
-    href: "/profile",
-    page: true,
-  },
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    page: true,
-  },
-  {
-    title: "Referral",
-    href: "/referral",
-    page: true,
-  }
-];
+import { useRouter } from 'next/navigation';
+import { useUser } from "../../../hooks/userContext";
 
 export default function HamburgerMenu(): JSX.Element {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const { address, isConnected } = useAccount();
+  const { user } = useUser();
+  const router = useRouter();
 
   useClickAway(ref, () => setOpen(false));
 
@@ -99,40 +73,56 @@ export default function HamburgerMenu(): JSX.Element {
               <div className="mb-8">
                 <LogoIcon className="text-[#6EC1E4] size-24" />
               </div>
-              <ul className="grid gap-4 mb-8">
-                {NavList.map((item, idx) => {
-                  return (
-                    <motion.li
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                        delay: 0.1 + idx / 10,
-                      }}
-                      key={item.title}
-                      className="w-full p-[0.08rem] rounded-xl z-40"
-                    >
-                      {item.page ? (
-                        <Link
-                          onClick={() => setOpen(false)}
-                          href={item.href}
-                          className={
-                            "flex items-center justify-center w-full text-[#98B0B1] hover:text-[#9DE2FF] cursor-pointer"
-                          }
-                        >
-                          <span className="flex hover:color-[#9DE2FF] color-[#98B0B1] text-lg">
-                            {item.title}
-                          </span>
-                        </Link>
-                      ) : (<></>)}
-                    </motion.li>
-                  );
-                })}
-              </ul>
+              <div className="flex flex-col gap-4 mb-8 w-full px-4">
+                <Link
+                  href="/"
+                  className="text-base text-gray-300 hover:text-[#6EC1E4] transition"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    router.push('/');
+                  }}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="text-base text-gray-300 hover:text-[#6EC1E4] transition"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    router.push('/dashboard');
+                  }}
+                >
+                  Dashboard
+                </Link>
+                {user && (
+                  <>
+                    {user.isAdmin ? (
+                      <>
+                        <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>All members</Link>
+                        <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>All investors</Link>
+                        <Link href="/dealcreate" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/dealcreate'); }}>Create New Deal</Link>
+                        <Link href="/alldeals" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/alldeals'); }}>All Deals</Link>
+                        <Link href="/distribution" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/distribution'); }}>Distribution</Link>
+                        <Link href="/referral" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/referral'); }}>Referral</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/portfolio" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/portfolio'); }}>Portfolios</Link>
+                        <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>Withdraw</Link>
+                        <Link href="/referral" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/referral'); }}>Referral</Link>
+                        <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>KYC</Link>
+                        <Link href="/userranking" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/userranking'); }}>User Ranking</Link>
+                      </>
+                    )}
+                  </>
+                )}
+                {isConnected && (
+                  <Link href="/profile" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/profile'); }}>Profile</Link>
+                )}
+              </div>
 
-              {/* Replace ScrollLink with a button that uses the scroll function */}
               <div 
                 onClick={() => handleScrollToElement("presale")}
                 className={`flex items-center justify-center relative bg-gradient-to-r from-[#6EC1E4] to-[#4A9BC1] text-black rounded-lg 

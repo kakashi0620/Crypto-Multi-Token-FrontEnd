@@ -163,7 +163,7 @@ const DashboardPage: NextPage = () => {
               Upcoming Deal
             </div>
 
-            <div className="flex flex-col gap-y-4 md:gap-x-6 md:flex md:flex-row overflow-x-auto whitespace-nowrap">
+            <div className="flex flex-col gap-y-10 md:gap-x-6 md:flex md:flex-row overflow-x-auto whitespace-nowrap">
 
               {/* Deal Cards */}
               {
