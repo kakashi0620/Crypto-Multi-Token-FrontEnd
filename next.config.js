@@ -10,6 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   distDir: 'build',
+  output: "export"
 };
 
 module.exports = nextConfig;
