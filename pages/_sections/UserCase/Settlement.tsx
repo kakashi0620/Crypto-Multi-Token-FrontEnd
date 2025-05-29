@@ -78,9 +78,9 @@ export default function Settlement() {
                   {t("connect_wallet")}
                 </button>
                 <div className="flex items-center gap-4">
-                  <img src="images/phantom.png" className="w-10"></img>
-                  <img src="images/metamask.png" className="w-10"></img>
-                  <img src="images/trustwallet.png" className="w-11"></img>
+                  <img src="images/phantom.png" className="w-10 h-10 object-contain"></img>
+                  <img src="images/metamask.png" className="w-10 h-10 object-contain"></img>
+                  <img src="images/trustwallet.png" className="w-11 h-11 object-contain"></img>
                 </div>
                 <span>
                   and <b>50</b>+ more

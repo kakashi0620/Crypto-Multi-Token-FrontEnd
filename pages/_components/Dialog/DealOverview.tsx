@@ -77,7 +77,7 @@ const DealOverview: React.FC<DealOverviewProps> = ({ isOpen, onConfirm, onClose 
 
         <div className="flex w-full justify-center">
           <div className="flex max-w-[100px] max-h-[150px]">
-            <img src={getLogoURL()} className="object-cover" alt="Logo Image" />
+            <img src={getLogoURL()} className="w-full h-full object-contain" alt="Logo Image" />
           </div>
         </div>
 

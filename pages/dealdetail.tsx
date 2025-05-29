@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React from "react";
+import { useRouter } from "next/router";
 import { useDeal } from "../hooks/dealContext";
 import ImageView from "./_components/ImageView";
 
@@ -13,8 +14,14 @@ const poppins = Poppins({
 const DealDetailPage: NextPage = () => {
 
   const { deal } = useDeal()
+  const router = useRouter()
+  
   const getVestingSummary = () => {
     return deal?.vesttge + "% TGE, " + deal?.vestcliff + "M Cliff, " + deal?.vestgap + "M vesting"
+  }
+
+  const handleBackToPrevious = () => {
+    router.back()
   }
 
   return (
@@ -398,6 +405,31 @@ const DealDetailPage: NextPage = () => {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Back to Previous Page Button */}
+            <div className="flex justify-center mt-8">
+              <button
+                type="button"
+                onClick={handleBackToPrevious}
+                className="flex items-center gap-2 px-6 py-3 text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm transition-colors duration-200"
+              >
+                <svg 
+                  className="w-4 h-4" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+                  />
+                </svg>
+                Back to Previous Page
+              </button>
             </div>
           </form>
         </div>

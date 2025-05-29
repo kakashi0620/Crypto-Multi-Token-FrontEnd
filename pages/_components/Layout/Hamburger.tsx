@@ -110,8 +110,8 @@ export default function HamburgerMenu(): JSX.Element {
                     ) : (
                       <>
                         <Link href="/portfolio" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/portfolio'); }}>Portfolios</Link>
-                        <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>Withdraw</Link>
-                        <Link href="/referral" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/referral'); }}>Referral</Link>
+                        <Link href="/referral" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/referral'); }}>Ref. Information</Link>
+                        <Link href="/referral/withdraw" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/referral/withdraw'); }}>Ref. Withdraw</Link>
                         <Link href="/" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/'); }}>KYC</Link>
                         <Link href="/userranking" className="text-base text-gray-300 hover:text-[#6EC1E4] transition" onClick={(e) => { e.preventDefault(); setOpen(false); router.push('/userranking'); }}>User Ranking</Link>
                       </>

@@ -99,7 +99,7 @@ const ImageUpload = ({
         {previewUrl ? (
           <img
             src={previewUrl}
-            className="max-h-48 rounded-lg mx-auto"
+            className="w-full h-full max-h-48 object-contain rounded-lg mx-auto"
             alt="Image preview"
           />
         ) : (

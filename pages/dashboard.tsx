@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
+import moment from 'moment-timezone';
 import RightIcon from "./_components/Icons/Right";
 import DealOverview from "./_components/Dialog/DealOverview";
 import { useUser } from "../hooks/userContext";
@@ -31,6 +32,17 @@ const DashboardPage: NextPage = () => {
 
   const { deal, setDeal } = useDeal();
   const [deals, setDeals] = useState<Deal[]>();
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update current time every second for countdown
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     setDeal(null)
 
@@ -51,6 +63,63 @@ const DashboardPage: NextPage = () => {
   const getStatus = (deal: Deal) => {
     return deal.state
   }
+  
+  const getRemainingTime = (deal: Deal) => {
+    if (!deal.livedate) return "TBA";
+    
+    const liveDate = new Date(deal.livedate);
+    const now = currentTime;
+    const timeDiff = liveDate.getTime() - now.getTime();
+    
+    // If the deal has already started
+    if (timeDiff <= 0) {
+      return "FUNDRAISING";
+    }
+    
+    // Calculate time components
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    
+    // Format the countdown
+    if (days > 0) {
+      return `${days}d ${hours}h ${minutes}m`;
+    } else if (hours > 0) {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    } else if (minutes > 0) {
+      return `${minutes}m ${seconds}s`;
+    } else {
+      return `${seconds}s`;
+    }
+  }
+
+  const getCountdownStyle = (deal: Deal) => {
+    if (!deal.livedate) return "text-gray-300";
+    
+    const liveDate = new Date(deal.livedate);
+    const now = currentTime;
+    const timeDiff = liveDate.getTime() - now.getTime();
+    
+    // If the deal has started (fundraising phase)
+    if (timeDiff <= 0) {
+      return "text-green-400 animate-pulse";
+    }
+    
+    const hours = timeDiff / (1000 * 60 * 60);
+    
+    // Color coding based on urgency
+    if (hours <= 1) {
+      return "text-red-400 animate-pulse"; // Very urgent - less than 1 hour
+    } else if (hours <= 24) {
+      return "text-orange-400"; // Urgent - less than 24 hours
+    } else if (hours <= 168) { // 7 days
+      return "text-yellow-400"; // Soon - less than 7 days
+    } else {
+      return "text-blue-400"; // Normal - more than 7 days
+    }
+  }
+  
   const getBid = (deal: Deal) => {
     // return new Date() < deal.date ? "Pre-Launch" : "Post-Launch"
     return "-"
@@ -151,6 +220,45 @@ const DashboardPage: NextPage = () => {
     router.push('/dealcreate')
   }
 
+  // Filter deals to show only active ones (not closed)
+  const getActiveDeals = () => {
+    if (!deals) return [];
+    return deals.filter(deal => deal.state !== 'Closed');
+  }
+
+  // Coming Soon Banner Component
+  const ComingSoonBanner = () => (
+    <div className="min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
+      <div className="w-full h-full grid grid-rows-3 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden border-2 border-dashed border-gray-300">
+        <div className="row-span-3 relative overflow-hidden flex items-center justify-center">
+          <div className="text-center p-6">
+            <div className="mb-4">
+              <svg 
+                className="w-16 h-16 mx-auto text-gray-400" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={1.5} 
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" 
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-600 mb-2">
+              Coming Soon
+            </h3>
+            <p className="text-sm text-gray-500">
+              Next Deal
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <>
       <div className={`bg-term ${poppins.className}`}>
@@ -163,70 +271,89 @@ const DashboardPage: NextPage = () => {
               Upcoming Deal
             </div>
 
-            <div className="flex flex-col gap-y-10 md:gap-x-6 md:flex md:flex-row overflow-x-auto whitespace-nowrap">
+            <div className="flex flex-col gap-y-10 md:gap-x-6 md:flex md:flex-row overflow-x-auto whitespace-nowrap justify-center items-center">
 
               {/* Deal Cards */}
               {
-                deals?.map((deal, index) => (
-                  <div onClick={() => setDeal(deal)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
-                    <div className="w-full h-full grid grid-rows-4 bg-white rounded-xl overflow-hidden">
+                getActiveDeals().length > 0 ? (
+                  getActiveDeals().map((deal, index) => (
+                    <div onClick={() => setDeal(deal)} key={index} className="cursor-pointer min-w-[280px] min-h-60 max-w-[350px] max-h-[200px] md:w-[350px] md:h-[200px]">
+                      <div className="w-full h-full grid grid-rows-3 bg-white rounded-xl overflow-hidden">
 
-                      {/* Image part */}
-                      <div className="row-span-3 relative overflow-hidden ">
-                        <a href={`${getBannerURL(deal)}`}>
-                          <img className="object-cover" src={`${getBannerURL(deal)}`} alt="Card Image" />
-                        </a>
-                        <div className="absolute top-0 start-0 end-0 h-full">
-                          <div className="px-6 text-white overview-title tracking-widest grid grid-cols-2 h-full">
+                        {/* Image part */}
+                        <div className="row-span-3 relative overflow-hidden ">
+                          <a href={`${getBannerURL(deal)}`}>
+                            <img className="w-full h-full object-cover object-center" src={`${getBannerURL(deal)}`} alt="Card Image" />
+                          </a>
+                          <div className="absolute top-0 start-0 end-0 h-full">
+                            <div className="px-6 text-white overview-title tracking-widest grid grid-cols-2 h-full">
 
-                            {/* Token name and price */}
-                            <div className="grid grid-rows-2">
-                              <div className="row-start-2">
-                                <h3 className="text-xl">
-                                  {deal.name}
-                                </h3>
-                                <p className="mt-1">
-                                  {deal.tokenprice}
-                                </p>
+                              {/* Token name and price */}
+                              <div className="grid grid-rows-3">
+                                {/* Schedule Date & Time */}
+                                <div className="row-start-1 pt-4">
+                                  {getRemainingTime(deal) !== "FUNDRAISING" && (
+                                    <p className="text-xs opacity-90 mb-1">
+                                      Starts in:
+                                    </p>
+                                  )}
+                                  <p className={`text-sm font-bold ${getCountdownStyle(deal)}`}>
+                                    {getRemainingTime(deal)}
+                                  </p>
+                                </div>
+                                
+                                <div className="row-start-3">
+                                  <h3 className="text-xl">
+                                    {deal.name}
+                                  </h3>
+                                  <p className="mt-1">
+                                    {deal.round}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
 
-                            {/* Launching state */}
-                            <div className="grid grid-rows-2">
-                              <div className="row-start-2 h-full text-right relative">
-                                <p className="border rounded-lg absolute right-0 bottom-2 shadow-black shadow-xl">
-                                  {getStatus(deal)}
-                                </p>
+                              {/* Launching state */}
+                              <div className="grid grid-rows-2">
+                                <div className="row-start-2 h-full text-right relative">
+                                  <p className="border rounded-lg absolute right-0 bottom-2 shadow-black shadow-xl px-2 py-1">
+                                    {getStatus(deal)}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
 
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Bid part */}
-                      <div className="w-full row-span-1 flex items-center pl-6">
-                        <div className="w-full flex justify-between text-gray">
-                          <div className="flex items-center">
-                            <span>Bid:&nbsp;</span>
-                            <span className="text-[#6EC1E4]">{getBid(deal)}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <span>Ask:&nbsp;</span>
-                            <span className="text-red-500">{getAsk(deal)}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <span>Last:&nbsp;</span>
-                            <span className="text-black">{getLast(deal)}</span>
-                          </div>
-                          <div>
-                            <RightIcon className="scale-50" />
+                        {/* Phase 2: Bid/Ask/Last section - Currently commented out */}
+                        {/* 
+                        <div className="w-full row-span-1 flex items-center pl-6">
+                          <div className="w-full flex justify-between text-gray">
+                            <div className="flex items-center">
+                              <span>Bid:&nbsp;</span>
+                              <span className="text-[#6EC1E4]">{getBid(deal)}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span>Ask:&nbsp;</span>
+                              <span className="text-red-500">{getAsk(deal)}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span>Last:&nbsp;</span>
+                              <span className="text-black">{getLast(deal)}</span>
+                            </div>
+                            <div>
+                              <RightIcon className="scale-50" />
+                            </div>
                           </div>
                         </div>
+                        */}
                       </div>
                     </div>
-                  </div>
-                ))
+                  ))
+                ) : (
+                  // Show Coming Soon banner when no active deals
+                  <ComingSoonBanner />
+                )
               }
 
               {/* New Deal */}
@@ -283,6 +410,7 @@ const DashboardPage: NextPage = () => {
                   autoComplete="test"
                   className="input-text"
                   value=""
+                  readOnly
                 />
               </div>
             </div>

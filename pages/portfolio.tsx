@@ -27,7 +27,7 @@ const poppins = Poppins({
 interface IPortfolioRowData {
   deal: { logo: string; name: string };
   status: string;
-  allocation: { pay: string; invest: string };
+  allocation: { invest: string; pay: string };
   tokensReceived: { percent: number; received: string; receiving: string };
   valueLocked: { free: string; locked: string };
   nextUnlock: { date: string; amount: string };
@@ -51,15 +51,28 @@ const PortfolioPage: NextPage = () => {
   const fetchInvestData = async () => {
     try {
       const investData = await axios.post(`${getBackend()}/api/invests/getbyuser`, { userName: user?.userName })
-      setDealCount(investData.data.length);
+      
+      // Group investments by deal name
+      const groupedInvestments = investData.data.reduce((acc: any, invest: any) => {
+        const dealname = invest.dealname;
+        if (acc[dealname]) {
+          acc[dealname].amount += invest.amount;
+        } else {
+          acc[dealname] = { ...invest };
+        }
+        return acc;
+      }, {});
 
-      if (investData.data.length > 0) {
+      const uniqueDeals = Object.values(groupedInvestments);
+      setDealCount(uniqueDeals.length);
+
+      if (uniqueDeals.length > 0) {
         let total = 0;
         let investArray: IPortfolioRowData[] = [];
   
-        const promises = investData.data.map(async (invest: any) => {
+        const promises = uniqueDeals.map(async (invest: any) => {
           const dealname = invest.dealname
-          const investamount = invest.amount
+          const investamount = invest.amount // This is now the combined amount for this deal
           let dealData: any = null
           let realPaidAmount = 0
 
@@ -67,7 +80,7 @@ const PortfolioPage: NextPage = () => {
           try {
             dealData = await axios.post(`${getBackend()}/api/deals/getdeal`, { name: dealname })
             realPaidAmount = Number(investamount) * (100 + Number(dealData.data.fee)) / 100
-            total += realPaidAmount
+            total += Number(investamount) // Add net investment amount (without fees)
           }
           catch (e) {
             toast.error("Error: Can not fetch deal data!");
@@ -97,7 +110,7 @@ const PortfolioPage: NextPage = () => {
               investArray.push({
                 deal: { logo: "http://localhost:5000" + dealData.data.logo.substring(1), name: dealname },
                 status: status,
-                allocation: { pay: '$' + realPaidAmount.toLocaleString(), invest: '$' + Number(investamount).toLocaleString() },
+                allocation: { invest: '$' + Number(investamount).toLocaleString(), pay: '$' + realPaidAmount.toLocaleString() },
                 tokensReceived: { percent: percent, received: tokenReceived.toFixed(2).toLocaleString(), receiving: tokenTotal.toFixed(2).toLocaleString() + symbol },
                 valueLocked: { free: '$' + assetsLocked.toFixed(2).toLocaleString(), locked: '🔒 ' + tokenLocked.toFixed(2).toLocaleString() + symbol },
                 nextUnlock: { date: nextDate === 'No schedule' ? nextDate : format(nextDate, 'yyyy-MM-dd') + ' 🔓', amount: nextTokenAmount.toFixed(2).toLocaleString() + symbol },
@@ -143,10 +156,16 @@ const PortfolioPage: NextPage = () => {
       cellRenderer: DealCell,
     },
     {
+      // Status filter allows users to filter portfolio by deal stage:
+      // - "Fundraising": Active deals still accepting investments
+      // - "Distributing": Deals currently paying out tokens
+      // - "Completed": Finished deals with all tokens distributed
+      // - "Awaiting TGE": Deals waiting for Token Generation Event
+      // - etc. Useful for portfolio management and tracking deal progress
       headerName: 'Status',
       field: 'status',
       flex: 1,
-      filter: 'agTextColumnFilter',
+      filter: 'agSetColumnFilter',
       cellRenderer: StatusCell,
     },
     {

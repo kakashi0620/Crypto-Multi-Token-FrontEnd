@@ -26,9 +26,9 @@ export default function VerticalDivider(props: any) {
           y2="27.7954"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-opacity="0" />
-          <stop offset="0.495" stop-color="#F9FF38" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopOpacity="0" />
+          <stop offset="0.495" stopColor="#F9FF38" />
+          <stop offset="1" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>

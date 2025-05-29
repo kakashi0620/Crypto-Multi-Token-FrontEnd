@@ -2,6 +2,7 @@ import "../lib/i18n";
 import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import Header from "./_components/Layout/Header";
 import { Toaster } from "react-hot-toast";
 import Footer from "./_components/Layout/Footer";
@@ -58,6 +59,9 @@ export const web3Modal = createAppKit({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Suspense fallback="loading">
+      <Head>
+        <title>Wealthy Capital | Invest in Crypto Private Deal at VC Price</title>
+      </Head>
       <WagmiProvider config={wagmiAdapter.wagmiConfig}>
         <UserProvider>
           <DealProvider>

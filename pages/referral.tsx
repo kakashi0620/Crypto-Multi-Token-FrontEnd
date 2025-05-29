@@ -1,16 +1,14 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import VerticalDivider from "./_components/Icons/VerticalDivider";
 
 import { Poppins } from "next/font/google";
 import { AgGridReact } from 'ag-grid-react';
-import type { ColDef, RowSelectionOptions } from "ag-grid-community";
+import type { ColDef } from "ag-grid-community";
 import { ClientSideRowModelModule, CsvExportModule, AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { IReferralGridRowData } from "../interface/ReferralGridRowData";
 import { useUser } from "../hooks/userContext";
 import { getBackend } from "./utils";
-
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCommunityModule]);
 
@@ -20,185 +18,160 @@ const poppins = Poppins({
 });
 
 export default function Referral() {
-
   const { user } = useUser()
+  const [rowData, setRowData] = useState<IReferralGridRowData[]>([]);
+  const [totalEarnings, setTotalEarnings] = useState(0);
+  const [totalReferrals, setTotalReferrals] = useState(0);
 
-  const [rowData1, setRowData1] = useState<IReferralGridRowData[]>([]);
-
-  const columnDefs1: ColDef[] = [
+  const columnDefs: ColDef[] = [
     { headerName: "Level", field: 'level', flex: 1 },
-    { headerName: "User name", field: 'from', flex: 2 },
-    // { headerName: "Date", field: 'date', flex: 3 },
-    // { headerName: "Chain", field: 'chain', flex: 3 },
-    // { headerName: "Wallet", field: 'wallet', flex: 6 },
-    { headerName: "Amount", field: 'amount', flex: 1 },
-    { headerName: "State", field: 'state', flex: 2 },
-  ];
-
-  const [rowData2, setRowData2] = useState<IReferralGridRowData[]>([]);
-
-  const columnDefs2: ColDef[] = [
-    { headerName: "Level", field: 'level', flex: 1 },
-    { headerName: "User name", field: 'from', flex: 2 },
-    { headerName: "Date", field: 'date', flex: 3 },
-    { headerName: "Chain", field: 'chain', flex: 3 },
-    { headerName: "Wallet", field: 'wallet', flex: 4 },
+    { headerName: "User Name", field: 'from', flex: 2 },
     { headerName: "Amount", field: 'amount', flex: 1 },
     { headerName: "State", field: 'state', flex: 2 },
   ];
 
   const [withdrawable, setWithdrawable] = useState<IReferralGridRowData[]>()
-  const [history, setHistory] = useState<IReferralGridRowData[]>()
+
   useEffect(() => {
     fetchReferralData()
   }, [])
 
   const fetchReferralData = async () => {
-    axios.get(`${getBackend()}/api/referrals/withdrawable/${user?.userId}`)
-      .then(res => {
-        console.log('referral =.', res.data)
-        setWithdrawable(res.data);
-      })
-      .catch(e => {
-        console.log("get withdrawable error:", e)
-      })
-
-    axios.get(`${getBackend()}/api/referrals/history/${user?.userId}`)
-      .then(res => {
-        console.log('referral =.', res.data)
-        setHistory(res.data);
-      })
-      .catch(e => {
-        console.log("get history error:", e)
-      })
+    try {
+      const response = await axios.get(`${getBackend()}/api/referrals/withdrawable/${user?.userId}`)
+      console.log('referral data:', response.data)
+      setWithdrawable(response.data);
+    } catch (e) {
+      console.log("get withdrawable error:", e)
+      toast.error("Failed to fetch referral data")
+    }
   }
 
   useEffect(() => {
     if (withdrawable) {
       const fillTable = async () => {
-        let investArray: any[] = [];
+        let referralArray: any[] = [];
+        let totalAmount = 0;
 
-        withdrawable.map(async (referral, index) => {
-
-          investArray.push({
+        withdrawable.forEach((referral) => {
+          referralArray.push({
             level: referral.level,
             from: referral.from,
             date: referral.date,
             chain: referral.chain,
             wallet: referral.wallet,
-            amount: referral.amount,
+            amount: `$${parseFloat(referral.amount).toLocaleString()}`,
             state: referral.state,
           });
+          totalAmount += parseFloat(referral.amount) || 0;
         })
 
-        setRowData1(investArray)
+        setRowData(referralArray)
+        setTotalEarnings(totalAmount)
+        setTotalReferrals(withdrawable.length)
       }
 
       fillTable();
     }
+  }, [withdrawable])
 
-    if (history) {
-      const fillTable = async () => {
-        let investArray: any[] = [];
-
-        history.map(async (referral, index) => {
-
-          investArray.push({
-            level: referral.level,
-            from: referral.from,
-            date: referral.date,
-            chain: referral.chain,
-            wallet: referral.wallet,
-            amount: referral.amount,
-            state: referral.state,
-          });
-        })
-
-        setRowData2(investArray)
-      }
-
-      fillTable();
-    }
-  }, [withdrawable, history])
-
-  const [defaultColDef, setDefaultColDef] = useState({
+  const [defaultColDef] = useState({
     resizable: true,
+    sortable: true,
+    filter: true,
   });
 
   const gridOption = React.useMemo(() => {
     return {
       pagination: true,
       paginationPageSize: 10,
-      // paginationPageSizeSelector: [10, 20, 30, 40, 50],
+      paginationPageSizeSelector: [10, 20, 50],
     };
   }, []);
 
-  const onWithdraw = () => {
-    axios.post(`${getBackend()}/api/referrals/withdraw/${user?.userId}`)
-    .then(res => {
-      toast.success("Withdraw successfully done! 🎉");
-      fetchReferralData()
-    })
-    .catch(err => {
-      toast.error("Withdraw failed.")
-    })
-  }
-
   return (
-    <main className="flex flex-col items-center justify-center lg:py-16 z-10 relative">
-      <div className="max-w-[1320px] w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
+    <div className={`bg-term ${poppins.className}`}>
+      <main className="flex flex-col items-center justify-center lg:py-16 z-10 relative">
+        <div className="max-w-[1320px] w-full flex flex-col items-center px-4 lg:px-12 2xl:px-20 relative z-10">
 
-        {/* Referral Information */}
-        <div className="w-full py-10 item-center flex flex-col gap-8">
-          <div className="w-full mb-4 text-2xl font-medium text-white border-b-2 border-white">
-            Referral Information
+          {/* Page Title */}
+          <div className="w-full text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Referral Information
+            </h1>
+            <p className="text-lg text-gray-300">
+              Track your referral earnings and manage your network
+            </p>
           </div>
 
-          <div className="flex w-full">
-            <div style={{ width: "100%", height: "30vh" }}>
-              <AgGridReact
-                rowData={rowData1}
-                columnDefs={columnDefs1}
-                domLayout="autoHeight"
-                defaultColDef={defaultColDef}
-                gridOptions={gridOption} />
+          {/* Statistics Cards */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#242424] rounded-lg p-6 text-center">
+              <h3 className="text-lg font-semibold text-gray-300 mb-2">Total Referrals</h3>
+              <p className="text-3xl font-bold text-[#6EC1E4]">{totalReferrals}</p>
+            </div>
+            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#242424] rounded-lg p-6 text-center">
+              <h3 className="text-lg font-semibold text-gray-300 mb-2">Total Earnings</h3>
+              <p className="text-3xl font-bold text-[#84FF38]">${totalEarnings.toLocaleString()}</p>
+            </div>
+            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#242424] rounded-lg p-6 text-center">
+              <h3 className="text-lg font-semibold text-gray-300 mb-2">Available Balance</h3>
+              <p className="text-3xl font-bold text-[#F9FF38]">${totalEarnings.toLocaleString()}</p>
             </div>
           </div>
-        </div>
 
-        {/* Withdraw */}
-        <div className="w-full py-10 item-center flex flex-col md:flex-row gap-8">
-          <div className={`flex items-center justify-center relative bg-gradient-to-r from-[#1A1A1A] to-[#242424] text-white rounded-lg w-[250px] h-[48px] cursor-pointer text-[16px] font-semibold overflow-hidden whitespace-nowrap text-ellipsis hover:from-[#242424] hover:to-[#1A1A1A]`}>
-            <div className="flex w-full justify-between">
-              <button className="h-[30.78px] md:h-[45px] w-full" onClick={() => onWithdraw()} >
-                Withdraw
-              </button>
+          {/* Referral Information Table */}
+          <div className="w-full py-10 flex flex-col gap-8">
+            <div className="w-full mb-4">
+              <h2 className="text-2xl font-semibold text-white border-b-2 border-[#6EC1E4] pb-2">
+                Referral Details
+              </h2>
+              <p className="text-gray-300 mt-2">
+                View all your referral commissions and their current status
+              </p>
+            </div>
+
+            <div className="w-full bg-gradient-to-r from-[#0A1A2A] to-[#1A2A3A] rounded-lg p-6">
+              <div style={{ width: "100%", minHeight: "400px" }}>
+                <AgGridReact
+                  rowData={rowData}
+                  columnDefs={columnDefs}
+                  domLayout="autoHeight"
+                  defaultColDef={defaultColDef}
+                  gridOptions={gridOption}
+                  className="ag-theme-alpine-dark"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="text-xl traking-[-2px] font-normal text-light-white">
-            After making withdrawal request, balance will show under &quot;Pending Withdrawal&quot;. Admin will send this payment manually and update as &quot;Completed Payment&quot; with a note of TrxID from admin dashboard.
-          </div>
-        </div>
-
-        {/* Withdrawal History */}
-        <div className="w-full py-10 item-center flex flex-col gap-8">
-          <div className="w-full mb-4 text-2xl font-medium text-white border-b-2 border-white">
-            Withdrawal History
-          </div>
-
-          <div className="flex w-full">
-            <div style={{ width: "100%", height: "30vh" }}>
-              <AgGridReact
-                rowData={rowData2}
-                columnDefs={columnDefs2}
-                domLayout="autoHeight"
-                defaultColDef={defaultColDef}
-                gridOptions={gridOption} />
+          {/* Referral Program Info */}
+          <div className="w-full mt-12 bg-gradient-to-r from-[#1A1A1A] to-[#242424] rounded-lg p-8">
+            <h3 className="text-2xl font-semibold text-white mb-6">How Our Referral Program Works</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-lg font-semibold text-[#6EC1E4] mb-3">Commission Structure</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Level 1: Direct referrals earn you commission</li>
+                  <li>• Level 2: Second-tier referrals provide additional rewards</li>
+                  <li>• Instant tracking of all referral activities</li>
+                  <li>• Real-time commission calculations</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-[#6EC1E4] mb-3">Getting Started</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Share your unique referral link</li>
+                  <li>• Earn commissions when friends invest</li>
+                  <li>• Track earnings in real-time</li>
+                  <li>• Withdraw earnings anytime</li>
+                </ul>
+              </div>
             </div>
           </div>
+
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

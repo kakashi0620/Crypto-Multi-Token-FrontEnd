@@ -9,10 +9,10 @@ const DualValueCell: FC<any> = ({ value }) => {
                 <>
                     {
                         index === 0 ?
-                            <p key={key}>
-                                <strong>{value[key]}</strong>
+                            <p key={key} className="text-black font-bold">
+                                {value[key]}
                             </p> :
-                            <p key={key} className='text-gray'>
+                            <p key={key} className='text-gray-500 font-normal'>
                                 {value[key]}
                             </p>
                     }

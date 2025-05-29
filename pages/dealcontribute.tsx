@@ -35,7 +35,7 @@ const ContributePage: NextPage = () => {
   const [toSellAmount, setToSellAmount] = useState(10000);
   const [soldAmount, setSoldAmount] = useState(2630);
 
-  const [claimWallet, setClaimWallet] = useState<string>(address as string);
+  const [claimWallet, setClaimWallet] = useState<string>(address || "");
   const [investAmount, setInvestAmount] = useState(0);
   const [tokenAmount, setTokenAmount] = useState(0);
 
@@ -84,15 +84,18 @@ const ContributePage: NextPage = () => {
 
   useEffect(() => {
     if (!progressRef || !progressRef.current) return;
-    (progressRef.current as any).style.width = `${Math.max(
-      progress,
-      55.71
-    ).toFixed(2)}%`;
+    (progressRef.current as any).style.width = `${progress.toFixed(2)}%`;
   }, [progress, progressRef]);
 
   useEffect(() => {
     setTokenAmount(investAmount / Number(deal?.tokenprice))
   }, [investAmount])
+
+  useEffect(() => {
+    if (address) {
+      setClaimWallet(address);
+    }
+  }, [address])
 
   const onPurchase = () => {
     if (investAmount < Number(deal?.investmin) || Number(deal?.investmax) < investAmount) {
@@ -137,7 +140,7 @@ const ContributePage: NextPage = () => {
               <div className="input-container h-full items-center">
                 <div className="flex w-full justify-center sm:col-span-2">
                   <div className="flex max-w-[100px] max-h-[150px]">
-                    <img src={"http://localhost:5000" + deal?.logo.substring(1)} className="object-cover" alt="Logo Image" />
+                    <img src={"http://localhost:5000" + deal?.logo.substring(1)} className="w-full h-full object-contain" alt="Logo Image" />
                   </div>
                 </div>
 
@@ -166,18 +169,18 @@ const ContributePage: NextPage = () => {
 
                   {/* Progress bar */}
                   <div className="flex flex-col gap-y-2 mx-5">
-                    <div className="bg-[#091F2F] h-[22px] w-full relative flex items-center">
+                    <div className="bg-gray-300 h-[22px] w-full relative flex items-center rounded-sm overflow-hidden">
                       <div
                         className={`progress-bar w-[0%] max-w-full transition-all duration-300 ease-in-out`}
                         ref={progressRef}
                       ></div>
-                      <span className="absolute right-2 font-medium opacity-60">
-                        {(100 - (progress + 55.71)).toFixed(2)}% Sold
+                      <span className="absolute right-2 font-medium text-gray-700 text-sm">
+                        {(100 - progress).toFixed(2)}% Left
                       </span>
                     </div>
                     <div className="text-center w-full mt-1 flex flex-col">
                       <span>
-                        USD RAISED SO FAR: ${soldAmount}/${toSellAmount}
+                        FUNDRAISED SO FAR: ${soldAmount}/${toSellAmount}
                       </span>
                     </div>
                   </div>
@@ -200,7 +203,7 @@ const ContributePage: NextPage = () => {
                       type="text"
                       autoComplete="loginWallet"
                       className="input-text"
-                      value={address}
+                      value={address || "Not connected"}
                       disabled
                     />
                   </div>
@@ -267,7 +270,15 @@ const ContributePage: NextPage = () => {
                       disabled
                       autoComplete="balance"
                       className="input-text"
-                      value={isError ? "Error getting balance." : isLoading ? "Loading balance..." : formatUnits(data?.value as bigint, data?.decimals as number)}
+                      value={
+                        isError 
+                          ? "Error getting balance." 
+                          : isLoading 
+                          ? "Loading balance..." 
+                          : data?.value && data?.decimals 
+                          ? formatUnits(data.value, data.decimals)
+                          : "0"
+                      }
                     />
                   </div>
                 </div>

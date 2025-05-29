@@ -8,8 +8,8 @@ export default class MyDocument extends Document {
       <Html lang="en" data-theme="dark">
         <Head>
           <link rel="icon" href="/favicon.ico" sizes="any" />
-          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-          <title>Wealthy Capital | Invest in Crypto Private Deal at VC Price</title>
+          <meta httpEquiv="content-type" content="text/html; charset=UTF-8" />
+          {/* Title should be in _app.js or in each page component */}
 
           <meta
             name="description"

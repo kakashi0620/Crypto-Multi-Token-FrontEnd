@@ -17,7 +17,7 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule, AllCo
 export interface IPortfolioRowData {
     deal: { logo: string; name: string };
     status: string;
-    allocation: { pay: string; invest: string };
+    allocation: { invest: string; pay: string };
     tokensReceived: { percent: number; received: string; receiving: string };
     valueLocked: { free: string; locked: string };
     nextUnlock: { date: string; amount: string };
